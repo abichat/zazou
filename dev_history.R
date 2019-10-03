@@ -23,6 +23,9 @@ library(testthat)
 # use_r("optim_internal")
 # use_test("unidirectionnal")
 
+# use_r("optim_functions")
+# use_test("compute_functions")
+
 
 
 ####
