@@ -26,7 +26,8 @@ library(testthat)
 # use_r("optim_functions")
 # use_test("compute_functions")
 
-
+# use_readme_rmd()
+# badgecreatr::badge_last_change()
 
 ####
 
@@ -43,3 +44,4 @@ test()
 goodpractice::gp()
 check()
 
+rmarkdown::render("README.Rmd"); file.remove("README.html")
