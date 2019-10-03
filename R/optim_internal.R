@@ -6,7 +6,7 @@
 #'
 #' @param y a vector of size n
 #' @param x a vector of size n
-#' @param lambda a positive regularization parameter
+#' @inheritParams estimate_shifts
 #'
 #' @return The scalar solution of the 1D optimization problem
 #' @export

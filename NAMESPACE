@@ -2,6 +2,7 @@
 
 export(compute_gradient_function)
 export(compute_objective_function)
+export(estimate_shifts)
 export(inverse_sqrt)
 export(open_doc)
 export(p2z)

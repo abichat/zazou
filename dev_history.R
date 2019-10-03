@@ -41,6 +41,8 @@ library(testthat)
 
 # badgecreatr::badge_packageversion()
 
+# use_r("optim_global")
+
 ####
 
 load_all()
@@ -56,5 +58,10 @@ test()
 goodpractice::gp()
 check()
 
+
+####
+
+chameleon::build_pkgdown()
 rmarkdown::render("README.Rmd"); file.remove("README.html")
+
 

@@ -2,7 +2,7 @@
 #'
 #' @param Y a vector of size m
 #' @param X a vector of size m*(n+m)
-#' @param lambda a positive regularization parameter
+#' @inheritParams estimate_shifts
 #'
 #' @return a function that take Delta (a vector of size n+m) as argument
 #' and returns a scalar
