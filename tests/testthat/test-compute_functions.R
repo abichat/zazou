@@ -19,3 +19,12 @@ test_that("objective function is correct", {
   expect_equal(value,
                t(Y - X %*% Delta) %*% (Y - X %*% Delta) - lambda * sum(Delta))
 })
+
+
+test_that("gradient function is correct", {
+  grad <- compute_gradient_function(Y, X, lambda)
+  vect <- grad(Delta)
+  expect_is(grad, "function")
+  expect_length(vect, length(Delta))
+  expect_equal(vect, -t(X) %*% Y + t(X) %*% X %*% Delta - lambda)
+})
