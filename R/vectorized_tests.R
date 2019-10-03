@@ -5,7 +5,6 @@
 #'
 #' @return A list with a \code{p.value} component and eventually a \code{e.sign} component.
 #' @export
-#' @importFrom attempt stop_if_not
 #' @importFrom stats wilcox.test
 #'
 #' @examples
