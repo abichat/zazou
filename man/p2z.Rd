@@ -22,4 +22,5 @@ Transform p-values to z-scores
 \examples{
 pv <- runif(5)
 p2z(pv)
+p2z(0.5) ## should be 0
 }

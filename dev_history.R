@@ -34,6 +34,10 @@ library(testthat)
 # # Add Depends: R (>= 2.10) in decription
 
 # use_test("vectorized_tests")
+# use_test("zscores")
+
+# chameleon::build_pkgdown()
+# chameleon::open_pkgdown_function()
 
 ####
 
@@ -51,3 +55,4 @@ goodpractice::gp()
 check()
 
 rmarkdown::render("README.Rmd"); file.remove("README.html")
+
