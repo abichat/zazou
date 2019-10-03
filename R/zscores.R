@@ -11,6 +11,7 @@
 #' @examples
 #' pv <- runif(5)
 #' p2z(pv)
+#' p2z(0.5) ## should be 0
 p2z <- function (p.value, e.sign = NULL, tol = 1e-15) {
   p.value[p.value <= tol] <- tol
   p.value[p.value >= 1 - tol] <- 1 - tol
