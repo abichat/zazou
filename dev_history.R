@@ -33,6 +33,7 @@ library(testthat)
 # use_r("datasets")
 # # Add Depends: R (>= 2.10) in decription
 
+# use_test("vectorized_tests")
 
 ####
 
