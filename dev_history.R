@@ -43,6 +43,9 @@ library(testthat)
 
 # use_r("optim_global")
 
+# use_r("incidence_matrix")
+# use_test("incidence_matrix")
+
 ####
 
 load_all()
@@ -61,7 +64,7 @@ check()
 
 ####
 
-chameleon::build_pkgdown()
 rmarkdown::render("README.Rmd"); file.remove("README.html")
+chameleon::build_pkgdown()
 
 

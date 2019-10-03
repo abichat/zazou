@@ -8,6 +8,7 @@
 #'
 #' @return a list
 #' @export
+#' @importFrom stats optim
 estimate_shifts <- function(Delta0, zscores, incidence_mat, covar_mat, lambda){
   R <- inverse_sqrt(covar_mat)
   Y <- R %*% zscores

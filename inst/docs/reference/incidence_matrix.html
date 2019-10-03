@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • zazou</title>
+<title>Incidence matrix — incidence_matrix • zazou</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Incidence matrix — incidence_matrix" />
+<meta property="og:description" content="Compute the incidence matrix from a tree" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -101,96 +103,47 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Incidence matrix</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/incidence_matrix.R'><code>R/incidence_matrix.R</code></a></small>
+    <div class="hidden name"><code>incidence_matrix.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Compute the incidence matrix from a tree</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>incidence_matrix</span>(<span class='no'>phylo</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="alcohol.html">alcohol</a></code> </p>
-        </td>
-        <td><p>Alcohol data set</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="compute_gradient_function.html">compute_gradient_function()</a></code> </p>
-        </td>
-        <td><p>Compute gradient function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="compute_objective_function.html">compute_objective_function()</a></code> </p>
-        </td>
-        <td><p>Compute objective function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="estimate_shifts.html">estimate_shifts()</a></code> </p>
-        </td>
-        <td><p>Estimate shifts</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="incidence_matrix.html">incidence_matrix()</a></code> </p>
-        </td>
-        <td><p>Incidence matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="inverse_sqrt.html">inverse_sqrt()</a></code> </p>
-        </td>
-        <td><p>Inverse of the square root of a matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="open_doc.html">open_doc()</a></code> </p>
-        </td>
-        <td><p>Open documentation site of the package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="p2z.html">p2z()</a></code> </p>
-        </td>
-        <td><p>Transform p-values to z-scores</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="solve_univariate.html">solve_univariate()</a></code> </p>
-        </td>
-        <td><p>Solve unidirectional constrained problem</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="test_wilcoxon.html">test_wilcoxon()</a></code> <code><a href="test_wilcoxon.html">test_kruskalwallis()</a></code> <code><a href="test_wilcoxon.html">test_fisher()</a></code> </p>
-        </td>
-        <td><p>Vectorized tests</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>phylo</th>
+      <td><p>a tree</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>the incidence matrix</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rtree</a></span>(<span class='fl'>3</span>)
+<span class='fu'>incidence_matrix</span>(<span class='no'>tree</span>)</div><div class='output co'>#&gt;       [,1]  [,2]  [,3]  [,4]
+#&gt; [1,]  TRUE  TRUE FALSE FALSE
+#&gt; [2,]  TRUE FALSE  TRUE FALSE
+#&gt; [3,] FALSE FALSE FALSE  TRUE</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 
