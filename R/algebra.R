@@ -10,7 +10,7 @@
 #' @examples
 #' M <- matrix(2, ncol = 3, nrow = 3) + diag(5, ncol = 3, nrow = 3)
 #' R <- inverse_sqrt(M)
-#' t(R) %*% R %*% M
+#' t(R) %*% R %*% M ## Should be the Identity
 inverse_sqrt <- function(M){
   L <- t(chol(M))
   solve(L)
