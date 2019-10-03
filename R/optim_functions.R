@@ -4,7 +4,8 @@
 #' @param X a vector of size m*(n+m)
 #' @param lambda a positive regularization parameter
 #'
-#' @return a function that take Delta, a vector of size n+m, as argument
+#' @return a function that take Delta (a vector of size n+m) as argument
+#' and returns a scalar
 #' @export
 #'
 #' @examples
@@ -15,4 +16,21 @@ compute_objective_function <- function(Y, X, lambda) {
     crossprod(YXD) - shrinkage
   }
   return(objective_function)
+}
+
+
+#' Compute gradient function
+#'
+#' @inheritParams compute_objective_function
+#'
+#' @return a function that take Delta (a vector of size n+m) as argument
+#' and returns a vector of size n+m
+#' @export
+#'
+#' @examples
+compute_gradient_function <- function(Y, X, lambda){
+  gradient_function <- function(Delta){
+    -crossprod(X, Y) + crossprod(X) %*% Delta - rep(lambda, length(Delta))
+  }
+  return(gradient_function)
 }

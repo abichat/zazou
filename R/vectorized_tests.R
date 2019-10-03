@@ -5,14 +5,14 @@
 #'
 #' @return A list with a \code{p.value} component and eventually a \code{e.sign} component.
 #' @export
-#' @importFrom attempt stop_if_not
 #' @importFrom stats wilcox.test
 #'
 #' @examples
 test_wilcoxon <- function (X, Y) {
   Y <- factor(Y)
-  stop_if_not(length(levels(Y)) == 2,
-              msg = "You need exactly two different conditions for a Wilcoxon test.")
+  if(length(levels(Y)) != 2){
+    stop("You need exactly two different conditions for a Wilcoxon test.")
+  }
   Y <- as.numeric(Y)
   obj <- apply(X, 1, function(x) {
     p.value <- suppressWarnings(wilcox.test(x ~ Y)$p.value)

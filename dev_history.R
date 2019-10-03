@@ -29,6 +29,11 @@ library(testthat)
 # use_readme_rmd()
 # badgecreatr::badge_last_change()
 
+# use_data_raw("alcohol")
+# use_r("datasets")
+# # Add Depends: R (>= 2.10) in decription
+
+
 ####
 
 load_all()
