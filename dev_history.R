@@ -20,6 +20,10 @@ library(testthat)
 
 # use_github_links()
 
+# use_r("optim_internal")
+# use_test("unidirectionnal")
+
+
 
 ####
 
@@ -28,6 +32,9 @@ document()
 attachment::att_to_description()
 use_tidy_description()
 
+
+spell_check()
+# spelling::update_wordlist()
 test()
 
 goodpractice::gp()

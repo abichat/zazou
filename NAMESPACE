@@ -2,6 +2,7 @@
 
 export(inverse_sqrt)
 export(p2z)
+export(solve_univariate)
 export(test_fisher)
 export(test_kruskalwallis)
 export(test_wilcoxon)

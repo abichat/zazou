@@ -7,7 +7,7 @@
 inverse_sqrt(M)
 }
 \arguments{
-\item{M}{a symetric positive definite matrix}
+\item{M}{a symmetric positive definite matrix}
 }
 \value{
 a lower triangular matrix
