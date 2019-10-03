@@ -23,3 +23,8 @@ A list with a \code{p.value} component and eventually a \code{e.sign} component.
 \description{
 Vectorized tests
 }
+\examples{
+test_wilcoxon(alcohol$X, alcohol$Y)
+test_kruskalwallis(alcohol$X, alcohol$Y)
+test_fisher(alcohol$X, alcohol$Y)
+}

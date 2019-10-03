@@ -8,6 +8,9 @@
 #' @importFrom stats wilcox.test
 #'
 #' @examples
+#' test_wilcoxon(alcohol$X, alcohol$Y)
+#' test_kruskalwallis(alcohol$X, alcohol$Y)
+#' test_fisher(alcohol$X, alcohol$Y)
 test_wilcoxon <- function (X, Y) {
   Y <- factor(Y)
   if(length(levels(Y)) != 2){

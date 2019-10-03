@@ -39,6 +39,8 @@ library(testthat)
 # chameleon::build_pkgdown()
 # chameleon::open_pkgdown_function()
 
+# badgecreatr::badge_packageversion()
+
 ####
 
 load_all()

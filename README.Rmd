@@ -15,8 +15,14 @@ knitr::opts_chunk$set(
 
 # zazou
 
+```{r, echo = FALSE}                                                                                               
+version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])                                                      
+version <- gsub('-', '.', version)                                                      
+```
+
 <!-- badges: start -->
-[![Last-changedate](https://img.shields.io/badge/Last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
+![Last-changedate](https://img.shields.io/badge/Last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)
+![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg)
 <!-- badges: end -->
 
 The goal of __zazou__ is to model the evolution of z-scores along a tree to do differential analysis.

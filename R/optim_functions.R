@@ -7,8 +7,6 @@
 #' @return a function that take Delta (a vector of size n+m) as argument
 #' and returns a scalar
 #' @export
-#'
-#' @examples
 compute_objective_function <- function(Y, X, lambda) {
   objective_function <- function(Delta) {
     YXD <- Y - X %*% Delta
@@ -26,8 +24,6 @@ compute_objective_function <- function(Y, X, lambda) {
 #' @return a function that take Delta (a vector of size n+m) as argument
 #' and returns a vector of size n+m
 #' @export
-#'
-#' @examples
 compute_gradient_function <- function(Y, X, lambda){
   gradient_function <- function(Delta){
     -crossprod(X, Y) + crossprod(X) %*% Delta - rep(lambda, length(Delta))
