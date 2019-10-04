@@ -19,7 +19,7 @@ library(zazou)
 library(ape)
 ```
 
-# Deterministic simulations
+# Deterministic situation
 
 
 ```{r tree}
@@ -55,11 +55,4 @@ optimized <- estimate_shifts(rep(0, 8), zscores = zscores,
 optimized
 round(incidence_mat %*% optimized$par, digits = 4)
 ```
-
-
-
-
-
-
-
 
