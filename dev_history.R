@@ -46,6 +46,8 @@ library(testthat)
 # use_r("incidence_matrix")
 # use_test("incidence_matrix")
 
+# use_vignette("simulations")
+
 ####
 
 load_all()

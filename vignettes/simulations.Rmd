@@ -1,0 +1,65 @@
+---
+title: "Simulations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{simulations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", fig.align = "center"
+)
+```
+
+```{r setup}
+library(zazou)
+library(ape)
+```
+
+# Deterministic simulations
+
+
+```{r tree}
+tree <- read.tree(text = "(((A,B),C),(D,E));")
+tree$tip.label
+```
+
+```{r incidence_mat}
+incidence_mat <- incidence_matrix(tree)
+incidence_mat + 0
+```
+
+```{r ggtree, message=FALSE}
+library(ggtree)
+ggtree(tree, ladderize = FALSE) +
+  geom_tiplab() +
+  geom_label(x = 1.5, y = 1.5, label = "-3", fill = "lightblue") +
+  geom_label(x = 2.5, y = 4, label = "-2", fill = "lightblue") 
+```
+
+```{r zscores}
+zscores <- c(-3, -3, 0, -2, 0)
+covar_mat <- diag(nrow = 5, ncol = 5)
+```
+
+```{r}
+optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
+                             incidence_mat = incidence_mat, 
+                             covar_mat = covar_mat, lambda = 0)
+```
+
+```{r}
+optimized
+round(incidence_mat %*% optimized$par, digits = 4)
+```
+
+
+
+
+
+
+
+
