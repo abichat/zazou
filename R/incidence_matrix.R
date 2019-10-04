@@ -24,8 +24,9 @@ incidence_matrix <- function(phylo) {
   daughters <- phy$edge[, 2]
   mat <- mat[daughters, ]
   ## Return to original tree
-  mat <- mat[cor,]
-  return(t(mat))
+  mat <- t(mat[cor, ])
+  rownames(mat) <- phy$tip.label
+  return(mat)
 }
 
 init_incidence_matrix <- function(phy) {
