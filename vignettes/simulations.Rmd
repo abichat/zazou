@@ -51,8 +51,21 @@ optimized <- estimate_shifts(rep(0, 8), zscores = zscores,
                              covar_mat = covar_mat, lambda = 0)
 ```
 
+Solution without penalty is not sparse due to ill-conditioning of the incidence matrix. 
+
 ```{r}
 optimized
 round(incidence_mat %*% optimized$par, digits = 4)
 ```
 
+With a low penalty, the solution is much sparser and closer to the one we have in mind. 
+
+```{r}
+optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
+                             incidence_mat = incidence_mat, 
+                             covar_mat = covar_mat, lambda = 0.1)
+optimized$par
+cbind(estimated = round(incidence_mat %*% optimized$par, digits = 4) %>% 
+        as.numeric(), 
+      observed  = zscores)
+```
