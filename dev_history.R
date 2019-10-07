@@ -48,6 +48,8 @@ library(testthat)
 
 # use_vignette("simulations")
 
+# use_r("covar")
+
 ####
 
 load_all()
