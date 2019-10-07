@@ -18,7 +18,8 @@ test_fisher(X, Y)
 \item{Y}{vector of condition}
 }
 \value{
-A list with a \code{p.value} component and eventually a \code{e.sign} component.
+A list with a \code{p.value} component and eventually
+a \code{e.sign} component.
 }
 \description{
 Vectorized tests

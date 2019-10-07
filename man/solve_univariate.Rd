@@ -17,10 +17,12 @@ solve_univariate(y, x, lambda = 0)
 The scalar solution of the 1D optimization problem
 }
 \description{
-This function minimizes \eqn{\beta} in the 1D problem \eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to \eqn{\beta < 0}.
+This function minimizes \eqn{\beta} in the 1D problem
+\eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to \eqn{\beta < 0}.
 }
 \details{
-The analytical solution of this problem is given by \deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
+The analytical solution of this problem is given by
+\deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
 }
 \examples{
 solve_univariate(1:4, -(4:1), 2)

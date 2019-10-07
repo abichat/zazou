@@ -3,7 +3,8 @@
 #' @param X matrix with samples in columns and taxa in rows
 #' @param Y vector of condition
 #'
-#' @return A list with a \code{p.value} component and eventually a \code{e.sign} component.
+#' @return A list with a \code{p.value} component and eventually
+#' a \code{e.sign} component.
 #' @export
 #' @importFrom stats wilcox.test
 #'

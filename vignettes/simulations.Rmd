@@ -21,7 +21,6 @@ library(ape)
 
 # Deterministic situation
 
-
 ```{r tree}
 tree <- read.tree(text = "(((A,B),C),(D,E));")
 tree$tip.label
@@ -41,7 +40,7 @@ ggtree(tree, ladderize = FALSE) +
 ```
 
 ```{r zscores}
-zscores <- c(-3, -3, 0, -2, 0)
+zscores <- true_shifts <- c(-3, -3, 0, -2, 0)
 covar_mat <- diag(nrow = 5, ncol = 5)
 ```
 
@@ -65,7 +64,7 @@ optimized <- estimate_shifts(rep(0, 8), zscores = zscores,
                              incidence_mat = incidence_mat, 
                              covar_mat = covar_mat, lambda = 0.1)
 optimized$par
-cbind(estimated = round(incidence_mat %*% optimized$par, digits = 4) %>% 
-        as.numeric(), 
-      observed  = zscores)
+round(data.frame(true = true_shifts, observed  = zscores,
+                 estimated = incidence_mat %*% optimized$par), 
+      digits = 4)
 ```

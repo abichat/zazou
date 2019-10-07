@@ -13,7 +13,8 @@ inverse_sqrt(M)
 a lower triangular matrix
 }
 \description{
-Compute \eqn{R}, the inverse of the square root of a matrix \eqn{M} such that \deqn{M^{-1} = R'R.}
+Compute \eqn{R}, the inverse of the square root of a matrix \eqn{M}
+such that \deqn{M^{-1} = R'R.}
 }
 \examples{
 M <- matrix(2, ncol = 3, nrow = 3) + diag(5, ncol = 3, nrow = 3)

@@ -1,8 +1,10 @@
 #' Solve unidirectional constrained problem
 #'
-#' This function minimizes \eqn{\beta} in the 1D problem \eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to \eqn{\beta < 0}.
+#' This function minimizes \eqn{\beta} in the 1D problem
+#' \eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to \eqn{\beta < 0}.
 #'
-#' The analytical solution of this problem is given by \deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
+#' The analytical solution of this problem is given by
+#' \deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
 #'
 #' @param y a vector of size n
 #' @param x a vector of size n

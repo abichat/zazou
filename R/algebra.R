@@ -1,6 +1,7 @@
 #' Inverse of the square root of a matrix
 #'
-#' Compute \eqn{R}, the inverse of the square root of a matrix \eqn{M} such that \deqn{M^{-1} = R'R.}
+#' Compute \eqn{R}, the inverse of the square root of a matrix \eqn{M}
+#' such that \deqn{M^{-1} = R'R.}
 #'
 #' @param M a symmetric positive definite matrix
 #'
