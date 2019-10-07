@@ -68,3 +68,52 @@ round(data.frame(true = true_shifts, observed  = zscores,
                  estimated = incidence_mat %*% optimized$par), 
       digits = 4)
 ```
+
+
+# Complete simulation
+
+```{r}
+tree <- read.tree(text = "(((A:1,B:1):1,C:2):1,(D:1,E:1):2);")
+(covar_mat <- covariance_matrix(tree, alpha = 1))
+true_shifts <- c(-3, -3, 0, -2, 0)
+sqrtcovar <- t(chol(covar_mat))
+zscores <- true_shifts + sqrtcovar %*% rnorm(5) # simulate 
+```
+
+
+```{r}
+optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
+                             incidence_mat = incidence_mat, 
+                             covar_mat = covar_mat, lambda = 0)
+optimized$par
+optimized$value
+round(data.frame(true = true_shifts, observed  = zscores,
+                 estimated = incidence_mat %*% optimized$par), 
+      digits = 4)
+```
+
+```{r}
+optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
+                             incidence_mat = incidence_mat, 
+                             covar_mat = covar_mat, lambda = 0.1)
+optimized$par
+optimized$value
+round(data.frame(true = true_shifts, observed  = zscores,
+                 estimated = incidence_mat %*% optimized$par), 
+      digits = 4)
+```
+
+```{r}
+optimized <- estimate_shifts(c(0, -3, 0, 0, 0, 0, -2, 0), zscores = zscores, 
+                             incidence_mat = incidence_mat, 
+                             covar_mat = covar_mat, lambda = 0.1)
+optimized$par
+optimized$value
+round(data.frame(true = true_shifts, observed  = zscores,
+                 estimated = incidence_mat %*% optimized$par), 
+      digits = 4)
+```
+
+
+
+
