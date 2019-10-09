@@ -111,7 +111,7 @@
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/pkg/ggtree/man/reexports.html">geom_label</a></span>(<span class="dt">x =</span> <span class="fl">1.5</span>, <span class="dt">y =</span> <span class="fl">1.5</span>, <span class="dt">label =</span> <span class="st">"-3"</span>, <span class="dt">fill =</span> <span class="st">"lightblue"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/pkg/ggtree/man/reexports.html">geom_label</a></span>(<span class="dt">x =</span> <span class="fl">2.5</span>, <span class="dt">y =</span> <span class="dv">4</span>, <span class="dt">label =</span> <span class="st">"-2"</span>, <span class="dt">fill =</span> <span class="st">"lightblue"</span>) </a></code></pre></div>
 <p><img src="simulations_files/figure-html/ggtree-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">zscores &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">-3</span>, <span class="dv">0</span>, <span class="dv">-2</span>, <span class="dv">0</span>)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">zscores &lt;-<span class="st"> </span>true_shifts &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">-3</span>, <span class="dv">0</span>, <span class="dv">-2</span>, <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">covar_mat &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="dt">nrow =</span> <span class="dv">5</span>, <span class="dt">ncol =</span> <span class="dv">5</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">optimized &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">zscores =</span> zscores, </a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">                             <span class="dt">incidence_mat =</span> incidence_mat, </a>
@@ -148,15 +148,91 @@
 <a class="sourceLine" id="cb8-4" data-line-number="4">optimized<span class="op">$</span>par</a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; [1]  0.000000000 -2.951381468  0.000000000  0.000000000  0.000000000</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; [6] -0.001954651 -1.896800199  0.000000000</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="dt">estimated =</span> <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(incidence_mat <span class="op">%*%</span><span class="st"> </span>optimized<span class="op">$</span>par, <span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">        </span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(), </a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">      <span class="dt">observed  =</span> zscores)</a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;      estimated observed</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; [1,]   -2.9514       -3</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; [2,]   -2.9514       -3</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; [3,]    0.0000        0</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; [4,]   -1.8988       -2</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; [5,]   -0.0020        0</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">true =</span> true_shifts, <span class="dt">observed  =</span> zscores,</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">                 <span class="dt">estimated =</span> incidence_mat <span class="op">%*%</span><span class="st"> </span>optimized<span class="op">$</span>par), </a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">      <span class="dt">digits =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;   true observed estimated</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; A   -3       -3   -2.9514</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; B   -3       -3   -2.9514</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; C    0        0    0.0000</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; D   -2       -2   -1.8988</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; E    0        0   -0.0020</span></a></code></pre></div>
+</div>
+<div id="complete-simulation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#complete-simulation" class="anchor"></a>Complete simulation</h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">tree &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ggtree/man/reexports.html">read.tree</a></span>(<span class="dt">text =</span> <span class="st">"(((A:1,B:1):1,C:2):1,(D:1,E:1):2);"</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">20191009</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">covar_mat &lt;-<span class="st"> </span><span class="kw"><a href="../reference/covariance_matrix.html">covariance_matrix</a></span>(tree, <span class="dt">alpha =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">corrplot<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span>(covar_mat, <span class="dt">type =</span> <span class="st">"upper"</span>)</a></code></pre></div>
+<p><img src="simulations_files/figure-html/ou_correlation_matrix-1.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">true_shifts &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">-3</span>, <span class="dv">0</span>, <span class="dv">-2</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">sqrtcovar &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/chol.html">chol</a></span>(covar_mat))</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">zscores &lt;-<span class="st"> </span>true_shifts <span class="op">+</span><span class="st"> </span>sqrtcovar <span class="op">%*%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">5</span>) <span class="co"># simulate </span></a></code></pre></div>
+<div id="estimate-shifts-without-penalty" class="section level2">
+<h2 class="hasAnchor">
+<a href="#estimate-shifts-without-penalty" class="anchor"></a>Estimate shifts without penalty</h2>
+<p>The fit is perfect since all observed <span class="math inline">\(z\)</span>-scores are negative.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">optimized &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">zscores =</span> zscores, </a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">                             <span class="dt">incidence_mat =</span> incidence_mat, </a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">                             <span class="dt">covar_mat =</span> covar_mat, <span class="dt">lambda =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">optimized<span class="op">$</span>par</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; [1] -1.38367127 -1.27282654 -1.12759012 -0.14523642 -0.11084473 -0.05758979</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; [7] -1.13260125  0.00000000</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">optimized<span class="op">$</span>value</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; [1] 4.43318e-11</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(optimized<span class="op">$</span>par <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## sparsity level</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [1] 7</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">true =</span> true_shifts, <span class="dt">observed  =</span> zscores,</a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">                 <span class="dt">estimated =</span> incidence_mat <span class="op">%*%</span><span class="st"> </span>optimized<span class="op">$</span>par), </a>
+<a class="sourceLine" id="cb11-13" data-line-number="13">      <span class="dt">digits =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt;   true observed estimated</span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; A   -3  -3.7841   -3.7841</span></a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt; B   -3  -2.8017   -2.8017</span></a>
+<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt; C    0  -1.4945   -1.4945</span></a>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt; D   -2  -1.1902   -1.1902</span></a>
+<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt; E    0  -0.0576   -0.0576</span></a></code></pre></div>
+<p>The fit degrades as we increase sparsity.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">optimized &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">zscores =</span> zscores, </a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">                             <span class="dt">incidence_mat =</span> incidence_mat, </a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">                             <span class="dt">covar_mat =</span> covar_mat, <span class="dt">lambda =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">optimized<span class="op">$</span>par</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; [1] -1.51130680 -1.25827913 -0.92742927  0.00000000  0.00000000 -0.04123557</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; [7] -1.05167379  0.00000000</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">optimized<span class="op">$</span>value</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; [1] 0.4967788</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(optimized<span class="op">$</span>par <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## sparsity level</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; [1] 5</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">true =</span> true_shifts, <span class="dt">observed  =</span> zscores,</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">                 <span class="dt">estimated =</span> incidence_mat <span class="op">%*%</span><span class="st"> </span>optimized<span class="op">$</span>par), </a>
+<a class="sourceLine" id="cb12-13" data-line-number="13">      <span class="dt">digits =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;   true observed estimated</span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; A   -3  -3.7841   -3.6970</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; B   -3  -2.8017   -2.7696</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; C    0  -1.4945   -1.5113</span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt; D   -2  -1.1902   -1.0929</span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; E    0  -0.0576   -0.0412</span></a></code></pre></div>
+<p>The fit does not depend a lot (on this toy example) on the initial solution.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">optimized &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">-3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">-2</span>, <span class="dv">0</span>), <span class="dt">zscores =</span> zscores, </a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">                             <span class="dt">incidence_mat =</span> incidence_mat, </a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">                             <span class="dt">covar_mat =</span> covar_mat, <span class="dt">lambda =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">optimized<span class="op">$</span>par</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; [1] -1.497968 -1.300098 -0.891983  0.000000  0.000000 -0.045241 -1.043102</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; [8]  0.000000</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">optimized<span class="op">$</span>value</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; [1] 0.4971269</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(optimized<span class="op">$</span>par <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## sparsity level</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; [1] 5</span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">true =</span> true_shifts, <span class="dt">observed  =</span> zscores,</a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">                 <span class="dt">estimated =</span> incidence_mat <span class="op">%*%</span><span class="st"> </span>optimized<span class="op">$</span>par), </a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">      <span class="dt">digits =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt;   true observed estimated</span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; A   -3  -3.7841   -3.6900</span></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; B   -3  -2.8017   -2.7981</span></a>
+<a class="sourceLine" id="cb13-17" data-line-number="17"><span class="co">#&gt; C    0  -1.4945   -1.4980</span></a>
+<a class="sourceLine" id="cb13-18" data-line-number="18"><span class="co">#&gt; D   -2  -1.1902   -1.0883</span></a>
+<a class="sourceLine" id="cb13-19" data-line-number="19"><span class="co">#&gt; E    0  -0.0576   -0.0452</span></a></code></pre></div>
+</div>
 </div>
   </div>
 
@@ -167,6 +243,11 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#deterministic-situation">Deterministic situation</a></li>
+      <li>
+<a href="#complete-simulation">Complete simulation</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#estimate-shifts-without-penalty">Estimate shifts without penalty</a></li>
+      </ul>
+</li>
       </ul>
 </div>
       </div>

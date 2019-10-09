@@ -36,7 +36,8 @@
 
 
 <meta property="og:title" content="Solve unidirectional constrained problem — solve_univariate" />
-<meta property="og:description" content="This function minimizes \(\beta\) in the 1D problem \(1/2 * ||y - x \beta||_2^2 + \lambda |\beta|\) subject to \(\beta &amp;lt; 0\)." />
+<meta property="og:description" content="This function minimizes \(\beta\) in the 1D problem
+\(1/2 * ||y - x \beta||_2^2 + \lambda |\beta|\) subject to \(\beta &amp;lt; 0\)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,7 +124,8 @@
     </div>
 
     <div class="ref-description">
-    <p>This function minimizes \(\beta\) in the 1D problem \(1/2 * ||y - x \beta||_2^2 + \lambda |\beta|\) subject to \(\beta &lt; 0\).</p>
+    <p>This function minimizes \(\beta\) in the 1D problem
+\(1/2 * ||y - x \beta||_2^2 + \lambda |\beta|\) subject to \(\beta &lt; 0\).</p>
     </div>
 
     <pre class="usage"><span class='fu'>solve_univariate</span>(<span class='no'>y</span>, <span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
@@ -150,7 +152,8 @@
     <p>The scalar solution of the 1D optimization problem</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The analytical solution of this problem is given by $$\beta* = min(0, (y'x + \lambda) / x'x ).$$</p>
+    <p>The analytical solution of this problem is given by
+$$\beta* = min(0, (y'x + \lambda) / x'x ).$$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>solve_univariate</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, -(<span class='fl'>4</span>:<span class='fl'>1</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -0.6</div></pre>
