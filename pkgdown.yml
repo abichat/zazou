@@ -1,0 +1,34 @@
+pandoc: 2.3.1
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  simulations: simulations.html
+
+template:
+  params:
+    bootswatch: simplex
+
+reference:
+  - title: Tree matrices
+    desc: ~
+    contents:
+    - '`covariance_matrix`'
+    - '`incidence_matrix`'
+  - title: p-values and z-scores
+    desc: ~
+    contents:
+    - '`test_wilcoxon`'
+    - '`p2z`'
+  - title: Datasets
+    desc: ~
+    contents:
+    - '`alcohol`'
+  - title: All other functions
+    desc: ~
+    contents:
+    - '`compute_gradient_function`'
+    - '`compute_objective_function`'
+    - '`estimate_shifts`'
+    - '`inverse_sqrt`'
+    - '`open_doc`'
+    - '`solve_univariate`'
