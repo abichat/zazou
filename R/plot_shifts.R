@@ -4,14 +4,14 @@
 #' @param tree   Phylo-class object
 #' @param scores Leaf-associated scores. Either a named vector
 #'
-#' @return a ggplot object, as created by ggtree
+#' @return a \code{ggplot} object, as created by \code{ggtree}
 #' @export
 #'
 #' @importFrom dplyr filter
 #' @import ggtree
 #'
 #' @examples
-#' tree <- read.tree(text = "(((A,B),C),(D,E));")
+#' tree <- ape::read.tree(text = "(((A,B),C),(D,E));")
 #' shifts <- c(0, -2.9513814680442, 0, 0, 0, -0.00195465052163029, -1.896800199013, 0)
 #' scores <- c(-3, -3, 0, -2, 0)
 #' plot_shifts(shifts, tree, scores)
