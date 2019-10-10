@@ -2,9 +2,13 @@
 % Please edit documentation in R/optim_global.R
 \name{estimate_shifts}
 \alias{estimate_shifts}
+\alias{estimate_shifts2}
 \title{Estimate shifts}
 \usage{
 estimate_shifts(Delta0, zscores, incidence_mat, covar_mat, lambda)
+
+estimate_shifts2(Delta0, zscores, tree, lambda = 0, alpha = NULL,
+  covar_mat = NULL)
 }
 \arguments{
 \item{Delta0}{initial position (size n+m)}
@@ -13,12 +17,19 @@ estimate_shifts(Delta0, zscores, incidence_mat, covar_mat, lambda)
 
 \item{incidence_mat}{incidence matrix (size m*(n+m))}
 
-\item{covar_mat}{covariance matrix (size m*m)}
+\item{covar_mat}{covariance matrix (size m*m) between z-scores}
 
 \item{lambda}{a positive regularization parameter}
+
+\item{tree}{the tree form which is calculated the incidence matrix and the
+covariance matrix if not specified}
+
+\item{alpha}{parameter > 0}
 }
 \value{
 a list
+
+a shiftestim object
 }
 \description{
 Estimate shifts

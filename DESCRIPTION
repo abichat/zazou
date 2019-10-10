@@ -20,12 +20,14 @@ BugReports: https://github.com/abichat/zazou/issues
 Depends: 
     R (>= 2.10)
 Imports: 
+    dplyr,
+    ggtree,
+    glue,
     stats,
     utils
 Suggests: 
     ape,
     corrplot,
-    ggtree,
     knitr,
     rmarkdown,
     spelling,

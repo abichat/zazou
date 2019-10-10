@@ -51,6 +51,8 @@ library(testthat)
 # use_r("covar")
 # use_r("plot_shifts")
 
+# use_r("shiftestim")
+
 ####
 
 load_all()
@@ -65,6 +67,7 @@ test()
 
 goodpractice::gp()
 check()
+
 
 
 
