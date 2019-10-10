@@ -2,7 +2,8 @@
 #'
 #' @param shifts Branch-associated shifts vector, sorted in cladewise order
 #' @param tree   Phylo-class object
-#' @param scores Leaf-associated scores. Either a named vector
+#' @param scores Leaf-associated scores, as a named vector. If scores is unnamed, assumes scores are in
+#'               the same order as \code{tree$tip.label}
 #'
 #' @return a ggplot object, as created by ggtree
 #' @export
@@ -23,14 +24,18 @@ plot_shifts <- function(shifts, tree, scores = NULL) {
                           shift_value = shifts) %>%
     dplyr::filter(shift_value != 0)
   p <- ggtree(tree) %<+% edge_data +
+    geom_tiplab(size = 5) +
     geom_label(aes(x = branch, label = shift_value))
   ## Build and add zscores annotation
   if (!is.null(scores)) {
-    leaf_data <- data.frame(label  = tree$tip.label,
-                            score = scores)
-    p <- p %<+% leaf_data + geom_tiplab(aes(label = glue::glue("{label} {score}")), size = 5)
-  } else {
-    p <- p + geom_tiplab(size = 5)
+    if (is.null(names(scores))) names(scores) <- tree$tip.label
+    leaf_data <- data.frame(label = names(scores),
+                            score = unname(scores))
+    p <- facet_plot(p,
+                    panel   = "Z-scores",
+                    data    = leaf_data,
+                    geom    = geom_point,
+                    mapping = aes(x = score))
   }
   p
 }
