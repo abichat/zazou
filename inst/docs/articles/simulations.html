@@ -230,11 +230,11 @@
 <a class="sourceLine" id="cb12-3" data-line-number="3">                             <span class="dt">covar_mat =</span> covar_mat, <span class="dt">lambda =</span> <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">optimized</a>
 <a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; $par</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; [1] -1.38367127 -1.27282654 -1.12759012 -0.14523642 -0.11084473 -0.05758979</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; [7] -1.13260125  0.00000000</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; [1] -1.38334650 -1.27274672 -1.12799095 -0.14475577 -0.11059978 -0.05606973</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; [7] -1.13170764  0.00000000</span></a>
 <a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; $value</span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; [1] 4.43318e-11</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; [1] 4.848911e-11</span></a>
 <a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; $counts</span></a>
 <a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; function gradient </span></a>
@@ -246,10 +246,10 @@
 <a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; $message</span></a>
 <a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; [1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</span></a>
 <a class="sourceLine" id="cb12-21" data-line-number="21">optimized<span class="op">$</span>par</a>
-<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="co">#&gt; [1] -1.38367127 -1.27282654 -1.12759012 -0.14523642 -0.11084473 -0.05758979</span></a>
-<a class="sourceLine" id="cb12-23" data-line-number="23"><span class="co">#&gt; [7] -1.13260125  0.00000000</span></a>
+<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="co">#&gt; [1] -1.38334650 -1.27274672 -1.12799095 -0.14475577 -0.11059978 -0.05606973</span></a>
+<a class="sourceLine" id="cb12-23" data-line-number="23"><span class="co">#&gt; [7] -1.13170764  0.00000000</span></a>
 <a class="sourceLine" id="cb12-24" data-line-number="24">optimized<span class="op">$</span>value</a>
-<a class="sourceLine" id="cb12-25" data-line-number="25"><span class="co">#&gt; [1] 4.43318e-11</span></a>
+<a class="sourceLine" id="cb12-25" data-line-number="25"><span class="co">#&gt; [1] 4.848911e-11</span></a>
 <a class="sourceLine" id="cb12-26" data-line-number="26"><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(optimized<span class="op">$</span>par <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## sparsity level</span></a>
 <a class="sourceLine" id="cb12-27" data-line-number="27"><span class="co">#&gt; [1] 7</span></a>
 <a class="sourceLine" id="cb12-28" data-line-number="28"><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">true =</span> true_shifts, <span class="dt">observed  =</span> zscores,</a>
@@ -257,42 +257,42 @@
 <a class="sourceLine" id="cb12-30" data-line-number="30">      <span class="dt">digits =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb12-31" data-line-number="31"><span class="co">#&gt;   true observed estimated</span></a>
 <a class="sourceLine" id="cb12-32" data-line-number="32"><span class="co">#&gt; A   -3  -3.7841   -3.7841</span></a>
-<a class="sourceLine" id="cb12-33" data-line-number="33"><span class="co">#&gt; B   -3  -2.8017   -2.8017</span></a>
-<a class="sourceLine" id="cb12-34" data-line-number="34"><span class="co">#&gt; C    0  -1.4945   -1.4945</span></a>
-<a class="sourceLine" id="cb12-35" data-line-number="35"><span class="co">#&gt; D   -2  -1.1902   -1.1902</span></a>
-<a class="sourceLine" id="cb12-36" data-line-number="36"><span class="co">#&gt; E    0  -0.0576   -0.0576</span></a>
+<a class="sourceLine" id="cb12-33" data-line-number="33"><span class="co">#&gt; B   -3  -2.8008   -2.8008</span></a>
+<a class="sourceLine" id="cb12-34" data-line-number="34"><span class="co">#&gt; C    0  -1.4939   -1.4939</span></a>
+<a class="sourceLine" id="cb12-35" data-line-number="35"><span class="co">#&gt; D   -2  -1.1878   -1.1878</span></a>
+<a class="sourceLine" id="cb12-36" data-line-number="36"><span class="co">#&gt; E    0  -0.0561   -0.0561</span></a>
 <a class="sourceLine" id="cb12-37" data-line-number="37"><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">zscores =</span> zscores, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb12-38" data-line-number="38"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1. </span></a>
-<a class="sourceLine" id="cb12-39" data-line-number="39"><span class="co">#&gt; Estimated shifts: -1.3837 -1.2728 -1.1276 -0.1452 -0.1108 -0.0576 -1.1326 0 ...</span></a>
-<a class="sourceLine" id="cb12-40" data-line-number="40"><span class="co">#&gt; Estimated zscores: -3.7841 -2.8017 -1.4945 -1.1902 -0.0576 ...</span></a>
-<a class="sourceLine" id="cb12-41" data-line-number="41"><span class="co">#&gt; Observed zscores: -3.7841 -2.8017 -1.4945 -1.1902 -0.0576 ...</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-39" data-line-number="39"><span class="co">#&gt; Estimated shifts: -1.3833 -1.2727 -1.128 -0.1448 -0.1106 -0.0561 -1.1317 0 ...</span></a>
+<a class="sourceLine" id="cb12-40" data-line-number="40"><span class="co">#&gt; Estimated zscores: -3.7841 -2.8008 -1.4939 -1.1878 -0.0561 ...</span></a>
+<a class="sourceLine" id="cb12-41" data-line-number="41"><span class="co">#&gt; Observed zscores: -3.7841 -2.8008 -1.4939 -1.1878 -0.0561 ...</span></a></code></pre></div>
 <p>The fit degrades as we increase sparsity.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">optimized &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">zscores =</span> zscores, </a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">                             <span class="dt">incidence_mat =</span> incidence_mat, </a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">                             <span class="dt">covar_mat =</span> covar_mat, <span class="dt">lambda =</span> <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4">optimized<span class="op">$</span>par</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; [1] -1.51130680 -1.25827913 -0.92742927  0.00000000  0.00000000 -0.04123557</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; [7] -1.05167379  0.00000000</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; [1] -1.51093684 -1.25815321 -0.92945555  0.00000000  0.00000000 -0.03973939</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; [7] -1.05057061  0.00000000</span></a>
 <a class="sourceLine" id="cb13-7" data-line-number="7">optimized<span class="op">$</span>value</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; [1] 0.4967788</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; [1] 0.4964638</span></a>
 <a class="sourceLine" id="cb13-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(optimized<span class="op">$</span>par <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## sparsity level</span></a>
 <a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; [1] 5</span></a>
 <a class="sourceLine" id="cb13-11" data-line-number="11"><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">true =</span> true_shifts, <span class="dt">observed  =</span> zscores,</a>
 <a class="sourceLine" id="cb13-12" data-line-number="12">                 <span class="dt">estimated =</span> incidence_mat <span class="op">%*%</span><span class="st"> </span>optimized<span class="op">$</span>par), </a>
 <a class="sourceLine" id="cb13-13" data-line-number="13">      <span class="dt">digits =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt;   true observed estimated</span></a>
-<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; A   -3  -3.7841   -3.6970</span></a>
-<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; B   -3  -2.8017   -2.7696</span></a>
-<a class="sourceLine" id="cb13-17" data-line-number="17"><span class="co">#&gt; C    0  -1.4945   -1.5113</span></a>
-<a class="sourceLine" id="cb13-18" data-line-number="18"><span class="co">#&gt; D   -2  -1.1902   -1.0929</span></a>
-<a class="sourceLine" id="cb13-19" data-line-number="19"><span class="co">#&gt; E    0  -0.0576   -0.0412</span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; A   -3  -3.7841   -3.6985</span></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; B   -3  -2.8008   -2.7691</span></a>
+<a class="sourceLine" id="cb13-17" data-line-number="17"><span class="co">#&gt; C    0  -1.4939   -1.5109</span></a>
+<a class="sourceLine" id="cb13-18" data-line-number="18"><span class="co">#&gt; D   -2  -1.1878   -1.0903</span></a>
+<a class="sourceLine" id="cb13-19" data-line-number="19"><span class="co">#&gt; E    0  -0.0561   -0.0397</span></a>
 <a class="sourceLine" id="cb13-20" data-line-number="20">optimized</a>
 <a class="sourceLine" id="cb13-21" data-line-number="21"><span class="co">#&gt; $par</span></a>
-<a class="sourceLine" id="cb13-22" data-line-number="22"><span class="co">#&gt; [1] -1.51130680 -1.25827913 -0.92742927  0.00000000  0.00000000 -0.04123557</span></a>
-<a class="sourceLine" id="cb13-23" data-line-number="23"><span class="co">#&gt; [7] -1.05167379  0.00000000</span></a>
+<a class="sourceLine" id="cb13-22" data-line-number="22"><span class="co">#&gt; [1] -1.51093684 -1.25815321 -0.92945555  0.00000000  0.00000000 -0.03973939</span></a>
+<a class="sourceLine" id="cb13-23" data-line-number="23"><span class="co">#&gt; [7] -1.05057061  0.00000000</span></a>
 <a class="sourceLine" id="cb13-24" data-line-number="24"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb13-25" data-line-number="25"><span class="co">#&gt; $value</span></a>
-<a class="sourceLine" id="cb13-26" data-line-number="26"><span class="co">#&gt; [1] 0.4967788</span></a>
+<a class="sourceLine" id="cb13-26" data-line-number="26"><span class="co">#&gt; [1] 0.4964638</span></a>
 <a class="sourceLine" id="cb13-27" data-line-number="27"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb13-28" data-line-number="28"><span class="co">#&gt; $counts</span></a>
 <a class="sourceLine" id="cb13-29" data-line-number="29"><span class="co">#&gt; function gradient </span></a>
@@ -305,40 +305,40 @@
 <a class="sourceLine" id="cb13-36" data-line-number="36"><span class="co">#&gt; [1] "ERROR: ABNORMAL_TERMINATION_IN_LNSRCH"</span></a>
 <a class="sourceLine" id="cb13-37" data-line-number="37"><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">zscores =</span> zscores, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb13-38" data-line-number="38"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1. </span></a>
-<a class="sourceLine" id="cb13-39" data-line-number="39"><span class="co">#&gt; Estimated shifts: -1.5113 -1.2583 -0.9274 0 0 -0.0412 -1.0517 0 ...</span></a>
-<a class="sourceLine" id="cb13-40" data-line-number="40"><span class="co">#&gt; Estimated zscores: -3.697 -2.7696 -1.5113 -1.0929 -0.0412 ...</span></a>
-<a class="sourceLine" id="cb13-41" data-line-number="41"><span class="co">#&gt; Observed zscores: -3.7841 -2.8017 -1.4945 -1.1902 -0.0576 ...</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-39" data-line-number="39"><span class="co">#&gt; Estimated shifts: -1.5109 -1.2582 -0.9295 0 0 -0.0397 -1.0506 0 ...</span></a>
+<a class="sourceLine" id="cb13-40" data-line-number="40"><span class="co">#&gt; Estimated zscores: -3.6985 -2.7691 -1.5109 -1.0903 -0.0397 ...</span></a>
+<a class="sourceLine" id="cb13-41" data-line-number="41"><span class="co">#&gt; Observed zscores: -3.7841 -2.8008 -1.4939 -1.1878 -0.0561 ...</span></a></code></pre></div>
 <p>The fit does not depend a lot (on this toy example) on the initial solution.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">optimized &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">-3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">-2</span>, <span class="dv">0</span>), <span class="dt">zscores =</span> zscores, </a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">                             <span class="dt">incidence_mat =</span> incidence_mat, </a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">                             <span class="dt">covar_mat =</span> covar_mat, <span class="dt">lambda =</span> <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb14-4" data-line-number="4">optimized<span class="op">$</span>par</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; [1] -1.497968 -1.300098 -0.891983  0.000000  0.000000 -0.045241 -1.043102</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; [8]  0.000000</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; [1] -1.4922481 -1.2950467 -0.8974621  0.0000000  0.0000000 -0.0426470</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; [7] -1.0450959  0.0000000</span></a>
 <a class="sourceLine" id="cb14-7" data-line-number="7">optimized<span class="op">$</span>value</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; [1] 0.4971269</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; [1] 0.4970994</span></a>
 <a class="sourceLine" id="cb14-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(optimized<span class="op">$</span>par <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## sparsity level</span></a>
 <a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt; [1] 5</span></a>
 <a class="sourceLine" id="cb14-11" data-line-number="11"><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">true =</span> true_shifts, <span class="dt">observed  =</span> zscores,</a>
 <a class="sourceLine" id="cb14-12" data-line-number="12">                 <span class="dt">estimated =</span> incidence_mat <span class="op">%*%</span><span class="st"> </span>optimized<span class="op">$</span>par), </a>
 <a class="sourceLine" id="cb14-13" data-line-number="13">      <span class="dt">digits =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb14-14" data-line-number="14"><span class="co">#&gt;   true observed estimated</span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">#&gt; A   -3  -3.7841   -3.6900</span></a>
-<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="co">#&gt; B   -3  -2.8017   -2.7981</span></a>
-<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="co">#&gt; C    0  -1.4945   -1.4980</span></a>
-<a class="sourceLine" id="cb14-18" data-line-number="18"><span class="co">#&gt; D   -2  -1.1902   -1.0883</span></a>
-<a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">#&gt; E    0  -0.0576   -0.0452</span></a>
+<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">#&gt; A   -3  -3.7841   -3.6848</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="co">#&gt; B   -3  -2.8008   -2.7873</span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="co">#&gt; C    0  -1.4939   -1.4922</span></a>
+<a class="sourceLine" id="cb14-18" data-line-number="18"><span class="co">#&gt; D   -2  -1.1878   -1.0877</span></a>
+<a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">#&gt; E    0  -0.0561   -0.0426</span></a>
 <a class="sourceLine" id="cb14-20" data-line-number="20">optimized</a>
 <a class="sourceLine" id="cb14-21" data-line-number="21"><span class="co">#&gt; $par</span></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; [1] -1.497968 -1.300098 -0.891983  0.000000  0.000000 -0.045241 -1.043102</span></a>
-<a class="sourceLine" id="cb14-23" data-line-number="23"><span class="co">#&gt; [8]  0.000000</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">#&gt; [1] -1.4922481 -1.2950467 -0.8974621  0.0000000  0.0000000 -0.0426470</span></a>
+<a class="sourceLine" id="cb14-23" data-line-number="23"><span class="co">#&gt; [7] -1.0450959  0.0000000</span></a>
 <a class="sourceLine" id="cb14-24" data-line-number="24"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb14-25" data-line-number="25"><span class="co">#&gt; $value</span></a>
-<a class="sourceLine" id="cb14-26" data-line-number="26"><span class="co">#&gt; [1] 0.4971269</span></a>
+<a class="sourceLine" id="cb14-26" data-line-number="26"><span class="co">#&gt; [1] 0.4970994</span></a>
 <a class="sourceLine" id="cb14-27" data-line-number="27"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb14-28" data-line-number="28"><span class="co">#&gt; $counts</span></a>
 <a class="sourceLine" id="cb14-29" data-line-number="29"><span class="co">#&gt; function gradient </span></a>
-<a class="sourceLine" id="cb14-30" data-line-number="30"><span class="co">#&gt;       59       59 </span></a>
+<a class="sourceLine" id="cb14-30" data-line-number="30"><span class="co">#&gt;       57       57 </span></a>
 <a class="sourceLine" id="cb14-31" data-line-number="31"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb14-32" data-line-number="32"><span class="co">#&gt; $convergence</span></a>
 <a class="sourceLine" id="cb14-33" data-line-number="33"><span class="co">#&gt; [1] 52</span></a>
@@ -347,9 +347,9 @@
 <a class="sourceLine" id="cb14-36" data-line-number="36"><span class="co">#&gt; [1] "ERROR: ABNORMAL_TERMINATION_IN_LNSRCH"</span></a>
 <a class="sourceLine" id="cb14-37" data-line-number="37"><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">-3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">-2</span>, <span class="dv">0</span>), <span class="dt">zscores =</span> zscores, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb14-38" data-line-number="38"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1. </span></a>
-<a class="sourceLine" id="cb14-39" data-line-number="39"><span class="co">#&gt; Estimated shifts: -1.498 -1.3001 -0.892 0 0 -0.0452 -1.0431 0 ...</span></a>
-<a class="sourceLine" id="cb14-40" data-line-number="40"><span class="co">#&gt; Estimated zscores: -3.69 -2.7981 -1.498 -1.0883 -0.0452 ...</span></a>
-<a class="sourceLine" id="cb14-41" data-line-number="41"><span class="co">#&gt; Observed zscores: -3.7841 -2.8017 -1.4945 -1.1902 -0.0576 ...</span></a></code></pre></div>
+<a class="sourceLine" id="cb14-39" data-line-number="39"><span class="co">#&gt; Estimated shifts: -1.4922 -1.295 -0.8975 0 0 -0.0426 -1.0451 0 ...</span></a>
+<a class="sourceLine" id="cb14-40" data-line-number="40"><span class="co">#&gt; Estimated zscores: -3.6848 -2.7873 -1.4922 -1.0877 -0.0426 ...</span></a>
+<a class="sourceLine" id="cb14-41" data-line-number="41"><span class="co">#&gt; Observed zscores: -3.7841 -2.8008 -1.4939 -1.1878 -0.0561 ...</span></a></code></pre></div>
 </div>
 </div>
   </div>

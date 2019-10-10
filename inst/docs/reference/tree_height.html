@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Covariance matrix — covariance_matrix • zazou</title>
+<title>Tree height — tree_height • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Covariance matrix — covariance_matrix" />
-<meta property="og:description" content="Compute normalized covariance matrix" />
+<meta property="og:title" content="Tree height — tree_height" />
+<meta property="og:description" content="Compute the tree height from an ultrametric tree" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,51 +117,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Covariance matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/covariance_matrix.R'><code>R/covariance_matrix.R</code></a></small>
-    <div class="hidden name"><code>covariance_matrix.Rd</code></div>
+    <h1>Tree height</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/tree_helpers.R'><code>R/tree_helpers.R</code></a></small>
+    <div class="hidden name"><code>tree_height.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Compute normalized covariance matrix</p>
+    <p>Compute the tree height from an ultrametric tree</p>
     </div>
 
-    <pre class="usage"><span class='fu'>covariance_matrix</span>(<span class='no'>tree</span>, <span class='no'>alpha</span>)</pre>
+    <pre class="usage"><span class='fu'>tree_height</span>(<span class='no'>tree</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>tree</th>
-      <td><p>a phylo object</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>hyperparameter</p></td>
+      <td><p>an ultrametric tree <code>phylo</code> object.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the covariance matrix of the OU process on the tree</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The coefficient is proportional to
-\(exp(- \alpha * d_{i,j}) - exp(-2 * \alpha * h) / (2 * \alpha)\)</p>
+    <p>the height of the tree</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rtree</a></span>(<span class='fl'>3</span>)
-<span class='fu'>covariance_matrix</span>(<span class='no'>tree</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt;           t1        t3        t2
-#&gt; t1 1.0000000 0.5491929 0.4213490
-#&gt; t3 0.5491929 1.0000000 0.1946219
-#&gt; t2 0.4213490 0.1946219 1.0000000</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rcoal</a></span>(<span class='fl'>6</span>)
+<span class='fu'>tree_height</span>(<span class='no'>tree</span>)</div><div class='output co'>#&gt; [1] 0.7223953</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
