@@ -7,7 +7,7 @@
 \usage{
 as_shiftestim(listopt, tree, zscores, lambda, alpha, covar_mat)
 
-\method{print}{shiftestim}(obj, digits = 4, ...)
+\method{print}{shiftestim}(x, digits = 4, ...)
 }
 \arguments{
 \item{listopt}{an output of 'estimate_shifts()'}
@@ -22,7 +22,7 @@ as_shiftestim(listopt, tree, zscores, lambda, alpha, covar_mat)
 
 \item{covar_mat}{the covariance matrix}
 
-\item{obj}{a 'shiftestim' object.}
+\item{x}{a 'shiftestim' object.}
 
 \item{digits}{number of digits to round to.}
 

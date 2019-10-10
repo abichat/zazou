@@ -25,28 +25,32 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
 }
 
 
+
+
 #' @rdname as_shiftestim
 #'
-#' @param obj a 'shiftestim' object.
+#' @name print.shiftestim
+#'
+#' @param x a 'shiftestim' object.
 #' @param digits number of digits to round to.
 #' @param ... further arguments to be passed to or from other methods.
 #'
 #' @importFrom utils head
 #'
 #' @export
-print.shiftestim <- function(obj, digits = 4, ...){
-  if(is.null(obj$alpha)){
+print.shiftestim <- function(x, digits = 4, ...){
+  if(is.null(x$alpha)){
     txt_alpha <- "Covariance matrix has been manually specified."
   } else {
     txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
-                        " with alpha = ", round(obj$alpha, digits), ".")
+                        " with alpha = ", round(x$alpha, digits), ".")
   }
-  zscores_est <- incidence_matrix(obj$tree) %*% obj$shift_est
+  zscores_est <- incidence_matrix(x$tree) %*% x$shift_est
 
   cat(txt_alpha, "\n")
-  cat("Estimated shifts:", head(round(obj$shift_est, digits), 10), "...\n")
+  cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
   cat("Estimated zscores:", head(round(zscores_est, digits), 10), "...\n")
-  cat("Observed zscores:", head(round(obj$zscores_obs, digits), 10), "...\n")
+  cat("Observed zscores:", head(round(x$zscores_obs, digits), 10), "...\n")
 }
 
 
