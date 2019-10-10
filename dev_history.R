@@ -54,6 +54,7 @@ library(testthat)
 # use_r("shiftestim")
 
 # use_r("tree_helpers")
+# use_test("tree_helpers")
 
 ####
 
