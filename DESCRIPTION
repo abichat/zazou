@@ -19,6 +19,7 @@ Imports:
     utils
 Suggests: 
     ape,
+    corrplot,
     ggtree,
     knitr,
     rmarkdown,

@@ -22,7 +22,7 @@ date <- gsub('-', '--', Sys.Date())
 ```
 
 <!-- badges: start -->
-[![Last-changedate](https://img.shields.io/badge/Last%20change-`r date`-yellowgreen.svg)]()
+<!-- [![Last-changedate](https://img.shields.io/badge/Last%20change-`r date`-yellowgreen.svg)]() -->
 [![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg)]()
 <!-- badges: end -->
 

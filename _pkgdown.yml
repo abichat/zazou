@@ -1,14 +1,29 @@
-pandoc: 2.3.1
-pkgdown: 1.4.1
-pkgdown_sha: ~
-articles:
-  simulations: simulations.html
-
 template:
   params:
     bootswatch: simplex
 
+navbar:
+  title: "yatah"
+  left:
+    - icon: fas fa-home fa-lg
+      href: index.html
+    - text: Get started
+      menu:
+      - text: Simulations
+        href: articles/simulations.html
+    - reference:
+      text: Reference
+      href: reference/index.html
+  right:
+    - icon: fab fa-github fa-lg
+      href: https://github.com/abichat/zazou
+
+
 reference:
+  - title: Main optimization function
+    desc: ~
+    contents:
+    - '`estimate_shifts`'
   - title: Tree matrices
     desc: ~
     contents:
@@ -19,16 +34,15 @@ reference:
     contents:
     - '`test_wilcoxon`'
     - '`p2z`'
-  - title: Datasets
+  - title: Datasets and documentation
     desc: ~
     contents:
     - '`alcohol`'
+    - '`open_doc`'
   - title: All other functions
     desc: ~
     contents:
     - '`compute_gradient_function`'
     - '`compute_objective_function`'
-    - '`estimate_shifts`'
     - '`inverse_sqrt`'
-    - '`open_doc`'
     - '`solve_univariate`'
