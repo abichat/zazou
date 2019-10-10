@@ -26,7 +26,7 @@ test_that("the covariance matrix is correct", {
   covar <- covariance_matrix(tree, alpha = a)
   expect_equal(covar, t(covar))
   expect_equivalent(diag(covar), rep(1, length(tree$tip.label)))
-  expect_equal(covar[1, 2],
+  expect_equal(covar[1, 2],  # To check !
                (exp(-a * 2 * 0.7) - exp(- 2 * a * h)) / (1 - exp(- 2 * a * h)),
                tolerance = 1e-5)
 })
