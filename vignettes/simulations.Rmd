@@ -57,6 +57,11 @@ optimized
 round(incidence_mat %*% optimized$par, digits = 4)
 ```
 
+```{r}
+estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, lambda = 0, covar_mat = covar_mat)
+```
+
+
 With a low penalty, the solution is much sparser and closer to the one we have in mind. 
 
 ```{r}
@@ -67,6 +72,7 @@ optimized$par
 round(data.frame(true = true_shifts, observed  = zscores,
                  estimated = incidence_mat %*% optimized$par), 
       digits = 4)
+unclass(estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, lambda = 0.1, covar_mat = covar_mat))
 ```
 
 
@@ -90,12 +96,14 @@ The fit is perfect since all observed $z$-scores are negative.
 optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
                              incidence_mat = incidence_mat, 
                              covar_mat = covar_mat, lambda = 0)
+optimized
 optimized$par
 optimized$value
 sum(optimized$par != 0) ## sparsity level
 round(data.frame(true = true_shifts, observed  = zscores,
                  estimated = incidence_mat %*% optimized$par), 
       digits = 4)
+estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0)
 ```
 
 The fit degrades as we increase sparsity. 
@@ -110,6 +118,8 @@ sum(optimized$par != 0) ## sparsity level
 round(data.frame(true = true_shifts, observed  = zscores,
                  estimated = incidence_mat %*% optimized$par), 
       digits = 4)
+optimized
+estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0.1)
 ```
 
 The fit does not depend a lot (on this toy example) on the initial solution. 
@@ -124,6 +134,8 @@ sum(optimized$par != 0) ## sparsity level
 round(data.frame(true = true_shifts, observed  = zscores,
                  estimated = incidence_mat %*% optimized$par), 
       digits = 4)
+optimized
+estimate_shifts2(c(0, -3, 0, 0, 0, 0, -2, 0), zscores = zscores, tree = tree, alpha = 1, lambda = 0.1)
 ```
 
 
