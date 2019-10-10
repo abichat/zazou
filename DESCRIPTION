@@ -2,11 +2,16 @@ Package: zazou
 Title: Z-scores az Ornstein-Uhlenbeck
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Antoine",
-           family = "Bichat",
-           role = c("aut", "cre"),
-           email = "abichat@enterome.com",
-           comment = c(ORCID = "0000-0001-6599-7081"))
+    c(person(given = "Antoine",
+             family = "Bichat",
+             role = c("aut", "cre"),
+             email = "a.bichat@yahoo.fr",
+             comment = c(ORCID = "0000-0001-6599-7081")),
+      person(given = "Mahendra",
+             family = "Mariadassou",
+             role = c("aut", "ths"),
+             email = "mahendra.mariadassou@inra.fr",
+             comment = c(ORCID = "0000-0003-2986-354X")))
 Description: Differentially abundance analysis with
     Ornstein-Uhlenbeck process on z-scores.
 License: GPL-3
