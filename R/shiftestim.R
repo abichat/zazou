@@ -39,19 +39,37 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
 #'
 #' @export
 print.shiftestim <- function(x, digits = 4, ...){
+
   if(is.null(x$alpha)){
     txt_alpha <- "Covariance matrix has been manually specified."
   } else {
+    h <- tree_height(x$tree)
+    sigma <- sqrt(2 * x$alpha) / (1 - exp(- 2 * x$alpha * h))
     txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
-                        " with alpha = ", round(x$alpha, digits), ".")
+                        " with alpha = ", round(x$alpha, digits),
+                        " and sigma = ", round(sigma, digits), ".")
   }
+
+
+
   zscores_est <- incidence_matrix(x$tree) %*% x$shift_est
 
   cat(txt_alpha, "\n")
+
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
-  cat("Estimated zscores:", head(round(zscores_est, digits), 10), "...\n")
-  cat("Observed zscores:", head(round(x$zscores_obs, digits), 10), "...\n")
+  cat(sum(x$shift_est != 0), "shifts have been identified (ie",
+      100 * round(mean(x$shift_est == 0), digits), "% of sparsity).\n")
+  cat("Estimated z-scores:", head(round(zscores_est, digits), 10), "...\n")
+  cat("Observed z-scores: ", head(round(x$zscores_obs, digits), 10), "...\n")
 }
 
+
+#' @rdname as_shiftestim
+#'
+#' @export
+plot.shiftestim <- function(x, digits = 4, ...){
+  plot_shifts(shifts = round(x$shift_est, digits),
+              tree = x$tree, scores = x$zscores_obs)
+}
 
 

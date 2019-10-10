@@ -11,8 +11,8 @@ plot_shifts(shifts, tree, scores = NULL)
 
 \item{tree}{Phylo-class object}
 
-\item{scores}{Leaf-associated scores, as a named vector. If scores is unnamed, assumes scores are in
-the same order as \code{tree$tip.label}}
+\item{scores}{Leaf-associated scores, as a named vector. If scores is
+unnamed, assumes scores are in the same order as \code{tree$tip.label}}
 }
 \value{
 a \code{ggplot} object, as created by \code{ggtree}
@@ -22,7 +22,8 @@ Plot shift amplitude and location on the tree
 }
 \examples{
 tree <- ape::read.tree(text = "(((A,B),C),(D,E));")
-shifts <- c(0, -2.9513814680442, 0, 0, 0, -0.00195465052163029, -1.896800199013, 0)
+shifts <- c(0, -2.9513814680442, 0, 0, 0, -0.00195465052163029,
+-1.896800199013, 0)
 scores <- c(-3, -3, 0, -2, 0)
 plot_shifts(shifts, tree, scores)
 }

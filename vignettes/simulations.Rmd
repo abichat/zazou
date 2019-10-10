@@ -72,7 +72,9 @@ optimized$par
 round(data.frame(true = true_shifts, observed  = zscores,
                  estimated = incidence_mat %*% optimized$par), 
       digits = 4)
-unclass(estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, lambda = 0.1, covar_mat = covar_mat))
+x <- estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, lambda = 0.1, covar_mat = covar_mat)
+x
+unclass(x)
 ```
 
 
@@ -119,7 +121,9 @@ round(data.frame(true = true_shifts, observed  = zscores,
                  estimated = incidence_mat %*% optimized$par), 
       digits = 4)
 optimized
-estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0.1)
+x <- estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0.1)
+x
+plot(x)
 ```
 
 The fit does not depend a lot (on this toy example) on the initial solution. 

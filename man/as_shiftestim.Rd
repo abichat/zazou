@@ -3,11 +3,14 @@
 \name{as_shiftestim}
 \alias{as_shiftestim}
 \alias{print.shiftestim}
+\alias{plot.shiftestim}
 \title{'shiftestim' object}
 \usage{
 as_shiftestim(listopt, tree, zscores, lambda, alpha, covar_mat)
 
 \method{print}{shiftestim}(x, digits = 4, ...)
+
+\method{plot}{shiftestim}(x, digits = 4, ...)
 }
 \arguments{
 \item{listopt}{an output of 'estimate_shifts()'}

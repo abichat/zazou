@@ -141,8 +141,8 @@
     </tr>
     <tr>
       <th>scores</th>
-      <td><p>Leaf-associated scores, as a named vector. If scores is unnamed, assumes scores are in
-the same order as <code>tree$tip.label</code></p></td>
+      <td><p>Leaf-associated scores, as a named vector. If scores is
+unnamed, assumes scores are in the same order as <code>tree$tip.label</code></p></td>
     </tr>
     </table>
 
@@ -152,7 +152,8 @@ the same order as <code>tree$tip.label</code></p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/read.tree.html'>read.tree</a></span>(<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"(((A,B),C),(D,E));"</span>)
-<span class='no'>shifts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>2.9513814680442</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>0.00195465052163029</span>, -<span class='fl'>1.896800199013</span>, <span class='fl'>0</span>)
+<span class='no'>shifts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>2.9513814680442</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>0.00195465052163029</span>,
+-<span class='fl'>1.896800199013</span>, <span class='fl'>0</span>)
 <span class='no'>scores</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>3</span>, -<span class='fl'>3</span>, <span class='fl'>0</span>, -<span class='fl'>2</span>, <span class='fl'>0</span>)
 <span class='fu'>plot_shifts</span>(<span class='no'>shifts</span>, <span class='no'>tree</span>, <span class='no'>scores</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 6 rows containing missing values (geom_label).</span></div><div class='img'><img src='plot_shifts-1.png' alt='' width='700' height='433' /></div></pre>
   </div>

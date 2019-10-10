@@ -2,8 +2,8 @@
 #'
 #' @param shifts Branch-associated shifts vector, sorted in cladewise order
 #' @param tree   Phylo-class object
-#' @param scores Leaf-associated scores, as a named vector. If scores is unnamed, assumes scores are in
-#'               the same order as \code{tree$tip.label}
+#' @param scores Leaf-associated scores, as a named vector. If scores is
+#' unnamed, assumes scores are in the same order as \code{tree$tip.label}
 #'
 #' @return a \code{ggplot} object, as created by \code{ggtree}
 #' @export
@@ -13,7 +13,8 @@
 #'
 #' @examples
 #' tree <- ape::read.tree(text = "(((A,B),C),(D,E));")
-#' shifts <- c(0, -2.9513814680442, 0, 0, 0, -0.00195465052163029, -1.896800199013, 0)
+#' shifts <- c(0, -2.9513814680442, 0, 0, 0, -0.00195465052163029,
+#' -1.896800199013, 0)
 #' scores <- c(-3, -3, 0, -2, 0)
 #' plot_shifts(shifts, tree, scores)
 plot_shifts <- function(shifts, tree, scores = NULL) {
