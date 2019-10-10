@@ -11,7 +11,8 @@ plot_shifts(shifts, tree, scores = NULL)
 
 \item{tree}{Phylo-class object}
 
-\item{scores}{Leaf-associated scores. Either a named vector}
+\item{scores}{Leaf-associated scores, as a named vector. If scores is unnamed, assumes scores are in
+the same order as \code{tree$tip.label}}
 }
 \value{
 a \code{ggplot} object, as created by \code{ggtree}

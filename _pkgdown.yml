@@ -20,10 +20,12 @@ navbar:
 
 
 reference:
-  - title: Main optimization function
+  - title: Estimation of shifts
     desc: ~
     contents:
+    - '`as_shiftestim`'
     - '`estimate_shifts`'
+    - '`plot_shifts`'
   - title: Tree matrices
     desc: ~
     contents:

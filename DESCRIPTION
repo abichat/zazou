@@ -22,7 +22,6 @@ Depends:
 Imports: 
     dplyr,
     ggtree,
-    glue,
     stats,
     utils
 Suggests: 
