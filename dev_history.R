@@ -49,6 +49,7 @@ library(testthat)
 # use_vignette("simulations")
 
 # use_r("covar")
+# use_r("plot_shifts")
 
 # use_r("shiftestim")
 
