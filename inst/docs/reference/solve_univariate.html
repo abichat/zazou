@@ -92,6 +92,9 @@
     <li>
       <a href="../articles/simulations.html">Simulations</a>
     </li>
+    <li>
+      <a href="../articles/comparisons.html">Comparisons</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -128,28 +131,50 @@
 \(1/2 * ||y - x \beta||_2^2 + \lambda |\beta|\) subject to \(\beta &lt; 0\).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>solve_univariate</span>(<span class='no'>y</span>, <span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>solve_univariate</span>(<span class='no'>y</span>, <span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+
+<span class='fu'>update_univariate</span>(<span class='no'>beta</span>, <span class='no'>coord</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>)
+
+<span class='fu'>solve_multivariate</span>(<span class='no'>beta0</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>y</th>
-      <td><p>a vector of size n</p></td>
+      <td><p>a vector of size n.</p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>a vector of size n</p></td>
+      <td><p>a vector of size n.</p></td>
     </tr>
     <tr>
       <th>lambda</th>
       <td><p>a positive regularization parameter</p></td>
+    </tr>
+    <tr>
+      <th>beta</th>
+      <td><p>the current value of beta.</p></td>
+    </tr>
+    <tr>
+      <th>coord</th>
+      <td><p>the coordinate to be updated.</p></td>
+    </tr>
+    <tr>
+      <th>X</th>
+      <td><p>a matrix of size n x p.</p></td>
+    </tr>
+    <tr>
+      <th>beta0</th>
+      <td><p>the initial position of beta.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The scalar solution of the 1D optimization problem</p>
+<p>the new value of beta</p>
+<p>the estimate value of beta</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The analytical solution of this problem is given by

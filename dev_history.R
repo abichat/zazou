@@ -58,6 +58,8 @@ library(testthat)
 
 # use_r("simulations")
 
+# use_vignette("comparisons")
+
 
 ####
 
@@ -74,6 +76,9 @@ test()
 goodpractice::gp()
 check()
 
+
+# pkgdown::template_articles()
+# pkgdown::template_reference()
 
 ####
 

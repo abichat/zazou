@@ -11,6 +11,8 @@ navbar:
       menu:
       - text: Simulations
         href: articles/simulations.html
+      - text: Comparisons
+        href: articles/comparisons.html
     - reference:
       text: Reference
       href: reference/index.html

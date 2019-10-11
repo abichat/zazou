@@ -49,7 +49,7 @@ update_univariate <- function(beta, coord, y, X, lambda){
 solve_multivariate <- function(beta0, y, X, lambda) {
   p <- ncol(X)
   beta <- beta0
-  for(i in 1:150){
+  for(i in 1:200){
     coord <- sample(p, size = 1)
     beta <- update_univariate(beta, coord, y, X, lambda)
   }
