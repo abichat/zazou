@@ -15,9 +15,8 @@
 #' @return a \code{ggplot} object, as created by \code{ggtree}
 #' @export
 #'
-#' @importFrom dplyr filter
-#' @importFrom ggtree ggtree aes %<+% geom_tiplab geom_point geom_label theme_tree2
-#' facet_plot
+#' @importFrom ggtree ggtree aes %<+% geom_tiplab geom_point geom_label
+#' theme_tree2 facet_plot
 #'
 #' @examples
 #' tree <- ape::read.tree(text = "(((A,B),C),(D,E));")
@@ -32,7 +31,7 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
 
   ## Build and add branch annotation
   edge_data <- data.frame(node = tree$edge[, 2], shift_value = shifts)
-  edge_data <- filter(edge_data, shift_value != 0)
+  edge_data <- edge_data[edge_data$shift_value != 0, ]
 
   p <-
     ggtree(tree) %<+%
