@@ -19,6 +19,6 @@
 covariance_matrix <- function(tree, alpha){
   distance_matrix <- cophenetic(tree)
   h <- max(distance_matrix) / 2
-  covar <- exp(- alpha * distance_matrix) - exp(-2 * alpha * h) / (2 * alpha)
+  covar <- (exp(- alpha * distance_matrix) - exp(-2 * alpha * h)) / (2 * alpha)
   covar / covar[1, 1]
 }
