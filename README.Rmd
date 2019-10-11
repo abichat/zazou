@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```{r, echo = FALSE}                                                                                               
 version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])                                                      
 version <- gsub('-', '.', version)   
-date <- gsub('-', '--', Sys.Date())
+date <- "Oct" #gsub('-', '--', Sys.Date())
 ```
 
 <!-- badges: start -->

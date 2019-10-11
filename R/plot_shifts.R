@@ -9,7 +9,8 @@
 #' @export
 #'
 #' @importFrom dplyr filter
-#' @import ggtree
+#' @importFrom ggtree ggtree aes %<+% geom_tiplab geom_point geom_label
+#' facet_plot
 #'
 #' @examples
 #' tree <- ape::read.tree(text = "(((A,B),C),(D,E));")
@@ -18,15 +19,20 @@
 #' scores <- c(-3, -3, 0, -2, 0)
 #' plot_shifts(shifts, tree, scores)
 plot_shifts <- function(shifts, tree, scores = NULL) {
+
   ## reorder tree
   tree <- reorder(tree, order = "cladewise")
+
   ## Build and add branch annotation
-  edge_data <- data.frame(node        = tree$edge[, 2],
-                          shift_value = shifts) %>%
-    dplyr::filter(shift_value != 0)
-  p <- ggtree(tree) %<+% edge_data +
+  edge_data <- data.frame(node = tree$edge[, 2], shift_value = shifts)
+  edge_data <- filter(edge_data, shift_value != 0)
+
+  p <-
+    ggtree(tree) %<+%
+    edge_data +
     geom_tiplab(size = 5) +
     geom_label(aes(x = branch, label = shift_value))
+
   ## Build and add zscores annotation
   if (!is.null(scores)) {
     if (is.null(names(scores))) names(scores) <- tree$tip.label
