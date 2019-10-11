@@ -4,26 +4,34 @@
 \alias{plot_shifts}
 \title{Plot shift amplitude and location on the tree}
 \usage{
-plot_shifts(shifts, tree, scores = NULL)
+plot_shifts(tree, shifts, true_scores = NULL, obs_scores = NULL,
+  est_scores = NULL, digits = 4)
 }
 \arguments{
-\item{shifts}{Branch-associated shifts vector, sorted in cladewise order}
-
 \item{tree}{Phylo-class object}
 
-\item{scores}{Leaf-associated scores, as a named vector. If scores is
-unnamed, assumes scores are in the same order as \code{tree$tip.label}}
+\item{shifts}{Branch-associated shifts vector, sorted in cladewise order}
+
+\item{true_scores}{Leaf-associated scores, as a named vector.}
+
+\item{obs_scores}{Leaf-associated scores, as a named vector.}
+
+\item{est_scores}{Leaf-associated scores, as a named vector.}
+
+\item{digits}{Number of digits to round to.}
 }
 \value{
 a \code{ggplot} object, as created by \code{ggtree}
 }
 \description{
-Plot shift amplitude and location on the tree
+Plot
+}
+\details{
+If scores is unnamed, assumes scores are in the same order as \code{tree$tip.label}
 }
 \examples{
 tree <- ape::read.tree(text = "(((A,B),C),(D,E));")
-shifts <- c(0, -2.9513814680442, 0, 0, 0, -0.00195465052163029,
--1.896800199013, 0)
-scores <- c(-3, -3, 0, -2, 0)
-plot_shifts(shifts, tree, scores)
+shifts <- c(0, -3, 0, 0, 0, 0, -2, 0)
+scores <- c(-3.2, -2.8, 0.1, -2.1, -0.1)
+plot_shifts(tree, shifts, obs_scores = scores)
 }

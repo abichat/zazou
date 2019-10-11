@@ -16,7 +16,12 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
                                "convergence", "message"))) {
         stop("'listopt' must be the output of 'estimate_shifts()'")
   }
-  obj <- list(zscores_obs = zscores, shift_est = listopt$par,
+
+  zscores_est <- incidence_matrix(tree) %*% listopt$par
+
+  obj <- list(zscores_obs = zscores,
+              zscores_est = zscores_est,
+              shift_est = listopt$par,
               objective_value = listopt$value, lambda = lambda,
               tree = tree, alpha = alpha, covar_mat = covar_mat,
               optim_info = listopt[c("counts", "convergence", "message")])
@@ -32,8 +37,8 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
 #' @name print.shiftestim
 #'
 #' @param x a 'shiftestim' object.
-#' @param digits number of digits to round to.
 #' @param ... further arguments to be passed to or from other methods.
+#' @inheritParams plot_shifts
 #'
 #' @importFrom utils head
 #'
@@ -52,24 +57,24 @@ print.shiftestim <- function(x, digits = 4, ...){
 
 
 
-  zscores_est <- incidence_matrix(x$tree) %*% x$shift_est
-
   cat(txt_alpha, "\n")
 
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
   cat(sum(x$shift_est != 0), "shifts have been identified (ie",
       100 * round(mean(x$shift_est == 0), digits), "% of sparsity).\n")
-  cat("Estimated z-scores:", head(round(zscores_est, digits), 10), "...\n")
+  cat("Estimated z-scores:", head(round(x$zscores_est, digits), 10), "...\n")
   cat("Observed z-scores: ", head(round(x$zscores_obs, digits), 10), "...\n")
 }
 
 
 #' @rdname as_shiftestim
+#' @inheritParams plot_shifts
 #'
 #' @export
 plot.shiftestim <- function(x, digits = 4, ...){
-  plot_shifts(shifts = round(x$shift_est, digits),
-              tree = x$tree, scores = x$zscores_obs)
+  plot_shifts(tree = x$tree, shifts = x$shift_est,
+              obs_scores = x$zscores_obs, est_scores = x$zscores_est,
+              digits = digits, ...)
 }
 
 

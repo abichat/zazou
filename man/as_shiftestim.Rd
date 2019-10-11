@@ -27,7 +27,7 @@ as_shiftestim(listopt, tree, zscores, lambda, alpha, covar_mat)
 
 \item{x}{a 'shiftestim' object.}
 
-\item{digits}{number of digits to round to.}
+\item{digits}{Number of digits to round to.}
 
 \item{...}{further arguments to be passed to or from other methods.}
 }
