@@ -2,19 +2,37 @@
 % Please edit documentation in R/optim_internal.R
 \name{solve_univariate}
 \alias{solve_univariate}
+\alias{update_univariate}
+\alias{solve_multivariate}
 \title{Solve unidirectional constrained problem}
 \usage{
 solve_univariate(y, x, lambda = 0)
+
+update_univariate(beta, coord, y, X, lambda)
+
+solve_multivariate(beta0, y, X, lambda)
 }
 \arguments{
-\item{y}{a vector of size n}
+\item{y}{a vector of size n.}
 
-\item{x}{a vector of size n}
+\item{x}{a vector of size n.}
 
 \item{lambda}{a positive regularization parameter}
+
+\item{beta}{the current value of beta.}
+
+\item{coord}{the coordinate to be updated.}
+
+\item{X}{a matrix of size n x p.}
+
+\item{beta0}{the initial position of beta.}
 }
 \value{
 The scalar solution of the 1D optimization problem
+
+the new value of beta
+
+the estimate value of beta
 }
 \description{
 This function minimizes \eqn{\beta} in the 1D problem
