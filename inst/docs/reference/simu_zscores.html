@@ -126,7 +126,8 @@
     <p>Simulates z-scores</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='no'>alpha</span>, <span class='kw'>shifts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Nshifts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='no'>alpha</span>, <span class='kw'>shifts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Nshifts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +148,14 @@
       <th>Nshifts</th>
       <td><p>number of shifts. Must be specified if <code>shifts</code> is not.</p></td>
     </tr>
+    <tr>
+      <th>graph</th>
+      <td><p>show the tree, shifts and z-scores be plotted?</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional parameters to pass to <code><a href='plot_shifts.html'>plot_shifts()</a></code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -157,17 +166,20 @@
     <p>Shifts are sampled from "statistically significant values of z-scores"</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rcoal</a></span>(<span class='fl'>7</span>)
-<span class='no'>shift</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>2</span>, <span class='fl'>0</span>, <span class='fl'>0</span>)
-<span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>2</span>, <span class='fl'>0</span>, <span class='fl'>0</span>))</div><div class='output co'>#&gt;          [,1]
-#&gt; t6  -2.823511
-#&gt; t1   0.218014
-#&gt; t2   3.539511
-#&gt; t3 -15.095993
-#&gt; t5  -0.133997
-#&gt; t7  -5.335610
-#&gt; t4   1.406627</div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
+<span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rcoal</a></span>(<span class='fl'>5</span>)
+<span class='no'>shift</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>)
+<span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='no'>shift</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 8 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;           [,1]
+#&gt; t4  2.28664539
+#&gt; t2 -4.38886070
+#&gt; t5 -2.53530326
+#&gt; t1  0.02227707
+#&gt; t3  1.97763678</div><div class='input'><span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>Nshifts</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 7 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;           [,1]
+#&gt; t4 -2.44046693
+#&gt; t2  5.20789194
+#&gt; t5  2.78948167
+#&gt; t1 -0.07885586
+#&gt; t3  5.55811981</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

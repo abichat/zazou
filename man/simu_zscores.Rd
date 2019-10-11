@@ -4,7 +4,8 @@
 \alias{simu_zscores}
 \title{Simulation of z-scores on branches}
 \usage{
-simu_zscores(tree, alpha, shifts = NULL, Nshifts = NULL)
+simu_zscores(tree, alpha, shifts = NULL, Nshifts = NULL,
+  graph = FALSE, ...)
 }
 \arguments{
 \item{tree}{tree.}
@@ -14,6 +15,10 @@ simu_zscores(tree, alpha, shifts = NULL, Nshifts = NULL)
 \item{shifts}{vector of shifts.}
 
 \item{Nshifts}{number of shifts. Must be specified if \code{shifts} is not.}
+
+\item{graph}{show the tree, shifts and z-scores be plotted?}
+
+\item{...}{additional parameters to pass to \code{plot_shifts()}.}
 }
 \value{
 a vector of simulated z-scores.
@@ -25,8 +30,9 @@ Simulates z-scores
 Shifts are sampled from "statistically significant values of z-scores"
 }
 \examples{
-tree <- ape::rcoal(7)
-shift = c(0, 0, -3, 0, 0, 0, 0, 0, 0, -2, 0, 0)
-simu_zscores(tree, alpha = 0.2, shift = c(0, 0, -3, 0, 0, 0, 0, 0, 0, -2, 0, 0))
-
+set.seed(42)
+tree <- ape::rcoal(5)
+shift <- c(0, 0, -3, 0, 0, 0, 0, 0)
+simu_zscores(tree, alpha = 0.2, shift = shift, graph = TRUE)
+simu_zscores(tree, alpha = 0.2, Nshifts = 2, graph = TRUE)
 }

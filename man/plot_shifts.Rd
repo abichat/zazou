@@ -27,7 +27,8 @@ a \code{ggplot} object, as created by \code{ggtree}
 Plot
 }
 \details{
-If scores is unnamed, assumes scores are in the same order as \code{tree$tip.label}
+If scores is unnamed, assumes scores are in the same order as
+\code{tree$tip.label}
 }
 \examples{
 tree <- ape::read.tree(text = "(((A,B),C),(D,E));")

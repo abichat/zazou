@@ -23,6 +23,7 @@ Imports:
     ape,
     dplyr,
     ggtree,
+    graphics,
     stats,
     utils
 Suggests: 

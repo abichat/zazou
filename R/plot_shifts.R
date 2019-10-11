@@ -2,7 +2,8 @@
 #'
 #' Plot
 #'
-#' If scores is unnamed, assumes scores are in the same order as \code{tree$tip.label}
+#' If scores is unnamed, assumes scores are in the same order as
+#' \code{tree$tip.label}
 #'
 #' @param shifts Branch-associated shifts vector, sorted in cladewise order
 #' @param tree   Phylo-class object
@@ -15,7 +16,7 @@
 #' @export
 #'
 #' @importFrom dplyr filter
-#' @importFrom ggtree ggtree aes %<+% geom_tiplab geom_point geom_label
+#' @importFrom ggtree ggtree aes %<+% geom_tiplab geom_point geom_label theme_tree2
 #' facet_plot
 #'
 #' @examples
@@ -37,7 +38,8 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
     ggtree(tree) %<+%
     edge_data +
     geom_tiplab(size = 5) +
-    geom_label(aes(x = branch, label = round(shift_value, digits)))
+    geom_label(aes(x = branch, label = round(shift_value, digits))) +
+    theme_tree2()
 
   ## Build and add zscores annotation
   if (!is.null(true_scores)) {

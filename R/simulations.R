@@ -8,18 +8,24 @@
 #' @param alpha the parameter for the OU process.
 #' @param shifts vector of shifts.
 #' @param Nshifts number of shifts. Must be specified if \code{shifts} is not.
+#' @param graph show the tree, shifts and z-scores be plotted?
+#' @param ... additional parameters to pass to \code{plot_shifts()}.
 #'
 #' @return a vector of simulated z-scores.
 #' @export
 #'
 #' @importFrom stats rnorm runif
+#' @importFrom graphics plot
 #' @importFrom ape Ntip
-#' @examples
-#' tree <- ape::rcoal(7)
-#' shift = c(0, 0, -3, 0, 0, 0, 0, 0, 0, -2, 0, 0)
-#' simu_zscores(tree, alpha = 0.2, shift = c(0, 0, -3, 0, 0, 0, 0, 0, 0, -2, 0, 0))
 #'
-simu_zscores <- function(tree, alpha, shifts = NULL, Nshifts = NULL){
+#' @examples
+#' set.seed(42)
+#' tree <- ape::rcoal(5)
+#' shift <- c(0, 0, -3, 0, 0, 0, 0, 0)
+#' simu_zscores(tree, alpha = 0.2, shift = shift, graph = TRUE)
+#' simu_zscores(tree, alpha = 0.2, Nshifts = 2, graph = TRUE)
+simu_zscores <- function(tree, alpha, shifts = NULL, Nshifts = NULL,
+                         graph = FALSE, ...){
 
   if(is.null(Nshifts)  && is.null(shifts)){
     stop("You must specified at least 'shifts' or 'Nshifts'.")
@@ -43,5 +49,14 @@ simu_zscores <- function(tree, alpha, shifts = NULL, Nshifts = NULL){
   covar_mat <- covariance_matrix(tree, alpha = alpha)
   sqrtcovar <- inverse_sqrt(covar_mat)
 
-  incidence_mat %*% shifts + sqrtcovar %*% rnorm(N)
+  true_zs <- incidence_mat %*% shifts
+
+  obs_zs <- true_zs + sqrtcovar %*% rnorm(N)
+
+  if(graph){
+    plot(plot_shifts(tree, shifts, true_scores = true_zs,
+                     obs_scores = obs_zs, ...))
+  }
+
+  return(obs_zs)
 }

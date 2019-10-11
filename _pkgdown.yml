@@ -37,6 +37,7 @@ reference:
     contents:
     - '`test_wilcoxon`'
     - '`p2z`'
+    - '`simu_zscores`'
   - title: Datasets and documentation
     desc: ~
     contents:
