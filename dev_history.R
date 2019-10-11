@@ -56,11 +56,13 @@ library(testthat)
 # use_r("tree_helpers")
 # use_test("tree_helpers")
 
+# use_r("simulations")
+
 
 ####
 
-load_all()
 document()
+load_all()
 attachment::att_to_description()
 use_tidy_description()
 
