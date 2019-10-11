@@ -17,7 +17,7 @@ p2z <- function (p.value, e.sign = NULL, tol = 1e-15) {
   p.value[p.value >= 1 - tol] <- 1 - tol
 
   if(is.null(e.sign)) {
-    z <- qnorm(1 - p.value)
+    z <- qnorm(p.value)
   } else {
     e.sign[e.sign == 0] <- sample(c(-1, 1), sum(e.sign == 0), replace = TRUE)
     z1 <- qnorm(p.value / 2)
