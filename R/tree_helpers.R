@@ -28,3 +28,29 @@ tree_height <- function(tree){
   }
   return(sum)
 }
+
+
+#' Force a tree to be ultrametric
+#'
+#' Force a tree to be ultrametric by extending its terminal branches
+#'
+#' @param tree a phylo object
+#'
+#' @return an ultrametric tree
+#' @export
+#' @importFrom ape vcv Ntip
+#'
+#' @examples
+#' tree_u <- force_ultrametric(alcohol$tree)
+#' ape::is.ultrametric(tree_u)
+force_ultrametric <- function(tree) {
+  h <- diag(vcv(tree))
+  d <- max(h) - h
+  ii <- vapply(1:Ntip(tree),
+               FUN = function(x, y) {which(y == x)},
+               FUN.VALUE = integer(1),
+               y = tree$edge[, 2])
+  tree$edge.length[ii] <- tree$edge.length[ii] + d
+  tree
+}
+
