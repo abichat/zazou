@@ -8,9 +8,9 @@
 \usage{
 as_shiftestim(listopt, tree, zscores, lambda, alpha, covar_mat)
 
-\method{print}{shiftestim}(x, digits = 4, ...)
+\method{print}{shiftestim}(x, digits = 3, ...)
 
-\method{plot}{shiftestim}(x, digits = 4, ...)
+\method{plot}{shiftestim}(x, digits = 3, ...)
 }
 \arguments{
 \item{listopt}{an output of 'estimate_shifts()'}

@@ -11,10 +11,12 @@
 #' @return a 'shiftestim' object
 #' @export
 as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
+
+  required_names <- c("par", "value", "method")
+
   if (!is.list(listopt) ||
-      !all(names(listopt) == c("par", "value", "counts",
-                               "convergence", "message"))) {
-        stop("'listopt' must be the output of 'estimate_shifts()'")
+      !all(required_names %in% names(listopt))) {
+        stop("'listopt' must be the output of a optimisation function.")
   }
 
   zscores_est <- incidence_matrix(tree) %*% listopt$par
@@ -24,7 +26,8 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
               shift_est = listopt$par,
               objective_value = listopt$value, lambda = lambda,
               tree = tree, alpha = alpha, covar_mat = covar_mat,
-              optim_info = listopt[c("counts", "convergence", "message")])
+              method = listopt$method,
+              optim_info = listopt[setdiff(names(listopt), required_names)])
   class(obj) <- "shiftestim"
   return(obj)
 }
@@ -43,7 +46,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
 #' @importFrom utils head
 #'
 #' @export
-print.shiftestim <- function(x, digits = 4, ...){
+print.shiftestim <- function(x, digits = 3, ...){
 
   if(is.null(x$alpha)){
     txt_alpha <- "Covariance matrix has been manually specified."
@@ -58,10 +61,12 @@ print.shiftestim <- function(x, digits = 4, ...){
 
 
   cat(txt_alpha, "\n")
-
+  cat("Optimisation algorithm: ", x$method, ".\n", sep = "")
+  cat("---\n")
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
   cat(sum(x$shift_est != 0), "shifts have been identified (ie",
       100 * round(mean(x$shift_est == 0), digits), "% of sparsity).\n")
+  cat("---\n")
   cat("Estimated z-scores:", head(round(x$zscores_est, digits), 10), "...\n")
   cat("Observed z-scores: ", head(round(x$zscores_obs, digits), 10), "...\n")
 }
@@ -71,7 +76,7 @@ print.shiftestim <- function(x, digits = 4, ...){
 #' @inheritParams plot_shifts
 #'
 #' @export
-plot.shiftestim <- function(x, digits = 4, ...){
+plot.shiftestim <- function(x, digits = 3, ...){
   plot_shifts(tree = x$tree, shifts = x$shift_est,
               obs_scores = x$zscores_obs, est_scores = x$zscores_est,
               digits = digits, ...)

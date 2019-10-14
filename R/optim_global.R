@@ -25,12 +25,16 @@ estimate_shifts <- function(Delta0, zscores, incidence_mat, covar_mat, lambda){
 #' @param tree the tree form which is calculated the incidence matrix and the
 #' covariance matrix if not specified
 #' @param alpha parameter > 0
+#' @param method method to use. One of \code{L-BFGS-B} or \code{shooting}.
 #'
 #' @return a shiftestim object
 #' @export
 #' @importFrom stats optim
 estimate_shifts2 <- function(Delta0, zscores, tree, lambda = 0,
-                             alpha = NULL, covar_mat = NULL){
+                             alpha = NULL, covar_mat = NULL,
+                             method = c("L-BFGS-B", "shooting")){
+
+  method <- match.arg(method)
 
   if(is.null(alpha) && is.null(covar_mat)){
     stop("Either 'alpha' or 'covar_mat' must be specified.")
@@ -46,10 +50,17 @@ estimate_shifts2 <- function(Delta0, zscores, tree, lambda = 0,
   R <- inverse_sqrt(covar_mat)
   Y <- R %*% zscores
   X <- R %*% incidence_mat
-  opt <- optim(par = Delta0,
-               fn = compute_objective_function(Y, X, lambda),
-               gr = compute_gradient_function(Y, X, lambda),
-               upper = 0, method = "L-BFGS-B")
+
+  if(method == "L-BFGS-B"){
+    opt <- optim(par = Delta0,
+                 fn = compute_objective_function(Y, X, lambda),
+                 gr = compute_gradient_function(Y, X, lambda),
+                 upper = 0, method = "L-BFGS-B")
+    opt <- c(opt, method = "L-BFGS-B")
+  }
+  if(method == "shooting"){
+    opt <- solve_multivariate(Delta0, Y, X, lambda)
+  }
 
   if(specified_covar) alpha <- NULL
 

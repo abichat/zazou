@@ -49,7 +49,7 @@ fn_obj <- compute_objective_function(Y, X, lambda)
 
 # Comparisons
 
-## `optim()`
+## L-BFGS-B algorithm
 
 ```{r}
 mthd1 <- estimate_shifts2(Delta0 = rep(0, 8), zscores = observed_zscores, 
@@ -61,33 +61,42 @@ plot(mthd1)
 ## Shooting algorithm
 
 ```{r}
-mthd2 <- solve_multivariate(beta0 = rep(0, 8), Y, X, lambda)
+mthd2 <- estimate_shifts2(Delta0 = rep(0, 8), zscores = observed_zscores, 
+                          lambda = lambda, tree = tree, alpha = alpha, 
+                          method = "shooting")
 mthd2
+plot(mthd2)
 ```
 
-## comparisons
+## Results
 
-Shifts
+### Shifts
 
 ```{r}
 true_shifts
 mthd1$shift_est
-mthd2
+mthd2$shift_est
 ```
 
-Z-scores
+### Z-scores
 
 ```{r}
 t(incidence_mat %*% true_shifts)
-t(incidence_mat %*% mthd1$shift_est)
-t(incidence_mat %*% mthd2)
+t(mthd1$zscores_est)
+t(mthd2$zscores_est)
 ```
 
-Objective 
+### Objective 
 
 ```{r}
-fn_obj(mthd1$shift_est)
-fn_obj(mthd2)
+mthd1$objective_value
+mthd2$objective_value
 ```
 
+### Other informations
+
+```{r}
+mthd1$optim_info
+mthd2$optim_info
+```
 

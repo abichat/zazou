@@ -130,59 +130,96 @@
 <div id="comparisons" class="section level1">
 <h1 class="hasAnchor">
 <a href="#comparisons" class="anchor"></a>Comparisons</h1>
-<div id="optim" class="section level2">
+<div id="l-bfgs-b-algorithm" class="section level2">
 <h2 class="hasAnchor">
-<a href="#optim" class="anchor"></a><code>optim()</code>
-</h2>
+<a href="#l-bfgs-b-algorithm" class="anchor"></a>L-BFGS-B algorithm</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">mthd1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">zscores =</span> observed_zscores, </a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">                          <span class="dt">lambda =</span> lambda, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> alpha)</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">mthd1</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.4177. </span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; Estimated shifts: 0 -1.6221 0 -2.0396 0 0 -1.3127 0 ...</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 3 shifts have been identified (ie 62.5 % of sparsity).</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; Estimated z-scores: -1.6221 -3.6617 0 -1.3127 0 ...</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; Observed z-scores:  -1.629 -3.754 0.3519 -1.3671 0.3229 ...</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(mthd1)</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418. </span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B.</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; Estimated shifts: 0 -1.622 0 -2.04 0 0 -1.313 0 ...</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 3 shifts have been identified (ie 62.5 % of sparsity).</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Estimated z-scores: -1.622 -3.662 0 -1.313 0 ...</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; Observed z-scores:  -1.629 -3.754 0.352 -1.367 0.323 ...</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(mthd1)</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="comparisons_files/figure-html/unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shooting-algorithm" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shooting-algorithm" class="anchor"></a>Shooting algorithm</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">mthd2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/solve_univariate.html">solve_multivariate</a></span>(<span class="dt">beta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), Y, X, lambda)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">mthd2</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [1]  0.0000000 -1.2571402 -0.3159426 -2.3960651  0.0000000  0.0000000</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; [7] -1.3119114  0.0000000</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">mthd2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">zscores =</span> observed_zscores, </a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">                          <span class="dt">lambda =</span> lambda, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> alpha, </a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">                          <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">mthd2</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418. </span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; Optimisation algorithm: shooting.</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Estimated shifts: 0 -1.257 -0.316 -2.396 0 0 -1.312 0 ...</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 4 shifts have been identified (ie 50 % of sparsity).</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Estimated z-scores: -1.573 -3.653 0 -1.312 0 ...</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; Observed z-scores:  -1.629 -3.754 0.352 -1.367 0.323 ...</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(mthd2)</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="comparisons_files/figure-html/unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
-<div id="comparisons-1" class="section level2">
+<div id="results" class="section level2">
 <h2 class="hasAnchor">
-<a href="#comparisons-1" class="anchor"></a>comparisons</h2>
-<p>Shifts</p>
+<a href="#results" class="anchor"></a>Results</h2>
+<div id="shifts" class="section level3">
+<h3 class="hasAnchor">
+<a href="#shifts" class="anchor"></a>Shifts</h3>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">true_shifts</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; [1]  0 -3  0  0  0  0 -2  0</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">mthd1<span class="op">$</span>shift_est</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; [1]  0.000000 -1.622104  0.000000 -2.039629  0.000000  0.000000 -1.312700</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; [8]  0.000000</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">mthd2</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">mthd2<span class="op">$</span>shift_est</a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; [1]  0.0000000 -1.2571402 -0.3159426 -2.3960651  0.0000000  0.0000000</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; [7] -1.3119114  0.0000000</span></a></code></pre></div>
-<p>Z-scores</p>
+</div>
+<div id="z-scores" class="section level3">
+<h3 class="hasAnchor">
+<a href="#z-scores" class="anchor"></a>Z-scores</h3>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(incidence_mat <span class="op">%*%</span><span class="st"> </span>true_shifts)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;       A  B C  D E</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [1,] -3 -3 0 -2 0</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(incidence_mat <span class="op">%*%</span><span class="st"> </span>mthd1<span class="op">$</span>shift_est)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(mthd1<span class="op">$</span>zscores_est)</a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;              A         B C       D E</span></a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; [1,] -1.622104 -3.661733 0 -1.3127 0</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(incidence_mat <span class="op">%*%</span><span class="st"> </span>mthd2)</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(mthd2<span class="op">$</span>zscores_est)</a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;              A         B C         D E</span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; [1,] -1.573083 -3.653205 0 -1.311911 0</span></a></code></pre></div>
-<p>Objective</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">fn_obj</span>(mthd1<span class="op">$</span>shift_est)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt;           [,1]</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; [1,] 0.7447657</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw">fn_obj</span>(mthd2)</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt;           [,1]</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; [1,] 0.7796152</span></a></code></pre></div>
+</div>
+<div id="objective" class="section level3">
+<h3 class="hasAnchor">
+<a href="#objective" class="anchor"></a>Objective</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">mthd1<span class="op">$</span>objective_value</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] 0.7447657</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">mthd2<span class="op">$</span>objective_value</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; [1] 0.7796152</span></a></code></pre></div>
+</div>
+<div id="other-informations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#other-informations" class="anchor"></a>Other informations</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">mthd1<span class="op">$</span>optim_info</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; $counts</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; function gradient </span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt;       22       22 </span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; $convergence</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; [1] 0</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; $message</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11">mthd2<span class="op">$</span>optim_info</a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; $iterations</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt; [1] 200</span></a></code></pre></div>
+</div>
 </div>
 </div>
   </div>
@@ -197,9 +234,9 @@
       <li><a href="#simulations">Simulations</a></li>
       <li>
 <a href="#comparisons">Comparisons</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#optim"><code>optim()</code></a></li>
+<li><a href="#l-bfgs-b-algorithm">L-BFGS-B algorithm</a></li>
       <li><a href="#shooting-algorithm">Shooting algorithm</a></li>
-      <li><a href="#comparisons-1">comparisons</a></li>
+      <li><a href="#results">Results</a></li>
       </ul>
 </li>
       </ul>

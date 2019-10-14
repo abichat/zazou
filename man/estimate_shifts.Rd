@@ -8,7 +8,7 @@
 estimate_shifts(Delta0, zscores, incidence_mat, covar_mat, lambda)
 
 estimate_shifts2(Delta0, zscores, tree, lambda = 0, alpha = NULL,
-  covar_mat = NULL)
+  covar_mat = NULL, method = c("L-BFGS-B", "shooting"))
 }
 \arguments{
 \item{Delta0}{initial position (size n+m)}
@@ -25,6 +25,8 @@ estimate_shifts2(Delta0, zscores, tree, lambda = 0, alpha = NULL,
 covariance matrix if not specified}
 
 \item{alpha}{parameter > 0}
+
+\item{method}{method to use. One of \code{L-BFGS-B} or \code{shooting}.}
 }
 \value{
 a list

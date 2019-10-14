@@ -5,7 +5,7 @@
 \title{Plot shift amplitude and location on the tree}
 \usage{
 plot_shifts(tree, shifts, true_scores = NULL, obs_scores = NULL,
-  est_scores = NULL, digits = 4)
+  est_scores = NULL, digits = 3)
 }
 \arguments{
 \item{tree}{Phylo-class object}

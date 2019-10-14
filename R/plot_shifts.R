@@ -24,7 +24,7 @@
 #' scores <- c(-3.2, -2.8, 0.1, -2.1, -0.1)
 #' plot_shifts(tree, shifts, obs_scores = scores)
 plot_shifts <- function(tree, shifts, true_scores = NULL,
-                        obs_scores = NULL, est_scores = NULL, digits = 4) {
+                        obs_scores = NULL, est_scores = NULL, digits = 3) {
 
   ## reorder tree
   tree <- reorder(tree, order = "cladewise")
