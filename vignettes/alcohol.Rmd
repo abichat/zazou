@@ -1,0 +1,100 @@
+---
+title: "Alcohol dataset analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{alcohol}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  fig.align = "center"
+)
+```
+
+```{r setup, message=FALSE}
+library(zazou)
+set.seed(42)
+```
+
+
+```{r data}
+attach(alcohol)
+```
+
+# Abundance 
+
+```{r}
+dim(X)
+```
+
+
+# z-scores
+
+```{r zscores}
+pval_obs <- test_wilcoxon(X, Y)$p.value
+zsco_obs <- p2z(pval_obs)
+```
+
+# Tree
+
+```{r tree}
+tree <- force_ultrametric(tree)
+N_branch <- length(tree$edge.length)
+plot_shifts(tree, NA, obs_scores = zsco_obs)
+```
+
+# Shift estimation
+
+## L-BFGS-B
+
+
+```{r lbfgsb}
+# est_lbfgsb <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+#                                lambda = 0.1, tree = tree, alpha = 1, 
+#                                method = "L-BFGS-B")
+# est_lbfgsb
+# plot(est_lbfgsb)
+```
+
+## Shooting 
+
+
+```{r shooting01}
+est_shooting01 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                                 lambda = 0.1, tree = tree, alpha = 0.1, 
+                                 method = "shooting")
+est_shooting01
+plot(est_shooting01)
+```
+
+```{r shooting05}
+est_shooting05 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                                 lambda = 0.1, tree = tree, alpha = 0.5, 
+                                 method = "shooting")
+est_shooting05
+plot(est_shooting05)
+```
+
+```{r shooting1}
+est_shooting1 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                                 lambda = 0.1, tree = tree, alpha = 1, 
+                                 method = "shooting")
+est_shooting1
+plot(est_shooting1)
+```
+
+```{r shooting5}
+est_shooting5 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                                 lambda = 0.1, tree = tree, alpha = 5, 
+                                 method = "shooting")
+est_shooting5
+plot(est_shooting5)
+```
+
+
+
+

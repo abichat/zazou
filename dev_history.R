@@ -62,6 +62,8 @@ library(testthat)
 
 # # Add biocViews: ggtree in Description
 
+# use_vignette("alcohol")
+
 ####
 
 document()

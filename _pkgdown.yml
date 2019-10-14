@@ -13,6 +13,8 @@ navbar:
         href: articles/simulations.html
       - text: Comparisons
         href: articles/comparisons.html
+      - text: Alcohol dataset analysis
+        href: articles/alcohol.html
     - reference:
       text: Reference
       href: reference/index.html
@@ -28,11 +30,12 @@ reference:
     - '`as_shiftestim`'
     - '`estimate_shifts`'
     - '`plot_shifts`'
-  - title: Tree related objects
+  - title: About trees
     desc: ~
     contents:
     - '`covariance_matrix`'
     - '`incidence_matrix`'
+    - '`force_ultrametric`'
     - '`tree_height`'
   - title: p-values and z-scores
     desc: ~
