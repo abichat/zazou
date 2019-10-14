@@ -44,6 +44,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
 #' @inheritParams plot_shifts
 #'
 #' @importFrom utils head
+#' @importFrom stringr str_pad
 #'
 #' @export
 print.shiftestim <- function(x, digits = 3, ...){
@@ -58,17 +59,33 @@ print.shiftestim <- function(x, digits = 3, ...){
                         " and sigma = ", round(sigma, digits), ".")
   }
 
+  zobs <- as.character(head(round(x$zscores_obs, digits), 10))
+  zest <- as.character(head(round(x$zscores_est, digits), 10))
+  nchar <- pmax(nchar(zobs), nchar(zest))
+
+  zobs <- str_pad(zobs, width = nchar, side = "left")
+  zest <- str_pad(zest, width = nchar, side = "left")
+
+  if(length(zobs) <= 10){
+    dots_z <- "\n"
+  } else {
+    dots_z <- "...\n"
+  }
 
 
   cat(txt_alpha, "\n")
+  cat("---\n")
   cat("Optimisation algorithm: ", x$method, ".\n", sep = "")
+  cat("Regularization parameter: lambda = ", round(x$lambda, digits),
+      "\n", sep = "")
+  cat("Objective value: ", round(x$objective_value, digits), ".\n", sep = "")
   cat("---\n")
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
   cat(sum(x$shift_est != 0), "shifts have been identified (ie",
       100 * round(mean(x$shift_est == 0), digits), "% of sparsity).\n")
   cat("---\n")
-  cat("Estimated z-scores:", head(round(x$zscores_est, digits), 10), "...\n")
-  cat("Observed z-scores: ", head(round(x$zscores_obs, digits), 10), "...\n")
+  cat("Observed z-scores: ", zobs, dots_z)
+  cat("Estimated z-scores:", zest, dots_z)
 }
 
 
