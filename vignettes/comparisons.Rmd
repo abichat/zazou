@@ -23,35 +23,32 @@ set.seed(42)
 
 # Parameters
 
-```{r}
+```{r parameters}
 tree <- read.tree(text = "(((A:1,B:1):1,C:2):1,(D:1,E:1):2);")
 true_shifts <- c(0, -3, 0, 0, 0, 0, -2, 0)
 alpha <- 1
 lambda <- 0.1
 ```
 
+```{r}
+(true_zscores <- incidence_matrix(tree) %*% true_shifts)
+```
+
+
 # Simulations
 
-```{r}
+```{r simulations}
 observed_zscores <- simu_zscores(tree = tree, shifts = true_shifts, 
                                  alpha = 1, graph = TRUE)
 observed_zscores
 ```
 
-```{r}
-covar_mat <- covariance_matrix(tree, alpha)
-incidence_mat <- incidence_matrix(tree)
-R <- inverse_sqrt(covar_mat)
-Y <- R %*% observed_zscores
-X <- R %*% incidence_mat
-fn_obj <- compute_objective_function(Y, X, lambda)
-```
 
 # Comparisons
 
 ## L-BFGS-B algorithm
 
-```{r}
+```{r lbfgsb}
 mthd1 <- estimate_shifts2(Delta0 = rep(0, 8), zscores = observed_zscores, 
                           lambda = lambda, tree = tree, alpha = alpha)
 mthd1
@@ -60,7 +57,7 @@ plot(mthd1)
 
 ## Shooting algorithm
 
-```{r}
+```{r shooting}
 mthd2 <- estimate_shifts2(Delta0 = rep(0, 8), zscores = observed_zscores, 
                           lambda = lambda, tree = tree, alpha = alpha, 
                           method = "shooting")
@@ -72,7 +69,7 @@ plot(mthd2)
 
 ### Shifts
 
-```{r}
+```{r shifts}
 true_shifts
 mthd1$shift_est
 mthd2$shift_est
@@ -80,22 +77,22 @@ mthd2$shift_est
 
 ### Z-scores
 
-```{r}
-t(incidence_mat %*% true_shifts)
+```{r zsc}
+t(true_zscores)
 t(mthd1$zscores_est)
 t(mthd2$zscores_est)
 ```
 
 ### Objective 
 
-```{r}
+```{r obj}
 mthd1$objective_value
 mthd2$objective_value
 ```
 
 ### Other informations
 
-```{r}
+```{r other}
 mthd1$optim_info
 mthd2$optim_info
 ```

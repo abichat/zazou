@@ -105,27 +105,28 @@
 <a class="sourceLine" id="cb2-2" data-line-number="2">true_shifts &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">-3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">-2</span>, <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">alpha &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">lambda &lt;-<span class="st"> </span><span class="fl">0.1</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">(true_zscores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/incidence_matrix.html">incidence_matrix</a></span>(tree) <span class="op">%*%</span><span class="st"> </span>true_shifts)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;   [,1]</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; A   -3</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; B   -3</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; C    0</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; D   -2</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; E    0</span></a></code></pre></div>
 </div>
 <div id="simulations" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simulations" class="anchor"></a>Simulations</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">observed_zscores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simu_zscores.html">simu_zscores</a></span>(<span class="dt">tree =</span> tree, <span class="dt">shifts =</span> true_shifts, </a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">                                 <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">graph =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Warning: Removed 7 rows containing missing values (geom_label).</span></a></code></pre></div>
-<p><img src="comparisons_files/figure-html/unnamed-chunk-3-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">observed_zscores</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt;         [,1]</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; A -1.6290416</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; B -3.7540090</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; C  0.3519108</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; D -1.3671374</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; E  0.3228558</span></a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">covar_mat &lt;-<span class="st"> </span><span class="kw"><a href="../reference/covariance_matrix.html">covariance_matrix</a></span>(tree, alpha)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">incidence_mat &lt;-<span class="st"> </span><span class="kw"><a href="../reference/incidence_matrix.html">incidence_matrix</a></span>(tree)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">R &lt;-<span class="st"> </span><span class="kw"><a href="../reference/inverse_sqrt.html">inverse_sqrt</a></span>(covar_mat)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">Y &lt;-<span class="st"> </span>R <span class="op">%*%</span><span class="st"> </span>observed_zscores</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">X &lt;-<span class="st"> </span>R <span class="op">%*%</span><span class="st"> </span>incidence_mat</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">fn_obj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/compute_objective_function.html">compute_objective_function</a></span>(Y, X, lambda)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">observed_zscores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simu_zscores.html">simu_zscores</a></span>(<span class="dt">tree =</span> tree, <span class="dt">shifts =</span> true_shifts, </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">                                 <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">graph =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; Warning: Removed 7 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="comparisons_files/figure-html/simulations-1.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">observed_zscores</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt;         [,1]</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; A -1.6290416</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; B -3.7540090</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; C  0.3519108</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; D -1.3671374</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; E  0.3228558</span></a></code></pre></div>
 </div>
 <div id="comparisons" class="section level1">
 <h1 class="hasAnchor">
@@ -149,7 +150,7 @@
 <a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; Estimated z-scores: -1.622 -3.662     0 -1.313     0</span></a>
 <a class="sourceLine" id="cb6-15" data-line-number="15"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(mthd1)</a>
 <a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></a></code></pre></div>
-<p><img src="comparisons_files/figure-html/unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="comparisons_files/figure-html/lbfgsb-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shooting-algorithm" class="section level2">
 <h2 class="hasAnchor">
@@ -171,7 +172,7 @@
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores: -1.573 -3.653     0 -1.312     0</span></a>
 <a class="sourceLine" id="cb7-16" data-line-number="16"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(mthd2)</a>
 <a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_label).</span></a></code></pre></div>
-<p><img src="comparisons_files/figure-html/unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="comparisons_files/figure-html/shooting-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="results" class="section level2">
 <h2 class="hasAnchor">
@@ -191,7 +192,7 @@
 <div id="z-scores" class="section level3">
 <h3 class="hasAnchor">
 <a href="#z-scores" class="anchor"></a>Z-scores</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(incidence_mat <span class="op">%*%</span><span class="st"> </span>true_shifts)</a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(true_zscores)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;       A  B C  D E</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [1,] -3 -3 0 -2 0</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(mthd1<span class="op">$</span>zscores_est)</a>

@@ -49,7 +49,8 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
                     panel   = "True z-scores",
                     data    = leaf_data_t,
                     geom    = geom_point,
-                    mapping = aes(x = score))
+                    mapping = aes(x = score, color = score >= 0),
+                    show.legend = FALSE)
   }
 
   if (!is.null(obs_scores)) {
@@ -60,7 +61,8 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
                     panel   = "Observed z-scores",
                     data    = leaf_data_o,
                     geom    = geom_point,
-                    mapping = aes(x = score))
+                    mapping = aes(x = score, color = score >= 0),
+                    show.legend = FALSE)
   }
 
   if (!is.null(est_scores)) {
@@ -71,7 +73,8 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
                     panel   = "Estimated z-scores",
                     data    = leaf_data_t,
                     geom    = geom_point,
-                    mapping = aes(x = score))
+                    mapping = aes(x = score, color = score >= 0),
+                    show.legend = FALSE)
   }
 
   p

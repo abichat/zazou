@@ -60,6 +60,7 @@ library(testthat)
 
 # use_vignette("comparisons")
 
+# # Add biocViews: ggtree in Description
 
 ####
 
@@ -72,6 +73,8 @@ use_tidy_description()
 spell_check()
 # spelling::update_wordlist()
 test()
+
+run_examples()
 
 goodpractice::gp()
 check()
