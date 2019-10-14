@@ -56,7 +56,7 @@ print.shiftestim <- function(x, digits = 3, ...){
     sigma <- sqrt(2 * x$alpha) / (1 - exp(- 2 * x$alpha * h))
     txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
                         " with alpha = ", round(x$alpha, digits),
-                        " and sigma = ", round(sigma, digits), ".")
+                        " and sigma = ", round(sigma, digits), "")
   }
 
   zobs <- as.character(head(round(x$zscores_obs, digits), 10))
@@ -66,7 +66,7 @@ print.shiftestim <- function(x, digits = 3, ...){
   zobs <- str_pad(zobs, width = nchar, side = "left")
   zest <- str_pad(zest, width = nchar, side = "left")
 
-  if(length(zobs) <= 10){
+  if(length(x$zscores_obs) <= 10){
     dots_z <- "\n"
   } else {
     dots_z <- "...\n"
@@ -75,17 +75,18 @@ print.shiftestim <- function(x, digits = 3, ...){
 
   cat(txt_alpha, "\n")
   cat("---\n")
-  cat("Optimisation algorithm: ", x$method, ".\n", sep = "")
-  cat("Regularization parameter: lambda = ", round(x$lambda, digits),
-      "\n", sep = "")
+  cat("Optimisation algorithm: ", x$method, "\n", sep = "")
+  cat("Regularization parameter: lambda =", round(x$lambda, digits), "\n")
   cat("Objective value: ", round(x$objective_value, digits), ".\n", sep = "")
   cat("---\n")
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
   cat(sum(x$shift_est != 0), "shifts have been identified (ie",
-      100 * round(mean(x$shift_est == 0), digits), "% of sparsity).\n")
+      100 * round(mean(x$shift_est == 0), digits), "% of sparsity)\n")
   cat("---\n")
   cat("Observed z-scores: ", zobs, dots_z)
   cat("Estimated z-scores:", zest, dots_z)
+  cat(sum(x$zscores_est != 0), "z-scores have been shifted (ie",
+      100 * round(mean(x$zscores_est == 0), digits), "% of sparsity)\n")
 }
 
 

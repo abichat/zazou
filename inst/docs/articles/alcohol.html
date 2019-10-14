@@ -138,73 +138,77 @@
 <a class="sourceLine" id="cb7-2" data-line-number="2">                                 <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>, </a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">                                 <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">est_shooting01</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307. </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: shooting.</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Objective value: 3484.496.</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 83 shifts have been identified (ie 95.6 % of sparsity).</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 83 shifts have been identified (ie 95.6 % of sparsity)</span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 </span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores:      0      0 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting01)</a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; Warning: Removed 1808 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores:      0      0 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121 ...</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; 540 z-scores have been shifted (ie 43.1 % of sparsity)</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting01)</a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; Warning: Removed 1808 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="alcohol_files/figure-html/shooting01-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">est_shooting05 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, N_branch), <span class="dt">zscores =</span> zsco_obs,</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">                                 <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.5</span>, </a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">                                 <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">est_shooting05</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.5 and sigma = 1.516. </span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.5 and sigma = 1.516 </span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: shooting.</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; Objective value: 2937.692.</span></a>
 <a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; 98 shifts have been identified (ie 94.8 % of sparsity).</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; 98 shifts have been identified (ie 94.8 % of sparsity)</span></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328 0.437 -0.153 -0.225  1.34 -1.678 </span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores: -0.134 -0.134 -0.412 -0.412  -0.72 -0.72  -0.72  -0.72 -0.72  -0.72</span></a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting05)</a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; Warning: Removed 1793 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328 0.437 -0.153 -0.225  1.34 -1.678 ...</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores: -0.134 -0.134 -0.412 -0.412  -0.72 -0.72  -0.72  -0.72 -0.72  -0.72 ...</span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 526 z-scores have been shifted (ie 44.6 % of sparsity)</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting05)</a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; Warning: Removed 1793 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="alcohol_files/figure-html/shooting05-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">est_shooting1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, N_branch), <span class="dt">zscores =</span> zsco_obs,</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">                                 <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>, </a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">                                 <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">est_shooting1</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.6. </span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.6 </span></a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: shooting.</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Objective value: 2561.165.</span></a>
 <a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 95 shifts have been identified (ie 95 % of sparsity).</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 95 shifts have been identified (ie 95 % of sparsity)</span></a>
 <a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 </span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores:      0 -1.798      0      0      0 -0.221 -0.221 -0.221 -0.221  -1.45</span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting1)</a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; Warning: Removed 1796 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores:      0 -1.798      0      0      0 -0.221 -0.221 -0.221 -0.221  -1.45 ...</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; 266 z-scores have been shifted (ie 72 % of sparsity)</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting1)</a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; Warning: Removed 1796 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="alcohol_files/figure-html/shooting1-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">est_shooting5 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, N_branch), <span class="dt">zscores =</span> zsco_obs,</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">                                 <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">5</span>, </a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">                                 <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">est_shooting5</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 5 and sigma = 3.162. </span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 5 and sigma = 3.162 </span></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: shooting.</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; Objective value: 2027.82.</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 87 shifts have been identified (ie 95.4 % of sparsity).</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 87 shifts have been identified (ie 95.4 % of sparsity)</span></a>
 <a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328 0.437 -0.153 -0.225 1.34 -1.678 </span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores: -1.847      0      0      0 -2.223     0      0      0    0      0</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting5)</a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; Warning: Removed 1804 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328 0.437 -0.153 -0.225 1.34 -1.678 ...</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; Estimated z-scores: -1.847      0      0      0 -2.223     0      0      0    0      0 ...</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 470 z-scores have been shifted (ie 50.5 % of sparsity)</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting5)</a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; Warning: Removed 1804 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="alcohol_files/figure-html/shooting5-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
