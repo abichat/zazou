@@ -10,7 +10,7 @@ solve_univariate(y, x, lambda = 0)
 
 update_univariate(beta, coord, y, X, lambda)
 
-solve_multivariate(beta0, y, X, lambda)
+solve_multivariate(beta0, y, X, lambda, prob = NULL)
 }
 \arguments{
 \item{y}{a vector of size n.}
@@ -26,6 +26,9 @@ solve_multivariate(beta0, y, X, lambda)
 \item{X}{a matrix of size n x p.}
 
 \item{beta0}{the initial position of beta.}
+
+\item{prob}{a vector of probability weights for obtaining the coordinates
+to be sampled}
 }
 \value{
 The scalar solution of the 1D optimization problem
