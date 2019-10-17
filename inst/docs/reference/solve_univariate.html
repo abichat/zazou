@@ -138,7 +138,7 @@
 
 <span class='fu'>update_univariate</span>(<span class='no'>beta</span>, <span class='no'>coord</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>)
 
-<span class='fu'>solve_multivariate</span>(<span class='no'>beta0</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>)</pre>
+<span class='fu'>solve_multivariate</span>(<span class='no'>beta0</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,6 +170,11 @@
     <tr>
       <th>beta0</th>
       <td><p>the initial position of beta.</p></td>
+    </tr>
+    <tr>
+      <th>prob</th>
+      <td><p>a vector of probability weights for obtaining the coordinates
+to be sampled</p></td>
     </tr>
     </table>
 

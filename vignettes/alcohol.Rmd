@@ -71,29 +71,29 @@ est_shooting01
 plot(est_shooting01)
 ```
 
-```{r shooting05}
-est_shooting05 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                 lambda = 0.1, tree = tree, alpha = 0.5, 
-                                 method = "shooting")
-est_shooting05
-plot(est_shooting05)
-```
+<!-- ```{r shooting05} -->
+<!-- est_shooting05 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs, -->
+<!--                                  lambda = 0.1, tree = tree, alpha = 0.5,  -->
+<!--                                  method = "shooting") -->
+<!-- est_shooting05 -->
+<!-- plot(est_shooting05) -->
+<!-- ``` -->
 
-```{r shooting1}
-est_shooting1 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                 lambda = 0.1, tree = tree, alpha = 1, 
-                                 method = "shooting")
-est_shooting1
-plot(est_shooting1)
-```
+<!-- ```{r shooting1} -->
+<!-- est_shooting1 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs, -->
+<!--                                  lambda = 0.1, tree = tree, alpha = 1,  -->
+<!--                                  method = "shooting") -->
+<!-- est_shooting1 -->
+<!-- plot(est_shooting1) -->
+<!-- ``` -->
 
-```{r shooting5}
-est_shooting5 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                 lambda = 0.1, tree = tree, alpha = 5, 
-                                 method = "shooting")
-est_shooting5
-plot(est_shooting5)
-```
+<!-- ```{r shooting5} -->
+<!-- est_shooting5 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs, -->
+<!--                                  lambda = 0.1, tree = tree, alpha = 5,  -->
+<!--                                  method = "shooting") -->
+<!-- est_shooting5 -->
+<!-- plot(est_shooting5) -->
+<!-- ``` -->
 
 
 

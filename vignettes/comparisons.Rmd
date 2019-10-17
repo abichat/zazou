@@ -79,8 +79,8 @@ mthd2$shift_est
 
 ```{r zsc}
 t(true_zscores)
-t(mthd1$zscores_est)
-t(mthd2$zscores_est)
+mthd1$zscores_est
+mthd2$zscores_est
 ```
 
 ### Objective 

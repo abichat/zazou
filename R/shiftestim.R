@@ -20,6 +20,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
   }
 
   zscores_est <- incidence_matrix(tree) %*% listopt$par
+  zscores_est <- zscores_est[, 1]
 
   obj <- list(zscores_obs = zscores,
               zscores_est = zscores_est,
