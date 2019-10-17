@@ -46,6 +46,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
 #'
 #' @importFrom utils head
 #' @importFrom stringr str_pad
+#' @importFrom ape is.binary
 #'
 #' @export
 print.shiftestim <- function(x, digits = 3, ...){
@@ -60,6 +61,15 @@ print.shiftestim <- function(x, digits = 3, ...){
                         " and sigma = ", round(sigma, digits), "")
   }
 
+  if(is.binary(x$tree)){
+    txt_tree1 <- "Tree is binary"
+  } else {
+    txt_tree1 <- "Tree is not binary"
+  }
+
+  txt_tree2 <- paste0("with ", length(x$tree$tip.label), " leafs and ",
+                      nrow(x$tree$edge), " branches\n")
+
   zobs <- as.character(head(round(x$zscores_obs, digits), 10))
   zest <- as.character(head(round(x$zscores_est, digits), 10))
   nchar <- pmax(nchar(zobs), nchar(zest))
@@ -73,7 +83,7 @@ print.shiftestim <- function(x, digits = 3, ...){
     dots_z <- "...\n"
   }
 
-
+  cat(txt_tree1, txt_tree2)
   cat(txt_alpha, "\n")
   cat("---\n")
   cat("Optimisation algorithm: ", x$method, "\n", sep = "")

@@ -65,8 +65,8 @@ plot_shifts(tree, NA, obs_scores = zsco_obs)
 
 ```{r shooting01}
 est_shooting01 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                 lambda = 0.1, tree = tree, alpha = 0.1, 
-                                 method = "shooting")
+                                   lambda = 0.1, tree = tree, alpha = 0.1, 
+                                   method = "shooting")
 est_shooting01
 plot(est_shooting01)
 ```
