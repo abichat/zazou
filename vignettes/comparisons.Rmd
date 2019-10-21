@@ -65,6 +65,16 @@ mthd2
 plot(mthd2)
 ```
 
+## Shooting algorithm
+
+```{r shooting}
+mthd3 <- estimate_shifts2(Delta0 = rep(0, 8), zscores = observed_zscores, 
+                          lambda = lambda, tree = tree, alpha = alpha, 
+                          method = "shooting2")
+mthd2
+plot(mthd2)
+```
+
 ## Results
 
 ### Shifts
