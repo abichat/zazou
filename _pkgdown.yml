@@ -36,6 +36,7 @@ reference:
     - '`covariance_matrix`'
     - '`incidence_matrix`'
     - '`force_ultrametric`'
+    - '`parsimony_score`'
     - '`tree_height`'
   - title: p-values and z-scores
     desc: ~

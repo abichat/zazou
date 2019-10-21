@@ -46,7 +46,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
 #'
 #' @importFrom utils head
 #' @importFrom stringr str_pad
-#' @importFrom ape is.binary
+#' @importFrom ape is.binary multi2di
 #'
 #' @export
 print.shiftestim <- function(x, digits = 3, ...){
@@ -63,8 +63,12 @@ print.shiftestim <- function(x, digits = 3, ...){
 
   if(is.binary(x$tree)){
     txt_tree1 <- "Tree is binary"
+    tree <- x$tree
+    txt_bin <- "tree"
   } else {
     txt_tree1 <- "Tree is not binary"
+    tree <- multi2di(x$tree)
+    txt_bin <- "binarized tree"
   }
 
   txt_tree2 <- paste0("with ", length(x$tree$tip.label), " leafs and ",
@@ -93,6 +97,8 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
   cat(sum(x$shift_est != 0), "shifts have been identified (ie",
       100 * round(mean(x$shift_est == 0), digits), "% of sparsity)\n")
+  cat("A parsimonious solution on the", txt_bin, "would have involve",
+      suppressWarnings(parsimony_score(tree, x$zscores_est)), "shifts\n")
   cat("---\n")
   cat("Observed z-scores: ", zobs, dots_z)
   cat("Estimated z-scores:", zest, dots_z)

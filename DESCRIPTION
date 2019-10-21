@@ -23,6 +23,7 @@ Imports:
     ape,
     ggtree,
     graphics,
+    phangorn,
     stats,
     stringr,
     utils
