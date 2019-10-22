@@ -32,11 +32,6 @@ solve_multivariate2(beta0, y, X, lambda, prob = NULL)
 
 \item{prob}{a vector of probability weights for obtaining the coordinates
 to be sampled}
-
-\item{beta0}{the initial position of beta.}
-
-\item{prob}{a vector of probability weights for obtaining the coordinates
-to be sampled}
 }
 \value{
 The scalar solution of the 1D optimization problem

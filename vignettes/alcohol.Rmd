@@ -54,13 +54,13 @@ plot_shifts(tree, NA, obs_scores = zsco_obs)
 
 
 ```{r lbfgsb}
-tic()
-est_lbfgsb <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                               lambda = 0.1, tree = tree, alpha = 1,
-                               method = "L-BFGS-B")
-toc()
-est_lbfgsb
-plot(est_lbfgsb)
+# tic()
+# est_lbfgsb <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+#                                lambda = 0.1, tree = tree, alpha = 1,
+#                                method = "L-BFGS-B")
+# toc()
+# est_lbfgsb
+# plot(est_lbfgsb)
 ```
 
 ## Shooting 
