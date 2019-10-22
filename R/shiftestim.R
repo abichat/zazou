@@ -36,11 +36,9 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
     obj$is_bin <- TRUE
   } else {
     obj$is_bin <- FALSE
-    obj$tree <- ape::multi2di(tree)
   }
-  ## Leaf coloring and parsimony score
-  obj$leaf_coloring <- match(zscores_est, sort(unique(zscores_est)))           ## estimated means as colors
-  obj$pars_score    <- parsimony_score(obj$tree, obj$leaf_coloring)  ## parsimony score
+  ## Parsimony score
+  obj$pars_score    <- parsimony_score(multi2di(obj$tree), obj$zscores_est) ## parsimony score
 
   class(obj) <- "shiftestim"
   return(obj)
