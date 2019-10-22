@@ -40,7 +40,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
   }
   ## Leaf coloring and parsimony score
   obj$leaf_coloring <- match(zscores_est, sort(unique(zscores_est)))           ## estimated means as colors
-  obj$pars_score    <- phangorn::parsimony_score(obj$tree, obj$leaf_coloring)  ## parsimony score
+  obj$pars_score    <- parsimony_score(obj$tree, obj$leaf_coloring)  ## parsimony score
 
   class(obj) <- "shiftestim"
   return(obj)
