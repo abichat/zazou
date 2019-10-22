@@ -8,7 +8,8 @@
 estimate_shifts(Delta0, zscores, incidence_mat, covar_mat, lambda)
 
 estimate_shifts2(Delta0, zscores, tree, lambda = 0, alpha = NULL,
-  covar_mat = NULL, method = c("L-BFGS-B", "shooting", "shooting2"))
+  covar_mat = NULL, method = c("L-BFGS-B", "shooting", "shooting2",
+  "shooting3"))
 }
 \arguments{
 \item{Delta0}{initial position (size n+m)}

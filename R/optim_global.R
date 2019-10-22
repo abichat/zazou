@@ -32,7 +32,8 @@ estimate_shifts <- function(Delta0, zscores, incidence_mat, covar_mat, lambda){
 #' @importFrom stats optim
 estimate_shifts2 <- function(Delta0, zscores, tree, lambda = 0,
                              alpha = NULL, covar_mat = NULL,
-                             method = c("L-BFGS-B", "shooting", "shooting2")){
+                             method = c("L-BFGS-B", "shooting",
+                                        "shooting2", "shooting3")){
 
   method <- match.arg(method)
 
@@ -63,6 +64,9 @@ estimate_shifts2 <- function(Delta0, zscores, tree, lambda = 0,
   }
   if(method == "shooting2"){
     opt <- solve_multivariate2(Delta0, Y, X, lambda)
+  }
+  if(method == "shooting3"){
+    opt <- solve_multivariate3(Delta0, Y, X, lambda)
   }
 
   if(specified_covar) alpha <- NULL

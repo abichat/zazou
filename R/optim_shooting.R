@@ -98,3 +98,55 @@ solve_multivariate2 <- function(beta0, y, X, lambda, prob = NULL) {
 
   list(par = beta, value = value, method = "shooting", iterations = i)
 }
+
+#' @rdname solve_univariate
+#'
+#' @return the estimate value of beta
+#' @export
+solve_multivariate3 <- function(beta0, y, X, lambda, prob = NULL) {
+  p <- length(beta0)
+  beta <- beta0
+
+  yhat <- X %*% beta0
+  fn_obj <- compute_objective_function(y, X, lambda)
+
+  update_univariate2 <- function(beta, coord){
+    betai <- beta[coord]
+    beta_i <- beta[-coord]
+    xi <- X[, coord]
+    yi <- y - yhat + betai * xi
+
+    beta_next <- beta
+    beta_next[coord] <- solve_univariate(yi, xi, lambda)
+
+    # mise à jour de Yhat
+    diff_beta <- beta_next - beta
+    yhat <<- yhat + diff_beta[coord] * xi
+
+    beta_next
+  }
+
+
+  i <- 0
+  eps <- 10 ^ -8
+  progress <- +Inf
+  obj <- fn_obj(beta0)
+  never_null <- TRUE
+
+  while (i < p || progress > eps) {
+    for (j in 1:(ceiling(p / 10) + 20)) {
+      coord <- sample(p, size = 1, prob = prob)
+      beta <- update_univariate2(beta, coord)
+      i <- i + 1
+    }
+    new_obj <- fn_obj(beta)
+    progress <- abs(new_obj - obj) / obj
+    obj <- new_obj
+  }
+
+
+  value <- fn_obj(beta)
+
+  list(par = beta, value = value, method = "shooting", iterations = i,
+       last_progress = progress)
+}

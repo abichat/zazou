@@ -54,52 +54,49 @@ plot_shifts(tree, NA, obs_scores = zsco_obs)
 
 
 ```{r lbfgsb}
-# tic()
-# est_lbfgsb <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-#                                lambda = 0.1, tree = tree, alpha = 1,
-#                                method = "L-BFGS-B")
-# toc()
-# est_lbfgsb
-# plot(est_lbfgsb)
+tic()
+est_lbfgsb <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                               lambda = 0.1, tree = tree, alpha = 1,
+                               method = "L-BFGS-B")
+toc()
+est_lbfgsb
+plot(est_lbfgsb)
 ```
 
 ## Shooting 
 
 
 ```{r shooting01}
+set.seed(42)
 tic()
 est_shooting01 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                   lambda = 0.1, tree = tree, alpha = 0.1, 
+                                   lambda = 0.1, tree = tree, alpha = 0.1,
                                    method = "shooting2")
 toc()
 est_shooting01
 plot(est_shooting01)
 ```
 
-<!-- ```{r shooting05} -->
-<!-- est_shooting05 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs, -->
-<!--                                  lambda = 0.1, tree = tree, alpha = 0.5,  -->
-<!--                                  method = "shooting") -->
-<!-- est_shooting05 -->
-<!-- plot(est_shooting05) -->
-<!-- ``` -->
-
-<!-- ```{r shooting1} -->
-<!-- est_shooting1 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs, -->
-<!--                                  lambda = 0.1, tree = tree, alpha = 1,  -->
-<!--                                  method = "shooting") -->
-<!-- est_shooting1 -->
-<!-- plot(est_shooting1) -->
-<!-- ``` -->
-
-<!-- ```{r shooting5} -->
-<!-- est_shooting5 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs, -->
-<!--                                  lambda = 0.1, tree = tree, alpha = 5,  -->
-<!--                                  method = "shooting") -->
-<!-- est_shooting5 -->
-<!-- plot(est_shooting5) -->
-<!-- ``` -->
+```{r shooting03}
+set.seed(42)
+tic()
+est_shooting03 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                                   lambda = 0.1, tree = tree, alpha = 0.1,
+                                   method = "shooting3")
+toc()
+est_shooting03
+plot(est_shooting03)
+```
 
 
+
+```{r}
+est_lbfgsb$objective_value
+est_shooting01$objective_value
+est_shooting03$objective_value
+est_lbfgsb$optim_info
+est_shooting01$optim_info
+est_shooting03$optim_info
+```
 
 

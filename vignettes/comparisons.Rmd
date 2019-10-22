@@ -58,12 +58,30 @@ plot(mthd1)
 ## Shooting algorithm
 
 ```{r shooting}
+set.seed(41)
 mthd2 <- estimate_shifts2(Delta0 = rep(0, 8), zscores = observed_zscores, 
                           lambda = lambda, tree = tree, alpha = alpha, 
                           method = "shooting2")
 mthd2
 plot(mthd2)
 ```
+
+```{r shooting3}
+set.seed(41)
+mthd3 <- estimate_shifts2(Delta0 = rep(0, 8), zscores = observed_zscores, 
+                          lambda = lambda, tree = tree, alpha = alpha, 
+                          method = "shooting3")
+mthd3
+plot(mthd3)
+```
+
+```{r}
+mthd2$objective_value
+mthd3$objective_value
+mthd2$optim_info
+mthd3$optim_info
+```
+
 
 ## Results
 
