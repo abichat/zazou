@@ -32,7 +32,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
 
   ### Compute accessory slots --------------
   ## Binary tree
-  if (is.binary(x$tree)){
+  if (is.binary(tree)){
     obj$is_bin <- TRUE
   } else {
     obj$is_bin <- FALSE
