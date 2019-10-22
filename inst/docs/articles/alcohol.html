@@ -95,8 +95,9 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(zazou)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tictoc)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(zazou)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span>(alcohol)</a></code></pre></div>
 <div id="abundance" class="section level1">
 <h1 class="hasAnchor">
@@ -125,35 +126,57 @@
 <div id="l-bfgs-b" class="section level2">
 <h2 class="hasAnchor">
 <a href="#l-bfgs-b" class="anchor"></a>L-BFGS-B</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># est_lbfgsb &lt;- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#                                lambda = 0.1, tree = tree, alpha = 1, </span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#                                method = "L-BFGS-B")</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co"># est_lbfgsb</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co"># plot(est_lbfgsb)</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">est_lbfgsb &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, N_branch), <span class="dt">zscores =</span> zsco_obs,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                               <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">                               <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 202.142 sec elapsed</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">est_lbfgsb</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.6 </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; Objective value: 757.541.</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 0 0 0 -0.581 0 0 0 -0.043 -0.399 ...</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; 970 shifts have been identified (ie 48.7 % of sparsity)</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; A parsimonious solution on the binarized tree would have involve 31 shifts</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; Estimated z-scores: -3.905 -4.005 -3.709 -2.424 -4.293 -1.782  -2.14 -2.216 -1.782 -3.669 ...</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; 922 z-scores have been shifted (ie 2.8 % of sparsity)</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_lbfgsb)</a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; Warning: Removed 921 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="alcohol_files/figure-html/lbfgsb-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shooting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shooting" class="anchor"></a>Shooting</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">est_shooting01 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, N_branch), <span class="dt">zscores =</span> zsco_obs,</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">                                   <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>, </a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                                   <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">est_shooting01</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; Objective value: 3484.496.</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; 83 shifts have been identified (ie 95.6 % of sparsity)</span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; A parsimonious solution on the binarized tree would have involve 31 shifts</span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; Estimated z-scores:      0      0 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121 -0.121 ...</span></a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; 540 z-scores have been shifted (ie 43.1 % of sparsity)</span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting01)</a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; Warning: Removed 1808 rows containing missing values (geom_label).</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">est_shooting01 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts2</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, N_branch), <span class="dt">zscores =</span> zsco_obs,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">                                   <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>, </a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">                                   <span class="dt">method =</span> <span class="st">"shooting2"</span>)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 2.119 sec elapsed</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">est_shooting01</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; Objective value: 3490.031.</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; 87 shifts have been identified (ie 95.4 % of sparsity)</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; A parsimonious solution on the binarized tree would have involve 31 shifts</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; Estimated z-scores: -0.177 -0.177 -0.498 -0.498 -0.498 -0.498 -0.498 -0.498 -0.498 -0.498 ...</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; 659 z-scores have been shifted (ie 30.6 % of sparsity)</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting01)</a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; Warning: Removed 1804 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="alcohol_files/figure-html/shooting01-1.png" width="700" style="display: block; margin: auto;"></p>
 <!-- ```{r shooting05} -->
 <!-- est_shooting05 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs, -->
