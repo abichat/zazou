@@ -70,7 +70,7 @@ plot(est_lbfgsb)
 set.seed(42)
 tic()
 est_shooting01 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                   lambda = 0.1, tree = tree, alpha = 0.1,
+                                   lambda = 0.1, tree = tree, alpha = 1,
                                    method = "shooting2")
 toc()
 est_shooting01
@@ -81,7 +81,7 @@ plot(est_shooting01)
 set.seed(42)
 tic()
 est_shooting03 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                   lambda = 0.1, tree = tree, alpha = 0.1,
+                                   lambda = 0.1, tree = tree, alpha = 1,
                                    method = "shooting3")
 toc()
 est_shooting03
