@@ -3,6 +3,7 @@
 \docType{data}
 \name{alcohol}
 \alias{alcohol}
+\alias{chlamydiae}
 \title{Alcohol data set}
 \format{A list containing
 \describe{
@@ -17,6 +18,8 @@ microbial enterotypes." Science 334.6052 (2011): 105-108.
 }
 \usage{
 alcohol
+
+chlamydiae
 }
 \description{
 The data set was taken from a study of the dietary association with the gut

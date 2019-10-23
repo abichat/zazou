@@ -16,3 +16,6 @@
 #' @source Wu, Gary D., et al. "Linking long-term dietary patterns with gut
 #' microbial enterotypes." Science 334.6052 (2011): 105-108.
 "alcohol"
+
+#' @rdname alcohol
+"chlamydiae"
