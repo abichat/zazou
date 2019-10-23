@@ -66,6 +66,9 @@ library(testthat)
 
 # use_data_raw("chlamydiae")
 
+# use_vignette("chlamydiae")
+
+
 ####
 
 document()

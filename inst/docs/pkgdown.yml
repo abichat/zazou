@@ -3,6 +3,7 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   alcohol: alcohol.html
+  chlamydiae: chlamydiae.html
   comparisons: comparisons.html
   simulations: simulations.html
 

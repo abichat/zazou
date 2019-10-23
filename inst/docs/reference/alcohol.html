@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Alcohol data set — alcohol • zazou</title>
+<title>Datasets — alcohol • zazou</title>
 
 
 <!-- jquery -->
@@ -35,12 +35,8 @@
 
 
 
-<meta property="og:title" content="Alcohol data set — alcohol" />
-<meta property="og:description" content="The data set was taken from a study of the dietary association with the gut
-microbiome (Wu, 2011). Here we include the alcohol intake as the primary
-phenotype. The OTU abundance data consists of 98 samples with 949 OTUs
-with prevalence &amp;gt; 10
-variable library sizes." />
+<meta property="og:title" content="Datasets — alcohol" />
+<meta property="og:description" content="alcohol and chlamydiae datasets" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,6 +97,9 @@ variable library sizes." />
     <li>
       <a href="../articles/alcohol.html">Alcohol dataset analysis</a>
     </li>
+    <li>
+      <a href="../articles/chlamydiae.html">Chlamydiae dataset analysis</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -127,20 +126,18 @@ variable library sizes." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Alcohol data set</h1>
+    <h1>Datasets</h1>
     <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
     <div class="hidden name"><code>alcohol.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The data set was taken from a study of the dietary association with the gut
-microbiome (Wu, 2011). Here we include the alcohol intake as the primary
-phenotype. The OTU abundance data consists of 98 samples with 949 OTUs
-with prevalence &gt; 10<!-- %. The raw counts are normalized to account for -->
-variable library sizes.</p>
+    <p><code>alcohol</code> and <code>chlamydiae</code> datasets</p>
     </div>
 
-    <pre class="usage"><span class='no'>alcohol</span></pre>
+    <pre class="usage"><span class='no'>alcohol</span>
+
+<span class='no'>chlamydiae</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -149,13 +146,25 @@ variable library sizes.</p>
   <dt><code>X</code></dt><dd><p>the normalized OTU data,</p></dd>
   <dt><code>Y</code></dt><dd><p>the alcohol intake phenotype,</p></dd>
   <dt><code>tree</code></dt><dd><p>the corresponding phylogenetic tree,</p></dd>
-  <dt><code>otu.name</code></dt><dd><p>the taxonomic lineages of the OTUs.</p></dd>
+  <dt><code>taxonomy</code></dt><dd><p>the taxonomic lineages of the OTUs.</p></dd>
 
 </dl>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>Wu, Gary D., et al. "Linking long-term dietary patterns with gut
 microbial enterotypes." Science 334.6052 (2011): 105-108.</p>
+<p>Caporaso, J. G., et al. (2011). "Global patterns of 16S rRNA
+diversity at a depth of millions of sequences per sample." PNAS,
+108, 4516-4522. PMCID: PMC3063599</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The <code>alcohol</code> data set was taken from a study of the dietary association with the gut
+microbiome (Wu, 2011). Here we include the alcohol intake as the primary
+phenotype. The OTU abundance data consists of 98 samples with 949 OTUs
+with prevalence &gt; 10<!-- %. The raw counts are normalized to account for -->
+variable library sizes.</p>
+<p>The <code>chlamydia</code> data set is taken from a 16s rRNA diversity study
+narrowed to the Chlamydiae bacteria taxon, originally appearing in PNAS.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -163,6 +172,7 @@ microbial enterotypes." Science 334.6052 (2011): 105-108.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#format">Format</a></li>
       <li><a href="#source">Source</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>

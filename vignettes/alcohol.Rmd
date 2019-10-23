@@ -65,38 +65,30 @@ plot_shifts(tree, NA, obs_scores = zsco_obs)
 
 ## Shooting 
 
-
-```{r shooting01}
+```{r shooting}
 # set.seed(42)
 # tic()
-# est_shooting01 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-#                                    lambda = 0.1, tree = tree, alpha = 1,
-#                                    method = "shooting2")
+# est_shooting <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+#                                  lambda = 0.1, tree = tree, alpha = 1,
+#                                  method = "shooting3")
 # toc()
-# est_shooting01
-# plot(est_shooting01)
+# est_shooting
+# plot(est_shooting)
 ```
 
-```{r shooting03}
-# set.seed(42)
-# tic()
-# est_shooting03 <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-#                                    lambda = 0.1, tree = tree, alpha = 1,
-#                                    method = "shooting3")
-# toc()
-# est_shooting03
-# plot(est_shooting03)
-```
-
+# Comparisons
 
 
 ```{r}
 # est_lbfgsb$objective_value
-# est_shooting01$objective_value
-# est_shooting03$objective_value
+# est_shooting$objective_value
 # est_lbfgsb$optim_info
-# est_shooting01$optim_info
-# est_shooting03$optim_info
+# est_shooting$optim_info
 ```
 
+
+```{r}
+# hist(abs(est_lbfgsb$zscores_est - est_lbfgsb$zscores_obs), breaks = 20, col = "grey")
+# hist(abs(est_shooting$zscores_est - est_shooting$zscores_obs), breaks = 20,  col = "grey")
+```
 
