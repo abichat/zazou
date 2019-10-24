@@ -92,9 +92,9 @@ check()
 
 ####
 
-install()
+install(upgrade = "never")
 rmarkdown::render("README.Rmd", output_format = "md_document")
 chameleon::build_pkgdown(yml = "_pkgdown.yml")
-install()
+install(upgrade = "never")
 
 

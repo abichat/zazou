@@ -1,5 +1,5 @@
 ---
-title: "chlamydiae"
+title: "Chlamydiae dataset analysis"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{chlamydiae}
