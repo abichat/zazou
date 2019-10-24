@@ -17,7 +17,7 @@ test_that("objective function is correct", {
   expect_is(obj, "function")
   expect_length(value, 1)
   expect_equal(value,
-               (t(Y - X %*% Delta) %*% (Y - X %*% Delta) -
+               (1/2 * (t(Y - X %*% Delta) %*% (Y - X %*% Delta)) -
                   lambda * sum(Delta))[1, 1])
 })
 

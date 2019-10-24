@@ -29,6 +29,7 @@ Imports:
     utils
 Suggests: 
     corrplot,
+    ggplot2,
     knitr,
     rmarkdown,
     spelling,

@@ -148,14 +148,14 @@
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Objective value: 0.745.</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Objective value: 0.621.</span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; Estimated shifts: 0 -1.622 0 -2.04 0 0 -1.313 0 ...</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; Estimated shifts: 0 -1.621 0 -2.038 0 0 -1.312 0 ...</span></a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; 3 shifts have been identified (ie 62.5 % of sparsity)</span></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; A parsimonious solution would involve 3 shifts</span></a>
 <a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; Observed z-scores:  -1.629 -3.754 0.352 -1.367 0.323 </span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; Estimated z-scores: -1.622 -3.662     0 -1.313     0 </span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; Estimated z-scores: -1.621  -3.66     0 -1.312     0 </span></a>
 <a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; 3 z-scores have been shifted (ie 40 % of sparsity)</span></a>
 <a class="sourceLine" id="cb6-18" data-line-number="18"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(mthd1)</a>
 <a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></a></code></pre></div>
@@ -174,7 +174,7 @@
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.745.</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.621.</span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; Estimated shifts: 0 -1.621 0 -2.038 0 0 -1.312 0 ...</span></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; 3 shifts have been identified (ie 62.5 % of sparsity)</span></a>
@@ -196,7 +196,7 @@
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.745.</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.621.</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; Estimated shifts: 0 -1.621 0 -2.038 0 0 -1.312 0 ...</span></a>
 <a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; 3 shifts have been identified (ie 62.5 % of sparsity)</span></a>
@@ -209,18 +209,18 @@
 <a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="comparisons_files/figure-html/shooting3-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">mthd2<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] 0.7450608</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] 0.6211019</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">mthd3<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; [1] 0.7450504</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; [1] 0.6211018</span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5">mthd2<span class="op">$</span>optim_info</a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; $iterations</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; [1] 200</span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8">mthd3<span class="op">$</span>optim_info</a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; $iterations</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; [1] 315</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; [1] 231</span></a>
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; $last_progress</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; [1] 0</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; [1] 3.440292e-09</span></a></code></pre></div>
 </div>
 <div id="results" class="section level2">
 <h2 class="hasAnchor">
@@ -231,7 +231,7 @@
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">true_shifts</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1]  0 -3  0  0  0  0 -2  0</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">mthd1<span class="op">$</span>shift_est</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; [1]  0.000000 -1.622104  0.000000 -2.039629  0.000000  0.000000 -1.312700</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; [1]  0.000000 -1.621335  0.000000 -2.038286  0.000000  0.000000 -1.311911</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; [8]  0.000000</span></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6">mthd2<span class="op">$</span>shift_est</a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; [1]  0.000000 -1.621439  0.000000 -2.038079  0.000000  0.000000 -1.311911</span></a>
@@ -245,7 +245,7 @@
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; [1,] -3 -3 0 -2 0</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4">mthd1<span class="op">$</span>zscores_est</a>
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt;         A         B         C         D         E </span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; -1.622104 -3.661733  0.000000 -1.312700  0.000000</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; -1.621335 -3.659621  0.000000 -1.311911  0.000000</span></a>
 <a class="sourceLine" id="cb11-7" data-line-number="7">mthd2<span class="op">$</span>zscores_est</a>
 <a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt;         A         B         C         D         E </span></a>
 <a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; -1.621439 -3.659518  0.000000 -1.311911  0.000000</span></a></code></pre></div>
@@ -254,9 +254,9 @@
 <h3 class="hasAnchor">
 <a href="#objective" class="anchor"></a>Objective</h3>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">mthd1<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; [1] 0.7447657</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; [1] 0.6211018</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">mthd2<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; [1] 0.7450608</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; [1] 0.6211019</span></a></code></pre></div>
 </div>
 <div id="other-informations" class="section level3">
 <h3 class="hasAnchor">
@@ -264,7 +264,7 @@
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">mthd1<span class="op">$</span>optim_info</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; $counts</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; function gradient </span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;       22       22 </span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;       14       14 </span></a>
 <a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; $convergence</span></a>
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; [1] 0</span></a>

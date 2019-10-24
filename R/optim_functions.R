@@ -11,7 +11,7 @@ compute_objective_function <- function(Y, X, lambda) {
   objective_function <- function(Delta) {
     YXD <- Y - X %*% Delta
     shrinkage <- lambda * sum(Delta)
-    (crossprod(YXD) - shrinkage)[1, 1]
+    (crossprod(YXD) / 2 - shrinkage)[1, 1]
   }
   return(objective_function)
 }

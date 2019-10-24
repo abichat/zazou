@@ -130,24 +130,24 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3">                               <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">                               <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>)</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 0.009 sec elapsed</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 0.008 sec elapsed</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7">est_lbfgsb</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; Tree is binary with 21 leafs and 40 branches</span></a>
 <a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 7.198 </span></a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; Objective value: 1.367.</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; Objective value: 1.308.</span></a>
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: -0.074 0 0 0 -0.112 -2.17 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 18 shifts have been identified (ie 55 % of sparsity)</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; A parsimonious solution would involve 17 shifts</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: -0.077 0 0 0 -0.073 -2.21 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 17 shifts have been identified (ie 57.5 % of sparsity)</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; A parsimonious solution would involve 16 shifts</span></a>
 <a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; Observed z-scores:  -0.084 -0.084 -2.444 -2.423 -1.819 -0.041 -1.153 -1.153 -1.715  0.107 ...</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; Estimated z-scores: -0.074 -0.074 -2.356 -2.356  -1.76 -0.186 -1.121 -1.121 -1.631 -0.006 ...</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; Estimated z-scores: -0.077 -0.077 -2.359 -2.359  -1.75 -0.149 -1.114 -1.114 -1.622 -0.022 ...</span></a>
 <a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 21 z-scores have been shifted (ie 0 % of sparsity)</span></a>
 <a class="sourceLine" id="cb5-22" data-line-number="22"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_lbfgsb)</a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; Warning: Removed 23 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; Warning: Removed 24 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/lbfgsb-1.png" width="700"></p>
 </div>
 <div id="shooting" class="section level2">
@@ -159,21 +159,21 @@
 <a class="sourceLine" id="cb6-4" data-line-number="4">                                   <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5">                                   <span class="dt">method =</span> <span class="st">"shooting3"</span>)</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 0.068 sec elapsed</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 0.039 sec elapsed</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8">est_shooting</a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Tree is binary with 21 leafs and 40 branches</span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 7.198 </span></a>
 <a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; Objective value: 1.363.</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; Objective value: 1.308.</span></a>
 <a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; Estimated shifts: -0.077 0 0 0 -0.073 -2.21 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; Estimated shifts: -0.076 0 0 0 -0.076 -2.207 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; 17 shifts have been identified (ie 57.5 % of sparsity)</span></a>
 <a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; A parsimonious solution would involve 16 shifts</span></a>
 <a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; Observed z-scores:  -0.084 -0.084 -2.444 -2.423 -1.819 -0.041 -1.153 -1.153 -1.715  0.107 ...</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; Estimated z-scores: -0.077 -0.077 -2.359 -2.359  -1.75 -0.149 -1.114 -1.114 -1.622 -0.022 ...</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; Estimated z-scores: -0.076 -0.076 -2.359 -2.359  -1.75 -0.152 -1.114 -1.114 -1.623 -0.022 ...</span></a>
 <a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; 21 z-scores have been shifted (ie 0 % of sparsity)</span></a>
 <a class="sourceLine" id="cb6-23" data-line-number="23"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting)</a>
 <a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; Warning: Removed 24 rows containing missing values (geom_label).</span></a></code></pre></div>
@@ -184,29 +184,36 @@
 <h1 class="hasAnchor">
 <a href="#comparisons" class="anchor"></a>Comparisons</h1>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">est_lbfgsb<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] 1.367359</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] 1.308043</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">est_shooting<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; [1] 1.362688</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; [1] 1.308049</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5">est_lbfgsb<span class="op">$</span>optim_info</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; $counts</span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; function gradient </span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;       66       66 </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;       44       44 </span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; $convergence</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; [1] 52</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; [1] 0</span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; $message</span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; [1] "ERROR: ABNORMAL_TERMINATION_IN_LNSRCH"</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; [1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</span></a>
 <a class="sourceLine" id="cb7-15" data-line-number="15">est_shooting<span class="op">$</span>optim_info</a>
 <a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; $iterations</span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; [1] 3720</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; [1] 2400</span></a>
 <a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; $last_progress</span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; [1] 6.561297e-09</span></a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(est_lbfgsb<span class="op">$</span>zscores_est <span class="op">-</span><span class="st"> </span>est_lbfgsb<span class="op">$</span>zscores_obs), <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">"grey"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; [1] 3.550679e-09</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_lbfgsb<span class="op">$</span>zscores_obs, est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="dt">xintercept =</span> <span class="dv">0</span>)</a></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(est_shooting<span class="op">$</span>zscores_est <span class="op">-</span><span class="st"> </span>est_shooting<span class="op">$</span>zscores_obs), <span class="dt">breaks =</span> <span class="dv">20</span>,  <span class="dt">col =</span> <span class="st">"grey"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_shooting<span class="op">$</span>zscores_obs, est_shooting<span class="op">$</span>zscores_est) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="dt">xintercept =</span> <span class="dv">0</span>)</a></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/unnamed-chunk-4-2.png" width="700"></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="op">-</span>est_shooting<span class="op">$</span>zscores_est, <span class="op">-</span>est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>()</a></code></pre></div>
+<p><img src="chlamydiae_files/figure-html/unnamed-chunk-4-3.png" width="700"></p>
 </div>
   </div>
 
