@@ -28,9 +28,12 @@ Imports:
     stringr,
     utils
 Suggests: 
+    cluster,
     corrplot,
+    evabic,
     ggplot2,
     knitr,
+    phyloseq,
     rmarkdown,
     spelling,
     testthat (>= 2.1.0),

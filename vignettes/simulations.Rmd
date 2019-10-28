@@ -31,63 +31,50 @@ incidence_mat <- incidence_matrix(tree)
 incidence_mat + 0
 ```
 
-```{r ggtree, message=FALSE}
-library(ggtree)
-ggtree(tree, ladderize = FALSE) +
-  geom_tiplab() +
-  geom_label(x = 1.5, y = 1.5, label = "-3", fill = "lightblue") +
-  geom_label(x = 2.5, y = 4, label = "-2", fill = "lightblue") 
-```
-
 ```{r zscores}
-zscores <- true_shifts <- c(-3, -3, 0, -2, 0)
+true_shifts <- c(0, -3, 0, 0, 0, 0, -2, 0)
+obs_zscores <- true_zscores <- incidence_mat %*% true_shifts
 covar_mat <- diag(nrow = 5, ncol = 5)
 ```
 
+
+```{r ggtree, message=FALSE}
+plot_shifts(tree, true_shifts, true_scores = true_zscores)
+```
+
+
 ```{r}
-optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
-                             incidence_mat = incidence_mat, 
-                             covar_mat = covar_mat, lambda = 0)
+estimation <- estimate_shifts2(rep(0, 8), zscores = obs_zscores, 
+                               tree = tree, lambda = 0, 
+                               covar_mat = covar_mat)
+estimation
+plot(estimation)
 ```
 
 Solution without penalty is not sparse due to ill-conditioning of the incidence matrix. 
 
-```{r}
-optimized
-round(incidence_mat %*% optimized$par, digits = 4)
-```
 
 ```{r}
-estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, lambda = 0, covar_mat = covar_mat)
+estimation <- estimate_shifts2(rep(0, 8), zscores = obs_zscores, 
+                               tree = tree, lambda = 0.1, 
+                               covar_mat = covar_mat)
+estimation
+plot(estimation)
 ```
 
+With a low penalty, the solution is much sparser and closer to the true shifts on branches. 
 
-With a low penalty, the solution is much sparser and closer to the one we have in mind. 
-
-```{r}
-optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
-                             incidence_mat = incidence_mat, 
-                             covar_mat = covar_mat, lambda = 0.1)
-optimized$par
-round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = incidence_mat %*% optimized$par), 
-      digits = 4)
-x <- estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, lambda = 0.1, covar_mat = covar_mat)
-x
-unclass(x)
-```
-
-
-# Complete simulation
+# Simulations on a toy example
 
 ```{r ou_correlation_matrix}
 tree <- read.tree(text = "(((A:1,B:1):1,C:2):1,(D:1,E:1):2);")
-set.seed(20191009)
+set.seed(2019)
 covar_mat <- covariance_matrix(tree, alpha = 1)
 corrplot::corrplot(covar_mat, type = "upper")
 true_shifts <- c(-3, -3, 0, -2, 0)
 sqrtcovar <- t(chol(covar_mat))
 zscores <- true_shifts + sqrtcovar %*% rnorm(5) # simulate 
+zscores
 ```
 
 ## Estimate shifts without penalty
@@ -95,53 +82,106 @@ zscores <- true_shifts + sqrtcovar %*% rnorm(5) # simulate
 The fit is perfect since all observed $z$-scores are negative. 
 
 ```{r}
-optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
-                             incidence_mat = incidence_mat, 
-                             covar_mat = covar_mat, lambda = 0)
-optimized
-optimized$par
-optimized$value
-sum(optimized$par != 0) ## sparsity level
+estimation <- estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0)
+estimation
+plot(estimation, true_scores = true_shifts)
+
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = incidence_mat %*% optimized$par), 
+                 estimated = estimation$zscores_est), 
       digits = 4)
-estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0)
 ```
 
-The fit degrades as we increase sparsity. 
+The fit degrades as we increase sparsity. [Well, not so much...]
 
 ```{r}
-optimized <- estimate_shifts(rep(0, 8), zscores = zscores, 
-                             incidence_mat = incidence_mat, 
-                             covar_mat = covar_mat, lambda = 0.1)
-optimized$par
-optimized$value
-sum(optimized$par != 0) ## sparsity level
+estimation <- estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0.1)
+estimation
+plot(estimation, true_scores = true_shifts)
+
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = incidence_mat %*% optimized$par), 
+                 estimated = estimation$zscores_est), 
       digits = 4)
-optimized
-x <- estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0.1)
-x
-plot(x)
 ```
 
 The fit does not depend a lot (on this toy example) on the initial solution. 
 
 ```{r}
-optimized <- estimate_shifts(c(0, -3, 0, 0, 0, 0, -2, 0), zscores = zscores, 
-                             incidence_mat = incidence_mat, 
-                             covar_mat = covar_mat, lambda = 0.1)
-optimized$par
-optimized$value
-sum(optimized$par != 0) ## sparsity level
+estimation <- estimate_shifts2(c(0, -3, 0, 0, 0, 0, -2, 0), 
+                               zscores = zscores, tree = tree, 
+                               alpha = 1, lambda = 0.1)
+
+estimation
+plot(estimation, true_scores = true_shifts)
+
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = incidence_mat %*% optimized$par), 
+                 estimated = estimation$zscores_est), 
       digits = 4)
-optimized
-estimate_shifts2(c(0, -3, 0, 0, 0, 0, -2, 0), zscores = zscores, tree = tree, alpha = 1, lambda = 0.1)
 ```
 
 
+# Simulations from real data
+ 
+```{r}
+set.seed(42)
+data(alcohol)
+abund <- alcohol$X[, alcohol$Y == "Low"]
+groups <- sample(c("A", "B"), size = ncol(abund), replace = TRUE)
+tree <- force_ultrametric(alcohol$tree)
+otu_to_kepp <- names(which(rowSums(abund > 0) > 20))
+abund <- abund[otu_to_kepp, ]
+tree <- phyloseq::prune_taxa(otu_to_kepp, tree)
+N_branch <- length(tree$edge.length)
+```
+
+```{r}
+pvalues_original <- test_wilcoxon(abund, groups)$p.value
+zscores_original <- p2z(pvalues_original)
+plot_shifts(tree, shifts = NA, obs_scores = zscores_original)
+```
+
+
+```{r}
+D <- cophenetic(tree)
+obj <- cluster::pam(D, 20)
+clustering <- obj$clustering
+```
+
+
+```{r}
+clusters <- sample(10, 4)
+table(clustering[which(clustering %in% clusters)])
+# cluster1 <- names(which(clustering == clusters[1]))
+# cluster2 <- names(which(clustering == clusters[2]))
+# cluster3 <- names(which(clustering == clusters[3]))
+# cluster4 <- names(which(clustering == clusters[4]))
+otus_da <- names(clustering[which(clustering %in% clusters)])
+abund[otus_da, groups == "B"] <- 4 * abund[otus_da,  groups == "B"]
+```
+
+
+```{r}
+pvalues <- test_wilcoxon(abund, groups)$p.value
+zscores <- p2z(pvalues)
+plot_shifts(tree, NA, obs_scores = zscores)
+```
+
+
+```{r}
+plot_shifts(tree, NA, obs_scores = zscores - zscores_original)
+```
+
+```{r}
+estimation <- estimate_shifts2(rep(0, N_branch), zscores = zscores, 
+                               lambda = 5, tree = tree, alpha = 0.01)
+estimation
+plot(estimation)
+```
+
+```{r}
+detected <- names(which(estimation$zscores_est != 0))
+detected_bh <- names(which(p.adjust(pvalues, method = "BH") < 0.05))
+evabic::ebc_tidy(detected, otus_da, m = length(otu_to_kepp))
+evabic::ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp))
+```
 
 
