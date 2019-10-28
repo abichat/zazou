@@ -40,6 +40,14 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
   ## Parsimony score
   obj$pars_score    <- parsimony_score(multi2di(obj$tree), obj$zscores_est) ## parsimony score
 
+  ## Sigma
+  if (is.null(obj$alpha)){
+    obj$sigma <- NULL
+  } else {
+    h <- tree_height(obj$tree)
+    obj$sigma <- sqrt(2 * obj$alpha) / (1 - exp(- 2 * obj$alpha * h))
+  }
+
   class(obj) <- "shiftestim"
   return(obj)
 }
@@ -65,11 +73,9 @@ print.shiftestim <- function(x, digits = 3, ...){
   if(is.null(x$alpha)){
     txt_alpha <- "Covariance matrix has been manually specified."
   } else {
-    h <- tree_height(x$tree)
-    sigma <- sqrt(2 * x$alpha) / (1 - exp(- 2 * x$alpha * h))
     txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
                         " with alpha = ", round(x$alpha, digits),
-                        " and sigma = ", round(sigma, digits), "")
+                        " and sigma = ", round(x$sigma, digits), "")
   }
 
   txt_tree1 <- paste0("Tree is", ifelse(x$is_bin, " ", " not "), "binary")
