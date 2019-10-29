@@ -31,7 +31,6 @@ Suggests:
     cluster,
     corrplot,
     evabic,
-    ggplot2,
     knitr,
     phyloseq,
     rmarkdown,

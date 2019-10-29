@@ -43,9 +43,12 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
   ## Sigma
   if (is.null(obj$alpha)){
     obj$sigma <- NULL
+    obj$bic <- NULL
   } else {
     h <- tree_height(obj$tree)
     obj$sigma <- sqrt(2 * obj$alpha) / (1 - exp(- 2 * obj$alpha * h))
+    obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
+                   est_shifts = obj$shift_est, sigma = obj$sigma)
   }
 
   class(obj) <- "shiftestim"
@@ -72,10 +75,12 @@ print.shiftestim <- function(x, digits = 3, ...){
 
   if(is.null(x$alpha)){
     txt_alpha <- "Covariance matrix has been manually specified."
+    txt_bic <- ""
   } else {
     txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
                         " with alpha = ", round(x$alpha, digits),
                         " and sigma = ", round(x$sigma, digits), "")
+    txt_bic <- paste0("BIC: ", round(x$bic, digits), "\n")
   }
 
   txt_tree1 <- paste0("Tree is", ifelse(x$is_bin, " ", " not "), "binary")
@@ -103,6 +108,7 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat("Optimisation algorithm: ", x$method, "\n", sep = "")
   cat("Regularization parameter: lambda =", round(x$lambda, digits), "\n")
   cat("Objective value: ", round(x$objective_value, digits), ".\n", sep = "")
+  cat(txt_bic)
   cat("---\n")
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
   cat(sum(x$shift_est != 0), "shifts have been identified (ie",

@@ -32,6 +32,7 @@ reference:
     - '`as_shiftestim`'
     - '`estimate_shifts`'
     - '`plot_shifts`'
+    - '`bic`'
   - title: About trees
     desc: ~
     contents:

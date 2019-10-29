@@ -68,6 +68,8 @@ library(testthat)
 
 # use_vignette("chlamydiae")
 
+# use_r("bic")
+
 
 ####
 
