@@ -85,8 +85,8 @@ test()
 
 run_examples()
 
-goodpractice::gp()
 check()
+goodpractice::gp()
 
 
 # pkgdown::template_articles()

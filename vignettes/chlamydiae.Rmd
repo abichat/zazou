@@ -20,21 +20,21 @@ library(tictoc)
 ```
 
 ```{r}
-attach(chlamydiae)
+data(chlamydiae)
 ```
 
 
 # z-scores
 
 ```{r zscores}
-pval_obs <- test_kruskalwallis(X, Y)$p.value
+pval_obs <- test_kruskalwallis(chlamydiae$X, chlamydiae$Y)$p.value
 zsco_obs <- p2z(pval_obs)
 ```
 
 # Tree
 
 ```{r tree}
-tree <- force_ultrametric(tree)
+tree <- force_ultrametric(chlamydiae$tree)
 N_branch <- length(tree$edge.length)
 plot_shifts(tree, NA, obs_scores = zsco_obs)
 ```
@@ -47,47 +47,48 @@ plot_shifts(tree, NA, obs_scores = zsco_obs)
 
 
 ```{r lbfgsb}
-# tic()
-# est_lbfgsb <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-#                                lambda = 0.1, tree = tree, alpha = 1,
-#                                method = "L-BFGS-B")
-# toc()
-# est_lbfgsb
-# plot(est_lbfgsb)
+tic()
+est_lbfgsb <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                               lambda = 0.1, tree = tree, alpha = 1,
+                               method = "L-BFGS-B")
+toc()
+est_lbfgsb
+plot(est_lbfgsb)
 ```
+
 
 ## Shooting 
 
 ```{r shooting}
-# set.seed(42)
-# tic()
-# est_shooting <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-#                                    lambda = 0.1, tree = tree, alpha = 1,
-#                                    method = "shooting3")
-# toc()
-# est_shooting
-# plot(est_shooting)
+set.seed(42)
+tic()
+est_shooting <- estimate_shifts2(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                                   lambda = 0.1, tree = tree, alpha = 1,
+                                   method = "shooting3")
+toc()
+est_shooting
+plot(est_shooting)
 ```
 
 # Comparisons
 
 
 ```{r}
-# est_lbfgsb$objective_value
-# est_shooting$objective_value
-# est_lbfgsb$optim_info
-# est_shooting$optim_info
+est_lbfgsb$objective_value
+est_shooting$objective_value
+est_lbfgsb$optim_info
+est_shooting$optim_info
 ```
 
 
 ```{r}
-# library(ggplot2)
-# theme_set(theme_minimal())
-# qplot(est_lbfgsb$zscores_obs, est_lbfgsb$zscores_est) + 
-#   geom_abline() + geom_vline(xintercept = 0)
-# qplot(est_shooting$zscores_obs, est_shooting$zscores_est) + 
-#   geom_abline() + geom_vline(xintercept = 0)
-# qplot(-est_shooting$zscores_est, -est_lbfgsb$zscores_est) + 
-#   geom_abline() + scale_x_log10() + scale_y_log10()
+library(ggplot2)
+theme_set(theme_minimal())
+qplot(est_lbfgsb$zscores_obs, est_lbfgsb$zscores_est) +
+  geom_abline() + geom_vline(xintercept = 0)
+qplot(est_shooting$zscores_obs, est_shooting$zscores_est) +
+  geom_abline() + geom_vline(xintercept = 0)
+qplot(-est_shooting$zscores_est, -est_lbfgsb$zscores_est) +
+  geom_abline() + scale_x_log10() + scale_y_log10()
 ```
 

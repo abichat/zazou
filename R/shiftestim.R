@@ -38,7 +38,8 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
     obj$is_bin <- FALSE
   }
   ## Parsimony score
-  obj$pars_score    <- parsimony_score(multi2di(obj$tree), obj$zscores_est) ## parsimony score
+  obj$pars_score    <- parsimony_score(multi2di(obj$tree),
+                                       obj$zscores_est) ## parsimony score
 
   ## Sigma
   if (is.null(obj$alpha)){
@@ -107,7 +108,7 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat("---\n")
   cat("Optimisation algorithm: ", x$method, "\n", sep = "")
   cat("Regularization parameter: lambda =", round(x$lambda, digits), "\n")
-  cat("Objective value: ", round(x$objective_value, digits), ".\n", sep = "")
+  cat("Objective value: ", round(x$objective_value, digits), "\n", sep = "")
   cat(txt_bic)
   cat("---\n")
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")

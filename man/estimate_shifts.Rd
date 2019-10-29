@@ -3,13 +3,17 @@
 \name{estimate_shifts}
 \alias{estimate_shifts}
 \alias{estimate_shifts2}
+\alias{estimate_shifts3}
 \title{Estimate shifts}
 \usage{
 estimate_shifts(Delta0, zscores, incidence_mat, covar_mat, lambda)
 
 estimate_shifts2(Delta0, zscores, tree, lambda = 0, alpha = NULL,
   covar_mat = NULL, method = c("L-BFGS-B", "shooting", "shooting2",
-  "shooting3"))
+  "shooting3"), ...)
+
+estimate_shifts3(Delta0, zscores, tree, alpha, lambda = 0,
+  method = c("L-BFGS-B", "shooting", "shooting2", "shooting3"), ...)
 }
 \arguments{
 \item{Delta0}{initial position (size n+m)}
@@ -28,6 +32,8 @@ covariance matrix if not specified}
 \item{alpha}{parameter > 0}
 
 \item{method}{method to use. One of \code{L-BFGS-B} or \code{shooting}.}
+
+\item{...}{additional parameters}
 }
 \value{
 a list

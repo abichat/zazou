@@ -170,12 +170,15 @@ plot_shifts(tree, NA, obs_scores = zscores)
 plot_shifts(tree, NA, obs_scores = zscores - zscores_original)
 ```
 
+
 ```{r}
-estimation <- estimate_shifts2(rep(0, N_branch), zscores = zscores, 
-                               lambda = 5, tree = tree, alpha = 0.01)
+estimation <- estimate_shifts3(rep(0, N_branch), zscores = zscores, 
+                               lambda = c(0.1, 0.5, 1, 2, 5), tree = tree, alpha = c(0.01, 0.1, 1, 5))
 estimation
 plot(estimation)
+estimation$optim_info$bic_selection
 ```
+
 
 ```{r}
 detected <- names(which(estimation$zscores_est != 0))

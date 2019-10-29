@@ -23,27 +23,27 @@ set.seed(42)
 
 
 ```{r data}
-attach(alcohol)
+data(alcohol)
 ```
 
 # Abundance 
 
 ```{r}
-dim(X)
+dim(alcohol$X)
 ```
 
 
 # z-scores
 
 ```{r zscores}
-pval_obs <- test_wilcoxon(X, Y)$p.value
+pval_obs <- test_wilcoxon(alcohol$X, alcohol$Y)$p.value
 zsco_obs <- p2z(pval_obs)
 ```
 
 # Tree
 
 ```{r tree}
-tree <- force_ultrametric(tree)
+tree <- force_ultrametric(alcohol$tree)
 N_branch <- length(tree$edge.length)
 plot_shifts(tree, NA, obs_scores = zsco_obs)
 ```

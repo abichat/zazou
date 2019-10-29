@@ -101,23 +101,23 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tictoc)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(zazou)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span>(alcohol)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(alcohol)</a></code></pre></div>
 <div id="abundance" class="section level1">
 <h1 class="hasAnchor">
 <a href="#abundance" class="anchor"></a>Abundance</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(X)</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(alcohol<span class="op">$</span>X)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; [1] 949  98</span></a></code></pre></div>
 </div>
 <div id="z-scores" class="section level1">
 <h1 class="hasAnchor">
 <a href="#z-scores" class="anchor"></a>z-scores</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">pval_obs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span>(X, Y)<span class="op">$</span>p.value</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">pval_obs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span>(alcohol<span class="op">$</span>X, alcohol<span class="op">$</span>Y)<span class="op">$</span>p.value</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">zsco_obs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/p2z.html">p2z</a></span>(pval_obs)</a></code></pre></div>
 </div>
 <div id="tree" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tree" class="anchor"></a>Tree</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">tree &lt;-<span class="st"> </span><span class="kw"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span>(tree)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">tree &lt;-<span class="st"> </span><span class="kw"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span>(alcohol<span class="op">$</span>tree)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">N_branch &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(tree<span class="op">$</span>edge.length)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, <span class="ot">NA</span>, <span class="dt">obs_scores =</span> zsco_obs)</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; Warning: Removed 1891 rows containing missing values (geom_label).</span></a></code></pre></div>
