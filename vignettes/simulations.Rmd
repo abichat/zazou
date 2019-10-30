@@ -178,7 +178,10 @@ plot_shifts(tree, NA,
 estimation <- estimate_shifts3(rep(0, N_branch), zscores = zscores, 
                                lambda = c(0.1, 0.5, 1, 2, 5), tree = tree, alpha = c(0.01, 0.1, 1, 5))
 estimation
-plot(estimation)
+plot(estimation, 
+     sup_scores = list(list(scores = zscores - zscores_original,
+                            title = "Difference in z-scores after fold-change",
+                            color = "as.character(sign(scores))")))
 estimation$optim_info$bic_selection
 ```
 
@@ -188,6 +191,28 @@ detected <- names(which(estimation$zscores_est != 0))
 detected_bh <- names(which(p.adjust(pvalues, method = "BH") < 0.05))
 evabic::ebc_tidy(detected, otus_da, m = length(otu_to_kepp))
 evabic::ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp))
+```
+
+
+```{r}
+plot(estimation, 
+     sup_scores = list(list(scores = zscores - zscores_original,
+                            title = "Difference in z-scores after fold-change",
+                            color = "as.character(sign(scores))")))
+plot(estimation, ### Les couleurs ne sont pas bonnes ! 
+     sup_scores = list(list(scores = zscores - zscores_original,
+                            title = "Difference in z-scores after fold-change",
+                            color = "as.character(sign(scores))"),
+                       list(scores = rnorm(127),
+                            title = "Random",
+                            color = "scores > -1")))
+plot(estimation, 
+     sup_scores = list(list(scores = rnorm(127),
+                            title = "Random",
+                            color = "scores > -1"),
+                       list(scores = zscores - zscores_original,
+                            title = "Difference in z-scores after fold-change",
+                            color = "as.character(sign(scores))")))
 ```
 
 

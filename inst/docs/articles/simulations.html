@@ -382,8 +382,11 @@
 <a class="sourceLine" id="cb22-51" data-line-number="51"><span class="co">#&gt; Observed z-scores:  1.58 -0.434 -0.152 -1.363 -1.521 -3.632 -4.547  0.266 1.167 1.959 ...</span></a>
 <a class="sourceLine" id="cb22-52" data-line-number="52"><span class="co">#&gt; Estimated z-scores:    0 -0.405 -0.405 -0.405 -0.405 -1.499 -1.499 -0.405     0     0 ...</span></a>
 <a class="sourceLine" id="cb22-53" data-line-number="53"><span class="co">#&gt; 50 z-scores have been shifted (ie 60.6 % of sparsity)</span></a>
-<a class="sourceLine" id="cb22-54" data-line-number="54"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation)</a>
-<a class="sourceLine" id="cb22-55" data-line-number="55"><span class="co">#&gt; Warning: Removed 248 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb22-54" data-line-number="54"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation, </a>
+<a class="sourceLine" id="cb22-55" data-line-number="55">     <span class="dt">sup_scores =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> zscores <span class="op">-</span><span class="st"> </span>zscores_original,</a>
+<a class="sourceLine" id="cb22-56" data-line-number="56">                            <span class="dt">title =</span> <span class="st">"Difference in z-scores after fold-change"</span>,</a>
+<a class="sourceLine" id="cb22-57" data-line-number="57">                            <span class="dt">color =</span> <span class="st">"as.character(sign(scores))"</span>)))</a>
+<a class="sourceLine" id="cb22-58" data-line-number="58"><span class="co">#&gt; Warning: Removed 248 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-13-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">estimation<span class="op">$</span>optim_info<span class="op">$</span>bic_selection</a>
 <a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co">#&gt;    alpha lambda       bic</span></a>
@@ -415,6 +418,30 @@
 <a class="sourceLine" id="cb24-6" data-line-number="6">evabic<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/evabic/man/ebc_tidy.html">ebc_tidy</a></span>(detected_bh, otus_da, <span class="dt">m =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(otu_to_kepp))</a>
 <a class="sourceLine" id="cb24-7" data-line-number="7"><span class="co">#&gt;         TPR   FDR       ACC        F1</span></a>
 <a class="sourceLine" id="cb24-8" data-line-number="8"><span class="co">#&gt; 1 0.2121212 0.125 0.7874016 0.3414634</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation, </a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">     <span class="dt">sup_scores =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> zscores <span class="op">-</span><span class="st"> </span>zscores_original,</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">                            <span class="dt">title =</span> <span class="st">"Difference in z-scores after fold-change"</span>,</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">                            <span class="dt">color =</span> <span class="st">"as.character(sign(scores))"</span>)))</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="co">#&gt; Warning: Removed 248 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="simulations_files/figure-html/unnamed-chunk-15-1.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation, <span class="co">### Les couleurs ne sont pas bonnes ! </span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">     <span class="dt">sup_scores =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> zscores <span class="op">-</span><span class="st"> </span>zscores_original,</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">                            <span class="dt">title =</span> <span class="st">"Difference in z-scores after fold-change"</span>,</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">                            <span class="dt">color =</span> <span class="st">"as.character(sign(scores))"</span>),</a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">                       <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">127</span>),</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">                            <span class="dt">title =</span> <span class="st">"Random"</span>,</a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">                            <span class="dt">color =</span> <span class="st">"scores &gt; -1"</span>)))</a>
+<a class="sourceLine" id="cb26-8" data-line-number="8"><span class="co">#&gt; Warning: Removed 248 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="simulations_files/figure-html/unnamed-chunk-15-2.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation, </a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">     <span class="dt">sup_scores =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">127</span>),</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">                            <span class="dt">title =</span> <span class="st">"Random"</span>,</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">                            <span class="dt">color =</span> <span class="st">"scores &gt; -1"</span>),</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">                       <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> zscores <span class="op">-</span><span class="st"> </span>zscores_original,</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">                            <span class="dt">title =</span> <span class="st">"Difference in z-scores after fold-change"</span>,</a>
+<a class="sourceLine" id="cb27-7" data-line-number="7">                            <span class="dt">color =</span> <span class="st">"as.character(sign(scores))"</span>)))</a>
+<a class="sourceLine" id="cb27-8" data-line-number="8"><span class="co">#&gt; Warning: Removed 248 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="simulations_files/figure-html/unnamed-chunk-15-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
   </div>
 
