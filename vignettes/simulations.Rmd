@@ -167,7 +167,10 @@ plot_shifts(tree, NA, obs_scores = zscores)
 
 
 ```{r}
-plot_shifts(tree, NA, obs_scores = zscores - zscores_original)
+plot_shifts(tree, NA, 
+            sup_scores = list(list(scores = zscores - zscores_original,
+                                   title = "Difference in z-scores after fold-change",
+                                   color = "as.character(sign(scores))")))
 ```
 
 

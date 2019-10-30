@@ -10,6 +10,9 @@
 #' @param true_scores Leaf-associated scores, as a named vector.
 #' @param obs_scores Leaf-associated scores, as a named vector.
 #' @param est_scores Leaf-associated scores, as a named vector.
+#' @param sup_scores A list of lists for additional scores to plot. Each
+#' list must contain at least a 'scores" element and eventually a
+#' 'title" and 'color' one.
 #' @param digits Number of digits to round to.
 #'
 #' @return a \code{ggplot} object, as created by \code{ggtree}
@@ -24,7 +27,8 @@
 #' scores <- c(-3.2, -2.8, 0.1, -2.1, -0.1)
 #' plot_shifts(tree, shifts, obs_scores = scores)
 plot_shifts <- function(tree, shifts, true_scores = NULL,
-                        obs_scores = NULL, est_scores = NULL, digits = 3) {
+                        obs_scores = NULL, est_scores = NULL,
+                        sup_scores = NULL, digits = 3) {
 
   ## reorder tree
   tree <- reorder(tree, order = "cladewise")
@@ -39,7 +43,7 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
     geom_tiplab(size = 5) +
     geom_label(aes(x = branch, label = round(shift_value, digits))) +
     theme_tree2()
-
+# browser()
   ## Build and add zscores annotation
   if (!is.null(true_scores)) {
     if (is.null(names(true_scores))) names(true_scores) <- tree$tip.label
@@ -67,14 +71,49 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
 
   if (!is.null(est_scores)) {
     if (is.null(names(est_scores))) names(est_scores) <- tree$tip.label
-    leaf_data_t <- data.frame(label = names(est_scores),
+    leaf_data_e <- data.frame(label = names(est_scores),
                               score = unname(est_scores))
     p <- facet_plot(p,
                     panel   = "Estimated z-scores",
-                    data    = leaf_data_t,
+                    data    = leaf_data_e,
                     geom    = geom_point,
                     mapping = aes(x = score, color = score >= 0),
                     show.legend = FALSE)
+  }
+
+  if (!is.null(sup_scores)) {
+
+    if(!is.list(sup_scores) | length(sup_scores) == 0) {
+      stop("'sup_scores' must be a non-empty list.")
+    }
+
+    if(!all(vapply(sup_scores, is.list, FUN.VALUE = logical(1)))) {
+      stop("'sup_scores' must be a list of lists.")
+    }
+
+    for(i in seq_along(sup_scores)) {
+      l_scores <- sup_scores[[i]]
+      scores <- l_scores$scores
+
+      if(is.null(scores)){
+        stop("Each list in 'sup_scores' must contain a 'scores' element.")
+      }
+
+      if (is.null(names(scores))) names(scores) <- tree$tip.label
+      if (is.null(l_scores$title)) l_scores$title <- i
+      if (is.null(l_scores$color)) l_scores$color <- NA
+
+      leaf_data_s <- data.frame(label = names(scores),
+                                scores = unname(scores))
+      p <- facet_plot(p,
+                      panel   = l_scores$title,
+                      data    = leaf_data_s,
+                      geom    = geom_point,
+                      mapping = aes(x = scores,
+                                    color = eval(parse(text = l_scores$color))),
+                      show.legend = FALSE)
+
+    }
   }
 
   p

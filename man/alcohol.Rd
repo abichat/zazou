@@ -29,11 +29,11 @@ chlamydiae
 \code{alcohol} and \code{chlamydiae} datasets
 }
 \details{
-The \code{alcohol} data set was taken from a study of the dietary association with the gut
-microbiome (Wu, 2011). Here we include the alcohol intake as the primary
-phenotype. The OTU abundance data consists of 98 samples with 949 OTUs
-with prevalence > 10%. The raw counts are normalized to account for
-variable library sizes.
+The \code{alcohol} data set was taken from a study of the dietary
+association with the gut microbiome (Wu, 2011). Here we include the
+alcohol intake as the primary phenotype. The OTU abundance data consists
+of 98 samples with 949 OTUs with prevalence > 10%. The raw counts are
+normalized to account for variable library sizes.
 
 The \code{chlamydia} data set is taken from a 16s rRNA diversity study
 narrowed to the Chlamydiae bacteria taxon, originally appearing in PNAS.

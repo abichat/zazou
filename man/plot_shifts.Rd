@@ -5,7 +5,7 @@
 \title{Plot shift amplitude and location on the tree}
 \usage{
 plot_shifts(tree, shifts, true_scores = NULL, obs_scores = NULL,
-  est_scores = NULL, digits = 3)
+  est_scores = NULL, sup_scores = NULL, digits = 3)
 }
 \arguments{
 \item{tree}{Phylo-class object}
@@ -17,6 +17,10 @@ plot_shifts(tree, shifts, true_scores = NULL, obs_scores = NULL,
 \item{obs_scores}{Leaf-associated scores, as a named vector.}
 
 \item{est_scores}{Leaf-associated scores, as a named vector.}
+
+\item{sup_scores}{A list of lists for additional scores to plot. Each
+list must contain at least a 'score" element and eventually a
+'title" and 'color' one.}
 
 \item{digits}{Number of digits to round to.}
 }

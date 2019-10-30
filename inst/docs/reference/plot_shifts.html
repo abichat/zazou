@@ -136,7 +136,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>plot_shifts</span>(<span class='no'>tree</span>, <span class='no'>shifts</span>, <span class='kw'>true_scores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>obs_scores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>est_scores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
+  <span class='kw'>est_scores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sup_scores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,6 +160,12 @@
     <tr>
       <th>est_scores</th>
       <td><p>Leaf-associated scores, as a named vector.</p></td>
+    </tr>
+    <tr>
+      <th>sup_scores</th>
+      <td><p>A list of lists for additional scores to plot. Each
+list must contain at least a 'score" element and eventually a
+'title" and 'color' one.</p></td>
     </tr>
     <tr>
       <th>digits</th>
