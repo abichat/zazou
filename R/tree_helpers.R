@@ -66,5 +66,5 @@ force_ultrametric <- function(tree) {
 #' @importFrom phangorn as.phyDat fitch
 parsimony_score <- function(tree, zscores){
   z <- as.phyDat(as.factor(zscores))
-  fitch(tree, z)
+  suppressWarnings(fitch(tree, z))
 }
