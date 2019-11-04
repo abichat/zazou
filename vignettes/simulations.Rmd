@@ -121,7 +121,7 @@ round(data.frame(true = true_shifts, observed  = zscores,
 
 # Simulations from real data
  
-```{r}
+```{r simudataset}
 set.seed(42)
 data(alcohol)
 abund <- alcohol$X[, alcohol$Y == "Low"]
@@ -133,60 +133,51 @@ tree <- phyloseq::prune_taxa(otu_to_kepp, tree)
 N_branch <- length(tree$edge.length)
 ```
 
-```{r}
+```{r pvalueswofoldchange}
 pvalues_original <- test_wilcoxon(abund, groups)$p.value
 zscores_original <- p2z(pvalues_original)
 plot_shifts(tree, shifts = NA, obs_scores = zscores_original)
 ```
 
 
-```{r}
+```{r pam}
 D <- cophenetic(tree)
 obj <- cluster::pam(D, 20)
 clustering <- obj$clustering
 ```
 
 
-```{r}
+```{r clusters}
 clusters <- sample(10, 4)
 table(clustering[which(clustering %in% clusters)])
-# cluster1 <- names(which(clustering == clusters[1]))
-# cluster2 <- names(which(clustering == clusters[2]))
-# cluster3 <- names(which(clustering == clusters[3]))
-# cluster4 <- names(which(clustering == clusters[4]))
 otus_da <- names(clustering[which(clustering %in% clusters)])
 abund[otus_da, groups == "B"] <- 4 * abund[otus_da,  groups == "B"]
 ```
 
 
-```{r}
+```{r zscoressimudataset}
 pvalues <- test_wilcoxon(abund, groups)$p.value
 zscores <- p2z(pvalues)
-plot_shifts(tree, NA, obs_scores = zscores)
-```
-
-
-```{r}
-plot_shifts(tree, NA, 
+plot_shifts(tree, NA, obs_scores = zscores, 
             sup_scores = list(list(scores = zscores - zscores_original,
                                    title = "Difference in z-scores after fold-change",
-                                   color = "as.character(sign(scores))")))
+                                   color = as.character(sign(zscores - zscores_original)))))
 ```
 
 
-```{r}
+```{r estimationwithselection}
 estimation <- estimate_shifts3(rep(0, N_branch), zscores = zscores, 
                                lambda = c(0.1, 0.5, 1, 2, 5), tree = tree, alpha = c(0.01, 0.1, 1, 5))
 estimation
 plot(estimation, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
-                            color = "as.character(sign(scores))")))
+                            color = as.character(sign(zscores - zscores_original)))))
 estimation$optim_info$bic_selection
 ```
 
 
-```{r}
+```{r detected}
 detected <- names(which(estimation$zscores_est != 0))
 detected_bh <- names(which(p.adjust(pvalues, method = "BH") < 0.05))
 evabic::ebc_tidy(detected, otus_da, m = length(otu_to_kepp))
@@ -194,25 +185,15 @@ evabic::ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp))
 ```
 
 
-```{r}
+```{r plotswithbh}
+ran <- rnorm(127)
 plot(estimation, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
-                            color = "as.character(sign(scores))")))
-plot(estimation, ### Les couleurs ne sont pas bonnes ! 
-     sup_scores = list(list(scores = zscores - zscores_original,
-                            title = "Difference in z-scores after fold-change",
-                            color = "as.character(sign(scores))"),
-                       list(scores = rnorm(127),
-                            title = "Random",
-                            color = "scores > -1")))
-plot(estimation, 
-     sup_scores = list(list(scores = rnorm(127),
-                            title = "Random",
-                            color = "scores > -1"),
-                       list(scores = zscores - zscores_original,
-                            title = "Difference in z-scores after fold-change",
-                            color = "as.character(sign(scores))")))
+                            color = as.character(sign(zscores - zscores_original))),
+                       list(scores = p.adjust(pvalues, method = "BH"),
+                            title = "Detected by BH",
+                            color = p.adjust(pvalues, method = "BH") < 0.05)))
 ```
 
 

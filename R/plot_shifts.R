@@ -104,13 +104,13 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
       if (is.null(l_scores$color)) l_scores$color <- NA
 
       leaf_data_s <- data.frame(label = names(scores),
-                                scores = unname(scores))
+                                scores = unname(scores),
+                                col = l_scores$color)
       p <- facet_plot(p,
                       panel   = l_scores$title,
                       data    = leaf_data_s,
                       geom    = geom_point,
-                      mapping = aes(x = scores,
-                                    color = eval(parse(text = l_scores$color))),
+                      mapping = aes(x = scores, color = col),
                       show.legend = FALSE)
 
     }

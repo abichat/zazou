@@ -19,7 +19,7 @@ plot_shifts(tree, shifts, true_scores = NULL, obs_scores = NULL,
 \item{est_scores}{Leaf-associated scores, as a named vector.}
 
 \item{sup_scores}{A list of lists for additional scores to plot. Each
-list must contain at least a 'score" element and eventually a
+list must contain at least a 'scores" element and eventually a
 'title" and 'color' one.}
 
 \item{digits}{Number of digits to round to.}
