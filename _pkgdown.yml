@@ -13,7 +13,7 @@ navbar:
         href: articles/simulations.html
       - text: Comparisons
         href: articles/comparisons.html
-      - text: Alcohol dataset analysis
+      - text: Comparison of optimisation methods
         href: articles/alcohol.html
       - text: Chlamydiae dataset analysis
         href: articles/chlamydiae.html

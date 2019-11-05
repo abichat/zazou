@@ -167,7 +167,8 @@ plot_shifts(tree, NA, obs_scores = zscores,
 
 ```{r estimationwithselection}
 estimation <- estimate_shifts3(rep(0, N_branch), zscores = zscores, 
-                               lambda = c(0.1, 0.5, 1, 2, 5), tree = tree, alpha = c(0.01, 0.1, 1, 5))
+                               lambda = c(0.1, 0.5, 1, 2, 5), tree = tree, alpha = c(0.01, 0.1, 1, 5), 
+                               method = "shooting3")
 estimation
 plot(estimation, 
      sup_scores = list(list(scores = zscores - zscores_original,

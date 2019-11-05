@@ -4,7 +4,6 @@
 \alias{solve_univariate}
 \alias{update_univariate}
 \alias{solve_multivariate}
-\alias{solve_multivariate2}
 \alias{solve_multivariate3}
 \title{Solve unidirectional constrained problem}
 \usage{
@@ -13,8 +12,6 @@ solve_univariate(y, x, lambda = 0)
 update_univariate(beta, coord, y, X, lambda)
 
 solve_multivariate(beta0, y, X, lambda, prob = NULL)
-
-solve_multivariate2(beta0, y, X, lambda, prob = NULL)
 
 solve_multivariate3(beta0, y, X, lambda, prob = NULL)
 }
@@ -40,8 +37,6 @@ to be sampled}
 The scalar solution of the 1D optimization problem
 
 the new value of beta
-
-the estimate value of beta
 
 the estimate value of beta
 
