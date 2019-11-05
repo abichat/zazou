@@ -134,7 +134,7 @@ solve_multivariate3 <- function(beta0, y, X, lambda, prob = NULL) {
   never_null <- TRUE
 
   while (i < p || progress > eps) {
-    for (j in 1:(ceiling(p / 10) + 20)) {
+    for (j in 1:p) {
       coord <- sample(p, size = 1, prob = prob)
       beta <- update_univariate2(beta, coord)
       i <- i + 1

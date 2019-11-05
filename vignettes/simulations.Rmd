@@ -167,7 +167,7 @@ plot_shifts(tree, NA, obs_scores = zscores,
 
 ```{r estimationwithselection}
 estimation <- estimate_shifts3(rep(0, N_branch), zscores = zscores, 
-                               lambda = c(0.1, 0.5, 1, 2, 5), tree = tree, alpha = c(0.01, 0.1, 1, 5))
+                               lambda = c(0.1, 0.5, 1, 2, 5, 7, 10), tree = tree, alpha = c(0.01, 0.1, 1, 5))
 estimation
 plot(estimation, 
      sup_scores = list(list(scores = zscores - zscores_original,
@@ -180,8 +180,8 @@ estimation$optim_info$bic_selection
 ```{r detected}
 detected <- names(which(estimation$zscores_est != 0))
 detected_bh <- names(which(p.adjust(pvalues, method = "BH") < 0.05))
-evabic::ebc_tidy(detected, otus_da, m = length(otu_to_kepp))
-evabic::ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp))
+evabic::ebc_tidy(detected, otus_da, m = length(otu_to_kepp), measures = c("TPR", "FDR", "ACC", "F1", "BACC"))
+evabic::ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp), measures = c("TPR", "FDR", "ACC", "F1", "BACC"))
 ```
 
 
