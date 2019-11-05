@@ -15,12 +15,14 @@
 #'     est_shifts = c(0, 0, 0, 0, -1, 0, -2.5, 0, 0, 0),
 #'     sigma = 1.4)
 bic <- function(obs_zscores, est_zscores, est_shifts, sigma){
-  N <- sum(est_shifts != 0)
-  - 2 * likelihood(obs_zscores, est_zscores, sigma) + log(N) / 2
+  LL <- loglikelihood(obs_zscores, est_zscores, sigma)
+  k <- sum(est_shifts != 0)
+  N <- length(obs_zscores)
+  - 2 * LL + k * log(N)
 }
 
 #' @rdname bic
 #' @importFrom stats dnorm
-likelihood <- function(obs_zscores, est_zscores, sigma){
-  prod(dnorm(x = obs_zscores, mean = est_zscores, sd = sigma))
+loglikelihood <- function(obs_zscores, est_zscores, sigma){
+  sum(log(dnorm(x = obs_zscores, mean = est_zscores, sd = sigma)))
 }

@@ -198,7 +198,7 @@
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span></a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; Regularization parameter: lambda = 0 </span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; Objective value: 0</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; BIC: 0.969</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; BIC: 23.946</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; Estimated shifts: -1.299 -0.963 0 -1.15 -0.336 -0.739 -0.345 -0.395 ...</span></a>
 <a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 7 shifts have been identified (ie 12.5 % of sparsity)</span></a>
@@ -229,7 +229,7 @@
 <a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span></a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; Objective value: 0.445</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; BIC: 0.69</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; BIC: 19.127</span></a>
 <a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; Estimated shifts: -1.634 -0.615 0 -1.064 0 -1.052 0 0 ...</span></a>
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 4 shifts have been identified (ie 50 % of sparsity)</span></a>
@@ -263,7 +263,7 @@
 <a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span></a>
 <a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.445</span></a>
-<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="co">#&gt; BIC: 0.69</span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="co">#&gt; BIC: 19.127</span></a>
 <a class="sourceLine" id="cb14-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb14-14" data-line-number="14"><span class="co">#&gt; Estimated shifts: -1.634 -0.615 0 -1.064 0 -1.052 0 0 ...</span></a>
 <a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">#&gt; 4 shifts have been identified (ie 50 % of sparsity)</span></a>
@@ -331,7 +331,7 @@
 <a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B with model selection</span></a>
 <a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 5 </span></a>
 <a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co">#&gt; Objective value: 109.902</span></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="co">#&gt; BIC: 0.805</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="co">#&gt; BIC: 446.252</span></a>
 <a class="sourceLine" id="cb21-11" data-line-number="11"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb21-12" data-line-number="12"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb21-13" data-line-number="13"><span class="co">#&gt; 5 shifts have been identified (ie 98 % of sparsity)</span></a>
@@ -348,34 +348,34 @@
 <p><img src="simulations_files/figure-html/estimationwithselection-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">estimation<span class="op">$</span>optim_info<span class="op">$</span>bic_selection</a>
 <a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt;    alpha lambda       bic</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co">#&gt; 1   0.01    0.1 2.3221954</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">#&gt; 2   0.10    0.1 2.3173645</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co">#&gt; 3   1.00    0.1 2.2769384</span></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">#&gt; 4   5.00    0.1 2.1383331</span></a>
-<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt; 5   0.01    0.5 2.2271736</span></a>
-<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="co">#&gt; 6   0.10    0.5 2.2271736</span></a>
-<a class="sourceLine" id="cb22-9" data-line-number="9"><span class="co">#&gt; 7   1.00    0.5 2.1653667</span></a>
-<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="co">#&gt; 8   5.00    0.5 2.0387687</span></a>
-<a class="sourceLine" id="cb22-11" data-line-number="11"><span class="co">#&gt; 9   0.01    1.0 2.0215256</span></a>
-<a class="sourceLine" id="cb22-12" data-line-number="12"><span class="co">#&gt; 10  0.10    1.0 2.0036666</span></a>
-<a class="sourceLine" id="cb22-13" data-line-number="13"><span class="co">#&gt; 11  1.00    1.0 1.8920948</span></a>
-<a class="sourceLine" id="cb22-14" data-line-number="14"><span class="co">#&gt; 12  5.00    1.0 1.7917595</span></a>
-<a class="sourceLine" id="cb22-15" data-line-number="15"><span class="co">#&gt; 13  0.01    2.0 1.5890269</span></a>
-<a class="sourceLine" id="cb22-16" data-line-number="16"><span class="co">#&gt; 14  0.10    2.0 1.5890269</span></a>
-<a class="sourceLine" id="cb22-17" data-line-number="17"><span class="co">#&gt; 15  1.00    2.0 1.4166067</span></a>
-<a class="sourceLine" id="cb22-18" data-line-number="18"><span class="co">#&gt; 16  5.00    2.0 1.3862944</span></a>
-<a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; 17  0.01    5.0 0.9729551</span></a>
-<a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; 18  0.10    5.0 0.8958797</span></a>
-<a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; 19  1.00    5.0 0.8047190</span></a>
-<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; 20  5.00    5.0 0.8958797</span></a></code></pre></div>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co">#&gt; 1   0.01    0.1 1221.3322</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">#&gt; 2   0.10    0.1  972.3812</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co">#&gt; 3   1.00    0.1  848.8706</span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">#&gt; 4   5.00    0.1  880.7543</span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt; 5   0.01    0.5 1132.8373</span></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="co">#&gt; 6   0.10    0.5  880.0633</span></a>
+<a class="sourceLine" id="cb22-9" data-line-number="9"><span class="co">#&gt; 7   1.00    0.5  750.7612</span></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="co">#&gt; 8   5.00    0.5  819.0473</span></a>
+<a class="sourceLine" id="cb22-11" data-line-number="11"><span class="co">#&gt; 9   0.01    1.0  992.3474</span></a>
+<a class="sourceLine" id="cb22-12" data-line-number="12"><span class="co">#&gt; 10  0.10    1.0  730.2175</span></a>
+<a class="sourceLine" id="cb22-13" data-line-number="13"><span class="co">#&gt; 11  1.00    1.0  602.6887</span></a>
+<a class="sourceLine" id="cb22-14" data-line-number="14"><span class="co">#&gt; 12  5.00    1.0  710.0190</span></a>
+<a class="sourceLine" id="cb22-15" data-line-number="15"><span class="co">#&gt; 13  0.01    2.0  833.1294</span></a>
+<a class="sourceLine" id="cb22-16" data-line-number="16"><span class="co">#&gt; 14  0.10    2.0  585.5512</span></a>
+<a class="sourceLine" id="cb22-17" data-line-number="17"><span class="co">#&gt; 15  1.00    2.0  485.9679</span></a>
+<a class="sourceLine" id="cb22-18" data-line-number="18"><span class="co">#&gt; 16  5.00    2.0  616.7324</span></a>
+<a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; 17  0.01    5.0  752.0484</span></a>
+<a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; 18  0.10    5.0  508.7266</span></a>
+<a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; 19  1.00    5.0  446.2525</span></a>
+<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; 20  5.00    5.0  572.1284</span></a></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">detected &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(estimation<span class="op">$</span>zscores_est <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>))</a>
 <a class="sourceLine" id="cb23-2" data-line-number="2">detected_bh &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span>(pvalues, <span class="dt">method =</span> <span class="st">"BH"</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">evabic<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/evabic/man/ebc_tidy.html">ebc_tidy</a></span>(detected, otus_da, <span class="dt">m =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(otu_to_kepp))</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="co">#&gt;   TPR  FDR       ACC        F1</span></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="co">#&gt; 1   1 0.34 0.8661417 0.7951807</span></a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">evabic<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/evabic/man/ebc_tidy.html">ebc_tidy</a></span>(detected_bh, otus_da, <span class="dt">m =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(otu_to_kepp))</a>
-<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="co">#&gt;         TPR   FDR       ACC        F1</span></a>
-<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="co">#&gt; 1 0.2121212 0.125 0.7874016 0.3414634</span></a></code></pre></div>
+<a class="sourceLine" id="cb23-3" data-line-number="3">evabic<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/evabic/man/ebc_tidy.html">ebc_tidy</a></span>(detected, otus_da, <span class="dt">m =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(otu_to_kepp), <span class="dt">measures =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"TPR"</span>, <span class="st">"FDR"</span>, <span class="st">"ACC"</span>, <span class="st">"F1"</span>, <span class="st">"BACC"</span>))</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="co">#&gt;   TPR  FDR       ACC        F1 BACC</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="co">#&gt; 1   1 0.34 0.8661417 0.7951807 0.83</span></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">evabic<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/evabic/man/ebc_tidy.html">ebc_tidy</a></span>(detected_bh, otus_da, <span class="dt">m =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(otu_to_kepp), <span class="dt">measures =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"TPR"</span>, <span class="st">"FDR"</span>, <span class="st">"ACC"</span>, <span class="st">"F1"</span>, <span class="st">"BACC"</span>))</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="co">#&gt;         TPR   FDR       ACC        F1      BACC</span></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="co">#&gt; 1 0.2121212 0.125 0.7874016 0.3414634 0.8282563</span></a></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">ran &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">127</span>)</a>
 <a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation, </a>
 <a class="sourceLine" id="cb24-3" data-line-number="3">     <span class="dt">sup_scores =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> zscores <span class="op">-</span><span class="st"> </span>zscores_original,</a>

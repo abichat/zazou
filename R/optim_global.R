@@ -132,6 +132,10 @@ estimate_shifts3 <- function(Delta0, zscores, tree, alpha, lambda = 0,
       }
     }
 
+    if(is.null(best_model)){
+      warning("No model can be selectionned by BIC. Please consider ")
+    }
+
     colnames(df_bic)[3] <- "bic"
     best_model$optim_info$bic_selection <- df_bic
     best_model$method <- paste(best_model$method, "with model selection")

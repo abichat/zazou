@@ -2,12 +2,12 @@
 % Please edit documentation in R/bic.R
 \name{bic}
 \alias{bic}
-\alias{likelihood}
+\alias{loglikelihood}
 \title{Bayesian information criterion}
 \usage{
 bic(obs_zscores, est_zscores, est_shifts, sigma)
 
-likelihood(obs_zscores, est_zscores, sigma)
+loglikelihood(obs_zscores, est_zscores, sigma)
 }
 \arguments{
 \item{obs_zscores}{observed z-scores}
