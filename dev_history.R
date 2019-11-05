@@ -70,6 +70,8 @@ library(testthat)
 
 # use_r("bic")
 
+# use_test("shiftestim")
+
 
 ####
 
