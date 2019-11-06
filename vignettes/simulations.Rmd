@@ -14,9 +14,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message=FALSE}
+library(ggplot2)
+library(tibble)
+library(evabic)
+library(tictoc)
+library(dplyr)
+library(tidyr)
 library(zazou)
+library(purrr)
 library(ape)
+theme_set(theme_minimal())
 ```
 
 # Deterministic situation
@@ -166,9 +174,11 @@ plot_shifts(tree, NA, obs_scores = zscores,
 
 
 ```{r estimationwithselection}
+tic()
 estimation <- estimate_shifts3(rep(0, N_branch), zscores = zscores, 
-                               lambda = c(0.1, 0.5, 1, 2, 5), tree = tree, alpha = c(0.01, 0.1, 1, 5), 
-                               method = "shooting3")
+                               lambda = 3 * c(1/3, 1:5), tree = tree,
+                               alpha = c(0.2, 0.5, 1, 2, 5), method = "shooting3")
+toc()
 estimation
 plot(estimation, 
      sup_scores = list(list(scores = zscores - zscores_original,
@@ -181,8 +191,8 @@ estimation$optim_info$bic_selection
 ```{r detected}
 detected <- names(which(estimation$zscores_est != 0))
 detected_bh <- names(which(p.adjust(pvalues, method = "BH") < 0.05))
-evabic::ebc_tidy(detected, otus_da, m = length(otu_to_kepp), measures = c("TPR", "FDR", "ACC", "F1", "BACC"))
-evabic::ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp), measures = c("TPR", "FDR", "ACC", "F1", "BACC"))
+ebc_tidy(detected, otus_da, m = length(otu_to_kepp), measures = c("TPR", "FDR", "ACC", "F1", "BACC"))
+ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp), measures = c("TPR", "FDR", "ACC", "F1", "BACC"))
 ```
 
 
@@ -197,4 +207,34 @@ plot(estimation,
                             color = p.adjust(pvalues, method = "BH") < 0.05)))
 ```
 
+
+
+```{r curves}
+df <-
+  unique(estimation$zscores_est) %>%
+  c(0.1) %>%
+  enframe(name = NULL, value = "threshold") %>%
+  arrange(desc(threshold)) %>%
+  mutate(detected = map(threshold, ~ names(which(estimation$zscores_est < .))),
+         eval = map(detected, ebc_tidy, otus_da, m = length(otu_to_kepp),
+                    measures = c("TPR", "TNR", "F1"))) %>%
+  unnest(eval) %>% 
+  mutate(FPR = 1 - TNR)
+
+df %>%
+  arrange(FPR, TPR) %>%
+  ggplot() +
+  aes(x = FPR, y = TPR) +
+  geom_point() +
+  geom_line() +
+  geom_label(aes(label = round(threshold, 2)))
+
+df %>%
+  arrange(threshold, F1) %>%
+  ggplot() +
+  aes(x = threshold, y = F1) +
+  geom_point() +
+  geom_line() +
+  geom_label(aes(label = round(threshold, 2)))
+```
 
