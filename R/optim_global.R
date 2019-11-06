@@ -4,7 +4,7 @@
 #' @param zscores z-scores (size m)
 #' @param incidence_mat incidence matrix (size m*(n+m))
 #' @param covar_mat covariance matrix (size m*m) between z-scores
-#' @param lambda a positive regularization parameter
+#' @param lambda a grid of positive regularization parameters
 #'
 #' @return a list
 #' @export
@@ -75,64 +75,74 @@ estimate_shifts2 <- function(Delta0, zscores, tree, lambda = 0,
 #' @rdname estimate_shifts
 #' @param ... additional parameters
 #' @export
-estimate_shifts3 <- function(Delta0, zscores, tree, alpha, lambda = 0,
+estimate_shifts3 <- function(Delta0, zscores, tree, alpha, lambda = NULL,
                              method = c("L-BFGS-B", "shooting",
                                         "shooting3"), ...){
 
   method <- match.arg(method)
 
-  if(length(lambda) == 1 && length(alpha) == 1){
-
-    covar_mat <- covariance_matrix(tree, alpha)
-    incidence_mat <- incidence_matrix(tree)
-    R <- inverse_sqrt(covar_mat)
-    Y <- R %*% zscores
-    X <- R %*% incidence_mat
-
-    if(method == "L-BFGS-B"){
+  ## local estimation routine (for a single lambda)
+  fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
+    if (method == "L-BFGS-B") {
       opt <- optim(par = Delta0,
                    fn = compute_objective_function(Y, X, lambda),
                    gr = compute_gradient_function(Y, X, lambda),
                    upper = 0, method = "L-BFGS-B")
       opt <- c(opt, method = "L-BFGS-B")
     }
-    if(method == "shooting"){
+    if (method == "shooting") {
       opt <- solve_multivariate(Delta0, Y, X, lambda)
     }
-    if(method == "shooting3"){
+    if (method == "shooting3") {
       opt <- solve_multivariate3(Delta0, Y, X, lambda, ...)
     }
-
-    return(as_shiftestim(listopt = opt, tree = tree, zscores = zscores,
-                         lambda = lambda, alpha = alpha, covar_mat = covar_mat))
-
-  } else {
-
-    df_bic <- expand.grid(alpha = alpha, lambda = lambda)
-    best_bic <- Inf
-    best_model <- NULL
-    i <- 1
-
-    for (lam in lambda) {
-      for (alp in alpha) {
-        model <- estimate_shifts3(Delta0, zscores, tree, alpha = alp,
-                                  lambda = lam, method = method, ...)
-        df_bic[i, 3] <- model$bic
-        if (model$bic < best_bic) {
-          best_model <- model
-          best_bic <- model$bic
-        }
-        i <- i + 1
-      }
-    }
-
-    if(is.null(best_model)){
-      warning("No model can be selectionned by BIC. Please consider ")
-    }
-
-    colnames(df_bic)[3] <- "bic"
-    best_model$optim_info$bic_selection <- df_bic
-    best_model$method <- paste(best_model$method, "with model selection")
-    return(best_model)
+    return(opt)
   }
+
+  ## Bookkeeping variables
+  best_bic <- Inf
+  bic_df <- data.frame(alpha  = numeric(0),
+                       lambda = numeric(0),
+                       bic    = numeric(0))
+  best_model <- NULL
+
+  ## Outer loop on alpha
+  for (alp in alpha) {
+    ## Compute covariance matrices, design matrix and response vector
+    covar_mat <- covariance_matrix(tree, alp)
+    incidence_mat <- incidence_matrix(tree)
+    R <- inverse_sqrt(covar_mat)
+    Y <- R %*% zscores
+    X <- R %*% incidence_mat
+
+    ## Set lambda grid for inner loop on lambda
+    if (is.null(lambda)) {
+      current_lambda <- lambda_grid(X, Y)
+    } else {
+      current_lambda <- lambda
+    }
+
+    ## Inner loop on lambda
+    for (lam in lambda) {
+      ## Compute current model
+      opt <- fitting_procedure(Delta0, X, Y, lambda = lam, ...)
+      current_model <- as_shiftestim(
+        listopt = opt, tree = tree, zscores = zscores,
+        lambda = lam, alpha = alp, covar_mat = covar_mat
+      )
+      ## Update bic table
+      bic_df <- rbind(bic_df, data.frame(alpha = alp,
+                                         lambda = lam,
+                                         bic = current_model$bic))
+      ## Update best model
+      if (current_model$bic < best_bic) {
+        best_model <- current_model
+        best_model$method <- paste(method, "with model selection")
+      }
+    } ## Close lambda loop
+  } ## Close alpha loop
+
+  best_model$optim_info$bic_selection <- bic_df
+  best_model$method <- paste(method, "with model selection")
+  return(best_model)
 }
