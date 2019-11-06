@@ -38,8 +38,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
     obj$is_bin <- FALSE
   }
   ## Parsimony score
-  obj$pars_score    <- parsimony_score(multi2di(obj$tree),
-                                       obj$zscores_est) ## parsimony score
+  obj$pars_score    <- fitch(multi2di(obj$tree), obj$zscores_est) ## parsimony score
 
   ## Sigma
   if (is.null(obj$alpha)){
