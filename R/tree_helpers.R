@@ -57,14 +57,60 @@ force_ultrametric <- function(tree) {
 
 #' Fitch parsimony score
 #'
-#' @param tree tree
-#' @param zscores named z-scores
+#' @param phy tree
+#' @param states named state vector (typically the estimated zscores)
 #'
 #' @return Fitch parsimony score
 #' @export
 #'
-#' @importFrom phangorn as.phyDat fitch
-parsimony_score <- function(tree, zscores){
-  z <- as.phyDat(as.factor(zscores))
-  suppressWarnings(fitch(tree, z))
+#' @examples
+#' tree <- read.tree(text = "(((t4:0.07418493367,(t6:0.0466889315,t5:0.0466889315):0.02749600216):0.6619201357,t2:0.7361050694):0.4046613234,(t7:0.3876200329,(t1:0.09560661687,t3:0.09560661687):0.2920134161):0.7531463598);")
+#' states <- c(t1 = "A", t2 = "B", t3 = "A", t4 = "C", t5 = "C", t6 = "C", t7 = "A")
+#' fitch(tree, states) ## 2
+fitch <- function(phy, states) {
+  ## Check state vector
+  if (is.null(names(states))) {
+    warning("State vector is unnamed, assuming same order as tip labels")
+    names(states) <- phy$tip.label
+  }
+  ## Reorder tree for up-recursion and state vector to match tip_label order
+  phy <- reorder(phy, order = "postorder")
+  states <- states[phy$tip.label]
+  ## Use integer coding for states for faster subsets
+  ## \code{states[tip]} is the integer coding of the state of \code{tip}
+  states <- as.integer(factor(states))
+  ## Bookkeeping variables
+  n_leaves <- length(phy$tip.label)
+  n_nodes <- phy$Nnode + n_leaves
+  n_states <- length(unique(states))
+  costs <- vector(mode = "list", length = n_nodes)
+  ## Local functions
+  init_cost <- function(node) {
+    ## Initialize costs at 0 for internal nodes
+    if (node > n_leaves) {
+      cost <- rep(0, n_states)
+    } else {
+      ## Initialize costs at +Inf/0 for leaves according to leaf states
+      cost <- rep(Inf, n_states)
+      cost[states[node]] <- 0
+    }
+    costs[[node]] <<- cost
+  }
+  exists_cost <- function(node) { !is.null(costs[[node]]) }
+  update_cost <- function(parent, child) {
+    if (!exists_cost(parent)) init_cost(parent)
+    if (!exists_cost(child)) init_cost(child)
+    costs[[parent]] <<- costs[[parent]] + pmin(
+      costs[[child]],         ## parent in same state as child
+      min(costs[[child]]) + 1 ## parent in different state
+    )
+    ## remove child costs
+    costs[[child]] <<- numeric(0)
+  }
+  ## Recursion
+  for (edge in 1:nrow(phy$edge)) {
+    update_cost(parent = phy$edge[edge, 1], child = phy$edge[edge, 2])
+  }
+  ## Compute fitch scores (min of root score)
+  return(min(costs[[n_leaves + 1]]))
 }

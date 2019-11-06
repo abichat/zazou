@@ -69,5 +69,3 @@ corresponding_edges <- function(edges, from, to) {
 }
 
 
-
-
