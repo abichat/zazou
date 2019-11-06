@@ -26,3 +26,23 @@ bic <- function(obs_zscores, est_zscores, est_shifts, sigma){
 loglikelihood <- function(obs_zscores, est_zscores, sigma){
   sum(log(dnorm(x = obs_zscores, mean = est_zscores, sd = sigma)))
 }
+
+
+#' Helper function to compute a logarithmic lambda grid
+#'
+#' @param x Design matrix
+#' @param y Response vector
+#' @param n_lambda Length of the lambda grid
+#' @param min_ratio Ratio between the minimum and maximum values in the lambda grid
+#'
+#' @return a numeric vector of length \code{nlambda}
+#'
+#' @examples
+get_lambda <- function(x ,y, n_lambda = 6, min_ratio = 1e-5) {
+  ## center y and x
+  y <- scale(y, center = TRUE, scale = FALSE)
+  x <- scale(x, center = TRUE, scale = FALSE)
+  xty <- drop(crossprod(x, y))
+  lambda_max <- max(abs(xty))
+  return(10^seq(log10(lambda_max), log10(min_ratio*lambda_max), len = n_lambda))
+}
