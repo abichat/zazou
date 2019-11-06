@@ -30,14 +30,18 @@ Imports:
 Suggests: 
     cluster,
     corrplot,
+    dplyr,
     evabic,
     ggplot2,
     knitr,
     phyloseq,
+    purrr,
     rmarkdown,
     spelling,
     testthat (>= 2.1.0),
-    tictoc
+    tibble,
+    tictoc,
+    tidyr
 VignetteBuilder: 
     knitr
 biocViews: ggtree

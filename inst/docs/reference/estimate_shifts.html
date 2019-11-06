@@ -141,7 +141,7 @@
   <span class='kw'>covar_mat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L-BFGS-B"</span>, <span class='st'>"shooting"</span>, <span class='st'>"shooting3"</span>),
   <span class='no'>...</span>)
 
-<span class='fu'>estimate_shifts3</span>(<span class='no'>Delta0</span>, <span class='no'>zscores</span>, <span class='no'>tree</span>, <span class='no'>alpha</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+<span class='fu'>estimate_shifts3</span>(<span class='no'>Delta0</span>, <span class='no'>zscores</span>, <span class='no'>tree</span>, <span class='no'>alpha</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L-BFGS-B"</span>, <span class='st'>"shooting"</span>, <span class='st'>"shooting3"</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -165,7 +165,7 @@
     </tr>
     <tr>
       <th>lambda</th>
-      <td><p>a positive regularization parameter</p></td>
+      <td><p>a grid of positive regularization parameters</p></td>
     </tr>
     <tr>
       <th>tree</th>
