@@ -89,6 +89,7 @@ test()
 run_examples()
 
 check()
+check(args = "--no-vignettes", build_args = "--no-build-vignettes")
 goodpractice::gp()
 
 
