@@ -13,7 +13,8 @@ lambda_grid(x, y, n_lambda = 6, min_ratio = 1e-05)
 
 \item{n_lambda}{Length of the lambda grid}
 
-\item{min_ratio}{Ratio between the minimum and maximum values in the lambda grid}
+\item{min_ratio}{Ratio between the minimum and maximum values in
+the lambda grid}
 }
 \value{
 a numeric vector of length \code{nlambda}
