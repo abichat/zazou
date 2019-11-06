@@ -35,6 +35,7 @@ library(testthat)
 
 # use_test("vectorized_tests")
 # use_test("zscores")
+# use_test("model_selection")
 
 # chameleon::build_pkgdown()
 # chameleon::open_pkgdown_function()

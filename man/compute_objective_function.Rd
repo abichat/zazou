@@ -11,7 +11,7 @@ compute_objective_function(Y, X, lambda)
 
 \item{X}{a vector of size m*(n+m)}
 
-\item{lambda}{a positive regularization parameter}
+\item{lambda}{a grid of positive regularization parameters}
 }
 \value{
 a function that take Delta (a vector of size n+m) as argument
