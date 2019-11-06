@@ -20,7 +20,7 @@ solve_multivariate3(beta0, y, X, lambda, prob = NULL)
 
 \item{x}{a vector of size n.}
 
-\item{lambda}{a positive regularization parameter}
+\item{lambda}{a grid of positive regularization parameters}
 
 \item{beta}{the current value of beta.}
 

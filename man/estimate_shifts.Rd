@@ -12,7 +12,7 @@ estimate_shifts2(Delta0, zscores, tree, lambda = 0, alpha = NULL,
   covar_mat = NULL, method = c("L-BFGS-B", "shooting", "shooting3"),
   ...)
 
-estimate_shifts3(Delta0, zscores, tree, alpha, lambda = 0,
+estimate_shifts3(Delta0, zscores, tree, alpha, lambda = NULL,
   method = c("L-BFGS-B", "shooting", "shooting3"), ...)
 }
 \arguments{
@@ -24,7 +24,7 @@ estimate_shifts3(Delta0, zscores, tree, alpha, lambda = 0,
 
 \item{covar_mat}{covariance matrix (size m*m) between z-scores}
 
-\item{lambda}{a positive regularization parameter}
+\item{lambda}{a grid of positive regularization parameters}
 
 \item{tree}{the tree form which is calculated the incidence matrix and the
 covariance matrix if not specified}
