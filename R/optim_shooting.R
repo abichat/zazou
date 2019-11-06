@@ -45,29 +45,11 @@ update_univariate <- function(beta, coord, y, X, lambda){
 #' @param beta0 the initial position of beta.
 #' @param prob a vector of probability weights for obtaining the coordinates
 #' to be sampled
+#' @param ... additional parameters
 #'
-#' @return the estimate value of beta
+#' @return the estimated value of beta
 #' @export
-solve_multivariate <- function(beta0, y, X, lambda, prob = NULL) {
-  p <- length(beta0)
-  beta <- beta0
-  for(i in 1:200){
-    coord <- sample(p, size = 1, prob = prob)
-    beta <- update_univariate(beta, coord, y, X, lambda)
-  }
-
-  fn_obj <- compute_objective_function(y, X, lambda)
-  value <- as.vector(fn_obj(beta))
-
-  list(par = beta, value = value, method = "shooting", iterations = i)
-}
-
-
-#' @rdname solve_univariate
-#'
-#' @return the estimate value of beta
-#' @export
-solve_multivariate3 <- function(beta0, y, X, lambda, prob = NULL) {
+solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
   p <- length(beta0)
   beta <- beta0
 

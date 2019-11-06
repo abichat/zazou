@@ -2,43 +2,32 @@
 % Please edit documentation in R/optim_global.R
 \name{estimate_shifts}
 \alias{estimate_shifts}
-\alias{estimate_shifts2}
-\alias{estimate_shifts3}
 \title{Estimate shifts}
 \usage{
-estimate_shifts(Delta0, zscores, incidence_mat, covar_mat, lambda)
-
-estimate_shifts2(Delta0, zscores, tree, lambda = 0, alpha = NULL,
-  covar_mat = NULL, method = c("L-BFGS-B", "shooting", "shooting3"),
-  ...)
-
-estimate_shifts3(Delta0, zscores, tree, alpha, lambda = NULL,
-  method = c("L-BFGS-B", "shooting", "shooting3"), ...)
+estimate_shifts(Delta0, zscores, tree, alpha, lambda = NULL,
+  method = c("L-BFGS-B", "shooting"), ...)
 }
 \arguments{
 \item{Delta0}{initial position (size n+m)}
 
 \item{zscores}{z-scores (size m)}
 
-\item{incidence_mat}{incidence matrix (size m*(n+m))}
+\item{tree}{the tree used to compute the incidence and covariance matrices (if not specified)}
 
-\item{covar_mat}{covariance matrix (size m*m) between z-scores}
+\item{alpha}{a grid of positive alpha parameters}
 
 \item{lambda}{a grid of positive regularization parameters}
 
-\item{tree}{the tree form which is calculated the incidence matrix and the
-covariance matrix if not specified}
-
-\item{alpha}{parameter > 0}
-
-\item{method}{method to use. One of \code{L-BFGS-B} or \code{shooting}.}
+\item{method}{method to use for the optimization. One of \code{L-BFGS-B} or \code{shooting}.}
 
 \item{...}{additional parameters}
+
+\item{incidence_mat}{incidence matrix (size m*(n+m))}
+
+\item{covar_mat}{covariance matrix (size m*m) between z-scores}
 }
 \value{
-a list
-
-a shiftestim object
+an object of class \code{shiftestim}
 }
 \description{
 Estimate shifts
