@@ -37,8 +37,7 @@ loglikelihood <- function(obs_zscores, est_zscores, sigma){
 #'
 #' @return a numeric vector of length \code{nlambda}
 #'
-#' @examples
-get_lambda <- function(x ,y, n_lambda = 6, min_ratio = 1e-5) {
+lambda_grid <- function(x ,y, n_lambda = 6, min_ratio = 1e-5) {
   ## center y and x
   y <- scale(y, center = TRUE, scale = FALSE)
   x <- scale(x, center = TRUE, scale = FALSE)
