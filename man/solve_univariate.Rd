@@ -6,7 +6,7 @@
 \alias{solve_multivariate}
 \title{Solve unidirectional constrained problem}
 \usage{
-solve_univariate(y, x, lambda = 0)
+solve_univariate(y, x, lambda = 0, allow_positive = FALSE)
 
 update_univariate(beta, coord, y, X, lambda)
 
@@ -18,6 +18,8 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, ...)
 \item{x}{a vector of size n.}
 
 \item{lambda}{a grid of positive regularization parameters}
+
+\item{allow_positive}{Logical. Default FALSE. Allow positive values for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0})}
 
 \item{beta}{the current value of beta.}
 
@@ -41,11 +43,12 @@ the estimated value of beta
 }
 \description{
 This function minimizes \eqn{\beta} in the 1D problem
-\eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to \eqn{\beta < 0}.
+\eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to \eqn{\beta <= 0} (or \eqn{x\beta <= 0} coordinate wise)
 }
 \details{
 The analytical solution of this problem is given by
 \deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
+for the first constraint and is slightly more complicated for the second constraint (refer to the corresponding vignette)
 }
 \examples{
 solve_univariate(1:4, -(4:1), 2)
