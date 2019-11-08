@@ -1,13 +1,15 @@
 #' Solve unidirectional constrained problem
 #'
 #' This function minimizes \eqn{\beta} in the 1D problem
-#' \eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to \eqn{\beta < 0}.
+#' \eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to \eqn{\beta <= 0} (or \eqn{x\beta <= 0} coordinate wise)
 #'
 #' The analytical solution of this problem is given by
 #' \deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
+#' for the first constraint and is slightly more complicated for the second constraint (refer to the corresponding vignette)
 #'
 #' @param y a vector of size n.
 #' @param x a vector of size n.
+#' @param allow_positive Logical. Default FALSE. Allow positive values for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0})
 #' @inheritParams estimate_shifts
 #'
 #' @return The scalar solution of the 1D optimization problem
@@ -15,9 +17,19 @@
 #'
 #' @examples
 #' solve_univariate(1:4, -(4:1), 2)
-solve_univariate <- function(y, x, lambda = 0) {
-  unconstrained <- (crossprod(y, x) + lambda) / crossprod(x)
-  min(0, unconstrained)
+solve_univariate <- function(y, x, lambda = 0, allow_positive = FALSE) {
+  ytx <- crossprod(y, x)
+  ## In all cases, return 0 if abs(ytx) is too small
+  if (abs(ytx) < lambda) return(0)
+  ## In all cases, return (ytx + lambda) / crossprod(x) if ytx < -lambda
+  if (ytx < -lambda) return( drop((ytx + lambda) / crossprod(x)) )
+  ## Remaining cases: ytx > lambda
+  ## If any x[i] > 0, allow_positive is void, return 0
+  if (!allow_positive || any(x > 0)) return(0)
+  ## Current case: ytx > lambda, allow_positive and all x[i] < 0
+  ##               mitigate (ytx - lambda) / crossprod(x) by beta_max
+  beta_max <- min(pmin(y, 0) / x, na.rm = TRUE) ## min_i (y[i]_- / x[i]_-)
+  min(beta_max, drop((ytx - lambda) / crossprod(x)) )
 }
 
 #' @rdname solve_univariate
