@@ -12,19 +12,17 @@ estimate_shifts(Delta0, zscores, tree, alpha, lambda = NULL,
 
 \item{zscores}{z-scores (size m)}
 
-\item{tree}{the tree used to compute the incidence and covariance matrices (if not specified)}
+\item{tree}{the tree used to compute the incidence and covariance matrices
+(if not specified)}
 
 \item{alpha}{a grid of positive alpha parameters}
 
 \item{lambda}{a grid of positive regularization parameters}
 
-\item{method}{method to use for the optimization. One of \code{L-BFGS-B} or \code{shooting}.}
+\item{method}{method to use for the optimization. One of \code{L-BFGS-B}
+or \code{shooting}.}
 
 \item{...}{additional parameters}
-
-\item{incidence_mat}{incidence matrix (size m*(n+m))}
-
-\item{covar_mat}{covariance matrix (size m*m) between z-scores}
 }
 \value{
 an object of class \code{shiftestim}

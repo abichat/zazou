@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include = TRUE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>", 
@@ -58,9 +58,9 @@ plot_shifts(tree, NA, obs_scores = zsco_obs)
 
 ```{r lbfgsb}
 tic()
-est_lbfgsb <- estimate_shifts3(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                               lambda = 2, tree = tree, alpha = 0.1,
-                               method = "L-BFGS-B")
+est_lbfgsb <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                              lambda = 2, tree = tree, alpha = 0.1,
+                              method = "L-BFGS-B")
 toc()
 est_lbfgsb
 plot(est_lbfgsb)
@@ -70,9 +70,9 @@ plot(est_lbfgsb)
 
 ```{r shooting}
 tic()
-est_shooting <- estimate_shifts3(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                 lambda = 2, tree = tree, alpha = 0.1,
-                                 method = "shooting3")
+est_shooting <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                                lambda = 2, tree = tree, alpha = 0.1,
+                                method = "shooting")
 toc() # 10 times faster
 est_shooting # similar results
 plot(est_shooting)

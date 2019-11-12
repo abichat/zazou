@@ -9,7 +9,7 @@ fitch(phy, states)
 \arguments{
 \item{phy}{tree}
 
-\item{states}{named state vector (typically the estimated zscores)}
+\item{states}{named state vector (typically the estimated z-scores)}
 }
 \value{
 Fitch parsimony score
@@ -18,7 +18,9 @@ Fitch parsimony score
 Fitch parsimony score
 }
 \examples{
-tree <- read.tree(text = "(((t4:0.07418493367,(t6:0.0466889315,t5:0.0466889315):0.02749600216):0.6619201357,t2:0.7361050694):0.4046613234,(t7:0.3876200329,(t1:0.09560661687,t3:0.09560661687):0.2920134161):0.7531463598);")
-states <- c(t1 = "A", t2 = "B", t3 = "A", t4 = "C", t5 = "C", t6 = "C", t7 = "A")
+nwk <- "(((t4:8,(t6:5,t5:5):3):66,t2:74):40,(t7:39,(t1:10,t3:10):29):75);"
+tree <- ape::read.tree(text = nwk)
+states <- c(t1 = "A", t2 = "B", t3 = "A", t4 = "C",
+            t5 = "C", t6 = "C", t7 = "A")
 fitch(tree, states) ## 2
 }

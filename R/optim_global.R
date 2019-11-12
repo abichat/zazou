@@ -4,12 +4,12 @@
 #'
 #' @param Delta0 initial position (size n+m)
 #' @param zscores z-scores (size m)
-#' @param incidence_mat incidence matrix (size m*(n+m))
-#' @param covar_mat covariance matrix (size m*m) between z-scores
 #' @param lambda a grid of positive regularization parameters
-#' @param tree the tree used to compute the incidence and covariance matrices (if not specified)
+#' @param tree the tree used to compute the incidence and covariance matrices
+#' (if not specified)
 #' @param alpha a grid of positive alpha parameters
-#' @param method method to use for the optimization. One of \code{L-BFGS-B} or \code{shooting}.
+#' @param method method to use for the optimization. One of \code{L-BFGS-B}
+#' or \code{shooting}.
 #' @param ... additional parameters
 #'
 #' @return an object of class \code{shiftestim}

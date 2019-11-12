@@ -135,14 +135,8 @@
     <p>Estimate shifts</p>
     </div>
 
-    <pre class="usage"><span class='fu'>estimate_shifts</span>(<span class='no'>Delta0</span>, <span class='no'>zscores</span>, <span class='no'>incidence_mat</span>, <span class='no'>covar_mat</span>, <span class='no'>lambda</span>)
-
-<span class='fu'>estimate_shifts2</span>(<span class='no'>Delta0</span>, <span class='no'>zscores</span>, <span class='no'>tree</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>covar_mat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L-BFGS-B"</span>, <span class='st'>"shooting"</span>, <span class='st'>"shooting3"</span>),
-  <span class='no'>...</span>)
-
-<span class='fu'>estimate_shifts3</span>(<span class='no'>Delta0</span>, <span class='no'>zscores</span>, <span class='no'>tree</span>, <span class='no'>alpha</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L-BFGS-B"</span>, <span class='st'>"shooting"</span>, <span class='st'>"shooting3"</span>), <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>estimate_shifts</span>(<span class='no'>Delta0</span>, <span class='no'>zscores</span>, <span class='no'>tree</span>, <span class='no'>alpha</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"L-BFGS-B"</span>, <span class='st'>"shooting"</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,29 +150,22 @@
       <td><p>z-scores (size m)</p></td>
     </tr>
     <tr>
-      <th>incidence_mat</th>
-      <td><p>incidence matrix (size m*(n+m))</p></td>
+      <th>tree</th>
+      <td><p>the tree used to compute the incidence and covariance matrices
+(if not specified)</p></td>
     </tr>
     <tr>
-      <th>covar_mat</th>
-      <td><p>covariance matrix (size m*m) between z-scores</p></td>
+      <th>alpha</th>
+      <td><p>a grid of positive alpha parameters</p></td>
     </tr>
     <tr>
       <th>lambda</th>
       <td><p>a grid of positive regularization parameters</p></td>
     </tr>
     <tr>
-      <th>tree</th>
-      <td><p>the tree form which is calculated the incidence matrix and the
-covariance matrix if not specified</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>parameter &gt; 0</p></td>
-    </tr>
-    <tr>
       <th>method</th>
-      <td><p>method to use. One of <code>L-BFGS-B</code> or <code>shooting</code>.</p></td>
+      <td><p>method to use for the optimization. One of <code>L-BFGS-B</code>
+or <code>shooting</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -188,8 +175,7 @@ covariance matrix if not specified</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a list</p>
-<p>a shiftestim object</p>
+    <p>an object of class <code>shiftestim</code></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

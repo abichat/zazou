@@ -58,14 +58,16 @@ force_ultrametric <- function(tree) {
 #' Fitch parsimony score
 #'
 #' @param phy tree
-#' @param states named state vector (typically the estimated zscores)
+#' @param states named state vector (typically the estimated z-scores)
 #'
 #' @return Fitch parsimony score
 #' @export
 #'
 #' @examples
-#' tree <- read.tree(text = "(((t4:0.07418493367,(t6:0.0466889315,t5:0.0466889315):0.02749600216):0.6619201357,t2:0.7361050694):0.4046613234,(t7:0.3876200329,(t1:0.09560661687,t3:0.09560661687):0.2920134161):0.7531463598);")
-#' states <- c(t1 = "A", t2 = "B", t3 = "A", t4 = "C", t5 = "C", t6 = "C", t7 = "A")
+#' nwk <- "(((t4:8,(t6:5,t5:5):3):66,t2:74):40,(t7:39,(t1:10,t3:10):29):75);"
+#' tree <- ape::read.tree(text = nwk)
+#' states <- c(t1 = "A", t2 = "B", t3 = "A", t4 = "C",
+#'             t5 = "C", t6 = "C", t7 = "A")
 #' fitch(tree, states) ## 2
 fitch <- function(phy, states) {
   ## Check state vector
@@ -108,7 +110,7 @@ fitch <- function(phy, states) {
     costs[[child]] <<- numeric(0)
   }
   ## Recursion
-  for (edge in 1:nrow(phy$edge)) {
+  for (edge in seq_len(nrow(phy$edge))) {
     update_cost(parent = phy$edge[edge, 1], child = phy$edge[edge, 2])
   }
   ## Compute fitch scores (min of root score)

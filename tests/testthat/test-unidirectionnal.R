@@ -30,6 +30,6 @@ test_that("1-D solution works when allowing positive values", {
   x <- c(rep(-1, n_change), rep(0, n_keep))
 
   expect_equal(solve_univariate(y = y, x = x, lambda = 0, TRUE), -delta)
-  expect_equal(solve_univariate(y = y, x = x, lambda = crossprod(y, x), TRUE), 0)
+  expect_equal(solve_univariate(y, x, lambda = crossprod(y, x), TRUE), 0)
   expect_gt(solve_univariate(y, x, lambda = crossprod(y, x) - 0.1, TRUE), 0)
 })

@@ -30,7 +30,7 @@ theme_set(theme_minimal())
 # Deterministic situation
 
 ```{r tree}
-tree <- read.tree(text = "(((A,B),C),(D,E));")
+tree <- read.tree(text = "(((A:1,B:1):1,C:2):1,(D:1,E:1):2);")
 tree$tip.label
 ```
 
@@ -45,6 +45,10 @@ obs_zscores <- true_zscores <- incidence_mat %*% true_shifts
 covar_mat <- diag(nrow = 5, ncol = 5)
 ```
 
+```{r covar}
+covariance_matrix(tree, alpha = 10^3)
+```
+
 
 ```{r ggtree, message=FALSE}
 plot_shifts(tree, true_shifts, true_scores = true_zscores)
@@ -52,9 +56,8 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 
 
 ```{r}
-estimation <- estimate_shifts2(rep(0, 8), zscores = obs_zscores, 
-                               tree = tree, lambda = 0, 
-                               covar_mat = covar_mat)
+estimation <- estimate_shifts(rep(0, 8), zscores = obs_zscores, 
+                              tree = tree, alpha = 10^3, lambda = 0)
 estimation
 plot(estimation)
 ```
@@ -63,9 +66,8 @@ Solution without penalty is not sparse due to ill-conditioning of the incidence 
 
 
 ```{r}
-estimation <- estimate_shifts2(rep(0, 8), zscores = obs_zscores, 
-                               tree = tree, lambda = 0.1, 
-                               covar_mat = covar_mat)
+estimation <- estimate_shifts(rep(0, 8), zscores = obs_zscores, 
+                              tree = tree, alpha = 10^3, lambda = 2)
 estimation
 plot(estimation)
 ```
@@ -90,7 +92,8 @@ zscores
 The fit is perfect since all observed $z$-scores are negative. 
 
 ```{r}
-estimation <- estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0)
+estimation <- estimate_shifts(rep(0, 8), zscores = zscores, 
+                              tree = tree, alpha = 1, lambda = 0)
 estimation
 plot(estimation, true_scores = true_shifts)
 
@@ -102,7 +105,8 @@ round(data.frame(true = true_shifts, observed  = zscores,
 The fit degrades as we increase sparsity. [Well, not so much...]
 
 ```{r}
-estimation <- estimate_shifts2(rep(0, 8), zscores = zscores, tree = tree, alpha = 1, lambda = 0.1)
+estimation <- estimate_shifts(rep(0, 8), zscores = zscores, 
+                              tree = tree, alpha = 1, lambda = 0.1)
 estimation
 plot(estimation, true_scores = true_shifts)
 
@@ -114,9 +118,9 @@ round(data.frame(true = true_shifts, observed  = zscores,
 The fit does not depend a lot (on this toy example) on the initial solution. 
 
 ```{r}
-estimation <- estimate_shifts2(c(0, -3, 0, 0, 0, 0, -2, 0), 
-                               zscores = zscores, tree = tree, 
-                               alpha = 1, lambda = 0.1)
+estimation <- estimate_shifts(c(0, -3, 0, 0, 0, 0, -2, 0), 
+                              zscores = zscores, tree = tree, 
+                              alpha = 1, lambda = 0.1)
 
 estimation
 plot(estimation, true_scores = true_shifts)
@@ -175,9 +179,10 @@ plot_shifts(tree, NA, obs_scores = zscores,
 
 ```{r estimationwithselection}
 tic()
-estimation <- estimate_shifts3(rep(0, N_branch), zscores = zscores, 
-                               lambda = 3 * c(1/3, 1:5), tree = tree,
-                               alpha = c(0.2, 0.5, 1, 2, 5), method = "shooting3")
+estimation <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
+                              lambda = 3 * c(1/3, 1:5), tree = tree,
+                              alpha = c(0.2, 0.5, 1, 2, 5), 
+                              method = "shooting")
 toc()
 estimation
 plot(estimation, 
