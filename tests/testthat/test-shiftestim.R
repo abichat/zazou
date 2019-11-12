@@ -9,15 +9,26 @@ zsco_obs <- p2z(pval_obs)
 tree <- force_ultrametric(chlamydiae$tree)
 N_branch <- length(tree$edge.length)
 
-grid <- c(0.1, 1, 5, 7)
+grid <- c(1, 5)
 
 estS <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                         lambda = grid, tree = tree,
                         alpha = grid, method = "shooting")
 
-test_that("a selection is done", {
-  expect_equal(nrow(estS$optim_info$bic_selection), length(grid)^2)
+estS2 <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                         tree = tree, alpha = grid, method = "shooting")
+
+estS3 <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                         tree = tree, alpha = 1, lambda = 2,
+                         method = "shooting")
+
+test_that("a selection is done or not", {
+  expect_equal(nrow(estS$optim_info$bic_selection), length(grid) ^ 2)
+  expect_equal(nrow(estS2$optim_info$bic_selection), length(grid) * 6)
+  expect_null(nrow(estS3$optim_info$bic_selection))
   expect_true(grepl("with model selection", estS$method))
+  expect_true(grepl("with model selection", estS2$method))
+  expect_false(grepl("with model selection", estS3$method))
 })
 
 

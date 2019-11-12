@@ -59,7 +59,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
     }
 
     ## Inner loop on lambda
-    for (lam in lambda) {
+    for (lam in current_lambda) {
       ## Compute current model
       opt <- fitting_procedure(Delta0, X, Y, lambda = lam, ...)
       current_model <- as_shiftestim(
@@ -73,12 +73,14 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
       ## Update best model
       if (current_model$bic < best_bic) {
         best_model <- current_model
-        best_model$method <- paste(method, "with model selection")
       }
     } ## Close lambda loop
   } ## Close alpha loop
 
-  best_model$optim_info$bic_selection <- bic_df
-  best_model$method <- paste(method, "with model selection")
+  if(any(c(length(alpha), length(current_lambda)) >= 2)){
+    best_model$optim_info$bic_selection <- bic_df
+    best_model$method <- paste(method, "with model selection")
+  }
+
   return(best_model)
 }

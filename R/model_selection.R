@@ -38,11 +38,12 @@ loglikelihood <- function(obs_zscores, est_zscores, sigma){
 #'
 #' @return a numeric vector of length \code{nlambda}
 #'
-lambda_grid <- function(x ,y, n_lambda = 6, min_ratio = 1e-5) {
+lambda_grid <- function(x, y, n_lambda = 6, min_ratio = 1e-5) {
   ## center y and x
   y <- scale(y, center = TRUE, scale = FALSE)
   x <- scale(x, center = TRUE, scale = FALSE)
   xty <- drop(crossprod(x, y))
   lambda_max <- max(abs(xty))
-  return(10^seq(log10(lambda_max), log10(min_ratio*lambda_max), len = n_lambda))
+  return(10 ^ seq(from = log10(lambda_max), to = log10(min_ratio * lambda_max),
+                  len = n_lambda))
 }
