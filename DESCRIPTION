@@ -33,7 +33,6 @@ Suggests:
     evabic,
     ggplot2,
     knitr,
-    phyloseq,
     purrr,
     rmarkdown,
     spelling,
