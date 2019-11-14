@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
       </span>
     </div>
 
@@ -311,7 +311,7 @@
 <a class="sourceLine" id="cb17-5" data-line-number="5">tree &lt;-<span class="st"> </span><span class="kw"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span>(alcohol<span class="op">$</span>tree)</a>
 <a class="sourceLine" id="cb17-6" data-line-number="6">otu_to_kepp &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span>(abund <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>))</a>
 <a class="sourceLine" id="cb17-7" data-line-number="7">abund &lt;-<span class="st"> </span>abund[otu_to_kepp, ]</a>
-<a class="sourceLine" id="cb17-8" data-line-number="8">tree &lt;-<span class="st"> </span>phyloseq<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/phyloseq/man/prune_taxa-methods.html">prune_taxa</a></span>(otu_to_kepp, tree)</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">tree &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">drop.tip</a></span>(tree, <span class="kw"><a href="https://dplyr.tidyverse.org/reference/setops.html">setdiff</a></span>(tree<span class="op">$</span>tip.label, otu_to_kepp))</a>
 <a class="sourceLine" id="cb17-9" data-line-number="9">N_branch &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(tree<span class="op">$</span>edge.length)</a></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">pvalues_original &lt;-<span class="st"> </span><span class="kw"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span>(abund, groups)<span class="op">$</span>p.value</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">zscores_original &lt;-<span class="st"> </span><span class="kw"><a href="../reference/p2z.html">p2z</a></span>(pvalues_original)</a>
@@ -342,28 +342,28 @@
 <a class="sourceLine" id="cb22-4" data-line-number="4">                              <span class="dt">alpha =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>), </a>
 <a class="sourceLine" id="cb22-5" data-line-number="5">                              <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb22-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt; 3.577 sec elapsed</span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="co">#&gt; 3.42 sec elapsed</span></a>
 <a class="sourceLine" id="cb22-8" data-line-number="8">estimation</a>
 <a class="sourceLine" id="cb22-9" data-line-number="9"><span class="co">#&gt; Tree is binary with 127 leafs and 252 branches</span></a>
-<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 5 and sigma = 3.162 </span></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.5 and sigma = 1.516 </span></a>
 <a class="sourceLine" id="cb22-11" data-line-number="11"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb22-12" data-line-number="12"><span class="co">#&gt; Optimisation algorithm: shooting with model selection</span></a>
-<a class="sourceLine" id="cb22-13" data-line-number="13"><span class="co">#&gt; Regularization parameter: lambda = 15 </span></a>
-<a class="sourceLine" id="cb22-14" data-line-number="14"><span class="co">#&gt; Objective value: 119.12</span></a>
-<a class="sourceLine" id="cb22-15" data-line-number="15"><span class="co">#&gt; BIC: 566.71</span></a>
+<a class="sourceLine" id="cb22-13" data-line-number="13"><span class="co">#&gt; Regularization parameter: lambda = 9 </span></a>
+<a class="sourceLine" id="cb22-14" data-line-number="14"><span class="co">#&gt; Objective value: 122.004</span></a>
+<a class="sourceLine" id="cb22-15" data-line-number="15"><span class="co">#&gt; BIC: 443.524</span></a>
 <a class="sourceLine" id="cb22-16" data-line-number="16"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb22-17" data-line-number="17"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 -0.062 0 -0.026 -0.117 0 ...</span></a>
-<a class="sourceLine" id="cb22-18" data-line-number="18"><span class="co">#&gt; 4 shifts have been identified (ie 98.4 % of sparsity)</span></a>
-<a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; A parsimonious solution would involve 4 shifts</span></a>
+<a class="sourceLine" id="cb22-17" data-line-number="17"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb22-18" data-line-number="18"><span class="co">#&gt; 1 shifts have been identified (ie 99.6 % of sparsity)</span></a>
+<a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; A parsimonious solution would involve 1 shifts</span></a>
 <a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; Observed z-scores:    1.58 -0.434 -0.152 -1.363 -1.521 -3.632 -4.547  0.266  1.167  1.959 ...</span></a>
-<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; Estimated z-scores: -0.205 -0.205 -0.205 -0.205 -0.205 -0.205 -0.205 -0.205 -0.205 -0.205 ...</span></a>
-<a class="sourceLine" id="cb22-23" data-line-number="23"><span class="co">#&gt; 124 z-scores have been shifted (ie 2.4 % of sparsity)</span></a>
+<a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; Observed z-scores:  1.58 -0.434 -0.152 -1.363 -1.521 -3.632 -4.547 0.266 1.167 1.959 ...</span></a>
+<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; Estimated z-scores:    0      0      0      0      0      0      0     0     0     0 ...</span></a>
+<a class="sourceLine" id="cb22-23" data-line-number="23"><span class="co">#&gt; 17 z-scores have been shifted (ie 86.6 % of sparsity)</span></a>
 <a class="sourceLine" id="cb22-24" data-line-number="24"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation, </a>
 <a class="sourceLine" id="cb22-25" data-line-number="25">     <span class="dt">sup_scores =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> zscores <span class="op">-</span><span class="st"> </span>zscores_original,</a>
 <a class="sourceLine" id="cb22-26" data-line-number="26">                            <span class="dt">title =</span> <span class="st">"Difference in z-scores after fold-change"</span>,</a>
 <a class="sourceLine" id="cb22-27" data-line-number="27">                            <span class="dt">color =</span> <span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/sign.html">sign</a></span>(zscores <span class="op">-</span><span class="st"> </span>zscores_original)))))</a>
-<a class="sourceLine" id="cb22-28" data-line-number="28"><span class="co">#&gt; Warning: Removed 249 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb22-28" data-line-number="28"><span class="co">#&gt; Warning: Removed 252 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="simulations_files/figure-html/estimationwithselection-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">estimation<span class="op">$</span>optim_info<span class="op">$</span>bic_selection</a>
 <a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co">#&gt;    alpha lambda      bic</span></a>
@@ -400,8 +400,8 @@
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">detected &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(estimation<span class="op">$</span>zscores_est <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>))</a>
 <a class="sourceLine" id="cb24-2" data-line-number="2">detected_bh &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span>(pvalues, <span class="dt">method =</span> <span class="st">"BH"</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</a>
 <a class="sourceLine" id="cb24-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/pkg/evabic/man/ebc_tidy.html">ebc_tidy</a></span>(detected, otus_da, <span class="dt">m =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(otu_to_kepp), <span class="dt">measures =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"TPR"</span>, <span class="st">"FDR"</span>, <span class="st">"ACC"</span>, <span class="st">"F1"</span>, <span class="st">"BACC"</span>))</a>
-<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="co">#&gt;   TPR      FDR       ACC        F1      BACC</span></a>
-<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="co">#&gt; 1   1 0.733871 0.2834646 0.4203822 0.5159574</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="co">#&gt;         TPR FDR       ACC   F1      BACC</span></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="co">#&gt; 1 0.5151515   0 0.8740157 0.68 0.7575758</span></a>
 <a class="sourceLine" id="cb24-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/pkg/evabic/man/ebc_tidy.html">ebc_tidy</a></span>(detected_bh, otus_da, <span class="dt">m =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(otu_to_kepp), <span class="dt">measures =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"TPR"</span>, <span class="st">"FDR"</span>, <span class="st">"ACC"</span>, <span class="st">"F1"</span>, <span class="st">"BACC"</span>))</a>
 <a class="sourceLine" id="cb24-7" data-line-number="7"><span class="co">#&gt;         TPR   FDR       ACC        F1      BACC</span></a>
 <a class="sourceLine" id="cb24-8" data-line-number="8"><span class="co">#&gt; 1 0.2121212 0.125 0.7874016 0.3414634 0.6007415</span></a></code></pre></div>
@@ -413,7 +413,7 @@
 <a class="sourceLine" id="cb25-6" data-line-number="6">                       <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">scores =</span> <span class="kw"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span>(pvalues, <span class="dt">method =</span> <span class="st">"BH"</span>),</a>
 <a class="sourceLine" id="cb25-7" data-line-number="7">                            <span class="dt">title =</span> <span class="st">"Detected by BH"</span>,</a>
 <a class="sourceLine" id="cb25-8" data-line-number="8">                            <span class="dt">color =</span> <span class="kw"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span>(pvalues, <span class="dt">method =</span> <span class="st">"BH"</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)))</a>
-<a class="sourceLine" id="cb25-9" data-line-number="9"><span class="co">#&gt; Warning: Removed 249 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb25-9" data-line-number="9"><span class="co">#&gt; Warning: Removed 252 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="simulations_files/figure-html/plotswithbh-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">df &lt;-</a>
 <a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(estimation<span class="op">$</span>zscores_est) <span class="op">%&gt;%</span></a>

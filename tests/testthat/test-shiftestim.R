@@ -9,7 +9,7 @@ zsco_obs <- p2z(pval_obs)
 tree <- force_ultrametric(chlamydiae$tree)
 N_branch <- length(tree$edge.length)
 
-grid <- c(1, 5)
+grid <- sample(c(1, 5))
 
 estS <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                         lambda = grid, tree = tree,
@@ -31,10 +31,11 @@ test_that("a selection is done or not", {
   expect_false(grepl("with model selection", estS3$method))
 })
 
+grid <- sample(c(1, 5, 10))
 
 estL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                         lambda = grid, tree = tree,
-                        alpha = grid, method = "L-BFGS-B")
+                        alpha = sample(grid), method = "L-BFGS-B")
 
 estL_best <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                              lambda = estL$lambda, tree = tree,
@@ -46,8 +47,9 @@ estL_notbest <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                                 tree = tree, method = "L-BFGS-B")
 
 test_that("the choosen model is the best one", {
-  expect_true(estL_best$bic <= estL_notbest$bic)
   expect_equal(estL$shift_est, estL_best$shift_est)
+  expect_true(estL_best$bic <= estL_notbest$bic)
+  expect_lte(estL$bic, min(estL$optim_info$bic_selection$bic))
 })
 
 

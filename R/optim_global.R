@@ -73,6 +73,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
       ## Update best model
       if (current_model$bic < best_bic) {
         best_model <- current_model
+        best_bic   <- current_model$bic
       }
     } ## Close lambda loop
   } ## Close alpha loop
