@@ -141,7 +141,7 @@ groups <- sample(c("A", "B"), size = ncol(abund), replace = TRUE)
 tree <- force_ultrametric(alcohol$tree)
 otu_to_kepp <- names(which(rowSums(abund > 0) > 20))
 abund <- abund[otu_to_kepp, ]
-tree <- phyloseq::prune_taxa(otu_to_kepp, tree)
+tree <- drop.tip(tree, setdiff(tree$tip.label, otu_to_kepp))
 N_branch <- length(tree$edge.length)
 ```
 
