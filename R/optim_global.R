@@ -16,7 +16,7 @@
 #'
 #'
 #' @export
-#' @import stat optim
+#' @importFrom stats optim
 estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
                              method = c("L-BFGS-B", "shooting"), ...){
 
@@ -41,7 +41,8 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   best_bic <- Inf
   bic_df <- data.frame(alpha  = numeric(0),
                        lambda = numeric(0),
-                       bic    = numeric(0))
+                       bic    = numeric(0),
+                       objective_value = numeric(0))
   best_model <- NULL
   shifts <- list()
 
@@ -72,6 +73,8 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
       ## Update bic table
       bic_df <- rbind(bic_df, data.frame(alpha = alp,
                                          lambda = lam,
+                                         objective_value =
+                                           current_model$objective_value,
                                          bic = current_model$bic))
       ## Update best model
       if (current_model$bic < best_bic) {
