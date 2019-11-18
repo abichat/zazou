@@ -9,7 +9,10 @@ zsco_obs <- p2z(pval_obs)
 tree <- force_ultrametric(chlamydiae$tree)
 N_branch <- length(tree$edge.length)
 
+# First tests
+
 grid <- sample(c(1, 3))
+
 
 estS <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                         lambda = grid, tree = tree,
@@ -31,6 +34,8 @@ test_that("a selection is done or not", {
   expect_true(grepl("with model selection", estS2$method))
   expect_false(grepl("with model selection", estS3$method))
 })
+
+# Second tests
 
 grid <- sample(c(0.9, 1, 1.1))
 
@@ -68,5 +73,22 @@ test_that("the shifts inside `bic_selection` are correct", {
                estL_notbest$shift_est)
 })
 
+all_est <- extract_models(estL)
 
+r <- sample(seq_len(length(grid) ^ 2), size = 1)
+est_r <- all_est[[r]]
+est_r_fs <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                            lambda = est_r$lambda, tree = tree,
+                            alpha = est_r$alpha, method = "L-BFGS-B")
 
+test_that("extraction works correctly", {
+  expect_length(all_est, length(grid) ^ 2)
+  expect_true(grepl(", part of model selection", est_r$method))
+  expect_equal(est_r$zscores_est, est_r_fs$zscores_est)
+  expect_equal(est_r$objective_value, est_r_fs$objective_value)
+  expect_equal(unname(est_r$optim_info$better_parameters["better_alpha"]),
+               estL$alpha)
+  expect_equal(unname(est_r$optim_info$better_parameters["better_lambda"]),
+               estL$lambda)
+  expect_warning(extract_models(estL_best))
+})

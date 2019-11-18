@@ -29,17 +29,18 @@ reference:
   - title: Estimation of shifts
     desc: ~
     contents:
-    - '`as_shiftestim`'
     - '`estimate_shifts`'
     - '`plot_shifts`'
+    - '`extract_models`'
     - '`bic`'
+    - '`as_shiftestim`'
   - title: About trees
     desc: ~
     contents:
     - '`covariance_matrix`'
     - '`incidence_matrix`'
     - '`force_ultrametric`'
-    - '`parsimony_score`'
+    - '`fitch`'
     - '`tree_height`'
   - title: p-values and z-scores
     desc: ~
@@ -52,10 +53,10 @@ reference:
     contents:
     - '`alcohol`'
     - '`open_doc`'
-  - title: All other functions
+  - title: Algebra and optimisation
     desc: ~
     contents:
+    - '`inverse_sqrt`'
     - '`compute_gradient_function`'
     - '`compute_objective_function`'
-    - '`inverse_sqrt`'
     - '`solve_univariate`'

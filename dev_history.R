@@ -73,6 +73,10 @@ library(testthat)
 
 # use_test("shiftestim")
 
+# # Change some test names
+
+# use_r("extraction")
+
 
 ####
 
