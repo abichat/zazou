@@ -12,7 +12,7 @@
 #' @param y a vector of size n.
 #' @param x a vector of size n.
 #' @param allow_positive Logical. Default FALSE. Allow positive values
-#' for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0})
+#' for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).
 #' @inheritParams estimate_shifts
 #'
 #' @return The scalar solution of the 1D optimization problem
@@ -37,30 +37,11 @@ solve_univariate <- function(y, x, lambda = 0, allow_positive = FALSE) {
 
 #' @rdname solve_univariate
 #'
-#' @param beta the current value of beta.
-#' @param coord the coordinate to be updated.
-#' @param X a matrix of size n x p.
-#'
-#' @return the new value of beta
-#' @export
-update_univariate <- function(beta, coord, y, X, lambda){
-  beta_i <- beta[-coord]
-  X_i <- X[, -coord]
-  xi <- X[, coord]
-  y_i <- y - X_i %*% beta_i
-
-  beta_next <- beta
-  beta_next[coord] <- solve_univariate(y_i, xi, lambda)
-
-  beta_next
-}
-
-#' @rdname solve_univariate
-#'
 #' @param beta0 the initial position of beta.
+#' @param X a matrix of size  x p.
 #' @param prob a vector of probability weights for obtaining the coordinates
-#' to be sampled
-#' @param ... additional parameters
+#' to be sampled.
+#' @param ... additional parameters.
 #'
 #' @return the estimated value of beta
 #' @export
@@ -71,7 +52,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
   yhat <- X %*% beta0
   fn_obj <- compute_objective_function(y, X, lambda)
 
-  update_univariate2 <- function(beta, coord){
+  update_univariate <- function(beta, coord){
     betai <- beta[coord]
     beta_i <- beta[-coord]
     xi <- X[, coord]
@@ -96,7 +77,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
   while (i < p || progress > eps) {
     for (j in 1:p) {
       coord <- sample(p, size = 1, prob = prob)
-      beta <- update_univariate2(beta, coord)
+      beta <- update_univariate(beta, coord)
       i <- i + 1
     }
     new_obj <- fn_obj(beta)

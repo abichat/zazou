@@ -40,15 +40,12 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
   obj$pars_score <- fitch(multi2di(obj$tree), obj$zscores_est) # parsimony score
 
   ## Sigma
-  if (is.null(obj$alpha)){
-    obj$sigma <- NULL
-    obj$bic <- NULL
-  } else {
-    h <- tree_height(obj$tree)
-    obj$sigma <- sqrt(2 * obj$alpha) / (1 - exp(- 2 * obj$alpha * h))
-    obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
-                   est_shifts = obj$shift_est, sigma = obj$sigma)
-  }
+  h <- tree_height(obj$tree)
+  obj$sigma <- sqrt(2 * obj$alpha) / (1 - exp(- 2 * obj$alpha * h))
+
+  ## BIC
+  obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
+                 est_shifts = obj$shift_est, sigma = obj$sigma)
 
   class(obj) <- "shiftestim"
   return(obj)
@@ -72,15 +69,10 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
 #' @export
 print.shiftestim <- function(x, digits = 3, ...){
 
-  if(is.null(x$alpha)){
-    txt_alpha <- "Covariance matrix has been manually specified."
-    txt_bic <- ""
-  } else {
-    txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
-                        " with alpha = ", round(x$alpha, digits),
-                        " and sigma = ", round(x$sigma, digits), "")
-    txt_bic <- paste0("BIC: ", round(x$bic, digits), "\n")
-  }
+  txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
+                      " with alpha = ", round(x$alpha, digits),
+                      " and sigma = ", round(x$sigma, digits), "")
+  txt_bic <- paste0("BIC: ", round(x$bic, digits), "\n")
 
   txt_tree1 <- paste0("Tree is", ifelse(x$is_bin, " ", " not "), "binary")
   tree <- x$tree

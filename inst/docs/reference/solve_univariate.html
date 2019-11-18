@@ -141,8 +141,6 @@
 
     <pre class="usage"><span class='fu'>solve_univariate</span>(<span class='no'>y</span>, <span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>allow_positive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>update_univariate</span>(<span class='no'>beta</span>, <span class='no'>coord</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>)
-
 <span class='fu'>solve_multivariate</span>(<span class='no'>beta0</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -163,39 +161,30 @@
     <tr>
       <th>allow_positive</th>
       <td><p>Logical. Default FALSE. Allow positive values
-for \(\beta\) (but still enforce the constraint \(x\beta &lt;= 0\))</p></td>
-    </tr>
-    <tr>
-      <th>beta</th>
-      <td><p>the current value of beta.</p></td>
-    </tr>
-    <tr>
-      <th>coord</th>
-      <td><p>the coordinate to be updated.</p></td>
-    </tr>
-    <tr>
-      <th>X</th>
-      <td><p>a matrix of size n x p.</p></td>
+for \(\beta\) (but still enforce the constraint \(x\beta &lt;= 0\)).</p></td>
     </tr>
     <tr>
       <th>beta0</th>
       <td><p>the initial position of beta.</p></td>
     </tr>
     <tr>
+      <th>X</th>
+      <td><p>a matrix of size  x p.</p></td>
+    </tr>
+    <tr>
       <th>prob</th>
       <td><p>a vector of probability weights for obtaining the coordinates
-to be sampled</p></td>
+to be sampled.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional parameters</p></td>
+      <td><p>additional parameters.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The scalar solution of the 1D optimization problem</p>
-<p>the new value of beta</p>
 <p>the estimated value of beta</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 

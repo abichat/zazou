@@ -2,13 +2,10 @@
 % Please edit documentation in R/optim_shooting.R
 \name{solve_univariate}
 \alias{solve_univariate}
-\alias{update_univariate}
 \alias{solve_multivariate}
 \title{Solve unidirectional constrained problem}
 \usage{
 solve_univariate(y, x, lambda = 0, allow_positive = FALSE)
-
-update_univariate(beta, coord, y, X, lambda)
 
 solve_multivariate(beta0, y, X, lambda, prob = NULL, ...)
 }
@@ -20,25 +17,19 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, ...)
 \item{lambda}{a grid of positive regularization parameters}
 
 \item{allow_positive}{Logical. Default FALSE. Allow positive values
-for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0})}
-
-\item{beta}{the current value of beta.}
-
-\item{coord}{the coordinate to be updated.}
-
-\item{X}{a matrix of size n x p.}
+for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).}
 
 \item{beta0}{the initial position of beta.}
 
-\item{prob}{a vector of probability weights for obtaining the coordinates
-to be sampled}
+\item{X}{a matrix of size  x p.}
 
-\item{...}{additional parameters}
+\item{prob}{a vector of probability weights for obtaining the coordinates
+to be sampled.}
+
+\item{...}{additional parameters.}
 }
 \value{
 The scalar solution of the 1D optimization problem
-
-the new value of beta
 
 the estimated value of beta
 }
