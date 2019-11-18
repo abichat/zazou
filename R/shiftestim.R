@@ -6,11 +6,10 @@
 #' @param zscores vector of observed z-scores
 #' @param lambda regularization parameter
 #' @param alpha parameter
-#' @param covar_mat the covariance matrix
 #'
 #' @return a 'shiftestim' object
 #' @export
-as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
+as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
 
   required_names <- c("par", "value", "method")
 
@@ -26,7 +25,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha, covar_mat) {
               zscores_est = zscores_est,
               shift_est = listopt$par,
               objective_value = listopt$value, lambda = lambda,
-              tree = tree, alpha = alpha, covar_mat = covar_mat,
+              tree = tree, alpha = alpha,
               method = listopt$method,
               optim_info = listopt[setdiff(names(listopt), required_names)])
 

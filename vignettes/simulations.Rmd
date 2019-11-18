@@ -189,7 +189,7 @@ plot(estimation,
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original)))))
-estimation$optim_info$bic_selection
+estimation$optim_info$bic_selection[1:3]
 ```
 
 

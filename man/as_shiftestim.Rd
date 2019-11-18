@@ -6,7 +6,7 @@
 \alias{plot.shiftestim}
 \title{'shiftestim' object}
 \usage{
-as_shiftestim(listopt, tree, zscores, lambda, alpha, covar_mat)
+as_shiftestim(listopt, tree, zscores, lambda, alpha)
 
 \method{print}{shiftestim}(x, digits = 3, ...)
 
@@ -22,8 +22,6 @@ as_shiftestim(listopt, tree, zscores, lambda, alpha, covar_mat)
 \item{lambda}{regularization parameter}
 
 \item{alpha}{parameter}
-
-\item{covar_mat}{the covariance matrix}
 
 \item{x}{a 'shiftestim' object.}
 

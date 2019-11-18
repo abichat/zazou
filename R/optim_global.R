@@ -14,7 +14,9 @@
 #'
 #' @return an object of class \code{shiftestim}
 #'
+#'
 #' @export
+#' @import stat optim
 estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
                              method = c("L-BFGS-B", "shooting"), ...){
 
@@ -65,8 +67,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
       opt <- fitting_procedure(Delta0, X, Y, lambda = lam, ...)
       current_model <- as_shiftestim(
         listopt = opt, tree = tree, zscores = zscores,
-        lambda = lam, alpha = alp, covar_mat = covar_mat
-      )
+        lambda = lam, alpha = alp)
       shifts <- c(shifts, list(current_model$shift_est))
       ## Update bic table
       bic_df <- rbind(bic_df, data.frame(alpha = alp,
