@@ -4,7 +4,7 @@
 \alias{lambda_grid}
 \title{Helper function to compute a logarithmic lambda grid}
 \usage{
-lambda_grid(x, y, n_lambda = 6, min_ratio = 1e-05)
+lambda_grid(x, y, n_lambda = 5, min_ratio = 0.01)
 }
 \arguments{
 \item{x}{Design matrix}

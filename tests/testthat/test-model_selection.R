@@ -28,7 +28,8 @@ estS3 <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
 test_that("a selection is done or not", {
   expect_equal(ncol(estS$optim_info$bic_selection), 5)
   expect_equal(nrow(estS$optim_info$bic_selection), length(grid) ^ 2)
-  expect_equal(nrow(estS2$optim_info$bic_selection), length(grid) * 6)
+  expect_equal(nrow(estS2$optim_info$bic_selection),
+               length(grid) * formals(zazou:::lambda_grid)$n_lambda)
   expect_null(nrow(estS3$optim_info$bic_selection))
   expect_true(grepl("with model selection", estS$method))
   expect_true(grepl("with model selection", estS2$method))

@@ -179,17 +179,17 @@ plot_shifts(tree, NA, obs_scores = zscores,
 
 ```{r estimationwithselection}
 tic()
-estimation <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
-                              lambda = 3 * c(1/3, 1:5), tree = tree,
-                              alpha = c(0.2, 0.5, 1, 2, 5), 
-                              method = "shooting")
+estimation <- estimate_shifts(rep(0, N_branch), zscores = zscores, tree = tree,
+                              alpha = c(0.2, 0.5, 1, 2, 5), method = "shooting")
 toc()
 estimation
 plot(estimation, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original)))))
-estimation$optim_info$bic_selection[1:4]
+estimation$optim_info$bic_selection %>%
+  mutate(n_shifts = map_dbl(shift_est, ~ sum(. != 0))) %>% 
+  select(-shift_est)
 ```
 
 
