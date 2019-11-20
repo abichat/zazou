@@ -4,8 +4,15 @@
 \alias{estimate_shifts}
 \title{Estimate shifts}
 \usage{
-estimate_shifts(Delta0, zscores, tree, alpha, lambda = NULL,
-  method = c("L-BFGS-B", "shooting"), ...)
+estimate_shifts(
+  Delta0,
+  zscores,
+  tree,
+  alpha,
+  lambda = NULL,
+  method = c("L-BFGS-B", "shooting"),
+  ...
+)
 }
 \arguments{
 \item{Delta0}{initial position (size n+m)}

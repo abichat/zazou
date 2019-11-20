@@ -4,8 +4,7 @@
 \alias{create_listopt_pms}
 \title{Create a list from}
 \usage{
-create_listopt_pms(objective_value, shift_est, method, best_alpha,
-  best_lambda)
+create_listopt_pms(objective_value, shift_est, method, best_alpha, best_lambda)
 }
 \arguments{
 \item{objective_value}{the objective value.}

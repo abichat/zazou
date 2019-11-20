@@ -4,8 +4,7 @@
 \alias{simu_zscores}
 \title{Simulation of z-scores on branches}
 \usage{
-simu_zscores(tree, alpha, shifts = NULL, Nshifts = NULL,
-  graph = FALSE, ...)
+simu_zscores(tree, alpha, shifts = NULL, Nshifts = NULL, graph = FALSE, ...)
 }
 \arguments{
 \item{tree}{tree.}

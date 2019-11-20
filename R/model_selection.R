@@ -30,15 +30,15 @@ loglikelihood <- function(obs_zscores, est_zscores, sigma){
 
 #' Helper function to compute a logarithmic lambda grid
 #'
-#' @param x Design matrix
-#' @param y Response vector
-#' @param n_lambda Length of the lambda grid
+#' @param x Design matrix.
+#' @param y Response vector.
+#' @param n_lambda Length of the lambda grid.
 #' @param min_ratio Ratio between the minimum and maximum values in
-#' the lambda grid
+#' the lambda grid.
 #'
 #' @return a numeric vector of length \code{nlambda}
 #'
-lambda_grid <- function(x, y, n_lambda = 5, min_ratio = 1e-2) {
+lambda_grid <- function(x, y, n_lambda = 10, min_ratio = 1e-2) {
   ## center y and x
   y <- scale(y, center = TRUE, scale = FALSE)
   x <- scale(x, center = TRUE, scale = FALSE)
