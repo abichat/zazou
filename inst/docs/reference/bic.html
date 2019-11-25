@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bayesian information criterion — bic • zazou</title>
+<title>Information criterions — bic • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Bayesian information criterion — bic" />
-<meta property="og:description" content="Bayesian information criterion" />
+<meta property="og:title" content="Information criterions — bic" />
+<meta property="og:description" content="Loglikelihood, Bayesian Information Criterion and Phylogenetic BIC" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,18 +126,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bayesian information criterion</h1>
+    <h1>Information criterions</h1>
     <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/model_selection.R'><code>R/model_selection.R</code></a></small>
     <div class="hidden name"><code>bic.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Bayesian information criterion</p>
+    <p>Loglikelihood, Bayesian Information Criterion and Phylogenetic BIC</p>
     </div>
 
     <pre class="usage"><span class='fu'>bic</span>(<span class='no'>obs_zscores</span>, <span class='no'>est_zscores</span>, <span class='no'>est_shifts</span>, <span class='no'>sigma</span>)
 
-<span class='fu'>loglikelihood</span>(<span class='no'>obs_zscores</span>, <span class='no'>est_zscores</span>, <span class='no'>sigma</span>)</pre>
+<span class='fu'>loglikelihood</span>(<span class='no'>obs_zscores</span>, <span class='no'>est_zscores</span>, <span class='no'>sigma</span>)
+
+<span class='fu'>pbic</span>(<span class='no'>obs_zscores</span>, <span class='no'>est_zscores</span>, <span class='no'>est_shifts</span>, <span class='no'>sigma</span>, <span class='no'>alpha</span>, <span class='no'>tree</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,6 +159,14 @@
     <tr>
       <th>sigma</th>
       <td><p>standard error</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>alpha from OU.</p></td>
+    </tr>
+    <tr>
+      <th>tree</th>
+      <td><p>phylogenetic tree.</p></td>
     </tr>
     </table>
 

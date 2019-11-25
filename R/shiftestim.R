@@ -43,9 +43,12 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
   h <- tree_height(obj$tree)
   obj$sigma <- sqrt(2 * obj$alpha) / (1 - exp(- 2 * obj$alpha * h))
 
-  ## BIC
+  ## BIC & pBIC
   obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
                  est_shifts = obj$shift_est, sigma = obj$sigma)
+  obj$pbic <- pbic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
+                  est_shifts = obj$shift_est, sigma = obj$sigma,
+                  alpha = alpha, tree = tree)
 
   class(obj) <- "shiftestim"
   return(obj)

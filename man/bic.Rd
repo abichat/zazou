@@ -3,11 +3,14 @@
 \name{bic}
 \alias{bic}
 \alias{loglikelihood}
-\title{Bayesian information criterion}
+\alias{pbic}
+\title{Information criterions}
 \usage{
 bic(obs_zscores, est_zscores, est_shifts, sigma)
 
 loglikelihood(obs_zscores, est_zscores, sigma)
+
+pbic(obs_zscores, est_zscores, est_shifts, sigma, alpha, tree)
 }
 \arguments{
 \item{obs_zscores}{observed z-scores}
@@ -17,12 +20,16 @@ loglikelihood(obs_zscores, est_zscores, sigma)
 \item{est_shifts}{estimated z-scores}
 
 \item{sigma}{standard error}
+
+\item{alpha}{alpha from OU.}
+
+\item{tree}{phylogenetic tree.}
 }
 \value{
 scalar
 }
 \description{
-Bayesian information criterion
+Loglikelihood, Bayesian Information Criterion and Phylogenetic BIC
 }
 \examples{
 bic(obs_zscores = c(-2.7, -2.3, 0.2, -0.1, -2, 0.1),
