@@ -41,8 +41,9 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   best_bic <- Inf
   bic_df <- data.frame(alpha  = numeric(0),
                        lambda = numeric(0),
+                       objective_value = numeric(0),
                        bic    = numeric(0),
-                       objective_value = numeric(0))
+                       pbic   = numeric(0))
   best_model <- NULL
   shifts <- list()
 
@@ -75,7 +76,8 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
                                          lambda = lam,
                                          objective_value =
                                            current_model$objective_value,
-                                         bic = current_model$bic))
+                                         bic = current_model$bic,
+                                         pbic = current_model$pbic))
       ## Update best model
       if (current_model$bic < best_bic) {
         best_model <- current_model

@@ -42,6 +42,7 @@ reference:
     - '`force_ultrametric`'
     - '`fitch`'
     - '`tree_height`'
+    - '`create_clusters`'
   - title: p-values and z-scores
     desc: ~
     contents:

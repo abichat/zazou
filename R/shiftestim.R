@@ -75,7 +75,6 @@ print.shiftestim <- function(x, digits = 3, ...){
   txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
                       " with alpha = ", round(x$alpha, digits),
                       " and sigma = ", round(x$sigma, digits), "")
-  txt_bic <- paste0("BIC: ", round(x$bic, digits), "\n")
 
   txt_tree1 <- paste0("Tree is", ifelse(x$is_bin, " ", " not "), "binary")
   tree <- x$tree
@@ -102,7 +101,8 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat("Optimisation algorithm: ", x$method, "\n", sep = "")
   cat("Regularization parameter: lambda =", round(x$lambda, digits), "\n")
   cat("Objective value: ", round(x$objective_value, digits), "\n", sep = "")
-  cat(txt_bic)
+  cat(paste0("BIC: ", round(x$bic, digits), "\n"))
+  cat(paste0("pBIC: ", round(x$pbic, digits), "\n"))
   cat("---\n")
   cat("Estimated shifts:", head(round(x$shift_est, digits), 10), "...\n")
   cat(sum(x$shift_est != 0), "shifts have been identified (ie",

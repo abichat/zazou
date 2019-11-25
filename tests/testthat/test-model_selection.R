@@ -26,7 +26,7 @@ estS3 <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                          method = "shooting")
 
 test_that("a selection is done or not", {
-  expect_equal(ncol(estS$optim_info$bic_selection), 5)
+  expect_equal(ncol(estS$optim_info$bic_selection), 6)
   expect_equal(nrow(estS$optim_info$bic_selection), length(grid) ^ 2)
   expect_equal(nrow(estS2$optim_info$bic_selection),
                length(grid) * formals(zazou:::lambda_grid)$n_lambda)
@@ -70,7 +70,7 @@ test_that("the shifts inside `bic_selection` are correct", {
                             "shift_est"][[1]],
                estL$shift_est)
   expect_equal(df_selection[df_selection$alpha == alpha_notbest &
-                              df_selection$lambda == lambda_notbest, 5][[1]],
+                              df_selection$lambda == lambda_notbest, 6][[1]],
                estL_notbest$shift_est)
 })
 
