@@ -77,6 +77,9 @@ library(testthat)
 
 # use_r("extraction")
 
+# use_r("clusters")
+# use_test("clusters")
+
 
 ####
 

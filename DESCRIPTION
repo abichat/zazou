@@ -21,13 +21,13 @@ Depends:
     R (>= 2.10)
 Imports: 
     ape,
+    cluster,
     ggtree,
     graphics,
     stats,
     stringr,
     utils
 Suggests: 
-    cluster,
     corrplot,
     dplyr,
     evabic,

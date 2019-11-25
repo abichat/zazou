@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Information criteria — bic • zazou</title>
+<title>Create clusters — create_clusters • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Information criteria — bic" />
-<meta property="og:description" content="Loglikelihood, Bayesian Information Criterion and Phylogenetic BIC" />
+<meta property="og:title" content="Create clusters — create_clusters" />
+<meta property="og:description" content="Create clusters" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,59 +126,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Information criteria</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/model_selection.R'><code>R/model_selection.R</code></a></small>
-    <div class="hidden name"><code>bic.Rd</code></div>
+    <h1>Create clusters</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/clusters.R'><code>R/clusters.R</code></a></small>
+    <div class="hidden name"><code>create_clusters.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Loglikelihood, Bayesian Information Criterion and Phylogenetic BIC</p>
+    <p>Create clusters</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bic</span>(<span class='no'>obs_zscores</span>, <span class='no'>est_zscores</span>, <span class='no'>est_shifts</span>, <span class='no'>sigma</span>)
-
-<span class='fu'>loglikelihood</span>(<span class='no'>obs_zscores</span>, <span class='no'>est_zscores</span>, <span class='no'>sigma</span>)
-
-<span class='fu'>pbic</span>(<span class='no'>obs_zscores</span>, <span class='no'>est_zscores</span>, <span class='no'>est_shifts</span>, <span class='no'>sigma</span>, <span class='no'>alpha</span>, <span class='no'>tree</span>)</pre>
+    <pre class="usage"><span class='fu'>create_clusters</span>(
+  <span class='no'>tree</span>,
+  <span class='no'>N_clusters</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"monophyletic"</span>, <span class='st'>"paraphyletic"</span>, <span class='st'>"uniform"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>obs_zscores</th>
-      <td><p>observed z-scores</p></td>
-    </tr>
-    <tr>
-      <th>est_zscores</th>
-      <td><p>estimated z-scores</p></td>
-    </tr>
-    <tr>
-      <th>est_shifts</th>
-      <td><p>estimated z-scores</p></td>
-    </tr>
-    <tr>
-      <th>sigma</th>
-      <td><p>standard error</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>alpha from OU.</p></td>
-    </tr>
-    <tr>
       <th>tree</th>
-      <td><p>phylogenetic tree.</p></td>
+      <td><p>tree whose tips must be clustered.</p></td>
+    </tr>
+    <tr>
+      <th>N_clusters</th>
+      <td><p>number of clusters.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>method to create clusters among <code>"monophyletic"</code>,
+<code>"paraphyletic"</code> and <code>"uniform"</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>scalar</p>
+    <p>The belonging of each tip to a cluster as a named integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>bic</span>(<span class='kw'>obs_zscores</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>2.7</span>, -<span class='fl'>2.3</span>, <span class='fl'>0.2</span>, -<span class='fl'>0.1</span>, -<span class='fl'>2</span>, <span class='fl'>0.1</span>),
-    <span class='kw'>est_zscores</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>2.5</span>, -<span class='fl'>2.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>1</span>, <span class='fl'>0</span>),
-    <span class='kw'>est_shifts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>1</span>, <span class='fl'>0</span>, -<span class='fl'>2.5</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>),
-    <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='fl'>1.4</span>)</div><div class='output co'>#&gt; [1] 19.23008</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rtree</a></span>(<span class='fl'>10</span>)
+<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>3</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>tree</span>)</div><div class='img'><img src='create_clusters-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>create_clusters</span>(<span class='no'>tree</span>, <span class='no'>N</span>)</div><div class='output co'>#&gt;  t8  t2  t6  t7  t3 t10  t1  t4  t9  t5 
+#&gt;   1   1   1   1   2   3   3   3   3   3 </div><div class='input'><span class='fu'>create_clusters</span>(<span class='no'>tree</span>, <span class='no'>N</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"paraphyletic"</span>)</div><div class='output co'>#&gt;  t8  t2  t6  t7  t3 t10  t1  t4  t9  t5 
+#&gt;   1   1   1   1   2   2   2   3   3   3 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

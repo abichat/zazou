@@ -1,5 +1,5 @@
 
-#' Information criterions
+#' Information criteria
 #'
 #' Loglikelihood, Bayesian Information Criterion and Phylogenetic BIC
 #'

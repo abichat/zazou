@@ -4,7 +4,7 @@
 \alias{bic}
 \alias{loglikelihood}
 \alias{pbic}
-\title{Information criterions}
+\title{Information criteria}
 \usage{
 bic(obs_zscores, est_zscores, est_shifts, sigma)
 
