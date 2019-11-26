@@ -153,9 +153,7 @@ plot_shifts(tree, shifts = NA, obs_scores = zscores_original)
 
 
 ```{r pam}
-D <- cophenetic(tree)
-obj <- cluster::pam(D, 20)
-clustering <- obj$clustering
+clustering <- create_clusters(tree, N_clusters = 20, method = "paraphyletic")
 ```
 
 
@@ -171,7 +169,10 @@ abund[otus_da, groups == "B"] <- 4 * abund[otus_da,  groups == "B"]
 pvalues <- test_wilcoxon(abund, groups)$p.value
 zscores <- p2z(pvalues)
 plot_shifts(tree, NA, obs_scores = zscores, 
-            sup_scores = list(list(scores = zscores - zscores_original,
+            sup_scores = list(list(scores = clustering,
+                                   title = "Clusters",
+                                   color = as.character(clustering)),
+                              list(scores = zscores - zscores_original,
                                    title = "Difference in z-scores after fold-change",
                                    color = as.character(sign(zscores - zscores_original)))))
 ```
@@ -195,9 +196,18 @@ estimation$optim_info$bic_selection %>%
 
 ```{r detected}
 detected <- names(which(estimation$zscores_est != 0))
-detected_bh <- names(which(p.adjust(pvalues, method = "BH") < 0.05))
-ebc_tidy(detected, otus_da, m = length(otu_to_kepp), measures = c("TPR", "FDR", "ACC", "F1", "BACC"))
-ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp), measures = c("TPR", "FDR", "ACC", "F1", "BACC"))
+pvalues_bh <- p.adjust(pvalues, method = "BH")
+detected_bh <- names(which(pvalues_bh < 0.05))
+mm <- c("TPR", "FPR", "FDR", "ACC", "F1", "BACC")
+ebc_tidy(detected, otus_da, m = length(otu_to_kepp), measures = )
+ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp), measures = mm)
+ebc_tidy(c(), otus_da, m = length(otu_to_kepp), measures = mm)
+ebc_tidy(otu_to_kepp, otus_da, m = length(otu_to_kepp), measures = mm)
+
+map_dfr(list(detected, detected_bh, c(), otu_to_kepp), ebc_tidy, 
+        detected = otus_da, m = length(otu_to_kepp), measures = mm) %>% 
+  mutate(method = c("zazou", "bh", "nothing", "everything")) %>% 
+  select(method, everything())
 ```
 
 
@@ -214,32 +224,27 @@ plot(estimation,
 
 
 
-```{r curves}
-df <-
-  unique(estimation$zscores_est) %>%
-  c(0.1) %>%
-  enframe(name = NULL, value = "threshold") %>%
-  arrange(desc(threshold)) %>%
-  mutate(detected = map(threshold, ~ names(which(estimation$zscores_est < .))),
-         eval = map(detected, ebc_tidy, otus_da, m = length(otu_to_kepp),
-                    measures = c("TPR", "TNR", "F1"))) %>%
-  unnest(eval) %>% 
-  mutate(FPR = 1 - TNR)
+```{r AUC}
+df_measures_zazou <-
+  ebc_tidy_by_threshold(estimation$zscores_est, true = otus_da, 
+                        m  = length(otu_to_kepp), measures = mm) %>% 
+  mutate(method = "zazou")
+df_measures_bh <-
+  ebc_tidy_by_threshold(pvalues_bh, true = otus_da, 
+                        m  = length(otu_to_kepp), measures = mm)%>% 
+  mutate(method = "bh")
 
-df %>%
+df_measures <- rbind(df_measures_zazou, df_measures_bh)
+
+df_measures %>%
   arrange(FPR, TPR) %>%
   ggplot() +
-  aes(x = FPR, y = TPR) +
+  aes(x = FPR, y = TPR, color = method) +
   geom_point() +
-  geom_line() +
-  geom_label(aes(label = round(threshold, 2)))
+  geom_line()
 
-df %>%
-  arrange(threshold, F1) %>%
-  ggplot() +
-  aes(x = threshold, y = F1) +
-  geom_point() +
-  geom_line() +
-  geom_label(aes(label = round(threshold, 2)))
+ebc_AUC(estimation$zscores_est, true = otus_da, m  = length(otu_to_kepp))
+ebc_AUC(pvalues_bh, true = otus_da, m  = length(otu_to_kepp))
+
 ```
 
