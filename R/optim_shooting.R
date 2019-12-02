@@ -20,19 +20,25 @@
 #'
 #' @examples
 #' solve_univariate(1:4, -(4:1), 2)
-solve_univariate <- function(y, x, lambda = 0, allow_positive = FALSE) {
+solve_univariate <- function(y, x, lambda = 0, allow_positive = FALSE, ...) {
   ytx <- crossprod(y, x)
   ## In all cases, return 0 if abs(ytx) is too small
-  if (abs(ytx) < lambda) return(0)
+  if (abs(ytx) < lambda) {
+    return(0)
+  }
   ## In all cases, return (ytx + lambda) / crossprod(x) if ytx < -lambda
-  if (ytx < -lambda) return( drop((ytx + lambda) / crossprod(x)) )
+  if (ytx < -lambda) {
+    return(drop((ytx + lambda) / crossprod(x)))
+  }
   ## Remaining cases: ytx > lambda
   ## If any x[i] > 0, allow_positive is void, return 0
-  if (!allow_positive || any(x > 0)) return(0)
+  if (!allow_positive || any(x > 0)) {
+    return(0)
+  }
   ## Current case: ytx > lambda, allow_positive and all x[i] < 0
   ##               mitigate (ytx - lambda) / crossprod(x) by beta_max
   beta_max <- min(pmin(y, 0) / x, na.rm = TRUE) ## min_i (y[i]_- / x[i]_-)
-  min(beta_max, drop((ytx - lambda) / crossprod(x)) )
+  min(beta_max, drop((ytx - lambda) / crossprod(x)))
 }
 
 #' @rdname solve_univariate
@@ -41,7 +47,7 @@ solve_univariate <- function(y, x, lambda = 0, allow_positive = FALSE) {
 #' @param X a matrix of size  x p.
 #' @param prob a vector of probability weights for obtaining the coordinates
 #' to be sampled.
-#' @param ... additional parameters.
+#' @param ... further arguments passed to or from other methods.
 #'
 #' @return the estimated value of beta
 #' @export
@@ -52,14 +58,14 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
   yhat <- X %*% beta0
   fn_obj <- compute_objective_function(y, X, lambda)
 
-  update_univariate <- function(beta, coord){
+  update_univariate <- function(beta, coord, ...){
     betai <- beta[coord]
     beta_i <- beta[-coord]
     xi <- X[, coord]
     yi <- y - yhat + betai * xi
 
     beta_next <- beta
-    beta_next[coord] <- solve_univariate(yi, xi, lambda)
+    beta_next[coord] <- solve_univariate(yi, xi, lambda, ...)
 
     # mise à jour de Yhat
     diff_beta <- beta_next - beta
@@ -77,7 +83,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
   while (i < p || progress > eps) {
     for (j in 1:p) {
       coord <- sample(p, size = 1, prob = prob)
-      beta <- update_univariate(beta, coord)
+      beta <- update_univariate(beta, coord, ...)
       i <- i + 1
     }
     new_obj <- fn_obj(beta)

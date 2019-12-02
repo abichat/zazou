@@ -5,7 +5,7 @@
 \alias{solve_multivariate}
 \title{Solve unidirectional constrained problem}
 \usage{
-solve_univariate(y, x, lambda = 0, allow_positive = FALSE)
+solve_univariate(y, x, lambda = 0, allow_positive = FALSE, ...)
 
 solve_multivariate(beta0, y, X, lambda, prob = NULL, ...)
 }
@@ -19,14 +19,14 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, ...)
 \item{allow_positive}{Logical. Default FALSE. Allow positive values
 for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).}
 
+\item{...}{further arguments passed to or from other methods.}
+
 \item{beta0}{the initial position of beta.}
 
 \item{X}{a matrix of size  x p.}
 
 \item{prob}{a vector of probability weights for obtaining the coordinates
 to be sampled.}
-
-\item{...}{additional parameters.}
 }
 \value{
 The scalar solution of the 1D optimization problem

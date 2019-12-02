@@ -10,7 +10,7 @@
 #' @param alpha a grid of positive alpha parameters
 #' @param method method to use for the optimization. One of \code{L-BFGS-B}
 #' or \code{shooting}.
-#' @param ... additional parameters
+#' @param ... further arguments passed to or from other methods.
 #'
 #' @return an object of class \code{shiftestim}
 #'
@@ -32,7 +32,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
       opt <- c(opt, method = "L-BFGS-B")
     }
     if (method == "shooting") {
-      opt <- solve_multivariate(Delta0, Y, X, lambda)
+      opt <- solve_multivariate(Delta0, Y, X, lambda, ...)
     }
     return(opt)
   }

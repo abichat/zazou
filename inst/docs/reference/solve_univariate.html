@@ -139,7 +139,7 @@
 \(\beta &lt;= 0\) (or \(x\beta &lt;= 0\) coordinate wise)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>solve_univariate</span>(<span class='no'>y</span>, <span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>allow_positive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>solve_univariate</span>(<span class='no'>y</span>, <span class='no'>x</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>allow_positive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='fu'>solve_multivariate</span>(<span class='no'>beta0</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
@@ -164,6 +164,10 @@
 for \(\beta\) (but still enforce the constraint \(x\beta &lt;= 0\)).</p></td>
     </tr>
     <tr>
+      <th>...</th>
+      <td><p>further arguments passed to or from other methods.</p></td>
+    </tr>
+    <tr>
       <th>beta0</th>
       <td><p>the initial position of beta.</p></td>
     </tr>
@@ -175,10 +179,6 @@ for \(\beta\) (but still enforce the constraint \(x\beta &lt;= 0\)).</p></td>
       <th>prob</th>
       <td><p>a vector of probability weights for obtaining the coordinates
 to be sampled.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional parameters.</p></td>
     </tr>
     </table>
 

@@ -29,7 +29,7 @@ estimate_shifts(
 \item{method}{method to use for the optimization. One of \code{L-BFGS-B}
 or \code{shooting}.}
 
-\item{...}{additional parameters}
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
 an object of class \code{shiftestim}
