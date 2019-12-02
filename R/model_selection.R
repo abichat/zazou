@@ -44,7 +44,8 @@ pbic <- function(obs_zscores, est_zscores, est_shifts, sigma, alpha, tree){
   cov <- covariance_matrix(tree, alpha)
   inv_cov <- solve(cov)
   mat <- nu * t(res_inc) %*% inv_cov %*% res_inc
-  - 2 * LL + 2 * k * log(2 * N - 3) + 2 * log(N) + log(det(mat))
+  logdet <- determinant(mat, logarithm = TRUE)$modulus[1]
+  - 2 * LL + 2 * k * log(2 * N - 3) + 2 * log(N) + logdet
 }
 
 
