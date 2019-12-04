@@ -10,6 +10,7 @@
 #' @param alpha a grid of positive alpha parameters
 #' @param method method to use for the optimization. One of \code{L-BFGS-B}
 #' or \code{shooting}.
+#' @param criterion criterion on which the selection is done.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return an object of class \code{shiftestim}
@@ -18,9 +19,11 @@
 #' @export
 #' @importFrom stats optim
 estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
-                             method = c("L-BFGS-B", "shooting"), ...){
+                            method = c("L-BFGS-B", "shooting"),
+                            criterion = c("bic", "pbic"), ...){
 
   method <- match.arg(method)
+  criterion <- match.arg(criterion)
 
   ## local estimation routine (for a single lambda)
   fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
@@ -38,7 +41,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   }
 
   ## Bookkeeping variables
-  best_bic <- Inf
+  best_criterion <- Inf
   bic_df <- data.frame(alpha  = numeric(0),
                        lambda = numeric(0),
                        objective_value = numeric(0),
@@ -71,17 +74,21 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
         listopt = opt, tree = tree, zscores = zscores,
         lambda = lam, alpha = alp)
       shifts <- c(shifts, list(current_model$shift_est))
+
       ## Update bic table
-      bic_df <- rbind(bic_df, data.frame(alpha = alp,
-                                         lambda = lam,
-                                         objective_value =
-                                           current_model$objective_value,
-                                         bic = current_model$bic,
-                                         pbic = current_model$pbic))
+      bic_df <- rbind(bic_df,
+                      data.frame(alpha = alp, lambda = lam,
+                                 objective_value =
+                                   current_model$objective_value,
+                                 bic = current_model$bic,
+                                 pbic = current_model$pbic))
+
       ## Update best model
-      if (current_model$bic < best_bic) {
+      current_criterion <- getElement(current_model, criterion)
+      if (is.finite(current_criterion) &&
+          current_criterion < best_criterion) {
         best_model <- current_model
-        best_bic   <- current_model$bic
+        best_criterion   <- current_criterion
       }
     } ## Close lambda loop
   } ## Close alpha loop
@@ -89,6 +96,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   if(any(c(length(alpha), length(current_lambda)) >= 2)){
     bic_df$shift_est <- shifts
     best_model$optim_info$bic_selection <- bic_df
+    best_model$optim_info$criterion <- criterion
     best_model$method <- paste(method, "with model selection")
   }
 

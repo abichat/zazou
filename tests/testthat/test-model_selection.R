@@ -31,6 +31,7 @@ test_that("a selection is done or not", {
   expect_equal(nrow(estS2$optim_info$bic_selection),
                length(grid) * formals(zazou:::lambda_grid)$n_lambda)
   expect_null(nrow(estS3$optim_info$bic_selection))
+  expect_equal(estS$optim_info$criterion, "bic")
   expect_true(grepl("with model selection", estS$method))
   expect_true(grepl("with model selection", estS2$method))
   expect_false(grepl("with model selection", estS3$method))
@@ -58,10 +59,22 @@ estL_notbest <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                                 lambda = lambda_notbest,
                                 tree = tree, method = "L-BFGS-B")
 
+
+
 test_that("the choosen model is the best one", {
   expect_equal(estL$shift_est, estL_best$shift_est)
   expect_true(estL_best$bic <= estL_notbest$bic)
   expect_lte(estL$bic, min(df_selection$bic))
+})
+
+est_pbic <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                            lambda = grid, tree = tree, criterion = "pbic",
+                            alpha = grid, method = "shooting")
+
+test_that("selection on pbic criterion is OK", {
+  expect_true(grepl("with model selection", est_pbic$method))
+  expect_equal(est_pbic$bic, min(est_pbic$optim_info$bic_selection$bic))
+  expect_equal(est_pbic$optim_info$criterion, "pbic")
 })
 
 test_that("the shifts inside `bic_selection` are correct", {

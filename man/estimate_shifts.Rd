@@ -11,6 +11,7 @@ estimate_shifts(
   alpha,
   lambda = NULL,
   method = c("L-BFGS-B", "shooting"),
+  criterion = c("bic", "pbic"),
   ...
 )
 }
@@ -28,6 +29,8 @@ estimate_shifts(
 
 \item{method}{method to use for the optimization. One of \code{L-BFGS-B}
 or \code{shooting}.}
+
+\item{criterion}{criterion on which the selection is done.}
 
 \item{...}{further arguments passed to or from other methods.}
 }
