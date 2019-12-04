@@ -40,8 +40,11 @@ create_clusters <- function(tree, N_clusters,
 
   if(method == "uniform"){
     clustering <- sample(x = seq_len(N_clusters),
-                         size = N_tips,
-                         replace = TRUE)
+                         size = N_tips, replace = TRUE)
+    while(length(unique(clustering)) != N_clusters){
+      clustering <- sample(x = seq_len(N_clusters),
+                           size = N_tips, replace = TRUE)
+    }
     names(clustering) <- tree$tip.label
   } else if (method == "monophyletic"){
     tree_hcl <- as.hclust.phylo(force_ultrametric(tree))

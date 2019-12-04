@@ -2,7 +2,7 @@ context("Clusters")
 
 library(ape)
 tree <- rtree(10)
-N <- 3
+N <- 4
 cl_mono <- create_clusters(tree, N)
 cl_para <- create_clusters(tree, N, "paraphyletic")
 cl_unif <- create_clusters(tree, N, "uniform")
@@ -17,9 +17,9 @@ test_that("create_clusters() has the correct format", {
   expect_equal(sort(names(cl_mono)), sort(tree$tip.label))
   expect_equal(sort(names(cl_para)), sort(tree$tip.label))
   expect_equal(sort(names(cl_unif)), sort(tree$tip.label))
-  expect_equal(max(cl_unif), N)
-  expect_equal(max(cl_para), N)
-  expect_equal(max(cl_unif), N)
+  expect_equal(length(unique(cl_mono)), N)
+  expect_equal(length(unique(cl_para)), N)
+  expect_equal(length(unique(cl_unif)), N)
   expect_equivalent(create_clusters(tree, 10), 1:10)
   expect_equivalent(create_clusters(tree, 1), rep(1, 10))
 })
