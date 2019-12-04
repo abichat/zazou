@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9004</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@
 <a class="sourceLine" id="cb7-3" data-line-number="3">                              <span class="dt">lambda =</span> <span class="dv">2</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>,</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">                              <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>)</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 169.281 sec elapsed</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 168.367 sec elapsed</span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7">est_lbfgsb</a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
@@ -172,7 +172,7 @@
 <a class="sourceLine" id="cb8-3" data-line-number="3">                                <span class="dt">lambda =</span> <span class="dv">2</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>,</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">                                <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>() <span class="co"># 10 times faster</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 10.74 sec elapsed</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 11.703 sec elapsed</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7">est_shooting <span class="co"># similar results</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
@@ -194,47 +194,94 @@
 <a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; Warning: Removed 1639 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="alcohol_files/figure-html/shooting-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
+<div id="shooting-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#shooting-1" class="anchor"></a>Shooting</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">est_shooting_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="dt">Delta0 =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, N_branch), <span class="dt">zscores =</span> zsco_obs,</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">                                <span class="dt">lambda =</span> <span class="dv">2</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>,</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">                                <span class="dt">method =</span> <span class="st">"shooting"</span>, <span class="dt">allow_positive =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>() <span class="co"># 10 times faster</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 11.645 sec elapsed</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">est_shooting_p <span class="co"># similar results</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; Regularization parameter: lambda = 2 </span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; Objective value: 1422.097</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; BIC: 5781.513</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; pBIC: 8332.175</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; 252 shifts have been identified (ie 86.7 % of sparsity)</span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; A parsimonious solution would involve 252 shifts</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; Estimated z-scores: -0.591 -0.704 -0.883 -0.883 -1.085 -0.883 -0.883 -0.883 -0.883 -0.883 ...</span></a>
+<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; 827 z-scores have been shifted (ie 12.9 % of sparsity)</span></a>
+<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting_p)</a>
+<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt; Warning: Removed 1639 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="alcohol_files/figure-html/shootingp-1.png" width="700" style="display: block; margin: auto;"></p>
+</div>
 </div>
 <div id="comparisons" class="section level1">
 <h1 class="hasAnchor">
 <a href="#comparisons" class="anchor"></a>Comparisons</h1>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">est_lbfgsb<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] 1422.097</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">est_shooting<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; [1] 1422.097</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">est_lbfgsb<span class="op">$</span>optim_info</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; $counts</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; function gradient </span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;       86       86 </span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; $convergence</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; [1] 0</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; $message</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; [1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15">est_shooting<span class="op">$</span>optim_info</a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; $iterations</span></a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; [1] 132300</span></a>
-<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; $last_progress</span></a>
-<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt; [1] 7.371954e-09</span></a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_lbfgsb<span class="op">$</span>zscores_obs, est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a></code></pre></div>
-<p><img src="alcohol_files/figure-html/unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_shooting<span class="op">$</span>zscores_obs, est_shooting<span class="op">$</span>zscores_est) <span class="op">+</span></a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">est_lbfgsb<span class="op">$</span>objective_value</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] 1422.097</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">est_shooting<span class="op">$</span>objective_value</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; [1] 1422.097</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">est_shooting_p<span class="op">$</span>objective_value</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; [1] 1422.097</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">est_lbfgsb<span class="op">$</span>optim_info</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; $counts</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; function gradient </span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt;       86       86 </span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; $convergence</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; [1] 0</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; $message</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; [1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17">est_shooting<span class="op">$</span>optim_info</a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; $iterations</span></a>
+<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; [1] 132300</span></a>
+<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; $last_progress</span></a>
+<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; [1] 7.371954e-09</span></a>
+<a class="sourceLine" id="cb10-23" data-line-number="23">est_shooting_p<span class="op">$</span>optim_info</a>
+<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; $iterations</span></a>
+<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="co">#&gt; [1] 141750</span></a>
+<a class="sourceLine" id="cb10-26" data-line-number="26"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt; $last_progress</span></a>
+<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; [1] 7.694189e-09</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_lbfgsb<span class="op">$</span>zscores_obs, est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a></code></pre></div>
+<p><img src="alcohol_files/figure-html/unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_shooting<span class="op">$</span>zscores_obs, est_shooting<span class="op">$</span>zscores_est) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a></code></pre></div>
 <p><img src="alcohol_files/figure-html/unnamed-chunk-4-2.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="op">-</span>est_shooting<span class="op">$</span>zscores_est, <span class="op">-</span>est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_shooting_p<span class="op">$</span>zscores_obs, est_shooting_p<span class="op">$</span>zscores_est) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a></code></pre></div>
 <p><img src="alcohol_files/figure-html/unnamed-chunk-4-3.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="op">-</span>est_shooting<span class="op">$</span>shift_est, <span class="op">-</span>est_lbfgsb<span class="op">$</span>shift_est) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="op">-</span>est_shooting<span class="op">$</span>zscores_est, <span class="op">-</span>est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></a></code></pre></div>
 <p><img src="alcohol_files/figure-html/unnamed-chunk-4-4.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="op">-</span>est_shooting<span class="op">$</span>shift_est, <span class="op">-</span>est_lbfgsb<span class="op">$</span>shift_est) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></a></code></pre></div>
+<p><img src="alcohol_files/figure-html/unnamed-chunk-4-5.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="op">-</span>est_shooting<span class="op">$</span>shift_est, <span class="op">-</span>est_shooting_p<span class="op">$</span>shift_est) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></a></code></pre></div>
+<p><img src="alcohol_files/figure-html/unnamed-chunk-4-6.png" width="700" style="display: block; margin: auto;"></p>
 </div>
   </div>
 
@@ -251,6 +298,7 @@
 <a href="#shift-estimation">Shift estimation</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#l-bfgs-b">L-BFGS-B</a></li>
       <li><a href="#shooting">Shooting</a></li>
+      <li><a href="#shooting-1">Shooting</a></li>
       </ul>
 </li>
       <li><a href="#comparisons">Comparisons</a></li>

@@ -3,8 +3,8 @@ zazou
 =====
 
 <!-- badges: start -->
-<!-- [![Last-changedate](https://img.shields.io/badge/Last%20change-Nov-yellowgreen.svg)]() -->
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.0.9003-orange.svg)]()
+<!-- [![Last-changedate](https://img.shields.io/badge/Last%20change-Dec-yellowgreen.svg)]() -->
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.0.9004-orange.svg)]()
 <!-- badges: end -->
 
 The goal of **zazou** is to model the evolution of z-scores along a tree
