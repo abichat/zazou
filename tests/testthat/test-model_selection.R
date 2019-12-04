@@ -23,7 +23,8 @@ estS2 <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
 
 estS3 <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                          tree = tree, alpha = 1, lambda = 2,
-                         method = "shooting")
+                         method = "shooting", allow_positive = TRUE,
+                         unknow = 3)
 
 test_that("a selection is done or not", {
   expect_equal(ncol(estS$optim_info$bic_selection), 6)
@@ -35,6 +36,13 @@ test_that("a selection is done or not", {
   expect_true(grepl("with model selection", estS$method))
   expect_true(grepl("with model selection", estS2$method))
   expect_false(grepl("with model selection", estS3$method))
+})
+
+test_that("supplementary arguments are tracked", {
+  expect_length(estS$optim_info$supp_arg, 0)
+  expect_length(estS3$optim_info$supp_arg, 2)
+  expect_equal(names(estS3$optim_info$supp_arg),
+               c("allow_positive", "unknow"))
 })
 
 # Second tests

@@ -130,7 +130,7 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3">                              <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">                              <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>)</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 0.01 sec elapsed</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 0.009 sec elapsed</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7">est_lbfgsb</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; Tree is binary with 21 leafs and 40 branches</span></a>
 <a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 7.198 </span></a>
@@ -161,7 +161,7 @@
 <a class="sourceLine" id="cb6-4" data-line-number="4">                                <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5">                                <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 0.056 sec elapsed</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 0.053 sec elapsed</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8">est_shooting</a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Tree is binary with 21 leafs and 40 branches</span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 7.198 </span></a>
@@ -201,12 +201,18 @@
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; $message</span></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; [1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15">est_shooting<span class="op">$</span>optim_info</a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; $iterations</span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; [1] 2520</span></a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; $last_progress</span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; [1] 9.347276e-09</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; $supp_arg</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; list()</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18">est_shooting<span class="op">$</span>optim_info</a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; $iterations</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; [1] 2520</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; $last_progress</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; [1] 9.347276e-09</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; $supp_arg</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; list()</span></a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_lbfgsb<span class="op">$</span>zscores_obs, est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span></a>

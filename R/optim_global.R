@@ -100,5 +100,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
     best_model$method <- paste(method, "with model selection")
   }
 
+  best_model$optim_info$supp_arg <- list(...)
+
   return(best_model)
 }
