@@ -22,6 +22,7 @@ test_that("create_clusters() has the correct format", {
   expect_equal(length(unique(cl_unif)), N)
   expect_equivalent(create_clusters(tree, 10), 1:10)
   expect_equivalent(create_clusters(tree, 1), rep(1, 10))
+  expect_equal(length(unique(create_clusters(tree, 9, "uniform"))), 9)
 })
 
 test_that("create_clusters() throws errors", {
