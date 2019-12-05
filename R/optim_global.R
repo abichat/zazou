@@ -61,7 +61,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
 
     ## Set lambda grid for inner loop on lambda
     if (is.null(lambda)) {
-      current_lambda <- lambda_grid(X, Y)
+      current_lambda <- lambda_grid(x = X, y = Y, ...)
     } else {
       current_lambda <- lambda
     }

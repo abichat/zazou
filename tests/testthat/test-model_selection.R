@@ -30,7 +30,7 @@ test_that("a selection is done or not", {
   expect_equal(ncol(estS$optim_info$bic_selection), 6)
   expect_equal(nrow(estS$optim_info$bic_selection), length(grid) ^ 2)
   expect_equal(nrow(estS2$optim_info$bic_selection),
-               length(grid) * formals(zazou:::lambda_grid)$n_lambda)
+               length(grid) * formals(lambda_grid)$n_lambda)
   expect_null(nrow(estS3$optim_info$bic_selection))
   expect_equal(estS$optim_info$criterion, "bic")
   expect_true(grepl("with model selection", estS$method))

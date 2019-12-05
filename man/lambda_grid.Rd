@@ -4,7 +4,7 @@
 \alias{lambda_grid}
 \title{Helper function to compute a logarithmic lambda grid}
 \usage{
-lambda_grid(x, y, n_lambda = 10, min_ratio = 0.01)
+lambda_grid(x, y, n_lambda = 10, min_ratio = 0.01, ...)
 }
 \arguments{
 \item{x}{Design matrix.}
@@ -15,6 +15,9 @@ lambda_grid(x, y, n_lambda = 10, min_ratio = 0.01)
 
 \item{min_ratio}{Ratio between the minimum and maximum values in
 the lambda grid.}
+
+\item{...}{Not used, here for avoiding errors when passing unknow arguments
+from previous ellipsis.}
 }
 \value{
 a numeric vector of length \code{nlambda}

@@ -33,6 +33,7 @@ reference:
     - '`plot_shifts`'
     - '`extract_models`'
     - '`bic`'
+    - '`lambda_grid`'
     - '`as_shiftestim`'
   - title: About trees
     desc: ~

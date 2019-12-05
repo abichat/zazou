@@ -56,10 +56,13 @@ pbic <- function(obs_zscores, est_zscores, est_shifts, sigma, alpha, tree){
 #' @param n_lambda Length of the lambda grid.
 #' @param min_ratio Ratio between the minimum and maximum values in
 #' the lambda grid.
+#' @param ... Not used, here for avoiding errors when passing unknow arguments
+#' from previous ellipsis.
 #'
+#' @export
 #' @return a numeric vector of length \code{nlambda}
 #'
-lambda_grid <- function(x, y, n_lambda = 10, min_ratio = 1e-2) {
+lambda_grid <- function(x, y, n_lambda = 10, min_ratio = 1e-2, ...) {
   ## center y and x
   y <- scale(y, center = TRUE, scale = FALSE)
   x <- scale(x, center = TRUE, scale = FALSE)
