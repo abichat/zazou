@@ -4,14 +4,14 @@
 \alias{scaled_lasso}
 \title{Scaled lasso}
 \usage{
-scaled_lasso(Y, X, projected = TRUE, ...)
+scaled_lasso(y, X, projected = TRUE, ...)
 }
 \arguments{
-\item{Y}{A vector of size m.}
+\item{y}{A vector of size m.}
 
 \item{X}{A vector of size m*(n+m).}
 
-\item{projected}{Logical. Should \code{beta_init} be projected on \eqn{\mathbb{R}_{-}} ?}
+\item{projected}{Logical. Should each coordinate of \code{beta_init} be projected on \eqn{\mathbb{R}_{-}}?}
 
 \item{...}{Not used, here for avoiding errors when passing unknown arguments
 from previous ellipsis.}

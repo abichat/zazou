@@ -24,6 +24,7 @@ Imports:
     cluster,
     ggtree,
     graphics,
+    hdi,
     scalreg,
     stats,
     stringr,

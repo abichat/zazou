@@ -82,6 +82,8 @@ library(testthat)
 
 # use_r("optim_scaled")
 
+# use_r("optim_desparsified")
+
 
 ####
 

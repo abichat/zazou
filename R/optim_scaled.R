@@ -2,9 +2,9 @@
 #'
 #' Scaled lasso to compute \code{beta_init} and \code{hsigma}.
 #'
-#' @param Y A vector of size m.
+#' @param y A vector of size m.
 #' @param X A vector of size m*(n+m).
-#' @param projected Logical. Should \code{beta_init} be projected on \eqn{\mathbb{R}_{-}} ?
+#' @param projected Logical. Should each coordinate of \code{beta_init} be projected on \eqn{\mathbb{R}_{-}}?
 #' @param ... Not used, here for avoiding errors when passing unknown arguments
 #' from previous ellipsis.
 #'
@@ -12,8 +12,8 @@
 #' @export
 #' @importFrom scalreg scalreg
 #'
-scaled_lasso <- function(Y, X, projected = TRUE, ...){
-  object <- scalreg(X, Y)
+scaled_lasso <- function(y, X, projected = TRUE, ...){
+  object <- scalreg(X, y)
   beta_init <- object$coefficients
   if(projected){
     beta_init[beta_init > 0] <- 0
