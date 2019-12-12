@@ -80,6 +80,8 @@ library(testthat)
 # use_r("clusters")
 # use_test("clusters")
 
+# use_r("optim_scaled")
+
 
 ####
 
