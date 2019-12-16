@@ -4,9 +4,9 @@ m <- 10
 n <- 100
 
 X <- matrix(rnorm(m*n), nrow = n, ncol = m)
-y <- - 3 * x[, 1] - 5 * x[, 2] + 4 * x[, 3] + rnorm(n)
+y <- - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
 
-scla <- scaled_lasso(y = y, X = x)
+scla <- scaled_lasso(y = y, X = X)
 
 test_that("scaled_lasso() has correct dimensions", {
   expect_length(scla, 2)
@@ -18,9 +18,11 @@ test_that("scaled_lasso() has correct dimensions", {
 
 scosys <- score_system(X = X, y = y, beta_init = scla$beta_init,
                        hsigma = scla$hsigma)
+D <- diag(crossprod(scosys))
 
 test_that("score_system() has correct dimensions", {
   expect_equal(dim(scosys), dim(X))
+  expect_equal(D, rep(D[1], m))
 })
 
 tau <- noise_factor(X = X, score_system = scosys)
@@ -42,4 +44,4 @@ test_that("size_half_confint() has correct dimensions", {
 })
 
 data.frame(lower = beta - hci, estimate = beta,
-           upper = beta + hci, signif = beta > abs(hci))
+           upper = beta + hci, signif = abs(beta) > hci)
