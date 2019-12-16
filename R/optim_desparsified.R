@@ -38,11 +38,28 @@ noise_factor <- function(X, score_system) {
 #' @inheritParams score_system
 #' @inheritParams noise_factor
 #'
-#' @return The one-step self-bias corrected estimator of beta.
+#' @return The one-step self-bias corrected estimator of beta, size m.
 #' @export
 beta <- function(X, y, beta_init, score_system) {
   res <- y - X %*% beta_init
   num <- colSums(score_system * res)
   den <- colSums(score_system * X)
   beta_init + num / den
+}
+
+#' Size of the half confidence interval
+#'
+#' Compute the size of the half confidence interval, depending on the desired
+#' level of confidence \code{alpha}.
+#'
+#' @param noise_factor Noise factor, size m.
+#' @param alpha The confidence level.
+#' @inheritParams score_system
+#'
+#' @return The half-size of the confidence interval for each beta, size m.
+#' @export
+size_half_confint <- function(noise_factor, hsigma, alpha = 0.05){
+  stopifnot(length(hsigma) == 1)
+  stopifnot(length(alpha) == 1)
+  qnorm(1 - alpha / 2) * noise_factor * hsigma
 }

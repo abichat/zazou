@@ -16,7 +16,7 @@ beta(X, y, beta_init, score_system)
 \item{score_system}{Score system of X}
 }
 \value{
-The one-step self-bias corrected estimator of beta.
+The one-step self-bias corrected estimator of beta, size m.
 }
 \description{
 Compute beta
