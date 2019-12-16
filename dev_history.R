@@ -85,6 +85,7 @@ library(testthat)
 # use_r("optim_desparsified")
 
 # use_test("desparsified_internal")
+# use_test("desparsified_midlevel")
 
 
 ####

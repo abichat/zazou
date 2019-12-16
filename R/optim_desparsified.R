@@ -17,7 +17,9 @@ score_system <- function(X, y, beta_init, hsigma) {
       lasso.proj(x = X, y = y, betainit = beta_init,
                  sigma = hsigma, return.Z = TRUE)
     ))
-  obj$Z
+  sco <- obj$Z
+  attr(sco, "scaled:scale") <- NULL
+  sco
 }
 
 #' Noise factor
@@ -42,7 +44,7 @@ noise_factor <- function(X, score_system) {
 #' @export
 beta <- function(X, y, beta_init, score_system) {
   res <- y - X %*% beta_init
-  num <- colSums(score_system * res)
+  num <- t(score_system) %*% res
   den <- colSums(score_system * X)
   beta_init + num / den
 }
