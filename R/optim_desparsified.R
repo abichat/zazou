@@ -30,7 +30,7 @@ score_system <- function(X, y, beta_init, hsigma) {
 #' @return The vector of noise factor, size (n+m)
 #' @export
 noise_factor <- function(X, score_system) {
-  num <- colSums(score_system ^ 2)
+  num <- sqrt(colSums(score_system ^ 2))
   den <- colSums(X * score_system)
   num / den
 }

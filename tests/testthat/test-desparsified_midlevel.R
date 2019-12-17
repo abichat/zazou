@@ -18,11 +18,9 @@ test_that("scaled_lasso() has correct dimensions", {
 
 scosys <- score_system(X = X, y = y, beta_init = scla$beta_init,
                        hsigma = scla$hsigma)
-D <- diag(crossprod(scosys))
 
 test_that("score_system() has correct dimensions", {
   expect_equal(dim(scosys), dim(X))
-  expect_equal(D, rep(D[1], m))
 })
 
 tau <- noise_factor(X = X, score_system = scosys)
