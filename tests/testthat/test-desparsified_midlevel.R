@@ -12,12 +12,17 @@ y <- -30 - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
 # y <- y - mean(y)
 
 Beta0 <- rep(0, ncol(X))
-scla <- scaled_lasso(y = y, X = X, projected = FALSE)
-scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1, use_constraint = FALSE, allow_positive = TRUE)
-beta <- scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1, use_constraint = FALSE, allow_positive = TRUE)$beta
-scaled_lasso2(y = y, X = X, beta0 = beta, lambda = 10^-1, use_constraint = TRUE, allow_positive = TRUE)
-max(X %*% beta)
+## very similar results for scalreg and scaled_lasso2, not very different from scaled_lasso
 scalreg(X, y, lam0 = 10^-1)
+scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1,
+              constraint_type = "yhat")
+scaled_lasso(y = y, X = X, projected = FALSE)
+# scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1, use_constraint = TRUE, constraint_type = "yhat")
+# scaled_lasso2(y = y, X = X, beta0 = beta, lambda = 10^-1, use_constraint = TRUE, constraint_type = "yhat")
+
+## Solve multivariate also gives very similar results when using the proper lambda (as expected)
+solve_multivariate(beta0 = Beta0, y = y, X = X, lambda = nrow(X) * 10^-1, constraint_type = "yhat")
+
 
 test_that("scaled_lasso() has correct dimensions", {
   expect_length(scla, 2)

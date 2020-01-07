@@ -83,20 +83,18 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
   yhat <- X %*% beta0
   fn_obj <- compute_objective_function(y, X, lambda)
 
+  ## update_univariate only has side effects
   update_univariate <- function(beta, coord, ...){
     betai <- beta[coord]
-    beta_i <- beta[-coord]
     xi <- X[, coord]
-    yi <- y - yhat + betai * xi
-
-    beta_next <- beta # Problem with relaxed negaitivity constraint
-    beta_next[coord] <- solve_univariate(yi, xi, lambda, ...)
-
-    # mise à jour de Yhat
-    diff_beta <- beta_next - beta
-    yhat <<- yhat + diff_beta[coord] * xi
-
-    beta_next
+    zi <- yhat - betai * xi ## X[ , -coord] %*% beta[-coord]
+    # update betai
+    betai <- solve_univariate(y = y, x = xi, z = zi, lambda = lambda, ...)
+    # update yhat and beta
+    yhat <<- zi + betai * xi
+    # update beta and return it
+    beta[coord] <- betai
+    beta
   }
 
 
