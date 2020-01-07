@@ -14,8 +14,10 @@
 score_system <- function(X, y, beta_init, hsigma) {
   obj <-
     suppressWarnings(suppressMessages(
-      lasso.proj(x = X, y = y, betainit = beta_init,
-                 sigma = hsigma, return.Z = TRUE)
+      hdi:::calculate.Z(x = X, parallel = FALSE, ncores = 1,
+                        verbose = FALSE, Z = NULL, do.ZnZ = FALSE)
+      # lasso.proj(x = X, y = y, betainit = beta_init,
+      #            sigma = hsigma, return.Z = TRUE)
     ))
   sco <- obj$Z
   attr(sco, "scaled:scale") <- NULL
@@ -31,7 +33,8 @@ score_system <- function(X, y, beta_init, hsigma) {
 #' @export
 noise_factor <- function(X, score_system) {
   num <- sqrt(colSums(score_system ^ 2))
-  den <- colSums(X * score_system)
+  # den <- colSums(X * score_system)
+  den <- nrow(X)
   num / den
 }
 
@@ -45,7 +48,8 @@ noise_factor <- function(X, score_system) {
 beta <- function(X, y, beta_init, score_system) {
   res <- y - X %*% beta_init
   num <- t(score_system) %*% res
-  den <- colSums(score_system * X)
+  # den <- colSums(score_system * X)
+  den <- nrow(X)
   beta_init + num / den
 }
 

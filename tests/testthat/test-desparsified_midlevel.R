@@ -3,17 +3,21 @@ context("Example desparsified for dimensions")
 m <- 10
 n <- 100
 
+set.seed(42)
+
 X <- matrix(rnorm(m*n), nrow = n, ncol = m)
 y <- - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
+X <- scale(X, center = TRUE, scale = FALSE)
+y <- y - mean(y)
 
-scla <- scaled_lasso(y = y, X = X)
+scla <- scaled_lasso(y = y, X = X, projected = FALSE)
 
 test_that("scaled_lasso() has correct dimensions", {
   expect_length(scla, 2)
   expect_length(scla$beta_init, m)
   expect_length(scla$hsigma, 1)
   expect_named(scla, c("beta_init", "hsigma"))
-  expect_true(all(scla$beta_init <= 0))
+  # expect_true(all(scla$beta_init <= 0))
 })
 
 scosys <- score_system(X = X, y = y, beta_init = scla$beta_init,
@@ -43,3 +47,12 @@ test_that("size_half_confint() has correct dimensions", {
 
 data.frame(lower = beta - hci, estimate = beta,
            upper = beta + hci, signif = abs(beta) > hci)
+
+bhat <- lasso.proj(x = X, y = y,
+                   # betainit = scla$beta_init, sigma = scla$hsigma,
+                   betainit = "scaled lasso",
+                   return.Z = TRUE, standardize = FALSE)$bhat
+
+(bhat - beta)
+(bhat - beta) / beta
+# plot(bhat, beta)
