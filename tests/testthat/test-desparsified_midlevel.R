@@ -7,13 +7,16 @@ set.seed(42)
 
 X <- matrix(rnorm(m*n), nrow = n, ncol = m)
 X <- cbind(1, X)
-y <- -20 - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
+y <- -30 - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
 # X <- scale(X, center = TRUE, scale = FALSE)
 # y <- y - mean(y)
 
 Beta0 <- rep(0, ncol(X))
 scla <- scaled_lasso(y = y, X = X, projected = FALSE)
-scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1, use_constraint = TRUE, allow_positive = TRUE)
+scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1, use_constraint = FALSE, allow_positive = TRUE)
+beta <- scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1, use_constraint = FALSE, allow_positive = TRUE)$beta
+scaled_lasso2(y = y, X = X, beta0 = beta, lambda = 10^-1, use_constraint = TRUE, allow_positive = TRUE)
+max(X %*% beta)
 scalreg(X, y, lam0 = 10^-1)
 
 test_that("scaled_lasso() has correct dimensions", {
