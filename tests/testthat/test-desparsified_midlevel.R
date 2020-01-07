@@ -10,7 +10,10 @@ y <- - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
 X <- scale(X, center = TRUE, scale = FALSE)
 y <- y - mean(y)
 
+Beta0 <- rep(0, ncol(X))
 scla <- scaled_lasso(y = y, X = X, projected = FALSE)
+scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1, use_constraint = FALSE)
+scalreg(X, y, lam0 = 10^-1)
 
 test_that("scaled_lasso() has correct dimensions", {
   expect_length(scla, 2)

@@ -20,3 +20,31 @@ scaled_lasso <- function(y, X, projected = TRUE, ...){
   }
   list(beta_init = beta_init, hsigma = object$hsigma)
 }
+
+update_sigma <- function(y, X, beta){
+  sqrt(sum((y - X %*% beta)^2) / nrow(X))
+}
+
+scaled_lasso2 <- function(beta0, y, X, lambda, ...){
+
+  n <- length(y)
+  p <- ncol(X)
+  beta <- beta0
+  sigma <- var(y) / n
+
+  i <- 0
+  eps <- 10 ^ -9
+  progress <- +Inf
+  obj <- compute_objective_function(y, X, n * sigma * lambda)(beta)
+
+  while (i < p || progress > eps) {
+    beta <- solve_multivariate(beta, y, X, n * sigma * lambda, ...)$par
+    sigma <- update_sigma(y, X, beta)
+    new_obj <- compute_objective_function(y, X, n * sigma * lambda)(beta)
+    progress <- abs(new_obj - obj) / obj
+    obj <- new_obj
+    cat(paste(c("Iteration:", i, round(sigma, 5), round(new_obj, 5))), "\n")
+    i <- i + 1
+  }
+  list(beta = beta, sigma = sigma)
+}
