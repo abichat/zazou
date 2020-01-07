@@ -1,22 +1,24 @@
 #' Solve unidirectional constrained problem
 #'
 #' This function minimizes \eqn{\beta} in the 1D problem
-#' \eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to
-#' \eqn{\beta <= 0} (or \eqn{x\beta <= 0} coordinate wise)
+#' \eqn{1/2 * ||y - z - x \beta||_2^2 + \lambda |\beta|} subject to
+#' either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} (coordinate wise).
 #'
 #' The analytical solution of this problem is given by
-#' \deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
-#' for the first constraint and is slightly more complicated for the second
-#' constraint (refer to the corresponding vignette)
+#' \deqn{\beta* = min(0, ((y-z)'x + \lambda) / x'x ).}
+#' when using the first constraint and is slightly more
+#' complex when using the second constraint
+#' (refer to the corresponding vignette)
 #'
 #' @param y a vector of size n.
 #' @param x a vector of size n.
+#' @param z a vector of size n.
 #' @param use_constraint Logical. Default TRUE. If \code{TRUE}, the return value
-#' \eqn{\beta} satisfies \eqn{\beta * x <= 0} coordinate wise
-#'
-#' @param allow_positive Logical. Default FALSE. Allow positive values
-#' for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).
-#' Not used if \code{use_constraint} is set to \code{TRUE}.
+#' \eqn{\beta} satisfies either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} coordinate wise.
+#' @param constraint_type Either "beta" (default) or "yhat". Ensures that
+#' all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or
+#' \eqn{z + x\beta} (for \code{constraint_type = "yhat"}) are negative.
+#' Not used if \code{use_constraint} is set to \code{FALSE}.
 #' @inheritParams estimate_shifts
 #'
 #' @return The scalar solution \eqn{\beta} of the 1D optimization problem
@@ -24,9 +26,16 @@
 #'
 #' @examples
 #' solve_univariate(1:4, -(4:1), 2)
-solve_univariate <- function(y, x, lambda = 0, use_constraint = TRUE,
-                             allow_positive = FALSE, ...) {
-  ytx <- crossprod(y, x)
+solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
+                             use_constraint = TRUE,
+                             constraint_type = c("beta", "yhat"),
+                             ...) {
+  constraint_type <- match.arg(constraint_type)
+  allow_positive <- switch(constraint_type,
+    "beta" = FALSE,
+    "yhat" = TRUE
+  )
+  ytx <- crossprod(y - z, x)
   ## In all cases, return 0 if abs(ytx) is too small
   if (abs(ytx) < lambda) {
     return(0)
@@ -36,17 +45,24 @@ solve_univariate <- function(y, x, lambda = 0, use_constraint = TRUE,
     return(drop((ytx + lambda) / crossprod(x)))
   }
   ## Remaining cases: ytx > lambda
-  ## Without negativity constraint
+  ## - Without negativity constraint return shrinked estimate
   if (!use_constraint) {
       return(drop((ytx - lambda) / crossprod(x)))
   }
-  ## If any x[i] > 0, allow_positive is void, return 0
-  if (!allow_positive || any(x > 0)) {
+  ## - If any x[i] & z[i] > 0, allow_positive is void, return 0
+  if (!allow_positive || any( (x > 0) & (z > 0))) {
     return(0)
   }
-  ## Current case: ytx > lambda, allow_positive and all x[i] < 0
-  ##               mitigate (ytx - lambda) / crossprod(x) by beta_max
-  beta_max <- min(pmin(y, 0) / x, na.rm = TRUE) ## min_i (y[i]_- / x[i]_-)
+  ## - Else, ytx > lambda and constraint on yhat
+  ##               mitigate (ytx - lambda) / crossprod(x) by feasible set
+  ## Upper bound of feasible set: min_{i: x[i]>0} (-z[i] / x[i])
+  x_plus <- x > 0
+  if (any(x_plus)) { beta_max <- min( -z[x_plus] / x[x_plus]) } else {beta_max <- Inf}
+  ## Lower bound of feasible set: max_{i: x[i]<0} (-z[i] / x[i])
+  x_minus <- x < 0
+  if (any(x_minus)) { beta_min <- max( -z[x_minus] / x[x_minus]) } else {beta_min <- -Inf}
+  ## Check that z + x * beta <= 0 is feasible.
+  if (beta_min > beta_max) stop("The constraint is not feasible. Consider changing the constraint.")
   min(beta_max, drop((ytx - lambda) / crossprod(x)))
 }
 
