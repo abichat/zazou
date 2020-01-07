@@ -11,16 +11,21 @@
 #'
 #' @param y a vector of size n.
 #' @param x a vector of size n.
+#' @param use_constraint Logical. Default TRUE. If \code{TRUE}, the return value
+#' \eqn{\beta} satisfies \eqn{\beta * x <= 0} coordinate wise
+#'
 #' @param allow_positive Logical. Default FALSE. Allow positive values
 #' for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).
+#' Not used if \code{use_constraint} is set to \code{TRUE}.
 #' @inheritParams estimate_shifts
 #'
-#' @return The scalar solution of the 1D optimization problem
+#' @return The scalar solution \eqn{\beta} of the 1D optimization problem
 #' @export
 #'
 #' @examples
 #' solve_univariate(1:4, -(4:1), 2)
-solve_univariate <- function(y, x, lambda = 0, allow_positive = FALSE, ...) {
+solve_univariate <- function(y, x, lambda = 0, use_constraint = TRUE,
+                             allow_positive = FALSE, ...) {
   ytx <- crossprod(y, x)
   ## In all cases, return 0 if abs(ytx) is too small
   if (abs(ytx) < lambda) {
@@ -31,6 +36,10 @@ solve_univariate <- function(y, x, lambda = 0, allow_positive = FALSE, ...) {
     return(drop((ytx + lambda) / crossprod(x)))
   }
   ## Remaining cases: ytx > lambda
+  ## Without negativity constraint
+  if (!use_constraint) {
+      return(drop((ytx - lambda) / crossprod(x)))
+  }
   ## If any x[i] > 0, allow_positive is void, return 0
   if (!allow_positive || any(x > 0)) {
     return(0)

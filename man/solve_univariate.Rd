@@ -5,7 +5,14 @@
 \alias{solve_multivariate}
 \title{Solve unidirectional constrained problem}
 \usage{
-solve_univariate(y, x, lambda = 0, allow_positive = FALSE, ...)
+solve_univariate(
+  y,
+  x,
+  lambda = 0,
+  use_constraint = TRUE,
+  allow_positive = FALSE,
+  ...
+)
 
 solve_multivariate(beta0, y, X, lambda, prob = NULL, ...)
 }
@@ -16,8 +23,12 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, ...)
 
 \item{lambda}{a grid of positive regularization parameters}
 
+\item{use_constraint}{Logical. Default TRUE. If \code{TRUE}, the return value
+\eqn{\beta} satisfies \eqn{\beta * x <= 0} coordinate wise}
+
 \item{allow_positive}{Logical. Default FALSE. Allow positive values
-for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).}
+for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).
+Not used if \ocde{use_constraint} is set to \code{TRUE}.}
 
 \item{...}{further arguments passed to or from other methods.}
 
@@ -29,7 +40,7 @@ for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).}
 to be sampled.}
 }
 \value{
-The scalar solution of the 1D optimization problem
+The scalar solution \eqn{\beta} of the 1D optimization problem
 
 the estimated value of beta
 }
