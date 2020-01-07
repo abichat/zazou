@@ -43,8 +43,8 @@ scaled_lasso2 <- function(beta0, y, X, lambda, ...){
     new_obj <- compute_objective_function(y, X, n * sigma * lambda)(beta)
     progress <- abs(new_obj - obj) / obj
     obj <- new_obj
-    cat(paste(c("Iteration:", i, round(sigma, 5), round(new_obj, 5))), "\n")
+    # cat(paste(c("Iteration:", i, round(sigma, 5), round(new_obj, 5))), "\n")
     i <- i + 1
   }
-  list(beta = beta, sigma = sigma)
+  list(beta = beta, sigma = sigma, obj = obj)
 }

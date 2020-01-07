@@ -73,7 +73,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
     xi <- X[, coord]
     yi <- y - yhat + betai * xi
 
-    beta_next <- beta
+    beta_next <- beta # Problem with relaxed negaitivity constraint
     beta_next[coord] <- solve_univariate(yi, xi, lambda, ...)
 
     # mise à jour de Yhat
