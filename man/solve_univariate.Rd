@@ -8,9 +8,10 @@
 solve_univariate(
   y,
   x,
+  z = rep(0, length(y)),
   lambda = 0,
   use_constraint = TRUE,
-  allow_positive = FALSE,
+  constraint_type = c("beta", "yhat"),
   ...
 )
 
@@ -21,14 +22,17 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, ...)
 
 \item{x}{a vector of size n.}
 
+\item{z}{a vector of size n.}
+
 \item{lambda}{a grid of positive regularization parameters}
 
 \item{use_constraint}{Logical. Default TRUE. If \code{TRUE}, the return value
-\eqn{\beta} satisfies \eqn{\beta * x <= 0} coordinate wise}
+\eqn{\beta} satisfies either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} coordinate wise.}
 
-\item{allow_positive}{Logical. Default FALSE. Allow positive values
-for \eqn{\beta} (but still enforce the constraint \eqn{x\beta <= 0}).
-Not used if \ocde{use_constraint} is set to \code{TRUE}.}
+\item{constraint_type}{Either "beta" (default) or "yhat". Ensures that
+all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or
+\eqn{z + x\beta} (for \code{constraint_type = "yhat"}) are negative.
+Not used if \code{use_constraint} is set to \code{FALSE}.}
 
 \item{...}{further arguments passed to or from other methods.}
 
@@ -46,14 +50,15 @@ the estimated value of beta
 }
 \description{
 This function minimizes \eqn{\beta} in the 1D problem
-\eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to
-\eqn{\beta <= 0} (or \eqn{x\beta <= 0} coordinate wise)
+\eqn{1/2 * ||y - z - x \beta||_2^2 + \lambda |\beta|} subject to
+either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} (coordinate wise).
 }
 \details{
 The analytical solution of this problem is given by
-\deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
-for the first constraint and is slightly more complicated for the second
-constraint (refer to the corresponding vignette)
+\deqn{\beta* = min(0, ((y-z)'x + \lambda) / x'x ).}
+when using the first constraint and is slightly more
+complex when using the second constraint
+(refer to the corresponding vignette)
 }
 \examples{
 solve_univariate(1:4, -(4:1), 2)
