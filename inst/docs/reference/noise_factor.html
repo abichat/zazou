@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function to compute a logarithmic lambda grid — lambda_grid • zazou</title>
+<title>Noise factor — noise_factor • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Helper function to compute a logarithmic lambda grid — lambda_grid" />
-<meta property="og:description" content="Helper function to compute a logarithmic lambda grid" />
+<meta property="og:title" content="Noise factor — noise_factor" />
+<meta property="og:description" content="Noise factor" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,47 +129,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function to compute a logarithmic lambda grid</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/model_selection.R'><code>R/model_selection.R</code></a></small>
-    <div class="hidden name"><code>lambda_grid.Rd</code></div>
+    <h1>Noise factor</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
+    <div class="hidden name"><code>noise_factor.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Helper function to compute a logarithmic lambda grid</p>
+    <p>Noise factor</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lambda_grid</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>n_lambda</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>min_ratio</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>noise_factor</span>(<span class='no'>X</span>, <span class='no'>score_system</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Design matrix.</p></td>
+      <th>X</th>
+      <td><p>A vector of size m*(n+m).</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>Response vector.</p></td>
-    </tr>
-    <tr>
-      <th>n_lambda</th>
-      <td><p>Length of the lambda grid.</p></td>
-    </tr>
-    <tr>
-      <th>min_ratio</th>
-      <td><p>Ratio between the minimum and maximum values in
-the lambda grid.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Not used, here for avoiding errors when passing unknown arguments
-from previous ellipsis.</p></td>
+      <th>score_system</th>
+      <td><p>Score system of X</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a numeric vector of length <code>nlambda</code></p>
+    <p>The vector of noise factor, size (n+m)</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function to compute a logarithmic lambda grid — lambda_grid • zazou</title>
+<title>Scaled lasso — scaled_lasso • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Helper function to compute a logarithmic lambda grid — lambda_grid" />
-<meta property="og:description" content="Helper function to compute a logarithmic lambda grid" />
+<meta property="og:title" content="Scaled lasso — scaled_lasso" />
+<meta property="og:description" content="Scaled lasso to compute beta_init and hsigma." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,36 +129,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function to compute a logarithmic lambda grid</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/model_selection.R'><code>R/model_selection.R</code></a></small>
-    <div class="hidden name"><code>lambda_grid.Rd</code></div>
+    <h1>Scaled lasso</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_scaled.R'><code>R/optim_scaled.R</code></a></small>
+    <div class="hidden name"><code>scaled_lasso.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Helper function to compute a logarithmic lambda grid</p>
+    <p>Scaled lasso to compute <code>beta_init</code> and <code>hsigma</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lambda_grid</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>n_lambda</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>min_ratio</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>scaled_lasso</span>(<span class='no'>y</span>, <span class='no'>X</span>, <span class='kw'>projected</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Design matrix.</p></td>
-    </tr>
-    <tr>
       <th>y</th>
-      <td><p>Response vector.</p></td>
+      <td><p>A vector of size m.</p></td>
     </tr>
     <tr>
-      <th>n_lambda</th>
-      <td><p>Length of the lambda grid.</p></td>
+      <th>X</th>
+      <td><p>A vector of size m*(n+m).</p></td>
     </tr>
     <tr>
-      <th>min_ratio</th>
-      <td><p>Ratio between the minimum and maximum values in
-the lambda grid.</p></td>
+      <th>projected</th>
+      <td><p>Logical. Should each coordinate of <code>beta_init</code> be
+projected on \(R_{-}\)?</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -169,7 +165,7 @@ from previous ellipsis.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a numeric vector of length <code>nlambda</code></p>
+    <p>A list composed by <code>beta_init</code> and <code>hsigma</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

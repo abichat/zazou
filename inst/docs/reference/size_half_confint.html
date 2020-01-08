@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function to compute a logarithmic lambda grid — lambda_grid • zazou</title>
+<title>Size of the half confidence interval — size_half_confint • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Helper function to compute a logarithmic lambda grid — lambda_grid" />
-<meta property="og:description" content="Helper function to compute a logarithmic lambda grid" />
+<meta property="og:title" content="Size of the half confidence interval — size_half_confint" />
+<meta property="og:description" content="Compute the size of the half confidence interval, depending on the desired
+level of confidence alpha." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,47 +130,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function to compute a logarithmic lambda grid</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/model_selection.R'><code>R/model_selection.R</code></a></small>
-    <div class="hidden name"><code>lambda_grid.Rd</code></div>
+    <h1>Size of the half confidence interval</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
+    <div class="hidden name"><code>size_half_confint.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Helper function to compute a logarithmic lambda grid</p>
+    <p>Compute the size of the half confidence interval, depending on the desired
+level of confidence <code>alpha</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lambda_grid</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>n_lambda</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>min_ratio</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>size_half_confint</span>(<span class='no'>noise_factor</span>, <span class='no'>hsigma</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Design matrix.</p></td>
+      <th>noise_factor</th>
+      <td><p>Noise factor, size m.</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>Response vector.</p></td>
+      <th>hsigma</th>
+      <td><p>Estimate value of sigma, found with scaled lasso.</p></td>
     </tr>
     <tr>
-      <th>n_lambda</th>
-      <td><p>Length of the lambda grid.</p></td>
-    </tr>
-    <tr>
-      <th>min_ratio</th>
-      <td><p>Ratio between the minimum and maximum values in
-the lambda grid.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Not used, here for avoiding errors when passing unknown arguments
-from previous ellipsis.</p></td>
+      <th>alpha</th>
+      <td><p>The confidence level.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a numeric vector of length <code>nlambda</code></p>
+    <p>The half-size of the confidence interval for each beta, size m.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

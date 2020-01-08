@@ -11,6 +11,8 @@ navbar:
       menu:
       - text: Simulations
         href: articles/simulations.html
+      - text: Negativity constraints
+        href: articles/constraints.html
       - text: Comparisons
         href: articles/comparisons.html
       - text: Comparison of optimisation methods

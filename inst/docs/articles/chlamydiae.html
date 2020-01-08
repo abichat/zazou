@@ -54,6 +54,9 @@
       <a href="../articles/simulations.html">Simulations</a>
     </li>
     <li>
+      <a href="../articles/constraints.html">Negativity constraints</a>
+    </li>
+    <li>
       <a href="../articles/comparisons.html">Comparisons</a>
     </li>
     <li>
@@ -102,7 +105,12 @@
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt;   method     from</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt;   root.phylo ape</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tictoc)</a></code></pre></div>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; Attachement du package : 'zazou'</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; The following object is masked from 'package:base':</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;     beta</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tictoc)</a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(chlamydiae)</a></code></pre></div>
 <div id="z-scores" class="section level1">
 <h1 class="hasAnchor">
@@ -161,7 +169,7 @@
 <a class="sourceLine" id="cb6-4" data-line-number="4">                                <span class="dt">lambda =</span> <span class="fl">0.1</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5">                                <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 0.051 sec elapsed</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 0.04 sec elapsed</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8">est_shooting</a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Tree is binary with 21 leafs and 40 branches</span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 7.198 </span></a>
@@ -172,12 +180,12 @@
 <a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; BIC: 173.255</span></a>
 <a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; pBIC: 251.239</span></a>
 <a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; Estimated shifts: -0.076 0 0 0 -0.075 -2.207 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; Estimated shifts: -0.076 0 0 0 -0.073 -2.21 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; 17 shifts have been identified (ie 57.5 % of sparsity)</span></a>
 <a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; A parsimonious solution would involve 16 shifts</span></a>
 <a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; Observed z-scores:  -0.084 -0.084 -2.444 -2.423 -1.819 -0.041 -1.153 -1.153 -1.715  0.107 ...</span></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; Estimated z-scores: -0.076 -0.076 -2.358 -2.358  -1.75 -0.151 -1.114 -1.114 -1.622 -0.022 ...</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; Estimated z-scores: -0.076 -0.076 -2.359 -2.359  -1.75 -0.149 -1.114 -1.114 -1.622 -0.022 ...</span></a>
 <a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; 21 z-scores have been shifted (ie 0 % of sparsity)</span></a>
 <a class="sourceLine" id="cb6-25" data-line-number="25"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(est_shooting)</a>
 <a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; Warning: Removed 24 rows containing missing values (geom_label).</span></a></code></pre></div>
@@ -190,7 +198,7 @@
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">est_lbfgsb<span class="op">$</span>objective_value</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] 1.308043</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">est_shooting<span class="op">$</span>objective_value</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; [1] 1.308047</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; [1] 1.308043</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5">est_lbfgsb<span class="op">$</span>optim_info</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; $counts</span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; function gradient </span></a>
@@ -206,13 +214,25 @@
 <a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; list()</span></a>
 <a class="sourceLine" id="cb7-18" data-line-number="18">est_shooting<span class="op">$</span>optim_info</a>
 <a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; $iterations</span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; [1] 2520</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; [1] 64</span></a>
 <a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; $last_progress</span></a>
-<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; [1] 9.347276e-09</span></a>
-<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; $supp_arg</span></a>
-<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; list()</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; $objective_values</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;  [1] 14.753313  3.637279  2.215311  1.730633  1.593417  1.543307  1.517980</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt;  [8]  1.495295  1.476946  1.466247  1.455071  1.445121  1.436800  1.426272</span></a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; [15]  1.415454  1.407626  1.401459  1.395880  1.392353  1.388641  1.384468</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; [22]  1.380026  1.377226  1.373046  1.370338  1.367820  1.365079  1.361326</span></a>
+<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; [29]  1.357208  1.354054  1.350301  1.346229  1.343096  1.340629  1.335813</span></a>
+<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">#&gt; [36]  1.332287  1.329093  1.324836  1.321110  1.318276  1.314149  1.309773</span></a>
+<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">#&gt; [43]  1.308387  1.308244  1.308170  1.308130  1.308095  1.308075  1.308061</span></a>
+<a class="sourceLine" id="cb7-30" data-line-number="30"><span class="co">#&gt; [50]  1.308053  1.308050  1.308048  1.308046  1.308045  1.308044  1.308044</span></a>
+<a class="sourceLine" id="cb7-31" data-line-number="31"><span class="co">#&gt; [57]  1.308043  1.308043  1.308043  1.308043  1.308043  1.308043  1.308043</span></a>
+<a class="sourceLine" id="cb7-32" data-line-number="32"><span class="co">#&gt; [64]  1.308043</span></a>
+<a class="sourceLine" id="cb7-33" data-line-number="33"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-34" data-line-number="34"><span class="co">#&gt; $last_progress</span></a>
+<a class="sourceLine" id="cb7-35" data-line-number="35"><span class="co">#&gt; [1] 6.584924e-09</span></a>
+<a class="sourceLine" id="cb7-36" data-line-number="36"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-37" data-line-number="37"><span class="co">#&gt; $supp_arg</span></a>
+<a class="sourceLine" id="cb7-38" data-line-number="38"><span class="co">#&gt; list()</span></a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_lbfgsb<span class="op">$</span>zscores_obs, est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span></a>

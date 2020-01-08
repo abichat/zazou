@@ -87,6 +87,8 @@ library(testthat)
 # use_test("desparsified_internal")
 # use_test("desparsified_midlevel")
 
+# use_vignette("constraints")
+
 
 ####
 
