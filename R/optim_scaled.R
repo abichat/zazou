@@ -25,12 +25,16 @@ update_sigma <- function(y, X, beta){
   sqrt(sum((y - X %*% beta)^2) / nrow(X))
 }
 
-scaled_lasso2 <- function(beta0, y, X, lambda, ...){
+scaled_lasso2 <- function(beta0, y, X, lambda = NULL, ...){
 
   n <- length(y)
   p <- ncol(X)
   beta <- beta0
   sigma <- var(y) / n
+
+  if(is.null(lambda)){
+    lambda <- sqrt(2 * log(p)/n) # As in Sun and Zhang (2012)
+  }
 
   i <- 0
   eps <- 10 ^ -9
