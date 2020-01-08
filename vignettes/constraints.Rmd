@@ -70,6 +70,8 @@ estimation2
 plot(estimation2)
 ```
 
+Z-score are well recovered but the solution is absolutly not sparse. We should prioritize ancestral branches before 
+
 ### Constraint on yhat
 
 ```{r, error=TRUE}
@@ -80,7 +82,6 @@ estimation3 <- estimate_shifts(rep(0, M), zscores = true_zscores,
 estimation3
 plot(estimation3)
 ```
-
 
 ## All zscores could be positive
 
