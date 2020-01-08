@@ -81,22 +81,25 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
   beta <- beta0
 
   yhat <- X %*% beta0
-  fn_obj <- compute_objective_function(y, X, lambda)
+  # fn_obj <- compute_objective_function(y, X, lambda)
+  ## Fast alternative to compute_objective_function leveraging
+  ## the fact that we have access to yhat (= X %*% beta)
+  fn_obj <- function(beta) {
+    sum( (y - yhat)^2 ) / 2 - lambda * sum(beta)
+  }
 
-  ## update_univariate only has side effects
-  update_univariate <- function(beta, coord, ...){
+  ## update_coord only has side effects
+  update_coord <- function(coord, ...){
     betai <- beta[coord]
     xi <- X[, coord]
     zi <- yhat - betai * xi ## X[ , -coord] %*% beta[-coord]
     # update betai
     betai <- solve_univariate(y = y, x = xi, z = zi, lambda = lambda, ...)
-    # update yhat and beta
-    yhat <<- zi + betai * xi
-    # update beta and return it
-    beta[coord] <- betai
-    beta
+    # update beta
+    beta[coord] <<- betai
+    # update yhat
+    yhat <<- zi + betai * xi ## X %*% beta
   }
-
 
   i <- 0
   eps <- 10 ^ -8
@@ -106,7 +109,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
   while (i < p || progress > eps) {
     for (j in 1:p) {
       coord <- sample(p, size = 1, prob = prob)
-      beta <- update_univariate(beta, coord, ...)
+      update_coord(coord, ...)
       i <- i + 1
     }
     new_obj <- fn_obj(beta)
