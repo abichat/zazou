@@ -10,8 +10,8 @@
 compute_objective_function <- function(Y, X, lambda) {
   objective_function <- function(Delta) {
     YXD <- Y - X %*% Delta
-    shrinkage <- lambda * sum(Delta)
-    (sum(YXD^2) / 2 - shrinkage)
+    shrinkage <- lambda * sum(abs(Delta))
+    (sum(YXD^2) / 2 + shrinkage)
   }
   return(objective_function)
 }

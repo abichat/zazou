@@ -70,13 +70,14 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
 #'
 #' @param beta0 the initial position of beta.
 #' @param X a matrix of size  x p.
+#' @max.it Maximum number of iterations.
 #' @param prob a vector of probability weights for obtaining the coordinates
 #' to be sampled.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return the estimated value of beta
 #' @export
-solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
+solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, max.it = 100, ...) {
   p <- length(beta0)
   beta <- beta0
 
@@ -101,25 +102,25 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, ...) {
     yhat <<- zi + betai * xi ## X %*% beta
   }
 
-  i <- 0
+  it <- 1
   eps <- 10 ^ -8
   progress <- +Inf
-  obj <- fn_obj(beta0)
 
-  while (i < p || progress > eps) {
-    for (j in 1:p) {
-      coord <- sample(p, size = 1, prob = prob)
+  ## Keep track of objective values throughout the iterations
+  obj_vals <- rep(NA, max.it)
+  obj_vals[it] <- fn_obj(beta0)
+
+  while (it <= max.it && progress > eps) {
+    ## Update coordinates in random order (rather than random coordinates)
+    coord_order <- sample(p)
+    for (coord in coord_order) {
       update_coord(coord, ...)
-      i <- i + 1
     }
-    new_obj <- fn_obj(beta)
-    progress <- abs(new_obj - obj) / obj
-    obj <- new_obj
+    it <- it + 1
+    obj_vals[it] <- fn_obj(beta)
+    progress <- abs(obj_vals[it] - obj_vals[it - 1]) / obj_vals[it - 1]
   }
 
-
-  value <- fn_obj(beta)
-
-  list(par = beta, value = value, method = "shooting", iterations = i,
-       last_progress = progress)
+  list(par = beta, value = obj_vals[it], method = "shooting", iterations = it,
+       objective_values = obj_vals[1:it], last_progress = progress)
 }
