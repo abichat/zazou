@@ -32,49 +32,37 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
                              constraint_type = c("beta", "yhat"),
                              ...) {
   constraint_type <- match.arg(constraint_type)
-  allow_positive <- switch(constraint_type,
-    "beta" = FALSE,
-    "yhat" = TRUE
-  )
-  ytx <- crossprod(y - z, x)
-  ## In all cases, return 0 if abs(ytx) is too small
-  if (abs(ytx) < lambda) {
-    return(0)
-  }
-  ## In all cases, return (ytx + lambda) / crossprod(x) if ytx < -lambda
-  if (ytx < -lambda) {
-    return(drop((ytx + lambda) / crossprod(x)))
-  }
-  ## Remaining cases: ytx > lambda
-  ## - Without negativity constraint return shrinked estimate
-  if (!use_constraint) {
-      return(drop((ytx - lambda) / crossprod(x)))
-  }
-  ## - If any x[i] & z[i] > 0, allow_positive is void, return 0
-  if (!allow_positive || any( (x > 0) & (z > 0))) {
-    return(0)
-  }
-  ## - Else, ytx > lambda and constraint on yhat
-  ##               mitigate (ytx - lambda) / crossprod(x) by feasible set
-  ## Upper bound of feasible set: min_{i: x[i]>0} (-z[i] / x[i])
-  x_plus <- x > sqrt(.Machine$double.eps)
-  if (any(x_plus)) {
-    beta_max <- min(-z[x_plus] / x[x_plus])
-  } else {
-    beta_max <- Inf
-  }
-  ## Lower bound of feasible set: max_{i: x[i]<0} (-z[i] / x[i])
-  x_minus <- x < -sqrt(.Machine$double.eps)
-  if (any(x_minus)) {
-    beta_min <- max(-z[x_minus] / x[x_minus])
-  } else {
+  ## Compute unconstrained estimator
+  ytx <- sum((y - z) * x) ## crossprod(y -z, x)
+  if (abs(ytx) <= lambda) beta <- 0
+  if (ytx < -lambda) beta <- (ytx + lambda) / sum(x^2)
+  if (ytx > lambda)  beta <- (ytx - lambda) / sum(x^2)
+  ## Check constraint
+  if (!use_constraint) return(beta)
+  ## Compute feasible set
+  if (constraint_type == "beta") {
     beta_min <- -Inf
+    beta_max <- 0
+  } else { ## constraint_type == yhat
+    ## Upper bound of feasible set: min_{i: x[i]>0} (-z[i] / x[i])
+    x_plus <- x > sqrt(.Machine$double.eps)
+    if (any(x_plus)) {
+      beta_max <- min(-z[x_plus] / x[x_plus])
+    } else {
+      beta_max <- Inf
+    }
+    ## Lower bound of feasible set: max_{i: x[i]<0} (-z[i] / x[i])
+    x_minus <- x < -sqrt(.Machine$double.eps)
+    if (any(x_minus)) {
+      beta_min <- max(-z[x_minus] / x[x_minus])
+    } else {
+      beta_min <- -Inf
+    }
   }
-  ## Check that z + x * beta <= 0 is feasible.
-  if (beta_min > beta_max) {
-    stop("The constraint is not feasible. Consider changing the constraint.")
-  }
-  min(beta_max, drop((ytx - lambda) / crossprod(x)))
+  ## Check that feasible set (z + x * beta <= 0) is not empty
+  if (beta_min > beta_max) stop("The constraint is not feasible. Consider changing the constraint.")
+  ## Project unconstrained estimate beta to feasible set [beta_min, beta_min]
+  max(beta_min, min(beta, beta_max))
 }
 
 #' @rdname solve_univariate
