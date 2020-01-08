@@ -70,7 +70,7 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
 #'
 #' @param beta0 the initial position of beta.
 #' @param X a matrix of size  x p.
-#' @max.it Maximum number of iterations.
+#' @param max.it Maximum number of iterations.
 #' @param prob a vector of probability weights for obtaining the coordinates
 #' to be sampled.
 #' @param ... further arguments passed to or from other methods.
@@ -86,7 +86,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, max.it = 100, .
   ## Fast alternative to compute_objective_function leveraging
   ## the fact that we have access to yhat (= X %*% beta)
   fn_obj <- function(beta) {
-    sum( (y - yhat)^2 ) / 2 - lambda * sum(beta)
+    sum( (y - yhat)^2 ) / 2 + lambda * sum(abs(beta))
   }
 
   ## update_coord only has side effects
@@ -110,12 +110,13 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, max.it = 100, .
   obj_vals <- rep(NA, max.it)
   obj_vals[it] <- fn_obj(beta0)
 
-  while (it <= max.it && progress > eps) {
+  while (it < max.it && progress > eps) {
     ## Update coordinates in random order (rather than random coordinates)
     coord_order <- sample(p)
     for (coord in coord_order) {
       update_coord(coord, ...)
     }
+    ## Store current objective value and compute progress
     it <- it + 1
     obj_vals[it] <- fn_obj(beta)
     progress <- abs(obj_vals[it] - obj_vals[it - 1]) / obj_vals[it - 1]
