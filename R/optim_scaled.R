@@ -4,7 +4,8 @@
 #'
 #' @param y A vector of size m.
 #' @param X A vector of size m*(n+m).
-#' @param projected Logical. Should each coordinate of \code{beta_init} be projected on \eqn{\mathbb{R}_{-}}?
+#' @param projected Logical. Should each coordinate of \code{beta_init} be
+#' projected on \eqn{R_{-}}?
 #' @param ... Not used, here for avoiding errors when passing unknown arguments
 #' from previous ellipsis.
 #'
@@ -46,5 +47,5 @@ scaled_lasso2 <- function(beta0, y, X, lambda, ...){
     # cat(paste(c("Iteration:", i, round(sigma, 5), round(new_obj, 5))), "\n")
     i <- i + 1
   }
-  list(beta = beta, sigma = sigma, obj = obj)
+  list(beta_init = beta, hsigma = sigma)
 }

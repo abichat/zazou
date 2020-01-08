@@ -26,8 +26,9 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, max.it = 100, ...)
 
 \item{lambda}{a grid of positive regularization parameters}
 
-\item{use_constraint}{Logical. Default TRUE. If \code{TRUE}, the return value
-\eqn{\beta} satisfies either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} coordinate wise.}
+\item{use_constraint}{Logical. Default TRUE. If \code{TRUE}, the
+return value \eqn{\beta} satisfies either \eqn{\beta <= 0} or
+\eqn{z + x\beta <= 0} coordinate wise.}
 
 \item{constraint_type}{Either "beta" (default) or "yhat". Ensures that
 all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or

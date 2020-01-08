@@ -13,8 +13,9 @@
 #' @param y a vector of size n.
 #' @param x a vector of size n.
 #' @param z a vector of size n.
-#' @param use_constraint Logical. Default TRUE. If \code{TRUE}, the return value
-#' \eqn{\beta} satisfies either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} coordinate wise.
+#' @param use_constraint Logical. Default TRUE. If \code{TRUE}, the
+#' return value \eqn{\beta} satisfies either \eqn{\beta <= 0} or
+#' \eqn{z + x\beta <= 0} coordinate wise.
 #' @param constraint_type Either "beta" (default) or "yhat". Ensures that
 #' all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or
 #' \eqn{z + x\beta} (for \code{constraint_type = "yhat"}) are negative.
@@ -57,12 +58,21 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
   ##               mitigate (ytx - lambda) / crossprod(x) by feasible set
   ## Upper bound of feasible set: min_{i: x[i]>0} (-z[i] / x[i])
   x_plus <- x > 0
-  if (any(x_plus)) { beta_max <- min( -z[x_plus] / x[x_plus]) } else {beta_max <- Inf}
+  if (any(x_plus)) {
+    beta_max <- min(-z[x_plus] / x[x_plus])
+  } else {
+    beta_max <- Inf
+  }
   ## Lower bound of feasible set: max_{i: x[i]<0} (-z[i] / x[i])
   x_minus <- x < 0
-  if (any(x_minus)) { beta_min <- max( -z[x_minus] / x[x_minus]) } else {beta_min <- -Inf}
+  if (any(x_minus)) {
+    beta_min <- max(-z[x_minus] / x[x_minus])
+  } else {
+    beta_min <- -Inf
+  }
   ## Check that z + x * beta <= 0 is feasible.
-  if (beta_min > beta_max) stop("The constraint is not feasible. Consider changing the constraint.")
+  if (beta_min > beta_max)
+    stop("The constraint is not feasible. Consider changing the constraint.")
   min(beta_max, drop((ytx - lambda) / crossprod(x)))
 }
 
@@ -77,7 +87,8 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
 #'
 #' @return the estimated value of beta
 #' @export
-solve_multivariate <- function(beta0, y, X, lambda, prob = NULL, max.it = 100, ...) {
+solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
+                               max.it = 100, ...) {
   p <- length(beta0)
   beta <- beta0
 

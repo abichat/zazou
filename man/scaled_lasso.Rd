@@ -11,7 +11,8 @@ scaled_lasso(y, X, projected = TRUE, ...)
 
 \item{X}{A vector of size m*(n+m).}
 
-\item{projected}{Logical. Should each coordinate of \code{beta_init} be projected on \eqn{\mathbb{R}_{-}}?}
+\item{projected}{Logical. Should each coordinate of \code{beta_init} be
+projected on \eqn{R_{-}}?}
 
 \item{...}{Not used, here for avoiding errors when passing unknown arguments
 from previous ellipsis.}
