@@ -102,7 +102,8 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(zazou)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ape)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ape)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">1234</span>)</a></code></pre></div>
 <div id="tree" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tree" class="anchor"></a>Tree</h2>
@@ -129,32 +130,33 @@
 <h3 class="hasAnchor">
 <a href="#constraint-on-beta" class="anchor"></a>Constraint on beta</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">estimation1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, M), <span class="dt">zscores =</span> true_zscores, </a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">                              <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">estimation1</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; Objective value: 0.299</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; BIC: 45.861</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; pBIC: 58.47</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 1 shifts have been identified (ie 96.9 % of sparsity)</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; A parsimonious solution would involve 1 shifts</span></a>
-<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; Observed z-scores:  0 0 0 0 0 0 0 0 0     -3 ...</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; Estimated z-scores: 0 0 0 0 0 0 0 0 0 -2.987 ...</span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; 8 z-scores have been shifted (ie 52.9 % of sparsity)</span></a>
-<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation1)</a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; Warning: Removed 32 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2">                              <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> <span class="fl">0.1</span>, </a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">                              <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">estimation1</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; Objective value: 0.346</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; BIC: 62.866</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; pBIC: 71.018</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 -0.003 0 0 0 -0.005 ...</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 7 shifts have been identified (ie 78.1 % of sparsity)</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; A parsimonious solution would involve 6 shifts</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; Observed z-scores:  0 0 0      0      0      0      0      0      0     -3 ...</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; Estimated z-scores: 0 0 0 -0.003 -0.003 -0.008 -0.008 -0.011 -0.047 -2.903 ...</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; 14 z-scores have been shifted (ie 17.6 % of sparsity)</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation1)</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; Warning: Removed 26 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="constraints_files/figure-html/unnamed-chunk-3-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div id="all-zscores-are-negative-but-shifts-could-be-positive" class="section level2">
+<div id="all-z-scores-are-negative-but-shifts-could-be-positive" class="section level2">
 <h2 class="hasAnchor">
-<a href="#all-zscores-are-negative-but-shifts-could-be-positive" class="anchor"></a>All zscores are negative but shifts could be positive</h2>
+<a href="#all-z-scores-are-negative-but-shifts-could-be-positive" class="anchor"></a>All z-scores are negative but shifts could be positive</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">true_shifts[<span class="dv">13</span> <span class="op">*</span><span class="st"> </span>M <span class="op">/</span><span class="st"> </span><span class="dv">16</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">true_zscores &lt;-<span class="st"> </span>mat_incid <span class="op">%*%</span><span class="st"> </span>true_shifts</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, true_shifts, <span class="dt">true_scores =</span> true_zscores)</a>
@@ -172,20 +174,21 @@
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Objective value: 0.594</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; BIC: 71.389</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; pBIC: 90.335</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Objective value: 0.598</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; BIC: 74.222</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; pBIC: 97.086</span></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 -0.002 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; 10 shifts have been identified (ie 68.8 % of sparsity)</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; A parsimonious solution would involve 9 shifts</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; Estimated shifts: 0 0 0 -0.001 0 0 0 0 0 -0.003 ...</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; 11 shifts have been identified (ie 65.6 % of sparsity)</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; A parsimonious solution would involve 10 shifts</span></a>
 <a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; Observed z-scores:  0 0 0      0      0      0      0      0      0   -3 ...</span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; Estimated z-scores: 0 0 0 -0.002 -0.002 -0.002 -0.004 -0.007 -0.049 -2.9 ...</span></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; 14 z-scores have been shifted (ie 17.6 % of sparsity)</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; Observed z-scores:  0 0      0      0      0      0      0     0      0     -3 ...</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; Estimated z-scores: 0 0 -0.001 -0.001 -0.001 -0.004 -0.006 -0.01 -0.052 -2.905 ...</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; 15 z-scores have been shifted (ie 11.8 % of sparsity)</span></a>
 <a class="sourceLine" id="cb6-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation2)</a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; Warning: Removed 23 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; Warning: Removed 22 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="constraints_files/figure-html/unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>Z-score are well recovered but the solution is absolutely not sparse. We should prioritize ancestral branches before</p>
 </div>
 <div id="constraint-on-yhat" class="section level3">
 <h3 class="hasAnchor">
@@ -194,16 +197,31 @@
 <a class="sourceLine" id="cb7-2" data-line-number="2">                              <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> <span class="fl">0.1</span>,  </a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">                              <span class="dt">method =</span> <span class="st">"shooting"</span>,</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">                              <span class="dt">constraint_type =</span> <span class="st">"yhat"</span>)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; Error in solve_univariate(y = y, x = xi, z = zi, lambda = lambda, ...): The constraint is not feasible. Consider changing the constraint.</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">estimation3</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; Error in eval(expr, envir, enclos): objet 'estimation3' introuvable</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation3)</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Error in plot(estimation3): objet 'estimation3' introuvable</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-5" data-line-number="5">estimation3</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.496</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; BIC: 68.543</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; pBIC: 49.692</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 -0.001 0 0 0 0 0 0 0 -0.001 ...</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; 9 shifts have been identified (ie 71.9 % of sparsity)</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; A parsimonious solution would involve 7 shifts</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; Observed z-scores:  0      0      0      0      0      0      0      0    0   -3 ...</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; Estimated z-scores: 0 -0.001 -0.001 -0.001 -0.001 -0.001 -0.001 -0.002 -0.1 -2.9 ...</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; 16 z-scores have been shifted (ie 5.9 % of sparsity)</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation3)</a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; Warning: Removed 24 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="constraints_files/figure-html/unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div id="all-zscores-could-be-positive" class="section level2">
+<div id="all-z-scores-could-be-positive" class="section level2">
 <h2 class="hasAnchor">
-<a href="#all-zscores-could-be-positive" class="anchor"></a>All zscores could be positive</h2>
+<a href="#all-z-scores-could-be-positive" class="anchor"></a>All z-scores could be positive</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">true_shifts[<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>M <span class="op">/</span><span class="st"> </span><span class="dv">16</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">true_zscores &lt;-<span class="st"> </span>mat_incid <span class="op">%*%</span><span class="st"> </span>true_shifts</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, true_shifts, <span class="dt">true_scores =</span> true_zscores)</a>
@@ -216,11 +234,26 @@
 <a class="sourceLine" id="cb9-2" data-line-number="2">                              <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> <span class="fl">0.1</span>,  </a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">                              <span class="dt">method =</span> <span class="st">"shooting"</span>,</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">                              <span class="dt">constraint_type =</span> <span class="st">"yhat"</span>)</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; Error in solve_univariate(y = y, x = xi, z = zi, lambda = lambda, ...): The constraint is not feasible. Consider changing the constraint.</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">estimation4</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; Error in eval(expr, envir, enclos): objet 'estimation4' introuvable</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation4)</a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Error in plot(estimation4): objet 'estimation4' introuvable</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" data-line-number="5">estimation4</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; Objective value: 1.071</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; BIC: 60.539</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; pBIC: 64.297</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; 6 shifts have been identified (ie 81.2 % of sparsity)</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; A parsimonious solution would involve 5 shifts</span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; Observed z-scores:  0 0 1 0 0 0 0 0      0     -3 ...</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt; Estimated z-scores: 0 0 0 0 0 0 0 0 -0.088 -2.937 ...</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; 13 z-scores have been shifted (ie 23.5 % of sparsity)</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation4)</a>
+<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; Warning: Removed 27 rows containing missing values (geom_label).</span></a></code></pre></div>
+<p><img src="constraints_files/figure-html/unnamed-chunk-8-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="no-constraint" class="section level3">
 <h3 class="hasAnchor">
@@ -235,19 +268,19 @@
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.618</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; BIC: 62.879</span></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; pBIC: 33.601</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.52</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; BIC: 74.209</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; pBIC: 98.167</span></a>
 <a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0.9 0 0 0 0 0 ...</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 7 shifts have been identified (ie 78.1 % of sparsity)</span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; A parsimonious solution would involve 5 shifts</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0.9 0 0 -0.003 0 -0.001 ...</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 11 shifts have been identified (ie 65.6 % of sparsity)</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; A parsimonious solution would involve 10 shifts</span></a>
 <a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; Observed z-scores:  0 0   1 0 0 0 0 0    0   -3 ...</span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; Estimated z-scores: 0 0 0.9 0 0 0 0 0 -0.1 -2.9 ...</span></a>
-<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; 10 z-scores have been shifted (ie 41.2 % of sparsity)</span></a>
+<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; Observed z-scores:  0 0   1 0      0      0      0      0     0     -3 ...</span></a>
+<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; Estimated z-scores: 0 0 0.9 0 -0.004 -0.004 -0.005 -0.005 -0.05 -2.911 ...</span></a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; 15 z-scores have been shifted (ie 11.8 % of sparsity)</span></a>
 <a class="sourceLine" id="cb10-22" data-line-number="22"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(estimation5)</a>
-<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt; Warning: Removed 26 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt; Warning: Removed 22 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="constraints_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -261,8 +294,8 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#tree">Tree</a></li>
       <li><a href="#all-shifts-are-negative">All shifts are negative</a></li>
-      <li><a href="#all-zscores-are-negative-but-shifts-could-be-positive">All zscores are negative but shifts could be positive</a></li>
-      <li><a href="#all-zscores-could-be-positive">All zscores could be positive</a></li>
+      <li><a href="#all-z-scores-are-negative-but-shifts-could-be-positive">All z-scores are negative but shifts could be positive</a></li>
+      <li><a href="#all-z-scores-could-be-positive">All z-scores could be positive</a></li>
       </ul>
 </div>
       </div>

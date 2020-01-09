@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE}
 library(zazou)
 library(ape)
+set.seed(1234)
 ```
 
 ## Tree
@@ -47,12 +48,13 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 
 ```{r}
 estimation1 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alpha = 1, lambda = 0.1)
+                              tree = tree, alpha = 1, lambda = 0.1, 
+                              method = "shooting")
 estimation1
 plot(estimation1)
 ```
 
-## All zscores are negative but shifts could be positive
+## All z-scores are negative but shifts could be positive
 
 ```{r}
 true_shifts[13 * M / 16] <- 1
@@ -70,7 +72,7 @@ estimation2
 plot(estimation2)
 ```
 
-Z-score are well recovered but the solution is absolutly not sparse. We should prioritize ancestral branches before 
+Z-score are well recovered but the solution is absolutely not sparse. We should prioritize ancestral branches before 
 
 ### Constraint on yhat
 
@@ -83,7 +85,7 @@ estimation3
 plot(estimation3)
 ```
 
-## All zscores could be positive
+## All z-scores could be positive
 
 ```{r}
 true_shifts[2 * M / 16 + 1] <- 1
