@@ -111,7 +111,7 @@ plot(estimation4)
 estimation5 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
                               tree = tree, alpha = 1, lambda = 0.1, 
                               method = "shooting",
-                              use_constraint = FALSE)
+                              constraint_type = "none")
 estimation5
 plot(estimation5)
 ```

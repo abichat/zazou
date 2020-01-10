@@ -1,32 +1,53 @@
+# #' Scaled lasso
+# #'
+# #' Scaled lasso to compute \code{beta_init} and \code{hsigma}.
+# #'
+# #' @param y A vector of size m.
+# #' @param X A vector of size m*(n+m).
+# #' @param projected Logical. Should each coordinate of \code{beta_init} be
+# #' projected on \eqn{R_{-}}?
+# #' @param ... Not used, here for avoiding errors when passing unknown arguments
+# #' from previous ellipsis.
+# #'
+# #' @return A list composed by \code{beta_init} and \code{hsigma}.
+# #' @export
+# #' @importFrom scalreg scalreg
+# #'
+# scaled_lasso <- function(y, X, projected = TRUE, ...){
+#   object <- scalreg(X, y)
+#   beta_init <- object$coefficients
+#   if(projected){
+#     beta_init[beta_init > 0] <- 0
+#   }
+#   list(beta_init = beta_init, hsigma = object$hsigma)
+# }
+
+#' Update sigma in the scaled lasso algorithm
+#'
+#' Compute the exact value of sigma that nullify the gradient.
+#'
+#' @param y A vector of size m.
+#' @param X A vector of size m*(n+m).
+#' @param beta The current value of beta.
+#'
+#' @return Updated version of sigma.
+update_sigma <- function(y, X, beta){
+  sqrt(sum((y - X %*% beta)^2) / nrow(X))
+}
+
 #' Scaled lasso
 #'
 #' Scaled lasso to compute \code{beta_init} and \code{hsigma}.
 #'
 #' @param y A vector of size m.
 #' @param X A vector of size m*(n+m).
-#' @param projected Logical. Should each coordinate of \code{beta_init} be
-#' projected on \eqn{R_{-}}?
-#' @param ... Not used, here for avoiding errors when passing unknown arguments
-#' from previous ellipsis.
+#' @param lamnda A regularisation parameter. If \code{NULL}, a universal
+#' value is choosen.
+#' @param ... Further arguments passed to or from other methods.
 #'
 #' @return A list composed by \code{beta_init} and \code{hsigma}.
-#' @export
-#' @importFrom scalreg scalreg
 #'
-scaled_lasso <- function(y, X, projected = TRUE, ...){
-  object <- scalreg(X, y)
-  beta_init <- object$coefficients
-  if(projected){
-    beta_init[beta_init > 0] <- 0
-  }
-  list(beta_init = beta_init, hsigma = object$hsigma)
-}
-
-update_sigma <- function(y, X, beta){
-  sqrt(sum((y - X %*% beta)^2) / nrow(X))
-}
-
-scaled_lasso2 <- function(beta0, y, X, lambda = NULL, ...){
+scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
 
   n <- length(y)
   p <- ncol(X)
