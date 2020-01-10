@@ -54,6 +54,9 @@
       <a href="../articles/simulations.html">Simulations</a>
     </li>
     <li>
+      <a href="../articles/constraints.html">Negativity constraints</a>
+    </li>
+    <li>
       <a href="../articles/comparisons.html">Comparisons</a>
     </li>
     <li>
@@ -142,7 +145,7 @@
 <a class="sourceLine" id="cb7-3" data-line-number="3">                              <span class="dt">lambda =</span> <span class="dv">2</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>,</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">                              <span class="dt">method =</span> <span class="st">"L-BFGS-B"</span>)</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 175.902 sec elapsed</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 169.096 sec elapsed</span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7">est_lbfgsb</a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
@@ -172,7 +175,7 @@
 <a class="sourceLine" id="cb8-3" data-line-number="3">                                <span class="dt">lambda =</span> <span class="dv">2</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>,</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">                                <span class="dt">method =</span> <span class="st">"shooting"</span>)</a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>() <span class="co"># 10 times faster</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 11.752 sec elapsed</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 7.197 sec elapsed</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7">est_shooting <span class="co"># similar results</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
@@ -180,8 +183,8 @@
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; Regularization parameter: lambda = 2 </span></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; Objective value: 1422.097</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; BIC: 5781.605</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; pBIC: 8332.268</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; BIC: 5781.504</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; pBIC: 8332.167</span></a>
 <a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 252 shifts have been identified (ie 86.7 % of sparsity)</span></a>
@@ -202,7 +205,7 @@
 <a class="sourceLine" id="cb9-3" data-line-number="3">                                <span class="dt">lambda =</span> <span class="dv">2</span>, <span class="dt">tree =</span> tree, <span class="dt">alpha =</span> <span class="fl">0.1</span>,</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">                                <span class="dt">method =</span> <span class="st">"shooting"</span>, <span class="dt">allow_positive =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>() <span class="co"># 10 times faster</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 11.281 sec elapsed</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 7.188 sec elapsed</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7">est_shooting_p <span class="co"># similar results</span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span></a>
@@ -210,8 +213,8 @@
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; Regularization parameter: lambda = 2 </span></a>
 <a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; Objective value: 1422.097</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; BIC: 5781.513</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; pBIC: 8332.175</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; BIC: 5781.547</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; pBIC: 8332.21</span></a>
 <a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; 252 shifts have been identified (ie 86.7 % of sparsity)</span></a>
@@ -249,23 +252,43 @@
 <a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; list()</span></a>
 <a class="sourceLine" id="cb10-20" data-line-number="20">est_shooting<span class="op">$</span>optim_info</a>
 <a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; $iterations</span></a>
-<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; [1] 132300</span></a>
+<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; [1] 58</span></a>
 <a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; $last_progress</span></a>
-<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="co">#&gt; [1] 7.371954e-09</span></a>
-<a class="sourceLine" id="cb10-26" data-line-number="26"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt; $supp_arg</span></a>
-<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; list()</span></a>
-<a class="sourceLine" id="cb10-29" data-line-number="29">est_shooting_p<span class="op">$</span>optim_info</a>
-<a class="sourceLine" id="cb10-30" data-line-number="30"><span class="co">#&gt; $iterations</span></a>
-<a class="sourceLine" id="cb10-31" data-line-number="31"><span class="co">#&gt; [1] 141750</span></a>
-<a class="sourceLine" id="cb10-32" data-line-number="32"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-33" data-line-number="33"><span class="co">#&gt; $last_progress</span></a>
-<a class="sourceLine" id="cb10-34" data-line-number="34"><span class="co">#&gt; [1] 7.694189e-09</span></a>
-<a class="sourceLine" id="cb10-35" data-line-number="35"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-36" data-line-number="36"><span class="co">#&gt; $supp_arg</span></a>
-<a class="sourceLine" id="cb10-37" data-line-number="37"><span class="co">#&gt; $supp_arg$allow_positive</span></a>
-<a class="sourceLine" id="cb10-38" data-line-number="38"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; $objective_values</span></a>
+<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="co">#&gt;  [1] 1856.680 1552.049 1485.718 1464.231 1453.860 1446.911 1441.562 1438.143</span></a>
+<a class="sourceLine" id="cb10-26" data-line-number="26"><span class="co">#&gt;  [9] 1436.042 1434.141 1432.520 1431.119 1429.963 1428.929 1427.971 1427.272</span></a>
+<a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt; [17] 1426.781 1426.361 1425.875 1425.394 1424.976 1424.509 1423.925 1423.510</span></a>
+<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; [25] 1423.129 1422.924 1422.790 1422.608 1422.434 1422.324 1422.228 1422.141</span></a>
+<a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; [33] 1422.130 1422.120 1422.115 1422.110 1422.106 1422.104 1422.102 1422.101</span></a>
+<a class="sourceLine" id="cb10-30" data-line-number="30"><span class="co">#&gt; [41] 1422.100 1422.099 1422.099 1422.098 1422.098 1422.098 1422.097 1422.097</span></a>
+<a class="sourceLine" id="cb10-31" data-line-number="31"><span class="co">#&gt; [49] 1422.097 1422.097 1422.097 1422.097 1422.097 1422.097 1422.097 1422.097</span></a>
+<a class="sourceLine" id="cb10-32" data-line-number="32"><span class="co">#&gt; [57] 1422.097 1422.097</span></a>
+<a class="sourceLine" id="cb10-33" data-line-number="33"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-34" data-line-number="34"><span class="co">#&gt; $last_progress</span></a>
+<a class="sourceLine" id="cb10-35" data-line-number="35"><span class="co">#&gt; [1] 9.789514e-09</span></a>
+<a class="sourceLine" id="cb10-36" data-line-number="36"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-37" data-line-number="37"><span class="co">#&gt; $supp_arg</span></a>
+<a class="sourceLine" id="cb10-38" data-line-number="38"><span class="co">#&gt; list()</span></a>
+<a class="sourceLine" id="cb10-39" data-line-number="39">est_shooting_p<span class="op">$</span>optim_info</a>
+<a class="sourceLine" id="cb10-40" data-line-number="40"><span class="co">#&gt; $iterations</span></a>
+<a class="sourceLine" id="cb10-41" data-line-number="41"><span class="co">#&gt; [1] 58</span></a>
+<a class="sourceLine" id="cb10-42" data-line-number="42"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-43" data-line-number="43"><span class="co">#&gt; $objective_values</span></a>
+<a class="sourceLine" id="cb10-44" data-line-number="44"><span class="co">#&gt;  [1] 1856.680 1550.839 1481.720 1458.977 1448.370 1442.007 1438.786 1436.557</span></a>
+<a class="sourceLine" id="cb10-45" data-line-number="45"><span class="co">#&gt;  [9] 1434.441 1433.046 1431.859 1430.953 1430.135 1429.694 1428.984 1428.365</span></a>
+<a class="sourceLine" id="cb10-46" data-line-number="46"><span class="co">#&gt; [17] 1427.788 1427.230 1426.652 1426.250 1425.677 1425.125 1424.634 1424.265</span></a>
+<a class="sourceLine" id="cb10-47" data-line-number="47"><span class="co">#&gt; [25] 1423.880 1423.336 1422.781 1422.348 1422.199 1422.141 1422.124 1422.116</span></a>
+<a class="sourceLine" id="cb10-48" data-line-number="48"><span class="co">#&gt; [33] 1422.111 1422.108 1422.105 1422.103 1422.102 1422.101 1422.100 1422.099</span></a>
+<a class="sourceLine" id="cb10-49" data-line-number="49"><span class="co">#&gt; [41] 1422.099 1422.098 1422.098 1422.098 1422.098 1422.097 1422.097 1422.097</span></a>
+<a class="sourceLine" id="cb10-50" data-line-number="50"><span class="co">#&gt; [49] 1422.097 1422.097 1422.097 1422.097 1422.097 1422.097 1422.097 1422.097</span></a>
+<a class="sourceLine" id="cb10-51" data-line-number="51"><span class="co">#&gt; [57] 1422.097 1422.097</span></a>
+<a class="sourceLine" id="cb10-52" data-line-number="52"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-53" data-line-number="53"><span class="co">#&gt; $last_progress</span></a>
+<a class="sourceLine" id="cb10-54" data-line-number="54"><span class="co">#&gt; [1] 7.912488e-09</span></a>
+<a class="sourceLine" id="cb10-55" data-line-number="55"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb10-56" data-line-number="56"><span class="co">#&gt; $supp_arg</span></a>
+<a class="sourceLine" id="cb10-57" data-line-number="57"><span class="co">#&gt; $supp_arg$allow_positive</span></a>
+<a class="sourceLine" id="cb10-58" data-line-number="58"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(est_lbfgsb<span class="op">$</span>zscores_obs, est_lbfgsb<span class="op">$</span>zscores_est) <span class="op">+</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a></code></pre></div>
 <p><img src="alcohol_files/figure-html/unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>

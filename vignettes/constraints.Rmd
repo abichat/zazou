@@ -1,0 +1,122 @@
+---
+title: "Constraints"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{constraints}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  fig.align = "center",
+  eval = TRUE
+)
+```
+
+```{r setup, message=FALSE}
+library(zazou)
+library(ape)
+set.seed(1234)
+```
+
+## Tree
+
+```{r tree}
+m <- 17
+M <- 2 * (m - 1)
+tree <- stree(m, type = "left")
+edlength <- rep(1, M)
+edlength[1:M %% 2 == 1] <- (m-1):1
+tree$edge.length <- edlength
+mat_incid <- incidence_matrix(tree)
+plot(tree)
+```
+
+## All shifts are negative
+
+```{r}
+true_shifts <- rep(0, M)
+true_shifts[9 * M / 16] <- -3
+true_zscores <- mat_incid %*% true_shifts
+plot_shifts(tree, true_shifts, true_scores = true_zscores)
+```
+
+### Constraint on beta
+
+```{r}
+estimation1 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
+                              tree = tree, alpha = 1, lambda = 0.1, 
+                              method = "shooting")
+estimation1
+plot(estimation1)
+```
+
+## All z-scores are negative but shifts could be positive
+
+```{r}
+true_shifts[13 * M / 16] <- 1
+true_zscores <- mat_incid %*% true_shifts
+plot_shifts(tree, true_shifts, true_scores = true_zscores)
+```
+
+### Constraint on beta
+
+```{r}
+estimation2 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
+                              tree = tree, alpha = 1, lambda = 0.1,
+                              method = "shooting")
+estimation2
+plot(estimation2)
+```
+
+Z-score are well recovered but the solution is absolutely not sparse. We should prioritize ancestral branches before 
+
+### Constraint on yhat
+
+```{r, error=TRUE}
+estimation3 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
+                              tree = tree, alpha = 1, lambda = 0.1,  
+                              method = "shooting",
+                              constraint_type = "yhat")
+estimation3
+plot(estimation3)
+```
+
+## All z-scores could be positive
+
+```{r}
+true_shifts[2 * M / 16 + 1] <- 1
+true_zscores <- mat_incid %*% true_shifts
+plot_shifts(tree, true_shifts, true_scores = true_zscores)
+```
+
+
+### Constraint on yhat
+
+```{r, error=TRUE}
+estimation4 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
+                              tree = tree, alpha = 1, lambda = 0.1,  
+                              method = "shooting",
+                              constraint_type = "yhat")
+estimation4
+plot(estimation4)
+```
+
+### No constraint 
+
+```{r}
+estimation5 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
+                              tree = tree, alpha = 1, lambda = 0.1, 
+                              method = "shooting",
+                              use_constraint = FALSE)
+estimation5
+plot(estimation5)
+```
+
+
+
+
+
