@@ -65,7 +65,7 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
 #'
 #' @param beta0 the initial position of beta.
 #' @param X a matrix of size  x p.
-#' @param max.it Maximum number of iterations.
+#' @param max_it Maximum number of iterations.
 #' @param prob a vector of probability weights for obtaining the coordinates
 #' to be sampled.
 #' @param ... further arguments passed to or from other methods.
@@ -73,7 +73,7 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
 #' @return the estimated value of beta
 #' @export
 solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
-                               max.it = 100, ...) {
+                               max_it = 500, ...) {
   p <- length(beta0)
   beta <- beta0
 
@@ -103,10 +103,10 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
   progress <- +Inf
 
   ## Keep track of objective values throughout the iterations
-  obj_vals <- rep(NA, max.it)
+  obj_vals <- rep(NA, max_it)
   obj_vals[it] <- fn_obj(beta0)
 
-  while (it < max.it && progress > eps) {
+  while (it < max_it && progress > eps) {
     ## Update coordinates in random order (rather than random coordinates)
     coord_order <- sample(p)
     for (coord in coord_order) {

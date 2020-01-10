@@ -39,10 +39,11 @@ update_sigma <- function(y, X, beta){
 #'
 #' Scaled lasso to compute \code{beta_init} and \code{hsigma}.
 #'
+#' @param beta0 Initial value for beta.
 #' @param y A vector of size m.
 #' @param X A vector of size m*(n+m).
-#' @param lamnda A regularisation parameter. If \code{NULL}, a universal
-#' value is choosen.
+#' @param lambda A regularization parameter. If \code{NULL}, a universal
+#' value is chosen.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @return A list composed by \code{beta_init} and \code{hsigma}.

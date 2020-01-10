@@ -25,7 +25,6 @@ Imports:
     ggtree,
     graphics,
     hdi,
-    scalreg,
     stats,
     stringr,
     utils
@@ -37,6 +36,7 @@ Suggests:
     knitr,
     purrr,
     rmarkdown,
+    scalreg,
     spelling,
     testthat (>= 2.1.0),
     tibble,

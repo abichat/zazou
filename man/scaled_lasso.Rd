@@ -4,18 +4,19 @@
 \alias{scaled_lasso}
 \title{Scaled lasso}
 \usage{
-scaled_lasso(y, X, projected = TRUE, ...)
+scaled_lasso(beta0, y, X, lambda = NULL, ...)
 }
 \arguments{
+\item{beta0}{Initial value for beta.}
+
 \item{y}{A vector of size m.}
 
 \item{X}{A vector of size m*(n+m).}
 
-\item{projected}{Logical. Should each coordinate of \code{beta_init} be
-projected on \eqn{R_{-}}?}
+\item{lambda}{A regularization parameter. If \code{NULL}, a universal
+value is chosen.}
 
-\item{...}{Not used, here for avoiding errors when passing unknown arguments
-from previous ellipsis.}
+\item{...}{Further arguments passed to or from other methods.}
 }
 \value{
 A list composed by \code{beta_init} and \code{hsigma}.

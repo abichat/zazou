@@ -14,7 +14,7 @@ solve_univariate(
   ...
 )
 
-solve_multivariate(beta0, y, X, lambda, prob = NULL, max.it = 100, ...)
+solve_multivariate(beta0, y, X, lambda, prob = NULL, max_it = 500, ...)
 }
 \arguments{
 \item{y}{a vector of size n.}
@@ -38,7 +38,7 @@ all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or
 \item{prob}{a vector of probability weights for obtaining the coordinates
 to be sampled.}
 
-\item{max.it}{Maximum number of iterations.}
+\item{max_it}{Maximum number of iterations.}
 }
 \value{
 The scalar solution \eqn{\beta} of the 1D optimization problem

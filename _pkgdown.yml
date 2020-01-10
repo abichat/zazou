@@ -37,6 +37,17 @@ reference:
     - '`bic`'
     - '`lambda_grid`'
     - '`as_shiftestim`'
+    - '`check_selection`'
+    - '`create_listopt_pms`'
+  - title: Desparsified lasso
+    desc: ~
+    contents:
+    - '`scaled_lasso`'
+    - '`update_sigma`'
+    - '`score_system`'
+    - '`noise_factor`'
+    - '`size_half_confint`'
+    - '`beta`'
   - title: About trees
     desc: ~
     contents:
