@@ -138,11 +138,15 @@
     <p>Scaled lasso to compute <code>beta_init</code> and <code>hsigma</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>scaled_lasso</span>(<span class='no'>y</span>, <span class='no'>X</span>, <span class='kw'>projected</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>scaled_lasso</span>(<span class='no'>beta0</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>beta0</th>
+      <td><p>Initial value for beta.</p></td>
+    </tr>
     <tr>
       <th>y</th>
       <td><p>A vector of size m.</p></td>
@@ -152,14 +156,13 @@
       <td><p>A vector of size m*(n+m).</p></td>
     </tr>
     <tr>
-      <th>projected</th>
-      <td><p>Logical. Should each coordinate of <code>beta_init</code> be
-projected on \(R_{-}\)?</p></td>
+      <th>lambda</th>
+      <td><p>A regularization parameter. If <code>NULL</code>, a universal
+value is chosen.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Not used, here for avoiding errors when passing unknown arguments
-from previous ellipsis.</p></td>
+      <td><p>Further arguments passed to or from other methods.</p></td>
     </tr>
     </table>
 

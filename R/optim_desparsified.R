@@ -38,14 +38,14 @@ noise_factor <- function(X, score_system) {
   num / den
 }
 
-#' Compute beta
+#' Update beta
 #'
 #' @inheritParams score_system
 #' @inheritParams noise_factor
 #'
 #' @return The one-step self-bias corrected estimator of beta, size m.
 #' @export
-beta <- function(X, y, beta_init, score_system) {
+update_beta <- function(X, y, beta_init, score_system) {
   res <- y - X %*% beta_init
   num <- t(score_system) %*% res
   # den <- colSums(score_system * X)

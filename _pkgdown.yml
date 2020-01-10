@@ -47,7 +47,7 @@ reference:
     - '`score_system`'
     - '`noise_factor`'
     - '`size_half_confint`'
-    - '`beta`'
+    - '`update_beta`'
   - title: About trees
     desc: ~
     contents:

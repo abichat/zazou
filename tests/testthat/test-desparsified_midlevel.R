@@ -47,7 +47,7 @@ test_that("noise_factor() has correct dimensions", {
   expect_length(tau, m)
 })
 
-beta <- beta(X = X, y = y, beta_init = scla$beta_init, score_system = scosys)
+beta <- update_beta(X = X, y = y, beta_init = scla$beta_init, score_system = scosys)
 
 test_that("noise_factor() has correct dimensions", {
   expect_length(beta, m)
