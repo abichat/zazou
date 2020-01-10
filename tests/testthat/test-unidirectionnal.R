@@ -30,11 +30,11 @@ test_that("1-D solution works when lifting the constraints", {
   x <- c(rep(-1, n_change), rep(0, n_keep))
 
   expect_equal(solve_univariate(y = y, x = x, lambda = 0,
-                                use_constraint = FALSE), -delta)
+                                constraint_type = "none"), -delta)
   expect_equal(solve_univariate(y = y, x = x, lambda = crossprod(y, x),
-                                use_constraint = FALSE), 0)
+                                constraint_type = "none"), 0)
   expect_gt(solve_univariate(y, x, lambda = crossprod(y, x) - 0.1,
-                             use_constraint = FALSE), 0)
+                             constraint_type = "none"), 0)
 })
 
 test_that("1-D solution works when allowing positive values and forgoing z", {
@@ -73,6 +73,6 @@ test_that("1-D solution works when the constraint is satisfiable", {
                0)
   expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "yhat"),
                1)
-  expect_equal(solve_univariate(y = y, x = x, z = z, use_constraint = FALSE),
+  expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "none"),
                1)
 })

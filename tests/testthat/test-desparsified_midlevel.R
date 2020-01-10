@@ -7,16 +7,15 @@ set.seed(42)
 
 X <- matrix(rnorm(m*n), nrow = n, ncol = m)
 # X <- cbind(1, X)
-y <- -30 - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
+y <- - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
 # X <- scale(X, center = TRUE, scale = FALSE)
 # y <- y - mean(y)
 
 # Beta0 <- rep(0, ncol(X))
 ## very similar results for scalreg and scaled_lasso2, not very
 ## different from scaled_lasso
-# scalreg(X, y, lam0 = 10^-1)
-scla <- scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1,
-              constraint_type = "yhat")
+scalreg::scalreg(X, y)
+(scla <- scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), constraint_type = "beta", use_constraint = TRUE))
 # scaled_lasso(y = y, X = X, projected = FALSE)
 # scaled_lasso2(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1,
 #               use_constraint = TRUE, constraint_type = "yhat")

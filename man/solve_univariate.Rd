@@ -10,8 +10,7 @@ solve_univariate(
   x,
   z = rep(0, length(y)),
   lambda = 0,
-  use_constraint = TRUE,
-  constraint_type = c("beta", "yhat"),
+  constraint_type = c("beta", "yhat", "none"),
   ...
 )
 
@@ -26,14 +25,9 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, max.it = 100, ...)
 
 \item{lambda}{a grid of positive regularization parameters}
 
-\item{use_constraint}{Logical. Default TRUE. If \code{TRUE}, the
-return value \eqn{\beta} satisfies either \eqn{\beta <= 0} or
-\eqn{z + x\beta <= 0} coordinate wise.}
-
-\item{constraint_type}{Either "beta" (default) or "yhat". Ensures that
+\item{constraint_type}{Character. "beta" (default), "yhat" or "none". Ensures that
 all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or
-\eqn{z + x\beta} (for \code{constraint_type = "yhat"}) are negative.
-Not used if \code{use_constraint} is set to \code{FALSE}.}
+\eqn{z + x\beta} (for \code{constraint_type = "yhat"}) are negative.}
 
 \item{...}{further arguments passed to or from other methods.}
 

@@ -13,13 +13,9 @@
 #' @param y a vector of size n.
 #' @param x a vector of size n.
 #' @param z a vector of size n.
-#' @param use_constraint Logical. Default TRUE. If \code{TRUE}, the
-#' return value \eqn{\beta} satisfies either \eqn{\beta <= 0} or
-#' \eqn{z + x\beta <= 0} coordinate wise.
-#' @param constraint_type Either "beta" (default) or "yhat". Ensures that
+#' @param constraint_type Character. "beta" (default), "yhat" or "none". Ensures that
 #' all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or
 #' \eqn{z + x\beta} (for \code{constraint_type = "yhat"}) are negative.
-#' Not used if \code{use_constraint} is set to \code{FALSE}.
 #' @inheritParams estimate_shifts
 #'
 #' @return The scalar solution \eqn{\beta} of the 1D optimization problem
@@ -28,8 +24,7 @@
 #' @examples
 #' solve_univariate(1:4, -(4:1), 2)
 solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
-                             use_constraint = TRUE,
-                             constraint_type = c("beta", "yhat"),
+                             constraint_type = c("beta", "yhat", "none"),
                              ...) {
   constraint_type <- match.arg(constraint_type)
   ## Compute unconstrained estimator
@@ -38,7 +33,7 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
   if (ytx < -lambda) beta <- (ytx + lambda) / sum(x^2)
   if (ytx > lambda)  beta <- (ytx - lambda) / sum(x^2)
   ## Check constraint
-  if (!use_constraint) return(beta)
+  if (constraint_type == "none") return(beta)
   ## Compute feasible set
   if (constraint_type == "beta") {
     beta_min <- -Inf
@@ -60,7 +55,8 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
     }
   }
   ## Check that feasible set (z + x * beta <= 0) is not empty
-  if (beta_min > beta_max) stop("The constraint is not feasible. Consider changing the constraint.")
+  if (beta_min > beta_max)
+    stop("The constraint is not feasible. Consider changing the constraint.")
   ## Project unconstrained estimate beta to feasible set [beta_min, beta_min]
   max(beta_min, min(beta, beta_max))
 }
