@@ -102,9 +102,8 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
   eps <- 10 ^ -8
   progress <- +Inf
 
-  ## Keep track of objective values throughout the iterations
-  obj_vals <- rep(NA, max_it)
-  obj_vals[it] <- fn_obj(beta0)
+  ## Keep track of objective value
+  obj_vals <- fn_obj(beta0)
 
   while (it < max_it && progress > eps) {
     ## Update coordinates in random order (rather than random coordinates)
@@ -114,10 +113,11 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
     }
     ## Store current objective value and compute progress
     it <- it + 1
-    obj_vals[it] <- fn_obj(beta)
-    progress <- abs(obj_vals[it] - obj_vals[it - 1]) / obj_vals[it - 1]
+    new_obj_vals <- fn_obj(beta)
+    progress <- abs(new_obj_vals - obj_vals) / obj_vals
+    obj_vals <- new_obj_vals
   }
 
-  list(par = beta, value = obj_vals[it], method = "shooting", iterations = it,
-       objective_values = obj_vals[1:it], last_progress = progress)
+  list(par = beta, value = obj_vals, method = "shooting",
+       iterations = it, last_progress = progress)
 }
