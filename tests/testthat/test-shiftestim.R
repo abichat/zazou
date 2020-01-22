@@ -31,11 +31,9 @@ expect_scalnum <- function(x){
 # General
 
 test_that("Shiftestim class is correct", {
+  expect_error(as_shiftestim(tree),
+               "'listopt' must be the output of a optimisation function.")
   expect_equal(class(estR), "shiftestim")
-  expect_true(
-    all(c("zscores_obs", "zscores_est", "shift_est", "objective_value",
-          "lambda", "tree", "alpha", "method", "optim_info", "is_bin",
-          "pars_score", "sigma", "bic", "pbic") %in% names(estR)))
   expect_is(estR$zscores_obs, "numeric")
   expect_is(estR$zscores_est, "numeric")
   expect_is(estR$shift_est, "data.frame")

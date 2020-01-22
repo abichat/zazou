@@ -1,27 +1,3 @@
-# #' Scaled lasso
-# #'
-# #' Scaled lasso to compute \code{beta_init} and \code{hsigma}.
-# #'
-# #' @param y A vector of size m.
-# #' @param X A vector of size m*(n+m).
-# #' @param projected Logical. Should each coordinate of \code{beta_init} be
-# #' projected on \eqn{R_{-}}?
-# #' @param ... Not used, here for avoiding errors when passing unknown arguments
-# #' from previous ellipsis.
-# #'
-# #' @return A list composed by \code{beta_init} and \code{hsigma}.
-# #' @export
-# #' @importFrom scalreg scalreg
-# #'
-# scaled_lasso <- function(y, X, projected = TRUE, ...){
-#   object <- scalreg(X, y)
-#   beta_init <- object$coefficients
-#   if(projected){
-#     beta_init[beta_init > 0] <- 0
-#   }
-#   list(beta_init = beta_init, hsigma = object$hsigma)
-# }
-
 #' Update sigma in the scaled lasso algorithm
 #'
 #' Compute the exact value of sigma that nullify the gradient.
