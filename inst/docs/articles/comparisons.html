@@ -203,11 +203,25 @@
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">true_shifts</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; [1]  0 -3  0  0  0  0 -2  0</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">mthd1<span class="op">$</span>shift_est</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; [1]  0.000000 -1.621335  0.000000 -2.038286  0.000000  0.000000 -1.311911</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; [8]  0.000000</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">mthd2<span class="op">$</span>shift_est</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; [1]  0.000000 -1.621301  0.000000 -2.038354  0.000000  0.000000 -1.311911</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; [8]  0.000000</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;    estimate</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1  0.000000</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 2 -1.621335</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 3  0.000000</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 4 -2.038286</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 5  0.000000</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; 6  0.000000</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 7 -1.311911</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; 8  0.000000</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13">mthd2<span class="op">$</span>shift_est</a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;    estimate</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; 1  0.000000</span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 2 -1.621301</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; 3  0.000000</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 4 -2.038354</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 5  0.000000</span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 6  0.000000</span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; 7 -1.311911</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; 8  0.000000</span></a></code></pre></div>
 </div>
 <div id="z-scores" class="section level3">
 <h3 class="hasAnchor">
@@ -250,20 +264,11 @@
 <a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; $iterations</span></a>
 <a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt; [1] 46</span></a>
 <a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt; $objective_values</span></a>
-<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt;  [1] 8.8508505 1.2100691 0.8424353 0.7531704 0.7414394 0.7378486 0.7337655</span></a>
-<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt;  [8] 0.7309273 0.7281240 0.7253208 0.7205300 0.7162179 0.7124242 0.7086172</span></a>
-<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt; [15] 0.7037058 0.6994212 0.6942813 0.6902240 0.6858709 0.6830678 0.6790121</span></a>
-<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt; [22] 0.6749620 0.6695589 0.6643132 0.6604834 0.6566483 0.6514374 0.6461719</span></a>
-<a class="sourceLine" id="cb11-23" data-line-number="23"><span class="co">#&gt; [29] 0.6412587 0.6381247 0.6334309 0.6299778 0.6265472 0.6230308 0.6214685</span></a>
-<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co">#&gt; [36] 0.6212608 0.6211707 0.6211317 0.6211148 0.6211075 0.6211029 0.6211023</span></a>
-<a class="sourceLine" id="cb11-25" data-line-number="25"><span class="co">#&gt; [43] 0.6211019 0.6211019 0.6211018 0.6211018</span></a>
-<a class="sourceLine" id="cb11-26" data-line-number="26"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-27" data-line-number="27"><span class="co">#&gt; $last_progress</span></a>
-<a class="sourceLine" id="cb11-28" data-line-number="28"><span class="co">#&gt; [1] 9.1569e-09</span></a>
-<a class="sourceLine" id="cb11-29" data-line-number="29"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-30" data-line-number="30"><span class="co">#&gt; $supp_arg</span></a>
-<a class="sourceLine" id="cb11-31" data-line-number="31"><span class="co">#&gt; list()</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt; $last_progress</span></a>
+<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt; [1] 9.1569e-09</span></a>
+<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt; $supp_arg</span></a>
+<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt; list()</span></a></code></pre></div>
 </div>
 </div>
 </div>

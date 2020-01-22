@@ -33,6 +33,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
                    gr = compute_gradient_function(Y, X, lambda),
                    upper = 0, method = "L-BFGS-B")
       opt <- c(opt, method = "L-BFGS-B")
+      opt$par <- data.frame(estimate = opt$par)
     }
     if (method == "shooting") {
       opt <- solve_multivariate(Delta0, Y, X, lambda, ...)

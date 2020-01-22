@@ -65,7 +65,7 @@ scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
   obj <- compute_objective_function(y, X, n * sigma * lambda)(beta)
 
   while (i < p || progress > eps) {
-    beta <- solve_multivariate(beta, y, X, n * sigma * lambda, ...)$par
+    beta <- solve_multivariate(beta, y, X, n * sigma * lambda, ...)$par$estimate
     sigma <- update_sigma(y, X, beta)
     new_obj <- compute_objective_function(y, X, n * sigma * lambda)(beta)
     progress <- abs(new_obj - obj) / obj
