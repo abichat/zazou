@@ -35,21 +35,27 @@ scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
     lambda <- sqrt(2 * log(p)/n) # As in Sun and Zhang (2012)
   }
 
-  i <- 0
+  it <- 0
   eps <- 10 ^ -9
   progress <- +Inf
-  obj <- compute_objective_function(y, X, n * sigma * lambda,
+  obj <- compute_objective_function(Y = y, X = X, lambda = n * sigma * lambda,
                                     type = "lasso")(beta)
 
-  while (i < p || progress > eps) {
+  while (it < p || progress > eps) {
     beta <- solve_multivariate(beta, y, X, n * sigma * lambda, ...)$par$estimate
     sigma <- update_sigma(y, X, beta)
     new_obj <- compute_objective_function(y, X, n * sigma * lambda,
                                           type = "lasso")(beta)
     progress <- abs(new_obj - obj) / obj
     obj <- new_obj
-    # cat(paste(c("Iteration:", i, round(sigma, 5), round(new_obj, 5))), "\n")
-    i <- i + 1
+    # cat(paste(c("Iteration:", it, round(sigma, 5), round(new_obj, 5))), "\n")
+    it <- it + 1
   }
-  list(beta_init = beta, hsigma = sigma)
+
+  obj_value <- compute_objective_function(Y = y, X = X, lambda = lambda,
+                                    sigma = sigma, type = "scaledlasso")(beta)
+
+  list(par = data.frame(estimate = beta), sigma_scaledlasso = sigma,
+       method = "scaled lasso", value = obj_value,
+       iterations = it, last_progress = progress)
 }

@@ -25,9 +25,10 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, max_it = 500, ...)
 
 \item{lambda}{a grid of positive regularization parameters}
 
-\item{constraint_type}{Character. "beta" (default), "yhat" or "none". Ensures that
-all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or
-\eqn{z + x\beta} (for \code{constraint_type = "yhat"}) are negative.}
+\item{constraint_type}{Character. "beta" (default), "yhat" or "none".
+Ensures that all coordinates of \eqn{\beta}
+(for \code{constraint_type = "beta"}) or \eqn{z + x\beta}
+(for \code{constraint_type = "yhat"}) are negative.}
 
 \item{...}{further arguments passed to or from other methods.}
 

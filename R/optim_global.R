@@ -19,7 +19,7 @@
 #' @export
 #' @importFrom stats optim
 estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
-                            method = c("L-BFGS-B", "shooting"),
+                            method = c("L-BFGS-B", "shooting", "scaledlasso"),
                             criterion = c("bic", "pbic"), ...){
 
   method <- match.arg(method)
@@ -34,6 +34,10 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
     if (method == "shooting") {
       opt <- solve_multivariate(beta0 = Delta0, y = Y, X = X,
                                 lambda = lambda, ...)
+    }
+    if (method == "scaledlasso") {
+      opt <- scaled_lasso(beta0 = Delta0, y = Y, X = X,
+                          lambda = lambda, ...)
     }
     return(opt)
   }

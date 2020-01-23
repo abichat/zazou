@@ -29,15 +29,16 @@ scalreg::scalreg(X, y)
 
 
 test_that("scaled_lasso() has correct dimensions", {
-  expect_length(scla, 2)
-  expect_length(scla$beta_init, m)
-  expect_length(scla$hsigma, 1)
-  expect_named(scla, c("beta_init", "hsigma"))
+  expect_length(scla, 6)
+  expect_length(scla$par$estimate, m)
+  expect_length(scla$sigma_scaledlasso, 1)
+  expect_named(scla, c("par", "sigma_scaledlasso", "method", "value",
+                       "iterations", "last_progress"))
   # expect_true(all(scla$beta_init <= 0))
 })
 
-scosys <- score_system(X = X, y = y, beta_init = scla$beta_init,
-                       hsigma = scla$hsigma)
+scosys <- score_system(X = X, y = y, beta_init = scla$par$estimate,
+                       hsigma = scla$sigma_scaledlasso)
 
 test_that("score_system() has correct dimensions", {
   expect_equal(dim(scosys), dim(X))
@@ -49,14 +50,14 @@ test_that("noise_factor() has correct dimensions", {
   expect_length(tau, m)
 })
 
-beta <- update_beta(X = X, y = y, beta_init = scla$beta_init,
+beta <- update_beta(X = X, y = y, beta_init = scla$par$estimate,
                     score_system = scosys)
 
 test_that("noise_factor() has correct dimensions", {
   expect_length(beta, m)
 })
 
-hci <- size_half_confint(noise_factor = tau, hsigma = scla$hsigma)
+hci <- size_half_confint(noise_factor = tau, hsigma = scla$sigma_scaledlasso)
 
 test_that("size_half_confint() has correct dimensions", {
   expect_length(hci, m)
@@ -66,7 +67,6 @@ data.frame(lower = beta - hci, estimate = beta,
            upper = beta + hci, signif = abs(beta) > hci)
 
 bhat <- lasso.proj(x = X, y = y,
-                   # betainit = scla$beta_init, sigma = scla$hsigma,
                    betainit = "scaled lasso",
                    return.Z = TRUE, standardize = FALSE)$bhat
 
