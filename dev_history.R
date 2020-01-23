@@ -91,6 +91,8 @@ library(testthat)
 
 # use_test("shiftestim")
 
+# use_r("optim_lbfgsb")
+
 
 ####
 

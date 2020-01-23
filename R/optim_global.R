@@ -28,15 +28,12 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   ## local estimation routine (for a single lambda)
   fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
     if (method == "L-BFGS-B") {
-      opt <- optim(par = Delta0,
-                   fn = compute_objective_function(Y, X, lambda),
-                   gr = compute_gradient_function(Y, X, lambda),
-                   upper = 0, method = "L-BFGS-B")
-      opt <- c(opt, method = "L-BFGS-B")
-      opt$par <- data.frame(estimate = opt$par)
+      opt <- solve_lbfgsb(Delta0 = Delta0, X = X, Y = Y,
+                          lambda = lambda, ...)
     }
     if (method == "shooting") {
-      opt <- solve_multivariate(Delta0, Y, X, lambda, ...)
+      opt <- solve_multivariate(beta0 = Delta0, y = Y, X = X,
+                                lambda = lambda, ...)
     }
     return(opt)
   }
@@ -70,7 +67,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
     ## Inner loop on lambda
     for (lam in current_lambda) {
       ## Compute current model
-      opt <- fitting_procedure(Delta0, X, Y, lambda = lam, ...)
+      opt <- fitting_procedure(Delta0 = Delta0, X = X, Y = Y, lambda = lam, ...)
       current_model <- as_shiftestim(
         listopt = opt, tree = tree, zscores = zscores,
         lambda = lam, alpha = alp)

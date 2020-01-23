@@ -66,5 +66,10 @@ test_that("L-BFGS-B output is correct", {
   expect_equal(estL$method, "L-BFGS-B")
   expect_equal(ncol(estL$shift_est), 1)
   expect_is(estL$optim_info$message, "character")
+  expect_error(
+    estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                    lambda = 1, tree = tree, constraint_type = "yhat",
+                    alpha = 1, method = "L-BFGS-B"),
+    "The constraint 'yhat' is not available for L-BFGS-B solving.")
 })
 
