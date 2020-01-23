@@ -27,18 +27,14 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
 
   ## local estimation routine (for a single lambda)
   fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
-    if (method == "L-BFGS-B") {
-      opt <- solve_lbfgsb(Delta0 = Delta0, X = X, Y = Y,
-                          lambda = lambda, ...)
-    }
-    if (method == "shooting") {
-      opt <- solve_multivariate(beta0 = Delta0, y = Y, X = X,
-                                lambda = lambda, ...)
-    }
-    if (method == "scaledlasso") {
-      opt <- scaled_lasso(beta0 = Delta0, y = Y, X = X,
-                          lambda = lambda, ...)
-    }
+
+    opt <- switch (method,
+                   "L-BFGS-B" = solve_lbfgsb(Delta0 = Delta0, X = X, Y = Y,
+                                             lambda = lambda, ...),
+                   "shooting" = solve_multivariate(beta0 = Delta0, y = Y, X = X,
+                                                   lambda = lambda, ...),
+                   "scaledlasso" = scaled_lasso(beta0 = Delta0, y = Y, X = X,
+                                                lambda = lambda, ...))
     return(opt)
   }
 

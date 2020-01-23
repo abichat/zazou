@@ -13,8 +13,8 @@
 compute_objective_function <- function(Y, X, lambda, sigma,
                                        type = c("lasso", "scaledlasso")) {
   objfun <- switch (type,
-                    lasso = compute_OF_lasso(Y, X, lambda),
-                    scaledlasso = compute_OF_scaledlasso(Y, X, lambda, sigma)
+                    "lasso" = compute_OF_lasso(Y, X, lambda),
+                    "scaledlasso" = compute_OF_scaledlasso(Y, X, lambda, sigma)
   )
 
   return(objfun)
