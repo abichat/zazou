@@ -23,7 +23,7 @@ withr::with_preserve_seed({
 ## Do not run this interactively. Insted, use Run Tests in RStudio. ##
 ######################################################################
 
-test_that("ouptuts do not change over time",{
+test_that("outputs do not change over time", {
   expect_known_value(estS$zscores_est, "previous_outputs/estS_zscore",
                      update = FALSE)
   expect_known_value(estL$zscores_est, "previous_outputs/estL_zscore",

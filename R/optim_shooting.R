@@ -13,9 +13,10 @@
 #' @param y a vector of size n.
 #' @param x a vector of size n.
 #' @param z a vector of size n.
-#' @param constraint_type Character. "beta" (default), "yhat" or "none". Ensures that
-#' all coordinates of \eqn{\beta} (for \code{constraint_type = "beta"}) or
-#' \eqn{z + x\beta} (for \code{constraint_type = "yhat"}) are negative.
+#' @param constraint_type Character. "beta" (default), "yhat" or "none".
+#' Ensures that all coordinates of \eqn{\beta}
+#' (for \code{constraint_type = "beta"}) or \eqn{z + x\beta}
+#' (for \code{constraint_type = "yhat"}) are negative.
 #' @inheritParams estimate_shifts
 #'
 #' @return The scalar solution \eqn{\beta} of the 1D optimization problem

@@ -13,8 +13,10 @@ y <- - 3 * X[, 1] - 5 * X[, 2] + 4 * X[, 3] + rnorm(n)
 
 # Beta0 <- rep(0, ncol(X))
 scalreg::scalreg(X, y)
-(scla <- scaled_lasso(y = y, X = X, beta0 = rep(0, ncol(X)), constraint_type = "none"))
-(scla <- scaled_lasso(y = y, X = X, beta0 = rep(0, ncol(X)), constraint_type = "beta"))
+(scla <- scaled_lasso(y = y, X = X, beta0 = rep(0, ncol(X)),
+                      constraint_type = "none"))
+(scla <- scaled_lasso(y = y, X = X, beta0 = rep(0, ncol(X)),
+                      constraint_type = "beta"))
 # scaled_lasso(y = y, X = X, beta0 = rep(0, ncol(X)), lambda = 10^-1,
 #               use_constraint = TRUE, constraint_type = "yhat")
 # scaled_lasso(y = y, X = X, beta0 = beta, lambda = 10^-1,
@@ -47,7 +49,8 @@ test_that("noise_factor() has correct dimensions", {
   expect_length(tau, m)
 })
 
-beta <- update_beta(X = X, y = y, beta_init = scla$beta_init, score_system = scosys)
+beta <- update_beta(X = X, y = y, beta_init = scla$beta_init,
+                    score_system = scosys)
 
 test_that("noise_factor() has correct dimensions", {
   expect_length(beta, m)

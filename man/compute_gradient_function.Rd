@@ -7,9 +7,9 @@
 compute_gradient_function(Y, X, lambda)
 }
 \arguments{
-\item{Y}{a vector of size m}
+\item{Y}{A vector of size m.}
 
-\item{X}{a vector of size m*(n+m)}
+\item{X}{A vector of size m*(n+m).}
 
 \item{lambda}{a grid of positive regularization parameters}
 }

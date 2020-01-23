@@ -104,7 +104,8 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat(paste0("BIC: ", round(x$bic, digits), "\n"))
   cat(paste0("pBIC: ", round(x$pbic, digits), "\n"))
   cat("---\n")
-  cat("Estimated shifts:", head(round(x$shift_est$estimate, digits), 10), "...\n")
+  cat("Estimated shifts:", head(round(x$shift_est$estimate, digits), 10),
+      "...\n")
   cat(sum(x$shift_est$estimate != 0), "shifts have been identified (ie",
       100 * round(mean(x$shift_est$estimate == 0), digits), "% of sparsity)\n")
   cat("A parsimonious solution would involve", x$pars_score, "shifts\n")

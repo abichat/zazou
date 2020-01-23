@@ -8,7 +8,7 @@ solve_lbfgsb <- function(Delta0, X, Y, lambda,
   upbbound <- ifelse(constraint_type == "beta", 0, Inf)
 
   opt <- optim(par = Delta0,
-               fn = compute_objective_function(Y, X, lambda),
+               fn = compute_objective_function(Y, X, lambda, type = "lasso"),
                gr = compute_gradient_function(Y, X, lambda),
                upper = upbbound, method = "L-BFGS-B", ...)
   opt <- c(opt, method = "L-BFGS-B")
