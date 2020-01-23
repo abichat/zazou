@@ -19,11 +19,18 @@
 #' @export
 #' @importFrom stats optim
 estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
-                            method = c("L-BFGS-B", "shooting", "scaledlasso"),
+                            method = c("L-BFGS-B", "shooting",
+                                       "scaledlasso", "desparsifiedlasso"),
                             criterion = c("bic", "pbic"), ...){
 
   method <- match.arg(method)
   criterion <- match.arg(criterion)
+
+  if(method %in% c("scaledlasso", "desparsifiedlasso")){
+    if(any(c(length(alpha), length(lambda)) != 1)){
+      stop(paste0("No model selection can be done with ", method, "."))
+    }
+  }
 
   ## local estimation routine (for a single lambda)
   fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
@@ -34,7 +41,10 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
                    "shooting" = solve_multivariate(beta0 = Delta0, y = Y, X = X,
                                                    lambda = lambda, ...),
                    "scaledlasso" = scaled_lasso(beta0 = Delta0, y = Y, X = X,
-                                                lambda = lambda, ...))
+                                                lambda = lambda, ...),
+                   "desparsifiedlasso" =
+                     solve_desparsified(Delta0 = Delta0, Y = Y, X = X,
+                                        lambda = lambda, ...))
     return(opt)
   }
 

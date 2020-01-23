@@ -57,7 +57,8 @@ test_that("noise_factor() has correct dimensions", {
   expect_length(beta, m)
 })
 
-hci <- size_half_confint(noise_factor = tau, hsigma = scla$sigma_scaledlasso)
+hci <- size_half_confint(noise_factor = tau,
+                         hsigma = scla$sigma_scaledlasso)$half_size
 
 test_that("size_half_confint() has correct dimensions", {
   expect_length(hci, m)
