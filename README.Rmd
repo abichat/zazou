@@ -36,3 +36,21 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("remotes")
 remotes::install_github("abichat/zazou")
 ```
+
+## Notations
+
+To keep consistant notations in the package: 
+
+- the considered tree has `m` leafs and `n` internal branches,
+
+- the vector of z-scores `Z` or `zscores` is size `m`,
+
+- the vector of shift `Delta` or `shifts` is size `n+m`,
+
+- the incidence matrix `incidence_mat`  is size `m*(n+m)`,
+  
+- the covariance matrix `covar_mat` and its square root `R` are size `m*m`,
+
+- `Y = R %*% Z` is a vector of size `m`,
+
+- `X = R %*% incidence_mat` is a matrix of size size `m*(n+m)`.  
