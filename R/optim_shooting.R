@@ -40,15 +40,18 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
     beta_min <- -Inf
     beta_max <- 0
   } else { ## constraint_type == yhat
+    ## Rounding to avoid numerical errors
+    z[abs(z) < 10 * .Machine$double.eps] <- 0
+    x[abs(x) < 10 * .Machine$double.eps] <- 0
     ## Upper bound of feasible set: min_{i: x[i]>0} (-z[i] / x[i])
-    x_plus <- x > sqrt(.Machine$double.eps)
+    x_plus <- x > 0
     if (any(x_plus)) {
       beta_max <- min(-z[x_plus] / x[x_plus])
     } else {
       beta_max <- Inf
     }
     ## Lower bound of feasible set: max_{i: x[i]<0} (-z[i] / x[i])
-    x_minus <- x < -sqrt(.Machine$double.eps)
+    x_minus <- x < 0
     if (any(x_minus)) {
       beta_min <- max(-z[x_minus] / x[x_minus])
     } else {
@@ -56,10 +59,11 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
     }
   }
   ## Check that feasible set (z + x * beta <= 0) is not empty
-  if (beta_min > beta_max)
+  if (beta_min - beta_max > sqrt(.Machine$double.eps)) {
     stop("The constraint is not feasible. Consider changing the constraint.")
-  ## Project unconstrained estimate beta to feasible set [beta_min, beta_min]
-  max(beta_min, min(beta, beta_max))
+  }
+  max(beta_min, min  ## Project unconstrained estimate beta to feasible set [beta_min, beta_min]
+(beta, beta_max))
 }
 
 #' @rdname solve_univariate
