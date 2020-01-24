@@ -31,11 +31,8 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
 
   ### Compute accessory slots --------------
   ## Binary tree
-  if (is.binary(tree)){
-    obj$is_bin <- TRUE
-  } else {
-    obj$is_bin <- FALSE
-  }
+  obj$is_bin <- is.binary(tree)
+
   ## Parsimony score
   obj$pars_score <- fitch(multi2di(obj$tree), obj$zscores_est) # parsimony score
 
