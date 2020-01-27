@@ -21,6 +21,9 @@ estL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
 estSL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                          lambda = 1, tree = tree,
                          alpha = 1, method = "scaledlasso")
+# estDL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+#                          lambda = 1, tree = tree,
+#                          alpha = 1, method = "desparsifiedlasso")
 
 estimations <- list(estS, estL, estSL)
 estR <- estimations[[sample(x = length(estimations), size = 1)]]
