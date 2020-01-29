@@ -96,7 +96,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
       if (is.finite(current_criterion) &&
           current_criterion < best_criterion) {
         best_model <- current_model
-        best_criterion   <- current_criterion
+        best_criterion <- current_criterion
       }
     } ## Close lambda loop
   } ## Close alpha loop
