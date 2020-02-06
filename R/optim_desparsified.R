@@ -67,5 +67,33 @@ update_beta <- function(X, y, beta_init, score_system) {
 size_half_confint <- function(noise_factor, hsigma, alpha = 0.05){
   stopifnot(length(hsigma) == 1)
   stopifnot(length(alpha) == 1)
-  qnorm(1 - alpha / 2) * noise_factor * hsigma
+
+  return(list(half_size = qnorm(1 - alpha / 2) * noise_factor * hsigma,
+              alpha = alpha))
 }
+
+
+solve_desparsified <- function(Delta0, Y, X, lambda, ...){
+  scla <- scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
+
+  scosys <- score_system(X = X, y = Y, beta_init = scla$par$estimate,
+                         hsigma = scla$sigma_scaledlasso)
+
+  tau <- noise_factor(X = X, score_system = scosys)
+
+  beta <- update_beta(X = X, y = Y, beta_init = scla$par$estimate,
+                      score_system = scosys)
+
+  hci <- size_half_confint(noise_factor = tau,
+                           hsigma = scla$sigma_scaledlasso, ...)
+
+  par <- data.frame(estimate = beta,
+                    lower = beta - hci$half_size,
+                    upper = bet + hci$hal_size)
+
+  list(par = par, value = NA, method = "desparsified lasso",
+       alpha_confint = alpha)
+
+}
+
+

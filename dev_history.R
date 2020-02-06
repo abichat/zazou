@@ -89,6 +89,14 @@ library(testthat)
 
 # use_vignette("constraints")
 
+# use_test("shiftestim")
+
+# use_r("optim_lbfgsb")
+
+# use_test("previous_outputs")
+
+# dir.create("tests/testthat/previous_outputs")
+
 
 ####
 

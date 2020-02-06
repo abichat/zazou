@@ -138,22 +138,37 @@
     <p>Compute objective function</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compute_objective_function</span>(<span class='no'>Y</span>, <span class='no'>X</span>, <span class='no'>lambda</span>)</pre>
+    <pre class="usage"><span class='fu'>compute_objective_function</span>(
+  <span class='no'>Y</span>,
+  <span class='no'>X</span>,
+  <span class='no'>lambda</span>,
+  <span class='no'>sigma</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lasso"</span>, <span class='st'>"scaledlasso"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>Y</th>
-      <td><p>a vector of size m</p></td>
+      <td><p>A vector of size m.</p></td>
     </tr>
     <tr>
       <th>X</th>
-      <td><p>a vector of size m*(n+m)</p></td>
+      <td><p>A vector of size m*(n+m).</p></td>
     </tr>
     <tr>
       <th>lambda</th>
       <td><p>a grid of positive regularization parameters</p></td>
+    </tr>
+    <tr>
+      <th>sigma</th>
+      <td><p>Needed if <code>type</code> is set to <code>"scaledlasso"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Character. If you want the <code>"lasso"</code> or
+<code>"scaledlasso"</code> objective function.</p></td>
     </tr>
     </table>
 

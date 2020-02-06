@@ -76,7 +76,7 @@ Z-score are well recovered but the solution is absolutely not sparse. We should 
 
 ### Constraint on yhat
 
-```{r, error=TRUE}
+```{r}
 estimation3 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
                               tree = tree, alpha = 1, lambda = 0.1,  
                               method = "shooting",
@@ -96,7 +96,7 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 
 ### Constraint on yhat
 
-```{r, error=TRUE}
+```{r}
 estimation4 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
                               tree = tree, alpha = 1, lambda = 0.1,  
                               method = "shooting",

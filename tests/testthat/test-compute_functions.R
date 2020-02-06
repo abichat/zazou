@@ -12,7 +12,7 @@ t(Y - X %*% Delta) %*% (Y - X %*% Delta) - lambda * sum(Delta)
 
 
 test_that("objective function is correct", {
-  obj <- compute_objective_function(Y, X, lambda)
+  obj <- compute_objective_function(Y, X, lambda, type = "lasso")
   value <- obj(Delta)
   expect_is(obj, "function")
   expect_length(value, 1)

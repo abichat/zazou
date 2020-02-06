@@ -21,9 +21,10 @@ test_that("noise_factor() is correct", {
 shc <- size_half_confint(1:4, 1)
 
 test_that("size_half_confint() is correct", {
-  expect_equal(shc[4], shc[1] * 4)
-  expect_equal(size_half_confint(runif(5), 1, 0), rep(Inf, 5))
-  expect_equal(size_half_confint(runif(5), 1, 1), rep(0, 5))
+  expect_equal(shc$half_size[4], shc$half_size[1] * 4)
+  expect_equal(size_half_confint(runif(5), 1, 0)$half_size, rep(Inf, 5))
+  expect_equal(size_half_confint(runif(5), 1, 1)$half_size, rep(0, 5))
+  expect_equal(size_half_confint(runif(5), 1, alpha = 0.65)$alpha, 0.65)
   expect_error(size_half_confint(runif(5), 1:4, 0))
   expect_error(size_half_confint(runif(5), 1, 0:1))
 })

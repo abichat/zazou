@@ -19,24 +19,32 @@
 #' @export
 #' @importFrom stats optim
 estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
-                            method = c("L-BFGS-B", "shooting"),
+                            method = c("L-BFGS-B", "shooting",
+                                       "scaledlasso", "desparsifiedlasso"),
                             criterion = c("bic", "pbic"), ...){
 
   method <- match.arg(method)
   criterion <- match.arg(criterion)
 
+  if(method %in% c("scaledlasso", "desparsifiedlasso")){
+    if(any(c(length(alpha), length(lambda)) != 1)){
+      stop(paste0("No model selection can be done with ", method, "."))
+    }
+  }
+
   ## local estimation routine (for a single lambda)
   fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
-    if (method == "L-BFGS-B") {
-      opt <- optim(par = Delta0,
-                   fn = compute_objective_function(Y, X, lambda),
-                   gr = compute_gradient_function(Y, X, lambda),
-                   upper = 0, method = "L-BFGS-B")
-      opt <- c(opt, method = "L-BFGS-B")
-    }
-    if (method == "shooting") {
-      opt <- solve_multivariate(Delta0, Y, X, lambda, ...)
-    }
+
+    opt <- switch (method,
+                   "L-BFGS-B" = solve_lbfgsb(Delta0 = Delta0, X = X, Y = Y,
+                                             lambda = lambda, ...),
+                   "shooting" = solve_multivariate(beta0 = Delta0, y = Y, X = X,
+                                                   lambda = lambda, ...),
+                   "scaledlasso" = scaled_lasso(beta0 = Delta0, y = Y, X = X,
+                                                lambda = lambda, ...),
+                   "desparsifiedlasso" =
+                     solve_desparsified(Delta0 = Delta0, Y = Y, X = X,
+                                        lambda = lambda, ...))
     return(opt)
   }
 
@@ -69,7 +77,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
     ## Inner loop on lambda
     for (lam in current_lambda) {
       ## Compute current model
-      opt <- fitting_procedure(Delta0, X, Y, lambda = lam, ...)
+      opt <- fitting_procedure(Delta0 = Delta0, X = X, Y = Y, lambda = lam, ...)
       current_model <- as_shiftestim(
         listopt = opt, tree = tree, zscores = zscores,
         lambda = lam, alpha = alp)
@@ -88,7 +96,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
       if (is.finite(current_criterion) &&
           current_criterion < best_criterion) {
         best_model <- current_model
-        best_criterion   <- current_criterion
+        best_criterion <- current_criterion
       }
     } ## Close lambda loop
   } ## Close alpha loop

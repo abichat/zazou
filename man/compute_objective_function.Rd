@@ -4,14 +4,25 @@
 \alias{compute_objective_function}
 \title{Compute objective function}
 \usage{
-compute_objective_function(Y, X, lambda)
+compute_objective_function(
+  Y,
+  X,
+  lambda,
+  sigma,
+  type = c("lasso", "scaledlasso")
+)
 }
 \arguments{
-\item{Y}{a vector of size m}
+\item{Y}{A vector of size m.}
 
-\item{X}{a vector of size m*(n+m)}
+\item{X}{A vector of size m*(n+m).}
 
 \item{lambda}{a grid of positive regularization parameters}
+
+\item{sigma}{Needed if \code{type} is set to \code{"scaledlasso"}.}
+
+\item{type}{Character. If you want the \code{"lasso"} or
+\code{"scaledlasso"} objective function.}
 }
 \value{
 a function that take Delta (a vector of size n+m) as argument

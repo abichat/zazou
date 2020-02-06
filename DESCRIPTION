@@ -41,7 +41,8 @@ Suggests:
     testthat (>= 2.1.0),
     tibble,
     tictoc,
-    tidyr
+    tidyr,
+    withr
 VignetteBuilder: 
     knitr
 biocViews: ggtree
