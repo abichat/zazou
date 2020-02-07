@@ -1,28 +1,3 @@
-#' Score system
-#'
-#' Compute the score system of a
-#'
-#' @param X A vector of size m*(n+m).
-#' @param y A vector of size m.
-#' @param beta_init Initial value of beta found with scaled lasso.
-#' @param hsigma Estimate value of sigma, found with scaled lasso.
-#'
-#' @return The matrix of score system, same dimension as X.
-#' @export
-#'
-#' @importFrom hdi lasso.proj
-score_system <- function(X, y, beta_init, hsigma) {
-  obj <-
-    suppressWarnings(suppressMessages(
-      hdi:::calculate.Z(x = X, parallel = FALSE, ncores = 1,
-                        verbose = FALSE, Z = NULL, do.ZnZ = FALSE)
-      # lasso.proj(x = X, y = y, betainit = beta_init,
-      #            sigma = hsigma, return.Z = TRUE)
-    ))
-  sco <- obj$Z
-  attr(sco, "scaled:scale") <- NULL
-  sco
-}
 
 #' Noise factor
 #'
