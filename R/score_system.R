@@ -28,7 +28,7 @@ score_system <- function(X, y, beta_init, hsigma) {
 calculate_Z <- function(X){
   nodewiselasso.out <- score_nodewise_lasso(X = X)
   Z <- nodewiselasso.out$out$Z
-  scaleZ <- nodewiselasso.out$out$scaleZ
+  nodewiselasso.out$out$scaleZ
 }
 
 
@@ -71,12 +71,16 @@ cv_nodewise_totalerr <- function(c, K, dataselects, X, lambdas) {
   for(i in 1:K){ ## loop over the test sets
     whichj <- dataselects == i ##the test part of the data
 
-    glmnetfit <- glmnet::glmnet(x = X[!whichj,-c, drop = FALSE],
-                        y = X[!whichj, c, drop = FALSE],
-                        lambda = lambdas, alpha = 0)
-    predictions  <- predict(glmnetfit, newx = X[whichj, -c, drop = FALSE],
-                            s = lambdas)
-    totalerr[, i] <- apply((X[whichj, c] - predictions)^2, 2, mean)
+    if(var(X[!whichj, c, drop = FALSE])>0){
+      glmnetfit <- glmnet::glmnet(x = X[!whichj,-c, drop = FALSE],
+                          y = X[!whichj, c, drop = FALSE],
+                          lambda = lambdas, alpha = 0)
+      predictions  <- predict(glmnetfit, newx = X[whichj, -c, drop = FALSE],
+                              s = lambdas)
+      totalerr[, i] <- apply((X[whichj, c] - predictions)^2, 2, mean)
+    } else {
+      totalerr[, i] <- mean((X[whichj, c] - mean(X[!whichj, c]))^2)
+    }
   }
 
   totalerr

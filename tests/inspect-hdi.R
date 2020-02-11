@@ -14,6 +14,7 @@ N_branch <- length(tree$edge.length)
 
 alp <- 1
 
+
 covar_mat <- covariance_matrix(tree, alp)
 incidence_mat <- incidence_matrix(tree)
 R <- inverse_sqrt(covar_mat)
@@ -82,3 +83,13 @@ X[!whichj, c, drop = FALSE]
 
 which(whichj)
 which(X[, c] != 0)
+
+
+totalerr
+
+err_array <- array(unlist(totalerr), dim = c(length(lambdas), K, p))
+err_mean <- apply(err_array, 1, mean)
+
+which.min(err_mean)
+lambdas[which.min(err_mean)]
+
