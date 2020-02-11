@@ -77,7 +77,8 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
     ## Inner loop on lambda
     for (lam in current_lambda) {
       ## Compute current model
-      opt <- fitting_procedure(Delta0 = Delta0, X = X, Y = Y, lambda = lam, ...)
+      opt <- fitting_procedure(Delta0 = Delta0, X = X, Y = Y, lambda = lam,
+                               incidence_mat = incidence_mat, ...)
       current_model <- as_shiftestim(
         listopt = opt, tree = tree, zscores = zscores,
         lambda = lam, alpha = alp)

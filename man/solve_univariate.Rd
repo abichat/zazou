@@ -9,12 +9,24 @@ solve_univariate(
   y,
   x,
   z = rep(0, length(y)),
+  u,
+  t,
   lambda = 0,
   constraint_type = c("beta", "yhat", "none"),
   ...
 )
 
-solve_multivariate(beta0, y, X, lambda, prob = NULL, max_it = 500, ...)
+solve_multivariate(
+  beta0,
+  y,
+  X,
+  lambda,
+  prob = NULL,
+  max_it = 500,
+  incidence_mat,
+  constraint_type = c("beta", "yhat", "none"),
+  ...
+)
 }
 \arguments{
 \item{y}{a vector of size n.}
@@ -22,6 +34,10 @@ solve_multivariate(beta0, y, X, lambda, prob = NULL, max_it = 500, ...)
 \item{x}{a vector of size n.}
 
 \item{z}{a vector of size n.}
+
+\item{u}{a vector of size n.}
+
+\item{t}{a vector of size n. Column of the incidence matrix.}
 
 \item{lambda}{a grid of positive regularization parameters}
 

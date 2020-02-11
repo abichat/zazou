@@ -13,6 +13,8 @@
 #' @param y a vector of size n.
 #' @param x a vector of size n.
 #' @param z a vector of size n.
+#' @param u a vector of size n.
+#' @param t a vector of size n. Column of the incidence matrix.
 #' @param constraint_type Character. "beta" (default), "yhat" or "none".
 #' Ensures that all coordinates of \eqn{\beta}
 #' (for \code{constraint_type = "beta"}) or \eqn{z + x\beta}
@@ -24,7 +26,7 @@
 #'
 #' @examples
 #' solve_univariate(1:4, -(4:1), 2)
-solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
+solve_univariate <- function(y, x, z = rep(0, length(y)), u, t, lambda = 0,
                              constraint_type = c("beta", "yhat", "none"),
                              ...) {
   constraint_type <- match.arg(constraint_type)
@@ -41,24 +43,24 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
     beta_max <- 0
   } else { ## constraint_type == yhat
     ## Rounding to avoid numerical errors
-    z[abs(z) < 10 * .Machine$double.eps] <- 0
-    x[abs(x) < 10 * .Machine$double.eps] <- 0
-    ## Upper bound of feasible set: min_{i: x[i]>0} (-z[i] / x[i])
-    x_plus <- x > 0
-    if (any(x_plus)) {
-      beta_max <- min(-z[x_plus] / x[x_plus])
+    u[abs(u) < 10 * .Machine$double.eps] <- 0
+    t[abs(t) < 10 * .Machine$double.eps] <- 0
+    ## Upper bound of feasible set: min_{i: t[i]>0} (-u[i] / t[i])
+    t_plus <- t > 0
+    if (any(t_plus)) {
+      beta_max <- min(-u[t_plus] / t[t_plus])
     } else {
       beta_max <- Inf
     }
-    ## Lower bound of feasible set: max_{i: x[i]<0} (-z[i] / x[i])
-    x_minus <- x < 0
-    if (any(x_minus)) {
-      beta_min <- max(-z[x_minus] / x[x_minus])
+    ## Lower bound of feasible set: max_{i: t[i]<0} (-u[i] / t[i])
+    t_minus <- t < 0
+    if (any(t_minus)) {
+      beta_min <- max(-u[t_minus] / t[t_minus])
     } else {
       beta_min <- -Inf
     }
   }
-  ## Check that feasible set (z + x * beta <= 0) is not empty
+  ## Check that feasible set (u + t * beta <= 0) is not empty
   if (beta_min - beta_max > sqrt(.Machine$double.eps)) {
     stop("The constraint is not feasible. Consider changing the constraint.")
   }
@@ -78,11 +80,18 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
 #' @return the estimated value of beta
 #' @export
 solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
-                               max_it = 500, ...) {
+                               max_it = 500, incidence_mat,
+                               constraint_type = c("beta", "yhat", "none"),
+                               ...) {
+  constraint_type <- match.arg(constraint_type)
   p <- length(beta0)
   beta <- beta0
 
-  yhat <- X %*% beta0
+  yhat <- X %*% beta
+  if(constraint_type == "yhat") {
+    I <- incidence_mat
+    J <- I %*% beta
+  }
   # fn_obj <- compute_objective_function(y, X, lambda)
   ## Fast alternative to compute_objective_function leveraging
   ## the fact that we have access to yhat (= X %*% beta)
@@ -95,8 +104,22 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
     betai <- beta[coord]
     xi <- X[, coord]
     zi <- yhat - betai * xi ## X[ , -coord] %*% beta[-coord]
+
+    if(constraint_type == "yhat") {
+      Ji <- J[coord]
+      Ii <- I[, coord]
+      ui <- J - betai * Ii
+    }
+
     # update betai
-    betai <- solve_univariate(y = y, x = xi, z = zi, lambda = lambda, ...)
+    if(constraint_type != "yhat") {
+      betai <- solve_univariate(y = y, x = xi, z = zi, lambda = lambda, ...)
+    } else {
+      betai <- solve_univariate(y = y, x = xi, z = zi,
+                                u = ui, t = Ii, lambda = lambda, ...)
+      J <<- ui + betai * Ii
+    }
+
     # update beta
     beta[coord] <<- betai
     # update yhat
