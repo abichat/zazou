@@ -8,9 +8,8 @@
 solve_univariate(
   y,
   x,
-  z = rep(0, length(y)),
   u,
-  t,
+  v,
   lambda = 0,
   constraint_type = c("beta", "yhat", "none"),
   ...
@@ -33,17 +32,15 @@ solve_multivariate(
 
 \item{x}{a vector of size n.}
 
-\item{z}{a vector of size n.}
-
 \item{u}{a vector of size n.}
 
-\item{t}{a vector of size n. Column of the incidence matrix.}
+\item{v}{a vector of size n. Column of the incidence matrix.}
 
 \item{lambda}{a grid of positive regularization parameters}
 
 \item{constraint_type}{Character. "beta" (default), "yhat" or "none".
 Ensures that all coordinates of \eqn{\beta}
-(for \code{constraint_type = "beta"}) or \eqn{z + x\beta}
+(for \code{constraint_type = "beta"}) or \eqn{u + v\beta}
 (for \code{constraint_type = "yhat"}) are negative.}
 
 \item{...}{further arguments passed to or from other methods.}
@@ -64,12 +61,12 @@ the estimated value of beta
 }
 \description{
 This function minimizes \eqn{\beta} in the 1D problem
-\eqn{1/2 * ||y - z - x \beta||_2^2 + \lambda |\beta|} subject to
-either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} (coordinate wise).
+\eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to
+either \eqn{\beta <= 0} or \eqn{u + v\beta <= 0} (coordinate wise).
 }
 \details{
 The analytical solution of this problem is given by
-\deqn{\beta* = min(0, ((y-z)'x + \lambda) / x'x ).}
+\deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
 when using the first constraint and is slightly more
 complex when using the second constraint
 (refer to the corresponding vignette)
