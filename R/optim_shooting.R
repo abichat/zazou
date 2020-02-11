@@ -112,10 +112,12 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
 
     # update betai
     if(constraint_type != "yhat") {
-      betai <- solve_univariate(y = y - yhat_minus_i, x = xi, lambda = lambda, ...)
+      betai <- solve_univariate(y = y - yhat_minus_i, x = xi, lambda = lambda,
+                                constraint_type = constraint_type, ...)
     } else {
       betai <- solve_univariate(y = y - yhat_minus_i, x = xi,
-                                u = J_minus_i, v = Ii, lambda = lambda, ...)
+                                u = J_minus_i, v = Ii, lambda = lambda,
+                                constraint_type = "yhat", ...)
       J <<- J_minus_i + betai * Ii
     }
 
