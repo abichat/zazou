@@ -96,9 +96,9 @@ cv_nodewise_totalerr <- function(c, K, dataselects, X, lambdas) {
     whichj <- dataselects == i ##the test part of the data
 
     if(var(X[!whichj, c, drop = FALSE])>0){
-      glmnetfit <- glmnet::glmnet(x = X[!whichj,-c, drop = FALSE],
-                          y = X[!whichj, c, drop = FALSE],
-                          lambda = lambdas, alpha = 0)
+      glmnetfit <- glmnet::glmnet(x = X[!whichj, -c, drop = FALSE],
+                                  y = X[!whichj,  c, drop = FALSE],
+                                  lambda = lambdas)
       predictions  <- predict(glmnetfit, newx = X[whichj, -c, drop = FALSE],
                               s = lambdas)
       totalerr[, i] <- apply((X[whichj, c] - predictions)^2, 2, mean)
@@ -123,7 +123,7 @@ score_getZforlambda <- function(x, lambda) {
 
 
 score_getZforlambda_unitfunction <- function(i, x, lambda) {
-  glmnetfit  <- glmnet(x[, -i], x[, i])
+  glmnetfit  <- glmnet::glmnet(x[, -i], x[, i])
   prediction <- predict(glmnetfit, x[, -i], s = lambda)
   return(x[, i] - prediction)
 }

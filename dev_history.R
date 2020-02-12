@@ -98,6 +98,7 @@ library(testthat)
 # dir.create("tests/testthat/previous_outputs")
 
 # use_r("score_system")
+# use_test("score_system")
 
 
 ####
