@@ -34,25 +34,37 @@ calculate_Z <- function(X){
 
 
 score_nodewise_lasso <- function(X){
-  lambdas <- nodewise_getlambdasequence(X = X)
+  lambdas <- get_lambda_sequence(X = X)
 
-  cvlambdas <- cv_nodewise_bestlambda(lambdas = lambdas, X = X)
+  # cvlambdas <- choose_best_lambda(lambdas = lambdas, X = X)
+  #
+  # bestlambda <- cvlambdas$lambda.min
+  #
+  # Z <- score_getZforlambda(x = X, lambda = bestlambda)
+  #
+  # out <- Z
+  #
+  # return_out <- list(out = out,
+  #                    bestlambda = bestlambda)
+  # return(return_out)
 
-  bestlambda <- cvlambdas$lambda.min
+  best_lambda <- choose_best_lambda(lambdas = lambdas, X = X)$lambda.min
 
-  Z <- score_getZforlambda(x = X, lambda = bestlambda)
+  Z <- score_getZforlambda(x = X, lambda = best_lambda)
 
-  out <- Z
-
-  return_out <- list(out = out,
-                     bestlambda = bestlambda)
-  return(return_out)
+  return(list(out = Z))
 }
 
-nodewise_getlambdasequence <- function(X) {
+#' Vector of lambdas to test
+#'
+#' @param X Matrix to pseudo orthogonalise
+#'
+#' @importFrom glmnet glmnet
+#' @return 100 values for lambdas
+get_lambda_sequence <- function(X) {
   nlambda <- 100
   p <- ncol(X)
-  lambdas <- c()
+  lambdas <- c() # Unknow length for glmnet()$lambda
   for (c in 1:p) {
     lambdas <- c(lambdas, glmnet::glmnet(X[,-c], X[, c])$lambda)
   }
@@ -61,7 +73,13 @@ nodewise_getlambdasequence <- function(X) {
   return(lambdas)
 }
 
-cv_nodewise_bestlambda <- function(lambdas, X){
+#' Choose best lambda by cross-validation
+#'
+#' @param lambdas Numeric vector of lambda to test.
+#' @param X Matrix to pseudo orthogonalise.
+#'
+#' @return The best lambda
+choose_best_lambda <- function(lambdas, X){
   K <- 10
   n <- nrow(X)
   p <- ncol(X)
@@ -86,10 +104,11 @@ cv_nodewise_bestlambda <- function(lambdas, X){
   pos.min    <- which.min(err.mean)
   lambda.min <- lambdas[pos.min]
 
-  stderr.lambda.min <- err.se[pos.min]
+  # stderr.lambda.min <- err.se[pos.min]
 
-  list(lambda.min = lambda.min,
-       lambda.1se = max(lambdas[err.mean < (min(err.mean) + stderr.lambda.min)]))
+  list(lambda.min = lambda.min#,)
+       #lambda.1se = max(lambdas[err.mean < (min(err.mean) + stderr.lambda.min)])
+       )
 }
 
 cv_nodewise_err_unitfunction <- function(c, K, dataselects, X, lambdas) {
