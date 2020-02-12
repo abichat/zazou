@@ -37,8 +37,9 @@ test_that("scaled_lasso() has correct dimensions", {
   # expect_true(all(scla$beta_init <= 0))
 })
 
-scosys <- score_system(X = X, y = y, beta_init = scla$par$estimate,
-                       hsigma = scla$sigma_scaledlasso)
+scosys <- calculate_Z(X = X)
+# scosys <- score_system(X = X, y = y, beta_init = scla$par$estimate,
+#                        hsigma = scla$sigma_scaledlasso)
 
 test_that("score_system() has correct dimensions", {
   expect_equal(dim(scosys), dim(X))
@@ -67,10 +68,10 @@ test_that("size_half_confint() has correct dimensions", {
 data.frame(lower = beta - hci, estimate = beta,
            upper = beta + hci, signif = abs(beta) > hci)
 
-bhat <- lasso.proj(x = X, y = y,
-                   betainit = "scaled lasso",
-                   return.Z = TRUE, standardize = FALSE)$bhat
-
-(bhat - beta)
-(bhat - beta) / beta
+# bhat <- lasso.proj(x = X, y = y,
+#                    betainit = "scaled lasso",
+#                    return.Z = TRUE, standardize = FALSE)$bhat
+#
+# (bhat - beta)
+# (bhat - beta) / beta
 # plot(bhat, beta)

@@ -25,7 +25,6 @@ Imports:
     ggtree,
     glmnet,
     graphics,
-    hdi,
     stats,
     stringr,
     utils
@@ -34,6 +33,7 @@ Suggests:
     dplyr,
     evabic,
     ggplot2,
+    hdi,
     knitr,
     purrr,
     rmarkdown,

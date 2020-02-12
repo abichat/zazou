@@ -7,13 +7,13 @@
 update_beta(X, y, beta_init, score_system)
 }
 \arguments{
-\item{X}{A vector of size m*(n+m).}
+\item{X}{Matrix size m*(n+m).}
 
 \item{y}{A vector of size m.}
 
 \item{beta_init}{Initial value of beta found with scaled lasso.}
 
-\item{score_system}{Score system of X}
+\item{score_system}{Score system of X.}
 }
 \value{
 The one-step self-bias corrected estimator of beta, size m.

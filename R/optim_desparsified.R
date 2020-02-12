@@ -1,8 +1,8 @@
 
 #' Noise factor
 #'
-#' @inheritParams score_system
-#' @param score_system Score system of X
+#' @param X Matrix size m*(n+m).
+#' @param score_system Score system of X.
 #'
 #' @return The vector of noise factor, size (n+m)
 #' @export
@@ -15,7 +15,8 @@ noise_factor <- function(X, score_system) {
 
 #' Update beta
 #'
-#' @inheritParams score_system
+#' @param y A vector of size m.
+#' @param beta_init Initial value of beta found with scaled lasso.
 #' @inheritParams noise_factor
 #'
 #' @return The one-step self-bias corrected estimator of beta, size m.
@@ -34,8 +35,8 @@ update_beta <- function(X, y, beta_init, score_system) {
 #' level of confidence \code{alpha}.
 #'
 #' @param noise_factor Noise factor, size m.
+#' @param hsigma Estimate value of sigma, found with scaled lasso.
 #' @param alpha The confidence level.
-#' @inheritParams score_system
 #'
 #' @return The half-size of the confidence interval for each beta, size m.
 #' @export
@@ -51,8 +52,7 @@ size_half_confint <- function(noise_factor, hsigma, alpha = 0.05){
 solve_desparsified <- function(Delta0, Y, X, lambda, ...){
   scla <- scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
 
-  scosys <- score_system(X = X, y = Y, beta_init = scla$par$estimate,
-                         hsigma = scla$sigma_scaledlasso)
+  scosys <- calculate_Z(X = X)
 
   tau <- noise_factor(X = X, score_system = scosys)
 

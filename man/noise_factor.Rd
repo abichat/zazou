@@ -7,9 +7,9 @@
 noise_factor(X, score_system)
 }
 \arguments{
-\item{X}{A vector of size m*(n+m).}
+\item{X}{Matrix size m*(n+m).}
 
-\item{score_system}{Score system of X}
+\item{score_system}{Score system of X.}
 }
 \value{
 The vector of noise factor, size (n+m)
