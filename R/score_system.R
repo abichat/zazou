@@ -26,9 +26,10 @@ score_system <- function(X, y, beta_init, hsigma) {
 
 
 calculate_Z <- function(X){
-  nodewiselasso.out <- score_nodewise_lasso(X = X)
-  Z <- nodewiselasso.out$out$Z
-  nodewiselasso.out$out$scaleZ
+  nodewiselasso_out <- score_nodewise_lasso(X = X)
+  Z <- nodewiselasso_out$out$Z
+  scaleZ <- nodewiselasso_out$out$scaleZ
+  list(Z = Z, scaleZ = scaleZ)
 }
 
 
@@ -36,6 +37,16 @@ score_nodewise_lasso <- function(X){
   lambdas <- hdi:::nodewise.getlambdasequence(x = X)
 
   cvlambdas <- cv_nodewise_bestlambda(lambdas = lambdas, X = X)
+
+  bestlambda <- cvlambdas$lambda.min
+
+  Z <- score_getZforlambda(x = X, lambda = bestlambda)
+
+  out <- Z
+
+  return_out <- list(out = out,
+                     bestlambda = bestlambda)
+  return(return_out)
 }
 
 cv_nodewise_bestlambda <- function(lambdas, X){
@@ -44,7 +55,7 @@ cv_nodewise_bestlambda <- function(lambdas, X){
   p <- ncol(X)
   l <- length(lambdas)
 
-  ## Based on code from cv.glmnet for sampling the data
+  ## Based on code from cv.glmnet for sampling the data=
   dataselects <- sample(rep(1:K, length = n))
 
   totalerr <- mapply(cv_nodewise_err_unitfunction,
@@ -54,6 +65,19 @@ cv_nodewise_bestlambda <- function(lambdas, X){
                      X = list(X = X),
                      lambdas = list(lambdas = lambdas),
                      SIMPLIFY = FALSE)
+
+  err.array  <- array(unlist(totalerr), dim = c(length(lambdas), K, p))
+  err.mean   <- apply(err.array, 1, mean) ## 1 mean for each lambda
+
+  err.se     <- apply(apply(err.array, c(1, 2), mean), 1, sd) / sqrt(K)
+
+  pos.min    <- which.min(err.mean)
+  lambda.min <- lambdas[pos.min]
+
+  stderr.lambda.min <- err.se[pos.min]
+
+  list(lambda.min = lambda.min,
+       lambda.1se = max(lambdas[err.mean < (min(err.mean) + stderr.lambda.min)]))
 }
 
 cv_nodewise_err_unitfunction <- function(c, K, dataselects, X, lambdas) {
@@ -84,4 +108,28 @@ cv_nodewise_totalerr <- function(c, K, dataselects, X, lambdas) {
   }
 
   totalerr
+}
+
+
+score_getZforlambda <- function(x, lambda) {
+  n <- nrow(x)
+  p <- ncol(x)
+  Z <- matrix(numeric(n * p), n)
+  Z <- mapply(score_getZforlambda_unitfunction, i = 1:p,
+              x = list(x = x), lambda = lambda)
+  Z <- score_rescale(Z, x)
+  return(Z)
+}
+
+
+score_getZforlambda_unitfunction <- function(i, x, lambda) {
+  glmnetfit  <- glmnet(x[, -i], x[, i])
+  prediction <- predict(glmnetfit, x[, -i], s = lambda)
+  return(x[, i] - prediction)
+}
+
+score_rescale <- function(Z, x) {
+  scaleZ <- diag(crossprod(Z, x)) / nrow(x)
+  Z      <- scale(Z, center = FALSE, scale = scaleZ)
+  return(list(Z = Z, scaleZ = scaleZ))
 }

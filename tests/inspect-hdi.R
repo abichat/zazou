@@ -25,7 +25,9 @@ X <- R %*% incidence_mat
 
 lambdas <- hdi:::nodewise.getlambdasequence(x = X)
 
-# cv_nodewise_bestlambda(lambdas = lambdas, X = X)
+cv_nodewise_bestlambda(lambdas = lambdas, X = X)
+calculate_Z(X)
+
 
 K <- 10
 n <- nrow(X)
