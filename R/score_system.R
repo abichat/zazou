@@ -26,34 +26,36 @@ score_system <- function(X, y, beta_init, hsigma) {
 
 
 calculate_Z <- function(X){
-  nodewiselasso_out <- score_nodewise_lasso(X = X)
-  Z <- nodewiselasso_out$out$Z
-  scaleZ <- nodewiselasso_out$out$scaleZ
-  list(Z = Z, scaleZ = scaleZ)
-}
 
-
-score_nodewise_lasso <- function(X){
   lambdas <- get_lambda_sequence(X = X)
-
-  # cvlambdas <- choose_best_lambda(lambdas = lambdas, X = X)
-  #
-  # bestlambda <- cvlambdas$lambda.min
-  #
-  # Z <- score_getZforlambda(x = X, lambda = bestlambda)
-  #
-  # out <- Z
-  #
-  # return_out <- list(out = out,
-  #                    bestlambda = bestlambda)
-  # return(return_out)
-
   best_lambda <- choose_best_lambda(lambdas = lambdas, X = X)$lambda.min
+  nodewiselasso_out <- score_getZforlambda(x = X, lambda = best_lambda)
 
-  Z <- score_getZforlambda(x = X, lambda = best_lambda)
-
-  return(list(out = Z))
+  nodewiselasso_out$Z
 }
+
+
+# score_nodewise_lasso <- function(X){
+#   lambdas <- get_lambda_sequence(X = X)
+#
+#   # cvlambdas <- choose_best_lambda(lambdas = lambdas, X = X)
+#   #
+#   # bestlambda <- cvlambdas$lambda.min
+#   #
+#   # Z <- score_getZforlambda(x = X, lambda = bestlambda)
+#   #
+#   # out <- Z
+#   #
+#   # return_out <- list(out = out,
+#   #                    bestlambda = bestlambda)
+#   # return(return_out)
+#
+#   best_lambda <- choose_best_lambda(lambdas = lambdas, X = X)$lambda.min
+#
+#   Z <- score_getZforlambda(x = X, lambda = best_lambda)
+#
+#   return(list(out = Z))
+# }
 
 #' Vector of lambdas to test
 #'

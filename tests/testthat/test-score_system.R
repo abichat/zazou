@@ -10,14 +10,14 @@ withr::with_preserve_seed({
   scosys <- calculate_Z(X)
   set.seed(42)
   scosyshdi <- hdi:::calculate.Z(x = X, parallel = FALSE, ncores = 1,
-                                 verbose = FALSE, Z = NULL, do.ZnZ = FALSE)
+                                 verbose = FALSE, Z = NULL, do.ZnZ = FALSE)$Z
 })
 
 test_that("Score system has the right dimension", {
-  expect_equal(dim(X), dim(scosys$Z))
+  expect_equal(dim(scosys), dim(X))
 })
 
 test_that("Coherent with hdi code", {
-  expect_equal(scosys$Z, scosyshdi$Z)
+  expect_equal(scosys, scosyshdi)
 })
 
