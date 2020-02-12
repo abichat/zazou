@@ -34,7 +34,7 @@ calculate_Z <- function(X){
 
 
 score_nodewise_lasso <- function(X){
-  lambdas <- hdi:::nodewise.getlambdasequence(x = X)
+  lambdas <- nodewise_getlambdasequence(X = X)
 
   cvlambdas <- cv_nodewise_bestlambda(lambdas = lambdas, X = X)
 
@@ -47,6 +47,18 @@ score_nodewise_lasso <- function(X){
   return_out <- list(out = out,
                      bestlambda = bestlambda)
   return(return_out)
+}
+
+nodewise_getlambdasequence <- function(X) {
+  nlambda <- 100
+  p <- ncol(X)
+  lambdas <- c()
+  for (c in 1:p) {
+    lambdas <- c(lambdas, glmnet::glmnet(X[,-c], X[, c])$lambda)
+  }
+  lambdas <- quantile(lambdas, probs = seq(0, 1, length.out = nlambda))
+  lambdas <- sort(lambdas, decreasing = TRUE)
+  return(lambdas)
 }
 
 cv_nodewise_bestlambda <- function(lambdas, X){
