@@ -29,7 +29,7 @@ score_system <- function(X, y, beta_init, hsigma) {
 #'
 #' Compute the score system of a matrix.
 #'
-#' @param X Matrix to pseudo orthogonalise of size m*(n+m).
+#' @param X Matrix to pseudo orthogonalize of size m*(n+m).
 
 #' @return The matrix of score system, same dimension as X.
 #' @export
@@ -70,13 +70,14 @@ calculate_Z <- function(X){
 #' @inheritParams calculate_Z
 #'
 #' @importFrom glmnet glmnet
+#' @importFrom stats quantile
 #' @return 100 values for lambdas
 get_lambda_sequence <- function(X) {
   nlambda <- 100
   p <- ncol(X)
   lambdas <- c() # Unknow length for glmnet()$lambda
   for (c in 1:p) {
-    lambdas <- c(lambdas, glmnet::glmnet(X[,-c], X[, c])$lambda)
+    lambdas <- c(lambdas, glmnet(X[,-c], X[, c])$lambda)
   }
   lambdas <- quantile(lambdas, probs = seq(0, 1, length.out = nlambda))
   lambdas <- sort(lambdas, decreasing = TRUE)
@@ -88,7 +89,7 @@ get_lambda_sequence <- function(X) {
 #' @inheritParams calculate_Z
 #' @param lambdas Numeric vector of lambda to test.
 #'
-#' @return The best lambda, whoch minimize RMSE prediction
+#' @return The best lambda, which minimize RMSE prediction
 choose_best_lambda <- function(lambdas, X){
   K <- 10
   n <- nrow(X)
@@ -109,7 +110,7 @@ choose_best_lambda <- function(lambdas, X){
   err.array  <- array(unlist(totalerr), dim = c(length(lambdas), K, p))
   err.mean   <- apply(err.array, 1, mean) ## 1 mean for each lambda
 
-  err.se     <- apply(apply(err.array, c(1, 2), mean), 1, sd) / sqrt(K)
+  # err.se     <- apply(apply(err.array, c(1, 2), mean), 1, sd) / sqrt(K)
 
   pos.min    <- which.min(err.mean)
   lambda.min <- lambdas[pos.min]
@@ -140,6 +141,7 @@ choose_best_lambda <- function(lambdas, X){
 #' @return Matrix of errors per lambda and batch.
 #'
 #' @importFrom glmnet glmnet
+#' @importFrom stats predict
 rmse_glmnet <- function(c, K, dataselects, X, lambdas) {
   totalerr <- matrix(nrow = length(lambdas), ncol = K)
 
@@ -147,7 +149,7 @@ rmse_glmnet <- function(c, K, dataselects, X, lambdas) {
     whichj <- dataselects == i ##the test part of the data
 
     if(var(X[!whichj, c, drop = FALSE])>0){
-      glmnetfit <- glmnet::glmnet(x = X[!whichj, -c, drop = FALSE],
+      glmnetfit <- glmnet(x = X[!whichj, -c, drop = FALSE],
                                   y = X[!whichj,  c, drop = FALSE],
                                   lambda = lambdas)
       predictions  <- predict(glmnetfit, newx = X[whichj, -c, drop = FALSE],
@@ -167,10 +169,7 @@ rmse_glmnet <- function(c, K, dataselects, X, lambdas) {
 #' @inheritParams choose_best_lambda
 #' @param lambda Numeric.
 #'
-#' @return
-#' @export
-#'
-#' @examples
+#' @return The score system.
 calculate_Z_with_best_lambda <- function(X, lambda) {
   n <- nrow(X)
   p <- ncol(X)
@@ -187,22 +186,21 @@ calculate_Z_with_best_lambda <- function(X, lambda) {
 #' @param i Integer. The column to use.
 #' @inheritParams calculate_Z_with_best_lambda
 #'
-#' @return A coluln of the score system.
+#' @return A column of the score system.
+#'
+#' @importFrom stats predict
 calculate_Z_column_with_best_lambda <- function(i, X, lambda) {
-  glmnetfit  <- glmnet::glmnet(X[, -i], X[, i])
+  glmnetfit  <- glmnet(X[, -i], X[, i])
   prediction <- predict(glmnetfit, X[, -i], s = lambda)
   return(X[, i] - prediction)
 }
 
 #' Rescale the score system
 #'
-#' @param Z The non-scaled score system
-#' @param X
+#' @param Z The non-scaled score system.
+#' @inheritParams calculate_Z
 #'
-#' @return
-#' @export
-#'
-#' @examples
+#' @return The scaled score system.
 rescale_score_system <- function(Z, X) {
   scaleZ <- diag(crossprod(Z, X)) / nrow(X)
   Z      <- scale(Z, center = FALSE, scale = scaleZ)

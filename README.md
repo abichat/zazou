@@ -25,7 +25,7 @@ remotes::install_github("abichat/zazou")
 
 ## Notations
 
-To keep consistant notations in the package:
+To keep consistent notations in the package:
 
   - the considered tree has `m` leafs and `n` internal branches,
 
