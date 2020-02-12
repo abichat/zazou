@@ -62,8 +62,8 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
   if (beta_min - beta_max > sqrt(.Machine$double.eps)) {
     stop("The constraint is not feasible. Consider changing the constraint.")
   }
-  max(beta_min, min  ## Project unconstrained estimate beta to feasible set [beta_min, beta_min]
-(beta, beta_max))
+  ## Project unconstrained estimate beta to feasible set [beta_min, beta_min]
+  max(beta_min, min(beta, beta_max))
 }
 
 #' @rdname solve_univariate

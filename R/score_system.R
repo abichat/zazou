@@ -1,29 +1,3 @@
-# #' Score system
-# #'
-# #' Compute the score system of a
-# #'
-# #' @param X A vector of size m*(n+m).
-# #' @param y A vector of size m.
-# #' @param beta_init Initial value of beta found with scaled lasso.
-# #' @param hsigma Estimate value of sigma, found with scaled lasso.
-# #'
-# #' @return The matrix of score system, same dimension as X.
-# #' @export
-# #'
-# #' @importFrom hdi lasso.proj
-# score_system <- function(X, y, beta_init, hsigma) {
-#   obj <-
-#     suppressWarnings(suppressMessages(
-#       hdi:::calculate.Z(x = X, parallel = FALSE, ncores = 1,
-#                         verbose = FALSE, Z = NULL, do.ZnZ = FALSE)
-#       # lasso.proj(x = X, y = y, betainit = beta_init,
-#       #            sigma = hsigma, return.Z = TRUE)
-#     ))
-#   sco <- obj$Z
-#   attr(sco, "scaled:scale") <- NULL
-#   sco
-# }
-
 
 #' Score system
 #'
@@ -42,28 +16,6 @@ calculate_Z <- function(X){
   nodewiselasso_out$Z
 }
 
-
-# score_nodewise_lasso <- function(X){
-#   lambdas <- get_lambda_sequence(X = X)
-#
-#   # cvlambdas <- choose_best_lambda(lambdas = lambdas, X = X)
-#   #
-#   # bestlambda <- cvlambdas$lambda.min
-#   #
-#   # Z <- score_getZforlambda(x = X, lambda = bestlambda)
-#   #
-#   # out <- Z
-#   #
-#   # return_out <- list(out = out,
-#   #                    bestlambda = bestlambda)
-#   # return(return_out)
-#
-#   best_lambda <- choose_best_lambda(lambdas = lambdas, X = X)$lambda.min
-#
-#   Z <- score_getZforlambda(x = X, lambda = best_lambda)
-#
-#   return(list(out = Z))
-# }
 
 #' Vector of lambdas to test
 #'
@@ -110,26 +62,11 @@ choose_best_lambda <- function(lambdas, X){
   err.array  <- array(unlist(totalerr), dim = c(length(lambdas), K, p))
   err.mean   <- apply(err.array, 1, mean) ## 1 mean for each lambda
 
-  # err.se     <- apply(apply(err.array, c(1, 2), mean), 1, sd) / sqrt(K)
-
   pos.min    <- which.min(err.mean)
   lambda.min <- lambdas[pos.min]
 
-  # stderr.lambda.min <- err.se[pos.min]
-
-  list(lambda.min = lambda.min#,)
-       #lambda.1se = max(lambdas[err.mean < (min(err.mean) + stderr.lambda.min)])
-       )
+  list(lambda.min = lambda.min)
 }
-
-# cv_nodewise_err_unitfunction <- function(c, K, dataselects, X, lambdas) {
-#   cv_nodewise_totalerr(c = c,
-#                        K = K,
-#                        dataselects = dataselects,
-#                        X = X,
-#                        lambdas = lambdas)
-# }
-
 
 #' Compute prediction errors
 #'
