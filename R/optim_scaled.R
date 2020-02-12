@@ -1,16 +1,3 @@
-#' Update sigma in the scaled lasso algorithm
-#'
-#' Compute the exact value of sigma that nullify the gradient.
-#'
-#' @param y A vector of size m.
-#' @param X A vector of size m*(n+m).
-#' @param beta The current value of beta.
-#'
-#' @return Updated version of sigma.
-update_sigma <- function(y, X, beta){
-  sqrt(sum((y - X %*% beta)^2) / nrow(X))
-}
-
 #' Scaled lasso
 #'
 #' Scaled lasso to compute \code{beta_init} and \code{hsigma}.
@@ -22,7 +9,9 @@ update_sigma <- function(y, X, beta){
 #' value is chosen.
 #' @param ... Further arguments passed to or from other methods.
 #'
-#' @return A list composed by \code{beta_init} and \code{hsigma}.
+#' @return A list composed by \code{par} (beta estimate) and
+#' \code{sigma_scaledlasso} among others.
+#' @export
 #'
 scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
 
@@ -58,4 +47,18 @@ scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
   list(par = data.frame(estimate = beta), sigma_scaledlasso = sigma,
        method = "scaled lasso", value = obj,
        iterations = it, last_progress = progress)
+}
+
+
+#' Update sigma in the scaled lasso algorithm
+#'
+#' Compute the exact value of sigma that nullify the gradient.
+#'
+#' @param y A vector of size m.
+#' @param X A vector of size m*(n+m).
+#' @param beta The current value of beta.
+#'
+#' @return Updated version of sigma.
+update_sigma <- function(y, X, beta){
+  sqrt(sum((y - X %*% beta)^2) / nrow(X))
 }

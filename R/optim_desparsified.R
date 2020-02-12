@@ -1,3 +1,35 @@
+#' Desparsified lasso
+#'
+#' @param Delta0 Initial value for Delta.
+#' @param Y A vector of size m.
+#' @param X A vector of size m*(n+m).
+#' @param alpha_conf Confidence interval for Delta values.
+#' @param ... Further arguments passed to or from other methods.
+#'
+#' @return A list composed by \code{par} (beta estimate) among others.
+#' @export
+#'
+solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
+  scla <- scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
+
+  scosys <- calculate_Z(X = X)
+
+  tau <- noise_factor(X = X, score_system = scosys)
+
+  beta <- update_beta(X = X, y = Y, beta_init = scla$par$estimate,
+                      score_system = scosys)
+
+  hci <- size_half_confint(noise_factor = tau,
+                           hsigma = scla$sigma_scaledlasso, alpha_conf)
+
+  par <- data.frame(estimate = beta,
+                    lower = beta - hci$half_size,
+                    upper = beta + hci$half_size)
+
+  list(par = par, value = NA, method = "desparsified lasso",
+       alpha_confint = alpha_conf)
+
+}
 
 #' Noise factor
 #'
@@ -49,26 +81,5 @@ size_half_confint <- function(noise_factor, hsigma, alpha_conf = 0.05){
 }
 
 
-solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
-  scla <- scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
-
-  scosys <- calculate_Z(X = X)
-
-  tau <- noise_factor(X = X, score_system = scosys)
-
-  beta <- update_beta(X = X, y = Y, beta_init = scla$par$estimate,
-                      score_system = scosys)
-
-  hci <- size_half_confint(noise_factor = tau,
-                           hsigma = scla$sigma_scaledlasso, alpha_conf)
-
-  par <- data.frame(estimate = beta,
-                    lower = beta - hci$half_size,
-                    upper = beta + hci$half_size)
-
-  list(par = par, value = NA, method = "desparsified lasso",
-       alpha_confint = alpha_conf)
-
-}
 
 

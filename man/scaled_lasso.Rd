@@ -19,7 +19,8 @@ value is chosen.}
 \item{...}{Further arguments passed to or from other methods.}
 }
 \value{
-A list composed by \code{beta_init} and \code{hsigma}.
+A list composed by \code{par} (beta estimate) and
+\code{sigma_scaledlasso} among others.
 }
 \description{
 Scaled lasso to compute \code{beta_init} and \code{hsigma}.

@@ -86,11 +86,12 @@ test_that("L-BFGS-B output is correct", {
     "The constraint 'yhat' is not available for L-BFGS-B solving.")
 })
 
-test_that("shooting output is correct", {
+test_that("scaled lasso output is correct", {
   expect_equal(estSL$method, "scaled lasso")
   expect_equal(ncol(estSL$shift_est), 1)
   expect_scalnum(estSL$optim_info$last_progress)
   expect_scalnum(estSL$optim_info$iterations)
+  expect_scalnum(estSL$optim_info$sigma_scaledlasso)
   expect_error(
     estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                     tree = tree, alpha = 1, method = "scaledlasso"),
