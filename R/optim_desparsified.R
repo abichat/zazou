@@ -36,20 +36,20 @@ update_beta <- function(X, y, beta_init, score_system) {
 #'
 #' @param noise_factor Noise factor, size m.
 #' @param hsigma Estimate value of sigma, found with scaled lasso.
-#' @param alpha The confidence level.
+#' @param alpha_conf The confidence level.
 #'
 #' @return The half-size of the confidence interval for each beta, size m.
 #' @export
-size_half_confint <- function(noise_factor, hsigma, alpha = 0.05){
+size_half_confint <- function(noise_factor, hsigma, alpha_conf = 0.05){
   stopifnot(length(hsigma) == 1)
-  stopifnot(length(alpha) == 1)
+  stopifnot(length(alpha_conf) == 1)
 
-  return(list(half_size = qnorm(1 - alpha / 2) * noise_factor * hsigma,
-              alpha = alpha))
+  return(list(half_size = qnorm(1 - alpha_conf / 2) * noise_factor * hsigma,
+              alpha_conf = alpha_conf))
 }
 
 
-solve_desparsified <- function(Delta0, Y, X, lambda, ...){
+solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
   scla <- scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
 
   scosys <- calculate_Z(X = X)
@@ -60,14 +60,14 @@ solve_desparsified <- function(Delta0, Y, X, lambda, ...){
                       score_system = scosys)
 
   hci <- size_half_confint(noise_factor = tau,
-                           hsigma = scla$sigma_scaledlasso, ...)
+                           hsigma = scla$sigma_scaledlasso, alpha_conf)
 
   par <- data.frame(estimate = beta,
                     lower = beta - hci$half_size,
-                    upper = bet + hci$hal_size)
+                    upper = beta + hci$half_size)
 
   list(par = par, value = NA, method = "desparsified lasso",
-       alpha_confint = alpha)
+       alpha_confint = alpha_conf)
 
 }
 

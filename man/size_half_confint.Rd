@@ -4,14 +4,14 @@
 \alias{size_half_confint}
 \title{Size of the half confidence interval}
 \usage{
-size_half_confint(noise_factor, hsigma, alpha = 0.05)
+size_half_confint(noise_factor, hsigma, alpha_conf = 0.05)
 }
 \arguments{
 \item{noise_factor}{Noise factor, size m.}
 
 \item{hsigma}{Estimate value of sigma, found with scaled lasso.}
 
-\item{alpha}{The confidence level.}
+\item{alpha_conf}{The confidence level.}
 }
 \value{
 The half-size of the confidence interval for each beta, size m.

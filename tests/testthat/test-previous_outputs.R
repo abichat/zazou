@@ -20,10 +20,9 @@ withr::with_preserve_seed({
   estSL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                           lambda = 0.1, tree = tree,
                           alpha = 1, method = "scaledlasso")
-  # Doesn't work
-  # estDL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-  #                         lambda = 0.1, tree = tree,
-  #                         alpha = 1, method = "desparsifiedlasso")
+  estDL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+                          lambda = 0.1, tree = tree,
+                          alpha = 1, method = "desparsifiedlasso")
 })
 
 ######################################################################
@@ -48,13 +47,11 @@ test_that("outputs do not change over time", {
                      update = FALSE)
   expect_known_value(estSL$optim_info$sigma_scaledlasso,
                      "previous_outputs/estSL_sigma", update = FALSE)
-  # Scaled Lasso
-  # expect_known_value(estDL$zscores_est, "previous_outputs/estDL_zscore",
-  #                    update = FALSE)
-  # expect_known_value(estDL$shift_est, "previous_outputs/estDL_shift",
-  #                    update = FALSE)
-  # expect_known_value(estDL$optim_info$sigma_scaledlasso,
-  #                    "previous_outputs/estDL_sigma", update = FALSE)
+  # Desparsified Lasso
+  expect_known_value(estDL$zscores_est, "previous_outputs/estDL_zscore",
+                     update = FALSE)
+  expect_known_value(estDL$shift_est, "previous_outputs/estDL_shift",
+                     update = FALSE)
 })
 
 
