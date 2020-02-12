@@ -25,11 +25,19 @@ score_system <- function(X, y, beta_init, hsigma) {
 }
 
 
+#' Score system
+#'
+#' Compute the score system of a matrix.
+#'
+#' @param X Matrix to pseudo orthogonalise of size m*(n+m).
+
+#' @return The matrix of score system, same dimension as X.
+#' @export
 calculate_Z <- function(X){
 
   lambdas <- get_lambda_sequence(X = X)
   best_lambda <- choose_best_lambda(lambdas = lambdas, X = X)$lambda.min
-  nodewiselasso_out <- score_getZforlambda(x = X, lambda = best_lambda)
+  nodewiselasso_out <- calculate_Z_with_best_lambda(X = X, lambda = best_lambda)
 
   nodewiselasso_out$Z
 }
@@ -59,7 +67,7 @@ calculate_Z <- function(X){
 
 #' Vector of lambdas to test
 #'
-#' @param X Matrix to pseudo orthogonalise
+#' @inheritParams calculate_Z
 #'
 #' @importFrom glmnet glmnet
 #' @return 100 values for lambdas
@@ -77,20 +85,20 @@ get_lambda_sequence <- function(X) {
 
 #' Choose best lambda by cross-validation
 #'
+#' @inheritParams calculate_Z
 #' @param lambdas Numeric vector of lambda to test.
-#' @param X Matrix to pseudo orthogonalise.
 #'
-#' @return The best lambda
+#' @return The best lambda, whoch minimize RMSE prediction
 choose_best_lambda <- function(lambdas, X){
   K <- 10
   n <- nrow(X)
   p <- ncol(X)
   l <- length(lambdas)
 
-  ## Based on code from cv.glmnet for sampling the data=
+  ## Based on code from cv.glmnet for sampling the data
   dataselects <- sample(rep(1:K, length = n))
 
-  totalerr <- mapply(cv_nodewise_err_unitfunction,
+  totalerr <- mapply(rmse_glmnet,
                      c = 1:p,
                      K = K,
                      dataselects = list(dataselects = dataselects),
@@ -113,16 +121,26 @@ choose_best_lambda <- function(lambdas, X){
        )
 }
 
-cv_nodewise_err_unitfunction <- function(c, K, dataselects, X, lambdas) {
-  cv_nodewise_totalerr(c = c,
-                       K = K,
-                       dataselects = dataselects,
-                       X = X,
-                       lambdas = lambdas)
-}
+# cv_nodewise_err_unitfunction <- function(c, K, dataselects, X, lambdas) {
+#   cv_nodewise_totalerr(c = c,
+#                        K = K,
+#                        dataselects = dataselects,
+#                        X = X,
+#                        lambdas = lambdas)
+# }
 
 
-cv_nodewise_totalerr <- function(c, K, dataselects, X, lambdas) {
+#' Compute prediction errors
+#'
+#' @param c Column to use.
+#' @param K Number of batches.
+#' @param dataselects Batches.
+#' @inheritParams choose_best_lambda
+#'
+#' @return Matrix of errors per lambda and batch.
+#'
+#' @importFrom glmnet glmnet
+rmse_glmnet <- function(c, K, dataselects, X, lambdas) {
   totalerr <- matrix(nrow = length(lambdas), ncol = K)
 
   for(i in 1:K){ ## loop over the test sets
@@ -144,25 +162,49 @@ cv_nodewise_totalerr <- function(c, K, dataselects, X, lambdas) {
 }
 
 
-score_getZforlambda <- function(x, lambda) {
-  n <- nrow(x)
-  p <- ncol(x)
-  Z <- matrix(numeric(n * p), n)
-  Z <- mapply(score_getZforlambda_unitfunction, i = 1:p,
-              x = list(x = x), lambda = lambda)
-  Z <- score_rescale(Z, x)
+#' Compute the score system once lambda is chosen
+#'
+#' @inheritParams choose_best_lambda
+#' @param lambda Numeric.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+calculate_Z_with_best_lambda <- function(X, lambda) {
+  n <- nrow(X)
+  p <- ncol(X)
+  # Z <- matrix(numeric(n * p), n)
+  Z <- mapply(calculate_Z_column_with_best_lambda, i = 1:p,
+              X = list(X = X), lambda = lambda)
+  Z <- rescale_score_system(Z, X)
   return(Z)
 }
 
 
-score_getZforlambda_unitfunction <- function(i, x, lambda) {
-  glmnetfit  <- glmnet::glmnet(x[, -i], x[, i])
-  prediction <- predict(glmnetfit, x[, -i], s = lambda)
-  return(x[, i] - prediction)
+#' Compute a column of the score system
+#'
+#' @param i Integer. The column to use.
+#' @inheritParams calculate_Z_with_best_lambda
+#'
+#' @return A coluln of the score system.
+calculate_Z_column_with_best_lambda <- function(i, X, lambda) {
+  glmnetfit  <- glmnet::glmnet(X[, -i], X[, i])
+  prediction <- predict(glmnetfit, X[, -i], s = lambda)
+  return(X[, i] - prediction)
 }
 
-score_rescale <- function(Z, x) {
-  scaleZ <- diag(crossprod(Z, x)) / nrow(x)
+#' Rescale the score system
+#'
+#' @param Z The non-scaled score system
+#' @param X
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rescale_score_system <- function(Z, X) {
+  scaleZ <- diag(crossprod(Z, X)) / nrow(X)
   Z      <- scale(Z, center = FALSE, scale = scaleZ)
   return(list(Z = Z, scaleZ = scaleZ))
 }
