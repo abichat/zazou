@@ -4,22 +4,29 @@
 \alias{norm0}
 \title{Norm 0}
 \usage{
-norm0(x, reverse = FALSE)
+norm0(x, rev = FALSE, prop = FALSE)
 }
 \arguments{
 \item{x}{Numeric.}
 
-\item{reverse}{If \code{TRUE}, returns the number of zeros in \code{x}.}
+\item{rev}{If \code{TRUE}, returns the number of zeros in \code{x}.}
+
+\item{prop}{If \code{TRUE}, returns the proportion of
+(non-)zeros in \code{x}.}
 }
 \value{
 By default, the number of non-zero values in \code{x}
-(\eqn{\|x\|_0}). If \code{reverse} is set to \code{TRUE},
-the number of zero in \code{x}.
+(\eqn{\|x\|_0}).
+If \code{rev} is set to \code{TRUE}, the number of zero in \code{x}.
+If \code{prop} is set to \code{TRUE}, i return the proportion
+instead of the absolute count.
 }
 \description{
-Compute the number of non-zero values
+Compute the number of non-zero values.
 }
 \examples{
 x <- c(1, 2, 3, 0, 4)
 norm0(x)
+norm0(x, rev = TRUE)
+norm0(x, prop = TRUE)
 }

@@ -19,27 +19,35 @@ inverse_sqrt <- function(M){
 
 #' Norm 0
 #'
-#' Compute the number of non-zero values
+#' Compute the number of non-zero values.
 #'
 #' @param x Numeric.
-#' @param reverse If \code{TRUE}, returns the number of zeros in \code{x}.
+#' @param rev If \code{TRUE}, returns the number of zeros in \code{x}.
+#' @param prop If \code{TRUE}, returns the proportion of
+#' (non-)zeros in \code{x}.
 #'
 #' @return By default, the number of non-zero values in \code{x}
-#' (\eqn{\|x\|_0}). If \code{reverse} is set to \code{TRUE},
-#' the number of zero in \code{x}.
+#' (\eqn{\|x\|_0}).
+#' If \code{rev} is set to \code{TRUE}, the number of zero in \code{x}.
+#' If \code{prop} is set to \code{TRUE}, i return the proportion
+#' instead of the absolute count.
 #' @export
 #'
 #' @examples
 #' x <- c(1, 2, 3, 0, 4)
 #' norm0(x)
-norm0 <- function(x, reverse = FALSE) {
+#' norm0(x, rev = TRUE)
+#' norm0(x, prop = TRUE)
+norm0 <- function(x, rev = FALSE, prop = FALSE) {
   stopifnot(is.numeric(x))
-  n <- sum(x != 0)
+  stopifnot(length(x) >= 1)
 
-  if (isTRUE(reverse)) {
-    return(length(x) - n)
-  } else {
-    return(n)
-  }
+  n <- sum(x != 0)
+  l <- length(x)
+
+  if (isTRUE(rev)) n <- l - n
+  if (isTRUE(prop)) n <- n / l
+
+  return(n)
 }
 
