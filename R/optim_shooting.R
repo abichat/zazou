@@ -1,21 +1,22 @@
 #' Solve unidirectional constrained problem
 #'
 #' This function minimizes \eqn{\beta} in the 1D problem
-#' \eqn{1/2 * ||y - z - x \beta||_2^2 + \lambda |\beta|} subject to
-#' either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} (coordinate wise).
+#' \eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to
+#' either \eqn{\beta <= 0} or \eqn{u + v\beta <= 0} (coordinate wise).
 #'
 #' The analytical solution of this problem is given by
-#' \deqn{\beta* = min(0, ((y-z)'x + \lambda) / x'x ).}
+#' \deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
 #' when using the first constraint and is slightly more
 #' complex when using the second constraint
 #' (refer to the corresponding vignette)
 #'
 #' @param y a vector of size n.
 #' @param x a vector of size n.
-#' @param z a vector of size n.
+#' @param u a vector of size n.
+#' @param v a vector of size n. Column of the incidence matrix.
 #' @param constraint_type Character. "beta" (default), "yhat" or "none".
 #' Ensures that all coordinates of \eqn{\beta}
-#' (for \code{constraint_type = "beta"}) or \eqn{z + x\beta}
+#' (for \code{constraint_type = "beta"}) or \eqn{u + v\beta}
 #' (for \code{constraint_type = "yhat"}) are negative.
 #' @inheritParams estimate_shifts
 #'
@@ -24,12 +25,12 @@
 #'
 #' @examples
 #' solve_univariate(1:4, -(4:1), 2)
-solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
+solve_univariate <- function(y, x, u, v, lambda = 0,
                              constraint_type = c("beta", "yhat", "none"),
                              ...) {
   constraint_type <- match.arg(constraint_type)
   ## Compute unconstrained estimator
-  ytx <- sum((y - z) * x) ## crossprod(y -z, x)
+  ytx <- sum(y * x) ## crossprod(y -z, x)
   if (abs(ytx) <= lambda) beta <- 0
   if (ytx < -lambda) beta <- (ytx + lambda) / sum(x^2)
   if (ytx > lambda)  beta <- (ytx - lambda) / sum(x^2)
@@ -41,24 +42,24 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
     beta_max <- 0
   } else { ## constraint_type == yhat
     ## Rounding to avoid numerical errors
-    z[abs(z) < 10 * .Machine$double.eps] <- 0
-    x[abs(x) < 10 * .Machine$double.eps] <- 0
-    ## Upper bound of feasible set: min_{i: x[i]>0} (-z[i] / x[i])
-    x_plus <- x > 0
-    if (any(x_plus)) {
-      beta_max <- min(-z[x_plus] / x[x_plus])
+    u[abs(u) < 10 * .Machine$double.eps] <- 0
+    v[abs(v) < 10 * .Machine$double.eps] <- 0
+    ## Upper bound of feasible set: min_{i: v[i]>0} (-u[i] / v[i])
+    v_plus <- v > 0
+    if (any(v_plus)) {
+      beta_max <- min(-u[v_plus] / v[v_plus])
     } else {
       beta_max <- Inf
     }
-    ## Lower bound of feasible set: max_{i: x[i]<0} (-z[i] / x[i])
-    x_minus <- x < 0
-    if (any(x_minus)) {
-      beta_min <- max(-z[x_minus] / x[x_minus])
+    ## Lower bound of feasible set: max_{i: v[i]<0} (-u[i] / v[i])
+    v_minus <- v < 0
+    if (any(v_minus)) {
+      beta_min <- max(-u[v_minus] / v[v_minus])
     } else {
       beta_min <- -Inf
     }
   }
-  ## Check that feasible set (z + x * beta <= 0) is not empty
+  ## Check that feasible set (u + v * beta <= 0) is not empty
   if (beta_min - beta_max > sqrt(.Machine$double.eps)) {
     stop("The constraint is not feasible. Consider changing the constraint.")
   }
@@ -68,21 +69,30 @@ solve_univariate <- function(y, x, z = rep(0, length(y)), lambda = 0,
 
 #' @rdname solve_univariate
 #'
-#' @param beta0 the initial position of beta.
-#' @param X a matrix of size  x p.
-#' @param max_it Maximum number of iterations.
-#' @param prob a vector of probability weights for obtaining the coordinates
+#' @param beta0 The initial position of beta.
+#' @param X A matrix of size  x p.
+#' @param prob A vector of probability weights for obtaining the coordinates
 #' to be sampled.
-#' @param ... further arguments passed to or from other methods.
+#' @param max_it Maximum number of iterations.
+#' @param incidence_mat Incidence matrix from the problem. Used only if
+#' \code{constraint_type} is set to \code{"yhat"}.
+#' @param ... Further arguments passed to or from other methods.
 #'
 #' @return the estimated value of beta
 #' @export
 solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
-                               max_it = 500, ...) {
+                               max_it = 500, incidence_mat,
+                               constraint_type = c("beta", "yhat", "none"),
+                               ...) {
+  constraint_type <- match.arg(constraint_type)
   p <- length(beta0)
   beta <- beta0
 
-  yhat <- X %*% beta0
+  yhat <- X %*% beta
+  if(constraint_type == "yhat") {
+    I <- incidence_mat
+    J <- I %*% beta
+  }
   # fn_obj <- compute_objective_function(y, X, lambda)
   ## Fast alternative to compute_objective_function leveraging
   ## the fact that we have access to yhat (= X %*% beta)
@@ -94,13 +104,29 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
   update_coord <- function(coord, ...){
     betai <- beta[coord]
     xi <- X[, coord]
-    zi <- yhat - betai * xi ## X[ , -coord] %*% beta[-coord]
+    yhat_minus_i <- yhat - betai * xi ## X[ , -coord] %*% beta[-coord]
+
+    if(constraint_type == "yhat") {
+      # Ji <- J[coord]
+      Ii <- I[, coord]
+      J_minus_i <- J - betai * Ii
+    }
+
     # update betai
-    betai <- solve_univariate(y = y, x = xi, z = zi, lambda = lambda, ...)
+    if(constraint_type != "yhat") {
+      betai <- solve_univariate(y = y - yhat_minus_i, x = xi, lambda = lambda,
+                                constraint_type = constraint_type, ...)
+    } else {
+      betai <- solve_univariate(y = y - yhat_minus_i, x = xi,
+                                u = J_minus_i, v = Ii, lambda = lambda,
+                                constraint_type = "yhat", ...)
+      J <<- J_minus_i + betai * Ii
+    }
+
     # update beta
     beta[coord] <<- betai
     # update yhat
-    yhat <<- zi + betai * xi ## X %*% beta
+    yhat <<- yhat_minus_i + betai * xi ## X %*% beta
   }
 
   it <- 1

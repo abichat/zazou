@@ -12,6 +12,7 @@ estimate_shifts(
   lambda = NULL,
   method = c("L-BFGS-B", "shooting", "scaledlasso", "desparsifiedlasso"),
   criterion = c("bic", "pbic"),
+  constraint_type = c("beta", "yhat", "none"),
   ...
 )
 }
@@ -31,6 +32,8 @@ estimate_shifts(
 or \code{shooting}.}
 
 \item{criterion}{criterion on which the selection is done.}
+
+\item{constraint_type}{Constrains on shifts.}
 
 \item{...}{further arguments passed to or from other methods.}
 }

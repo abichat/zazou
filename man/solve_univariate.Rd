@@ -8,38 +8,54 @@
 solve_univariate(
   y,
   x,
-  z = rep(0, length(y)),
+  u,
+  v,
   lambda = 0,
   constraint_type = c("beta", "yhat", "none"),
   ...
 )
 
-solve_multivariate(beta0, y, X, lambda, prob = NULL, max_it = 500, ...)
+solve_multivariate(
+  beta0,
+  y,
+  X,
+  lambda,
+  prob = NULL,
+  max_it = 500,
+  incidence_mat,
+  constraint_type = c("beta", "yhat", "none"),
+  ...
+)
 }
 \arguments{
 \item{y}{a vector of size n.}
 
 \item{x}{a vector of size n.}
 
-\item{z}{a vector of size n.}
+\item{u}{a vector of size n.}
+
+\item{v}{a vector of size n. Column of the incidence matrix.}
 
 \item{lambda}{a grid of positive regularization parameters}
 
 \item{constraint_type}{Character. "beta" (default), "yhat" or "none".
 Ensures that all coordinates of \eqn{\beta}
-(for \code{constraint_type = "beta"}) or \eqn{z + x\beta}
+(for \code{constraint_type = "beta"}) or \eqn{u + v\beta}
 (for \code{constraint_type = "yhat"}) are negative.}
 
-\item{...}{further arguments passed to or from other methods.}
+\item{...}{Further arguments passed to or from other methods.}
 
-\item{beta0}{the initial position of beta.}
+\item{beta0}{The initial position of beta.}
 
-\item{X}{a matrix of size  x p.}
+\item{X}{A matrix of size  x p.}
 
-\item{prob}{a vector of probability weights for obtaining the coordinates
+\item{prob}{A vector of probability weights for obtaining the coordinates
 to be sampled.}
 
 \item{max_it}{Maximum number of iterations.}
+
+\item{incidence_mat}{Incidence matrix from the problem. Used only if
+\code{constraint_type} is set to \code{"yhat"}.}
 }
 \value{
 The scalar solution \eqn{\beta} of the 1D optimization problem
@@ -48,12 +64,12 @@ the estimated value of beta
 }
 \description{
 This function minimizes \eqn{\beta} in the 1D problem
-\eqn{1/2 * ||y - z - x \beta||_2^2 + \lambda |\beta|} subject to
-either \eqn{\beta <= 0} or \eqn{z + x\beta <= 0} (coordinate wise).
+\eqn{1/2 * ||y - x \beta||_2^2 + \lambda |\beta|} subject to
+either \eqn{\beta <= 0} or \eqn{u + v\beta <= 0} (coordinate wise).
 }
 \details{
 The analytical solution of this problem is given by
-\deqn{\beta* = min(0, ((y-z)'x + \lambda) / x'x ).}
+\deqn{\beta* = min(0, (y'x + \lambda) / x'x ).}
 when using the first constraint and is slightly more
 complex when using the second constraint
 (refer to the corresponding vignette)
