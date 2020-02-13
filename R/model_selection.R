@@ -18,7 +18,7 @@
 #'     sigma = 1.4)
 bic <- function(obs_zscores, est_zscores, est_shifts, sigma){
   LL <- loglikelihood(obs_zscores, est_zscores, sigma)
-  k <- sum(est_shifts != 0)
+  k <- norm0(est_shifts)
   N <- length(obs_zscores)
   - 2 * LL + k * log(N)
 }

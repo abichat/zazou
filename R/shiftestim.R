@@ -103,14 +103,16 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat("---\n")
   cat("Estimated shifts:", head(round(x$shift_est$estimate, digits), 10),
       "...\n")
-  cat(sum(x$shift_est$estimate != 0), "shifts have been identified (ie",
-      100 * round(mean(x$shift_est$estimate == 0), digits), "% of sparsity)\n")
+  cat(norm0(x$shift_est$estimate), "shifts have been identified (ie",
+      100 * round(norm0(x$shift_est$estimate, rev = TRUE, prop = TRUE), digits),
+      "% of sparsity)\n")
   cat("A parsimonious solution would involve", x$pars_score, "shifts\n")
   cat("---\n")
   cat("Observed z-scores: ", zobs, dots_z)
   cat("Estimated z-scores:", zest, dots_z)
-  cat(sum(x$zscores_est != 0), "z-scores have been shifted (ie",
-      100 * round(mean(x$zscores_est == 0), digits), "% of sparsity)\n")
+  cat(norm0(x$zscores_est),  "z-scores have been shifted (ie",
+      100 * round(norm0(x$zscores_est, rev = TRUE, prop = TRUE), digits),
+      "% of sparsity)\n")
 }
 
 
