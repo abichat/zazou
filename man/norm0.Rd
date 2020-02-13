@@ -4,13 +4,17 @@
 \alias{norm0}
 \title{Norm 0}
 \usage{
-norm0(x)
+norm0(x, reverse = FALSE)
 }
 \arguments{
 \item{x}{Numeric.}
+
+\item{reverse}{If \code{TRUE}, returns the number of zeros in \code{x}.}
 }
 \value{
-The number of non-zero values in x (\eqn{\|x\|_0}).
+By default, the number of non-zero values in \code{x}
+(\eqn{\|x\|_0}). If \code{reverse} is set to \code{TRUE},
+the number of zero in \code{x}.
 }
 \description{
 Compute the number of non-zero values

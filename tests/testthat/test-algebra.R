@@ -20,8 +20,10 @@ x4 <- c(TRUE, FALSE)
 test_that("norm0 is correct", {
   expect_equal(norm0(x0), 0)
   expect_equal(norm0(x1), 6)
+  expect_equal(norm0(x1, reverse = TRUE), 1)
   expect_equal(norm0(x2), 3)
   expect_equal(norm0(x3), 90)
+  expect_equal(norm0(x3, reverse = TRUE), 10)
   expect_error(norm0(x4))
 })
 
