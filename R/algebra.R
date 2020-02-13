@@ -17,3 +17,20 @@ inverse_sqrt <- function(M){
   solve(L)
 }
 
+#' Norm 0
+#'
+#' Compute the number of non-zero values
+#'
+#' @param x Numeric.
+#'
+#' @return The number of non-zero values in x (\eqn{\|x\|_0}).
+#' @export
+#'
+#' @examples
+#' x <- c(1, 2, 3, 0, 4)
+#' norm0(x)
+norm0 <- function(x){
+  stopifnot(is.numeric(x))
+  sum(x != 0)
+}
+
