@@ -69,12 +69,14 @@ solve_univariate <- function(y, x, u, v, lambda = 0,
 
 #' @rdname solve_univariate
 #'
-#' @param beta0 the initial position of beta.
-#' @param X a matrix of size  x p.
-#' @param max_it Maximum number of iterations.
-#' @param prob a vector of probability weights for obtaining the coordinates
+#' @param beta0 The initial position of beta.
+#' @param X A matrix of size  x p.
+#' @param prob A vector of probability weights for obtaining the coordinates
 #' to be sampled.
-#' @param ... further arguments passed to or from other methods.
+#' @param max_it Maximum number of iterations.
+#' @param incidence_mat Incidence matrix from the problem. Used only if
+#' \code{constraint_type} is set to \code{"yhat"}.
+#' @param ... Further arguments passed to or from other methods.
 #'
 #' @return the estimated value of beta
 #' @export

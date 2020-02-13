@@ -11,6 +11,7 @@
 #' @param method method to use for the optimization. One of \code{L-BFGS-B}
 #' or \code{shooting}.
 #' @param criterion criterion on which the selection is done.
+#' @param constraint_type Constrains on shifts.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @return an object of class \code{shiftestim}

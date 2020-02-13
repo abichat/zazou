@@ -43,16 +43,19 @@ Ensures that all coordinates of \eqn{\beta}
 (for \code{constraint_type = "beta"}) or \eqn{u + v\beta}
 (for \code{constraint_type = "yhat"}) are negative.}
 
-\item{...}{further arguments passed to or from other methods.}
+\item{...}{Further arguments passed to or from other methods.}
 
-\item{beta0}{the initial position of beta.}
+\item{beta0}{The initial position of beta.}
 
-\item{X}{a matrix of size  x p.}
+\item{X}{A matrix of size  x p.}
 
-\item{prob}{a vector of probability weights for obtaining the coordinates
+\item{prob}{A vector of probability weights for obtaining the coordinates
 to be sampled.}
 
 \item{max_it}{Maximum number of iterations.}
+
+\item{incidence_mat}{Incidence matrix from the problem. Used only if
+\code{constraint_type} is set to \code{"yhat"}.}
 }
 \value{
 The scalar solution \eqn{\beta} of the 1D optimization problem

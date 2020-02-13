@@ -33,6 +33,8 @@ or \code{shooting}.}
 
 \item{criterion}{criterion on which the selection is done.}
 
+\item{constraint_type}{Constrains on shifts.}
+
 \item{...}{further arguments passed to or from other methods.}
 }
 \value{
