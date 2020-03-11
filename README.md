@@ -33,11 +33,11 @@ To keep consistent notations in the package:
 
   - the vector of shift `Delta` or `shifts` is size `n+m`,
 
-  - the incidence matrix `incidence_mat` is size `m*(n+m)`,
+  - the incidence matrix `mat_incidence` is size `m*(n+m)`,
 
-  - the covariance matrix `covar_mat` and its square root `R` are size
+  - the covariance matrix `mat_covar` and its square root `R` are size
     `m*m`,
 
   - `Y = R %*% Z` is a vector of size `m`,
 
-  - `X = R %*% incidence_mat` is a matrix of size size `m*(n+m)`.
+  - `X = R %*% mat_incidence` is a matrix of size size `m*(n+m)`.

@@ -103,7 +103,21 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"abichat/zazou"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"abichat/zazou"</span>)</a></code></pre></div>
+</div>
+<div id="notations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#notations" class="anchor"></a>Notations</h2>
+<p>To keep consistent notations in the package:</p>
+<ul>
+<li><p>the considered tree has <code>m</code> leafs and <code>n</code> internal branches,</p></li>
+<li><p>the vector of z-scores <code>Z</code> or <code>zscores</code> is size <code>m</code>,</p></li>
+<li><p>the vector of shift <code>Delta</code> or <code>shifts</code> is size <code>n+m</code>,</p></li>
+<li><p>the incidence matrix <code>incidence_mat</code> is size <code>m*(n+m)</code>,</p></li>
+<li><p>the covariance matrix <code>covar_mat</code> and its square root <code>R</code> are size <code>m*m</code>,</p></li>
+<li><p><code>Y = R %*% Z</code> is a vector of size <code>m</code>,</p></li>
+<li><p><code>X = R %*% incidence_mat</code> is a matrix of size size <code>m*(n+m)</code>.</p></li>
+</ul>
 </div>
 </div>
   </div>

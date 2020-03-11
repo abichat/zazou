@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Score system — score_system • zazou</title>
+<title>Compute the score system once lambda is chosen — calculate_Z_with_best_lambda • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Score system — score_system" />
-<meta property="og:description" content="Compute the score system of a" />
+<meta property="og:title" content="Compute the score system once lambda is chosen — calculate_Z_with_best_lambda" />
+<meta property="og:description" content="Compute the score system once lambda is chosen" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,41 +129,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Score system</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
-    <div class="hidden name"><code>score_system.Rd</code></div>
+    <h1>Compute the score system once lambda is chosen</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/score_system.R'><code>R/score_system.R</code></a></small>
+    <div class="hidden name"><code>calculate_Z_with_best_lambda.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Compute the score system of a</p>
+    <p>Compute the score system once lambda is chosen</p>
     </div>
 
-    <pre class="usage"><span class='fu'>score_system</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='no'>beta_init</span>, <span class='no'>hsigma</span>)</pre>
+    <pre class="usage"><span class='fu'>calculate_Z_with_best_lambda</span>(<span class='no'>X</span>, <span class='no'>lambda</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X</th>
-      <td><p>A vector of size m*(n+m).</p></td>
+      <td><p>Matrix to pseudo orthogonalize of size m*(n+m).</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>A vector of size m.</p></td>
-    </tr>
-    <tr>
-      <th>beta_init</th>
-      <td><p>Initial value of beta found with scaled lasso.</p></td>
-    </tr>
-    <tr>
-      <th>hsigma</th>
-      <td><p>Estimate value of sigma, found with scaled lasso.</p></td>
+      <th>lambda</th>
+      <td><p>Numeric.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The matrix of score system, same dimension as X.</p>
+    <p>The score system.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

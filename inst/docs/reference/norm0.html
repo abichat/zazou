@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Noise factor — noise_factor • zazou</title>
+<title>Norm 0 — norm0 • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Noise factor — noise_factor" />
-<meta property="og:description" content="Noise factor" />
+<meta property="og:title" content="Norm 0 — norm0" />
+<meta property="og:description" content="Compute the number of non-zero values." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,40 +129,53 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Noise factor</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
-    <div class="hidden name"><code>noise_factor.Rd</code></div>
+    <h1>Norm 0</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/algebra.R'><code>R/algebra.R</code></a></small>
+    <div class="hidden name"><code>norm0.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Noise factor</p>
+    <p>Compute the number of non-zero values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>noise_factor</span>(<span class='no'>X</span>, <span class='no'>score_system</span>)</pre>
+    <pre class="usage"><span class='fu'>norm0</span>(<span class='no'>x</span>, <span class='kw'>rev</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>X</th>
-      <td><p>Matrix size m*(n+m).</p></td>
+      <th>x</th>
+      <td><p>Numeric.</p></td>
     </tr>
     <tr>
-      <th>score_system</th>
-      <td><p>Score system of X.</p></td>
+      <th>rev</th>
+      <td><p>If <code>TRUE</code>, returns the number of zeros in <code>x</code>.</p></td>
+    </tr>
+    <tr>
+      <th>prop</th>
+      <td><p>If <code>TRUE</code>, returns the proportion of
+(non-)zeros in <code>x</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The vector of noise factor, size (n+m)</p>
+    <p>By default, the number of non-zero values in <code>x</code>
+(\(\|x\|_0\)).
+If <code>rev</code> is set to <code>TRUE</code>, the number of zero in <code>x</code>.
+If <code>prop</code> is set to <code>TRUE</code>, i return the proportion
+instead of the absolute count.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>4</span>)
+<span class='fu'>norm0</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] 4</div><div class='input'><span class='fu'>norm0</span>(<span class='no'>x</span>, <span class='kw'>rev</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>norm0</span>(<span class='no'>x</span>, <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 0.8</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

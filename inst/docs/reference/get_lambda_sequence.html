@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Noise factor — noise_factor • zazou</title>
+<title>Vector of lambdas to test — get_lambda_sequence • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Noise factor — noise_factor" />
-<meta property="og:description" content="Noise factor" />
+<meta property="og:title" content="Vector of lambdas to test — get_lambda_sequence" />
+<meta property="og:description" content="Vector of lambdas to test" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,33 +129,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Noise factor</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
-    <div class="hidden name"><code>noise_factor.Rd</code></div>
+    <h1>Vector of lambdas to test</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/score_system.R'><code>R/score_system.R</code></a></small>
+    <div class="hidden name"><code>get_lambda_sequence.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Noise factor</p>
+    <p>Vector of lambdas to test</p>
     </div>
 
-    <pre class="usage"><span class='fu'>noise_factor</span>(<span class='no'>X</span>, <span class='no'>score_system</span>)</pre>
+    <pre class="usage"><span class='fu'>get_lambda_sequence</span>(<span class='no'>X</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X</th>
-      <td><p>Matrix size m*(n+m).</p></td>
-    </tr>
-    <tr>
-      <th>score_system</th>
-      <td><p>Score system of X.</p></td>
+      <td><p>Matrix to pseudo orthogonalize of size m*(n+m).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The vector of noise factor, size (n+m)</p>
+    <p>100 values for lambdas</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
