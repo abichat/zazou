@@ -13,7 +13,7 @@
 #' \code{sigma_scaledlasso} among others.
 #' @export
 #'
-scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
+solve_scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
 
   n <- length(y)
   p <- ncol(X)

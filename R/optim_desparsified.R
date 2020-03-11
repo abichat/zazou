@@ -10,7 +10,7 @@
 #' @export
 #'
 solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
-  scla <- scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
+  scla <- solve_scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
 
   scosys <- calculate_Z(X = X)
 

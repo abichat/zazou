@@ -42,7 +42,8 @@ reference:
   - title: Desparsified lasso
     desc: ~
     contents:
-    - '`scaled_lasso`'
+    - '`solve_scaled_lasso`'
+    - '`solve_desparsified`'
     - '`update_sigma`'
     - '`score_system`'
     - '`noise_factor`'
