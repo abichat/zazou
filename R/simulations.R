@@ -46,8 +46,8 @@ simu_zscores <- function(tree, alpha, shifts = NULL, Nshifts = NULL,
 
   incidence_mat <- incidence_matrix(tree)
 
-  covar_mat <- covariance_matrix(tree, alpha = alpha)
-  sqrtcovar <- inverse_sqrt(covar_mat)
+  mat_covar <- covariance_matrix(tree, alpha = alpha)
+  sqrtcovar <- inverse_sqrt(mat_covar)
 
   true_zs <- incidence_mat %*% shifts
 

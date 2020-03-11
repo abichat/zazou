@@ -15,9 +15,9 @@
 # alp <- 1
 #
 #
-# covar_mat <- covariance_matrix(tree, alp)
+# mat_covar <- covariance_matrix(tree, alp)
 # incidence_mat <- incidence_matrix(tree)
-# R <- inverse_sqrt(covar_mat)
+# R <- inverse_sqrt(mat_covar)
 # Y <- R %*% zsco_obs
 # X <- R %*% incidence_mat
 #

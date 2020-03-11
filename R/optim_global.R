@@ -72,9 +72,9 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   ## Outer loop on alpha
   for (alp in alpha) {
     ## Compute covariance matrices, design matrix and response vector
-    covar_mat <- covariance_matrix(tree, alp)
+    mat_covar <- covariance_matrix(tree, alp)
     incidence_mat <- incidence_matrix(tree)
-    R <- inverse_sqrt(covar_mat)
+    R <- inverse_sqrt(mat_covar)
     Y <- R %*% zscores
     X <- R %*% incidence_mat
 
