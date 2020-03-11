@@ -16,10 +16,10 @@
 #
 #
 # mat_covar <- covariance_matrix(tree, alp)
-# incidence_mat <- incidence_matrix(tree)
+# mat_incidence <- incidence_matrix(tree)
 # R <- inverse_sqrt(mat_covar)
 # Y <- R %*% zsco_obs
-# X <- R %*% incidence_mat
+# X <- R %*% mat_incidence
 #
 # # calculate_Z(X)
 #

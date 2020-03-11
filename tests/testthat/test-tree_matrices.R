@@ -11,9 +11,9 @@ expected_incidence <- matrix(c(1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
 
 
 test_that("the incidence matrix is correct", {
-  incidence <- incidence_matrix(tree)
-  expect_equivalent(incidence + 0, expected_incidence)
-  expect_equal(rownames(incidence), tree$tip.label)
+  mat_incidence <- incidence_matrix(tree)
+  expect_equivalent(mat_incidence + 0, expected_incidence)
+  expect_equal(rownames(mat_incidence), tree$tip.label)
 })
 
 test_that("the postorder is required for incidence matrix ", {

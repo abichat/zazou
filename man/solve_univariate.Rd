@@ -22,7 +22,7 @@ solve_multivariate(
   lambda,
   prob = NULL,
   max_it = 500,
-  incidence_mat,
+  mat_incidence,
   constraint_type = c("beta", "yhat", "none"),
   ...
 )
@@ -54,7 +54,7 @@ to be sampled.}
 
 \item{max_it}{Maximum number of iterations.}
 
-\item{incidence_mat}{Incidence matrix from the problem. Used only if
+\item{mat_incidence}{Incidence matrix from the problem. Used only if
 \code{constraint_type} is set to \code{"yhat"}.}
 }
 \value{

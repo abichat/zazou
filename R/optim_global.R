@@ -73,10 +73,10 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   for (alp in alpha) {
     ## Compute covariance matrices, design matrix and response vector
     mat_covar <- covariance_matrix(tree, alp)
-    incidence_mat <- incidence_matrix(tree)
+    mat_incidence <- incidence_matrix(tree)
     R <- inverse_sqrt(mat_covar)
     Y <- R %*% zscores
-    X <- R %*% incidence_mat
+    X <- R %*% mat_incidence
 
     ## Set lambda grid for inner loop on lambda
     if (is.null(lambda)) {
@@ -89,7 +89,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
     for (lam in current_lambda) {
       ## Compute current model
       opt <- fitting_procedure(Delta0 = Delta0, X = X, Y = Y, lambda = lam,
-                               incidence_mat = incidence_mat, ...)
+                               mat_incidence = mat_incidence, ...)
       current_model <- as_shiftestim(
         listopt = opt, tree = tree, zscores = zscores,
         lambda = lam, alpha = alp)
