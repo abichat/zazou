@@ -20,6 +20,7 @@
 #'
 #' @importFrom ggtree ggtree aes %<+% geom_tiplab geom_point geom_label
 #' theme_tree2 facet_plot
+#' @importFrom rlang .data
 #'
 #' @examples
 #' tree <- ape::read.tree(text = "(((A,B),C),(D,E));")
@@ -41,7 +42,7 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
     ggtree(tree) %<+%
     edge_data +
     geom_tiplab(size = 5) +
-    geom_label(aes(x = branch, label = round(shift_value, digits))) +
+    geom_label(aes(x = .data$branch, label = round(.data$shift_value, digits))) +
     theme_tree2()
 # browser()
   ## Build and add zscores annotation
@@ -53,7 +54,7 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
                     panel   = "True z-scores",
                     data    = leaf_data_t,
                     geom    = geom_point,
-                    mapping = aes(x = score, color = score >= 0),
+                    mapping = aes(x = .data$score, color = .data$score >= 0),
                     show.legend = FALSE)
   }
 
@@ -65,7 +66,7 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
                     panel   = "Observed z-scores",
                     data    = leaf_data_o,
                     geom    = geom_point,
-                    mapping = aes(x = score, color = score >= 0),
+                    mapping = aes(x = .data$score, color = .data$score >= 0),
                     show.legend = FALSE)
   }
 
@@ -77,7 +78,7 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
                     panel   = "Estimated z-scores",
                     data    = leaf_data_e,
                     geom    = geom_point,
-                    mapping = aes(x = score, color = score >= 0),
+                    mapping = aes(x = .data$score, color = .data$score >= 0),
                     show.legend = FALSE)
   }
 
@@ -110,7 +111,7 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
                       panel   = l_scores$title,
                       data    = leaf_data_s,
                       geom    = geom_point,
-                      mapping = aes(x = scores, color = col),
+                      mapping = aes(x = .data$scores, color = .data$col),
                       show.legend = FALSE)
 
     }
