@@ -59,23 +59,23 @@ test_that("1-D solution works when allowing positive values and forgoing z", {
                              constraint_type = "yhat"), 0)
 })
 
-test_that("1-D solution fails when the constraint is not satisfiable", {
-  ## Can't find an unfeasible constraint
-  # expect_error(solve_univariate(y = y, x = x, u = 10, v = 0,
-  #                               lambda = 0, constraint_type = "yhat"),
-  #         "The constraint is not feasible. Consider changing the constraint.")
-})
+# test_that("1-D solution fails when the constraint is not satisfiable", {
+#   # Can't find an unfeasible constraint
+#   expect_error(solve_univariate(y = y, x = x, u = 10, v = 0,
+#                                 lambda = 0, constraint_type = "yhat"),
+#           "The constraint is not feasible. Consider changing the constraint.")
+# })
 
-test_that("1-D solution works when the constraint is satisfiable", {
-  y <- c(-1, -1, -1, -1)
-  z <- c(-2, -1, -2, -1)
-  x <- c(1, 0, 1, 0)
-  ## z + x = y
-  ## Redundant, no?
-  # expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "beta"),
-  #              0)
-  # expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "yhat"),
-  #              1)
-  # expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "none"),
-  #              1)
-})
+# test_that("1-D solution works when the constraint is satisfiable", {
+#   y <- c(-1, -1, -1, -1)
+#   z <- c(-2, -1, -2, -1)
+#   x <- c(1, 0, 1, 0)
+#   # z + x = y
+#   # Redundant, no?
+#   expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "beta"),
+#                0)
+#   expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "yhat"),
+#                1)
+#   expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "none"),
+#                1)
+# })

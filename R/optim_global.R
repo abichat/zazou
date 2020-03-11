@@ -38,20 +38,24 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   ## local estimation routine (for a single lambda)
   fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
 
-    opt <- switch (method,
-                   "L-BFGS-B" = solve_lbfgsb(Delta0 = Delta0, X = X, Y = Y,
-                                             lambda = lambda,
-                                             constraint_type = constraint_type, ...),
-                   "shooting" = solve_multivariate(beta0 = Delta0, y = Y, X = X,
-                                                   lambda = lambda,
-                                                   constraint_type = constraint_type, ...),
-                   "scaledlasso" = scaled_lasso(beta0 = Delta0, y = Y, X = X,
-                                                lambda = lambda,
-                                                constraint_type = constraint_type, ...),
-                   "desparsifiedlasso" =
-                     solve_desparsified(Delta0 = Delta0, Y = Y, X = X,
+    opt <-
+      switch (method,
+              "L-BFGS-B" = solve_lbfgsb(Delta0 = Delta0, X = X, Y = Y,
                                         lambda = lambda,
-                                        constraint_type = constraint_type, ...))
+                                        constraint_type = constraint_type,
+                                        ...),
+              "shooting" = solve_multivariate(beta0 = Delta0, y = Y, X = X,
+                                              lambda = lambda,
+                                              constraint_type = constraint_type,
+                                              ...),
+              "scaledlasso" = scaled_lasso(beta0 = Delta0, y = Y, X = X,
+                                           lambda = lambda,
+                                           constraint_type = constraint_type,
+                                           ...),
+              "desparsifiedlasso" =
+                solve_desparsified(Delta0 = Delta0, Y = Y, X = X,
+                                   lambda = lambda,
+                                   constraint_type = constraint_type, ...))
     return(opt)
   }
 
