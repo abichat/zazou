@@ -90,8 +90,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
 
   yhat <- X %*% beta
   if(constraint_type == "yhat") {
-    I <- mat_incidence
-    J <- I %*% beta
+    J <- mat_incidence %*% beta
   }
   # fn_obj <- compute_objective_function(y, X, lambda)
   ## Fast alternative to compute_objective_function leveraging
@@ -108,8 +107,8 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
 
     if(constraint_type == "yhat") {
       # Ji <- J[coord]
-      Ii <- I[, coord]
-      J_minus_i <- J - betai * Ii
+      Ti <- mat_incidence[, coord]
+      J_minus_i <- J - betai * Ti
     }
 
     # update betai
@@ -118,9 +117,9 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
                                 constraint_type = constraint_type, ...)
     } else {
       betai <- solve_univariate(y = y - yhat_minus_i, x = xi,
-                                u = J_minus_i, v = Ii, lambda = lambda,
+                                u = J_minus_i, v = Ti, lambda = lambda,
                                 constraint_type = "yhat", ...)
-      J <<- J_minus_i + betai * Ii
+      J <<- J_minus_i + betai * Ti
     }
 
     # update beta
