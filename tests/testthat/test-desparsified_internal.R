@@ -32,3 +32,4 @@ test_that("size_half_confint() is correct", {
 
 
 
+

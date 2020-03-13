@@ -75,3 +75,6 @@ data.frame(lower = beta - hci, estimate = beta,
 # (bhat - beta)
 # (bhat - beta) / beta
 # plot(bhat, beta)
+
+V <- covariance_noise_matrix(X, scosys)
+V

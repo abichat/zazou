@@ -36,7 +36,7 @@ solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
 #' @param X Matrix size m*(n+m).
 #' @param score_system Score system of X.
 #'
-#' @return The vector of noise factor, size (n+m)
+#' @return The vector of noise factor for the shifts, size (n+m)
 #' @export
 noise_factor <- function(X, score_system) {
   num <- sqrt(colSums(score_system ^ 2))
@@ -70,7 +70,7 @@ update_beta <- function(X, y, beta_init, score_system) {
 #' @param hsigma Estimate value of sigma, found with scaled lasso.
 #' @param alpha_conf The confidence level.
 #'
-#' @return The half-size of the confidence interval for each beta, size m.
+#' @return The half-size of the confidence interval for each beta, size m+n.
 #' @export
 size_half_confint <- function(noise_factor, hsigma, alpha_conf = 0.05){
   stopifnot(length(hsigma) == 1)
@@ -81,5 +81,51 @@ size_half_confint <- function(noise_factor, hsigma, alpha_conf = 0.05){
 }
 
 
+#' Covariance noise matrix
+#'
+#' @inheritParams noise_factor
+#'
+#' @return The covariance of the noise component for the leaves (size n*n)
+#' @export
+#'
+covariance_noise_matrix <- function(X, score_system){
+  STS <- crossprod(score_system)
+  STX <- crossprod(score_system, X)
+  n <- ncol(STS)
+  V <- matrix(NA, nrow = n, ncol = n)
+  for(i in seq_len(n)){
+    for(j in i:n){
+      # cat(paste0("i = ", i, ", j =", j), sep = "\n")
+      V[i, j] <- V[j, i] <- STS[i, j] / (abs(STX[i, i]) * abs(STX[j, j]))
+    }
+  }
+  V
+}
+
+
+#' Size of the half confidence interval for the z-scores
+#'
+#' @param covariance_noise_mat The covariance of the noise component
+#' for the leaves.
+#' @param incidence_mat The incidence matrix of the tree, size \code{n*(n+m)}.
+#' @inheritParams size_half_confint
+#'
+#' @return The half-size of the confidence interval for each z-score, size n.
+#' @export
+#'
+size_half_confint_all_zscores <-
+  function(covariance_noise_mat, incidence_mat, hsigma, alpha_conf = 0.05){
+    n <- nrow(incidence_mat)
+    first_term <- size_half_confint(noise_factor = rep(1, n),
+                                    hsigma = hsigma, alpha_conf = alpha_con)
+    second_term <- rep(NA, n)
+    for(i in seq_len(n)){
+      a <- incidence_mat[i, ]
+      second_term <- sum(crossprod(a, covariance_noise_mat) * a)
+    }
+    second_term <- sqrt(second_term)
+
+    first_term * second_term
+}
 
 
