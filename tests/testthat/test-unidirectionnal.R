@@ -72,10 +72,10 @@ test_that("1-D solution works when allowing positive values and forgoing z", {
 #   x <- c(1, 0, 1, 0)
 #   # z + x = y
 #   # Redundant, no?
-#   expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "beta"),
-#                0)
-#   expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "yhat"),
-#                1)
-#   expect_equal(solve_univariate(y = y, x = x, z = z, constraint_type = "none"),
-#                1)
+#   expect_equal(solve_univariate(y = y, x = x, z = z,
+#                                 constraint_type = "beta"), 0)
+#   expect_equal(solve_univariate(y = y, x = x, z = z,
+#                                 constraint_type = "yhat"), 1)
+#   expect_equal(solve_univariate(y = y, x = x, z = z,
+#                                 constraint_type = "none"), 1)
 # })

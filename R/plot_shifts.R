@@ -42,7 +42,8 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
     ggtree(tree) %<+%
     edge_data +
     geom_tiplab(size = 5) +
-    geom_label(aes(x = .data$branch, label = round(.data$shift_value, digits))) +
+    geom_label(aes(x = .data$branch,
+                   label = round(.data$shift_value, digits))) +
     theme_tree2()
 # browser()
   ## Build and add zscores annotation

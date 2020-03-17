@@ -12,7 +12,7 @@ noise_factor(X, score_system)
 \item{score_system}{Score system of X.}
 }
 \value{
-The vector of noise factor, size (n+m)
+The vector of noise factor for the shifts, size (n+m)
 }
 \description{
 Noise factor

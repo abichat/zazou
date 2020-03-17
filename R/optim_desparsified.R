@@ -19,8 +19,8 @@ solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
   beta <- update_beta(X = X, y = Y, beta_init = scla$par$estimate,
                       score_system = scosys)
 
-  hci <- size_half_confint(noise_factor = tau,
-                           hsigma = scla$sigma_scaledlasso, alpha_conf)
+  hci <- size_half_confint_shifts(noise_factor = tau,
+                                  hsigma = scla$sigma_scaledlasso, alpha_conf)
 
   par <- data.frame(estimate = beta,
                     lower = beta - hci$half_size,
@@ -61,10 +61,10 @@ update_beta <- function(X, y, beta_init, score_system) {
   beta_init + num / den
 }
 
-#' Size of the half confidence interval
+#' Size of the half confidence interval for the shifts
 #'
-#' Compute the size of the half confidence interval, depending on the desired
-#' level of confidence \code{alpha}.
+#' Compute the size of the half confidence interval for the shifts,
+#' depending on the desired level of confidence \code{alpha}.
 #'
 #' @param noise_factor Noise factor, size m.
 #' @param hsigma Estimate value of sigma, found with scaled lasso.
@@ -72,7 +72,7 @@ update_beta <- function(X, y, beta_init, score_system) {
 #'
 #' @return The half-size of the confidence interval for each beta, size m+n.
 #' @export
-size_half_confint <- function(noise_factor, hsigma, alpha_conf = 0.05){
+size_half_confint_shifts <- function(noise_factor, hsigma, alpha_conf = 0.05){
   stopifnot(length(hsigma) == 1)
   stopifnot(length(alpha_conf) == 1)
 
@@ -105,19 +105,23 @@ covariance_noise_matrix <- function(X, score_system){
 
 #' Size of the half confidence interval for the z-scores
 #'
+#' Compute the size of the half confidence interval for the z-scores,
+#' depending on the desired level of confidence \code{alpha}.
+#'
 #' @param covariance_noise_mat The covariance of the noise component
 #' for the leaves.
 #' @param incidence_mat The incidence matrix of the tree, size \code{n*(n+m)}.
-#' @inheritParams size_half_confint
+#' @inheritParams size_half_confint_shifts
 #'
 #' @return The half-size of the confidence interval for each z-score, size n.
 #' @export
 #'
-size_half_confint_all_zscores <-
+size_half_confint_zscores <-
   function(covariance_noise_mat, incidence_mat, hsigma, alpha_conf = 0.05){
     n <- nrow(incidence_mat)
-    first_term <- size_half_confint(noise_factor = rep(1, n),
-                                    hsigma = hsigma, alpha_conf = alpha_con)
+    first_term <- size_half_confint_shifts(noise_factor = rep(1, n),
+                                           hsigma = hsigma,
+                                           alpha_conf = alpha_conf)
     second_term <- rep(NA, n)
     for(i in seq_len(n)){
       a <- incidence_mat[i, ]

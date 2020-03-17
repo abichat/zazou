@@ -47,7 +47,8 @@ reference:
     - '`update_sigma`'
     - '`score_system`'
     - '`noise_factor`'
-    - '`size_half_confint`'
+    - '`size_half_confint_shifts`'
+    - '`size_half_confint_zscores`'
     - '`update_beta`'
   - title: About trees
     desc: ~
