@@ -26,8 +26,10 @@ solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
                     lower = beta - hci$half_size,
                     upper = beta + hci$half_size)
 
+  mat_covar_noise <- covariance_noise_matrix(X = X, score_system = scosys)
+
   list(par = par, value = NA, method = "desparsified lasso",
-       alpha_confint = alpha_conf)
+       alpha_confint = alpha_conf, covariance_noise_matrix = mat_covar_noise)
 
 }
 
@@ -96,7 +98,7 @@ covariance_noise_matrix <- function(X, score_system){
   for(i in seq_len(n)){
     for(j in i:n){
       # cat(paste0("i = ", i, ", j =", j), sep = "\n")
-      V[i, j] <- V[j, i] <- STS[i, j] / (abs(STX[i, i]) * abs(STX[j, j]))
+      V[i, j] <- V[j, i] <- STS[i, j] / abs(STX[i, i] * STX[j, j])
     }
   }
   V
