@@ -1,7 +1,7 @@
 context("Example desparsified with a tree")
 
 n <- 15
-tree <-  rtree(n)
+tree <- ape::rtree(n)
 tree <- force_ultrametric(tree)
 nplusm <- length(tree$edge.length)
 zscores <- simu_zscores(tree, 1, shifts = NULL, Nshifts = 3)
@@ -39,7 +39,7 @@ test_that("the covariance noise matrix is correct", {
   expect_equal(V, t(V))
   expect_equal(V[j, k],
                sum(scosys[, j] * scosys[, k]) /
-                 (abs(sum(scosys[, j] * X[, k]) * sum(scosys[, j] * X[, k]))))
+                 (abs(sum(scosys[, j] * X[, j]) * sum(scosys[, k] * X[, k]))))
 
 })
 
