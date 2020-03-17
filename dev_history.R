@@ -102,6 +102,8 @@ library(testthat)
 
 # use_test("desparsified_simulations")
 
+# file.remove("tests/testthat/test-desparsified_midlevel.R")
+
 
 ####
 
