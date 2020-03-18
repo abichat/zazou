@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Size of the half confidence interval — size_half_confint • zazou</title>
+<title>Scaled lasso — solve_scaled_lasso • zazou</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,8 @@
 
 
 
-<meta property="og:title" content="Size of the half confidence interval — size_half_confint" />
-<meta property="og:description" content="Compute the size of the half confidence interval, depending on the desired
-level of confidence alpha." />
+<meta property="og:title" content="Scaled lasso — solve_scaled_lasso" />
+<meta property="og:description" content="Scaled lasso to compute beta_init and hsigma." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,38 +129,47 @@ level of confidence alpha." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Size of the half confidence interval</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
-    <div class="hidden name"><code>size_half_confint.Rd</code></div>
+    <h1>Scaled lasso</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_scaled.R'><code>R/optim_scaled.R</code></a></small>
+    <div class="hidden name"><code>solve_scaled_lasso.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Compute the size of the half confidence interval, depending on the desired
-level of confidence <code>alpha</code>.</p>
+    <p>Scaled lasso to compute <code>beta_init</code> and <code>hsigma</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>size_half_confint</span>(<span class='no'>noise_factor</span>, <span class='no'>hsigma</span>, <span class='kw'>alpha_conf</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</pre>
+    <pre class="usage"><span class='fu'>solve_scaled_lasso</span>(<span class='no'>beta0</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>noise_factor</th>
-      <td><p>Noise factor, size m.</p></td>
+      <th>beta0</th>
+      <td><p>Initial value for beta.</p></td>
     </tr>
     <tr>
-      <th>hsigma</th>
-      <td><p>Estimate value of sigma, found with scaled lasso.</p></td>
+      <th>y</th>
+      <td><p>A vector of size m.</p></td>
     </tr>
     <tr>
-      <th>alpha_conf</th>
-      <td><p>The confidence level.</p></td>
+      <th>X</th>
+      <td><p>A vector of size m*(n+m).</p></td>
+    </tr>
+    <tr>
+      <th>lambda</th>
+      <td><p>A regularization parameter. If <code>NULL</code>, a universal
+value is chosen.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further arguments passed to or from other methods.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The half-size of the confidence interval for each beta, size m.</p>
+    <p>A list composed by <code>par</code> (beta estimate) and
+<code>sigma_scaledlasso</code> among others.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

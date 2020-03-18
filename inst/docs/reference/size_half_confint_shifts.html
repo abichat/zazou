@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Noise factor — noise_factor • zazou</title>
+<title>Size of the half confidence interval for the shifts — size_half_confint_shifts • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Noise factor — noise_factor" />
-<meta property="og:description" content="Noise factor" />
+<meta property="og:title" content="Size of the half confidence interval for the shifts — size_half_confint_shifts" />
+<meta property="og:description" content="Compute the size of the half confidence interval for the shifts,
+depending on the desired level of confidence alpha." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,33 +130,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Noise factor</h1>
+    <h1>Size of the half confidence interval for the shifts</h1>
     <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
-    <div class="hidden name"><code>noise_factor.Rd</code></div>
+    <div class="hidden name"><code>size_half_confint_shifts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Noise factor</p>
+    <p>Compute the size of the half confidence interval for the shifts,
+depending on the desired level of confidence <code>alpha</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>noise_factor</span>(<span class='no'>X</span>, <span class='no'>score_system</span>)</pre>
+    <pre class="usage"><span class='fu'>size_half_confint_shifts</span>(<span class='no'>noise_factor</span>, <span class='no'>hsigma</span>, <span class='kw'>alpha_conf</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>X</th>
-      <td><p>Matrix size m*(n+m).</p></td>
+      <th>noise_factor</th>
+      <td><p>Noise factor, size m.</p></td>
     </tr>
     <tr>
-      <th>score_system</th>
-      <td><p>Score system of X.</p></td>
+      <th>hsigma</th>
+      <td><p>Estimate value of sigma, found with scaled lasso.</p></td>
+    </tr>
+    <tr>
+      <th>alpha_conf</th>
+      <td><p>The confidence level.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The vector of noise factor for the shifts, size (n+m)</p>
+    <p>The half-size of the confidence interval for each beta, size m+n.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

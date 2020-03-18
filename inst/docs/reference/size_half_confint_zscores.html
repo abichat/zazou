@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scaled lasso — scaled_lasso • zazou</title>
+<title>Size of the half confidence interval for the z-scores — size_half_confint_zscores • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Scaled lasso — scaled_lasso" />
-<meta property="og:description" content="Scaled lasso to compute beta_init and hsigma." />
+<meta property="og:title" content="Size of the half confidence interval for the z-scores — size_half_confint_zscores" />
+<meta property="og:description" content="Compute the size of the half confidence interval for the z-scores,
+depending on the desired level of confidence alpha." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,47 +130,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Scaled lasso</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_scaled.R'><code>R/optim_scaled.R</code></a></small>
-    <div class="hidden name"><code>scaled_lasso.Rd</code></div>
+    <h1>Size of the half confidence interval for the z-scores</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
+    <div class="hidden name"><code>size_half_confint_zscores.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Scaled lasso to compute <code>beta_init</code> and <code>hsigma</code>.</p>
+    <p>Compute the size of the half confidence interval for the z-scores,
+depending on the desired level of confidence <code>alpha</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>scaled_lasso</span>(<span class='no'>beta0</span>, <span class='no'>y</span>, <span class='no'>X</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>size_half_confint_zscores</span>(
+  <span class='no'>covariance_noise_mat</span>,
+  <span class='no'>incidence_mat</span>,
+  <span class='no'>hsigma</span>,
+  <span class='kw'>alpha_conf</span> <span class='kw'>=</span> <span class='fl'>0.05</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>beta0</th>
-      <td><p>Initial value for beta.</p></td>
+      <th>covariance_noise_mat</th>
+      <td><p>The covariance of the noise component
+for the leaves.</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>A vector of size m.</p></td>
+      <th>incidence_mat</th>
+      <td><p>The incidence matrix of the tree, size <code>n*(n+m)</code>.</p></td>
     </tr>
     <tr>
-      <th>X</th>
-      <td><p>A vector of size m*(n+m).</p></td>
+      <th>hsigma</th>
+      <td><p>Estimate value of sigma, found with scaled lasso.</p></td>
     </tr>
     <tr>
-      <th>lambda</th>
-      <td><p>A regularization parameter. If <code>NULL</code>, a universal
-value is chosen.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Further arguments passed to or from other methods.</p></td>
+      <th>alpha_conf</th>
+      <td><p>The confidence level.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list composed by <code>par</code> (beta estimate) and
-<code>sigma_scaledlasso</code> among others.</p>
+    <p>The half-size of the confidence interval for each z-score, size n.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

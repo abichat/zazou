@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>", 
   fig.align = "center",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 
@@ -85,7 +85,7 @@ tic()
 est_shooting_p <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                                   lambda = 2, tree = tree, alpha = 0.1,
                                   method = "shooting", constraint_type = "yhat")
-toc() # 10 times faster
+toc()
 est_shooting_p # similar results
 plot(est_shooting_p)
 ```
@@ -108,21 +108,23 @@ plot(est_shooting_n)
 ```{r}
 est_lbfgsb$objective_value
 est_shooting$objective_value
-# est_shooting_p$objective_value
+est_shooting_p$objective_value
+est_shooting_n$objective_value
 est_lbfgsb$optim_info
 est_shooting$optim_info
-# est_shooting_p$optim_info
+est_shooting_p$optim_info
+est_shooting_n$optim_info
 ```
 
 
 ```{r}
-qplot(est_lbfgsb$zscores_obs, est_lbfgsb$zscores_est) +
+qplot(est_lbfgsb$zscores_obs, est_lbfgsb$zscores_est$estimate) +
   geom_abline() + geom_vline(xintercept = 0) + coord_equal()
-qplot(est_shooting$zscores_obs, est_shooting$zscores_est) +
+qplot(est_shooting$zscores_obs, est_shooting$zscores_est$estimate) +
   geom_abline() + geom_vline(xintercept = 0) + coord_equal()
 # qplot(est_shooting_p$zscores_obs, est_shooting_p$zscores_est) +
 #   geom_abline() + geom_vline(xintercept = 0) + coord_equal()
-qplot(-est_shooting$zscores_est, -est_lbfgsb$zscores_est) +
+qplot(-est_shooting$zscores_est$estimate, -est_lbfgsb$zscores_est$estimate) +
   geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()
 qplot(-est_shooting$shift_est$estimate, -est_lbfgsb$shift_est$estimate) +
   geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()

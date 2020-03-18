@@ -20,10 +20,11 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
 
   zscores_est <- incidence_matrix(tree) %*% listopt$par$estimate
   zscores_est <- data.frame(leaf = rownames(zscores_est),
-                            estimate = zscores_est[, 1])
+                            estimate = zscores_est[, 1],
+                            stringsAsFactors = FALSE)
   rownames(zscores_est) <- NULL
 
-    if(listopt$method %in% "desparsified lasso"){
+  if(listopt$method %in% "desparsified lasso"){
     hciz <-
       size_half_confint_zscores(
         covariance_noise_mat = listopt$covariance_noise_matrix,

@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>", 
   fig.align = "center",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 
@@ -86,11 +86,11 @@ est_shooting$optim_info
 ```{r}
 library(ggplot2)
 theme_set(theme_minimal())
-qplot(est_lbfgsb$zscores_obs, est_lbfgsb$zscores_est) +
+qplot(est_lbfgsb$zscores_obs, est_lbfgsb$zscores_est$estimate) +
   geom_abline() + geom_vline(xintercept = 0)
-qplot(est_shooting$zscores_obs, est_shooting$zscores_est) +
+qplot(est_shooting$zscores_obs, est_shooting$zscores_est$estimate) +
   geom_abline() + geom_vline(xintercept = 0)
-qplot(-est_shooting$zscores_est, -est_lbfgsb$zscores_est) +
+qplot(-est_shooting$zscores_est$estimate, -est_lbfgsb$zscores_est$estimate) +
   geom_abline() + scale_x_log10() + scale_y_log10()
 ```
 

@@ -113,10 +113,10 @@
 <li><p>the considered tree has <code>m</code> leafs and <code>n</code> internal branches,</p></li>
 <li><p>the vector of z-scores <code>Z</code> or <code>zscores</code> is size <code>m</code>,</p></li>
 <li><p>the vector of shift <code>Delta</code> or <code>shifts</code> is size <code>n+m</code>,</p></li>
-<li><p>the incidence matrix <code>incidence_mat</code> is size <code>m*(n+m)</code>,</p></li>
-<li><p>the covariance matrix <code>covar_mat</code> and its square root <code>R</code> are size <code>m*m</code>,</p></li>
+<li><p>the incidence matrix <code>mat_incidence</code> is size <code>m*(n+m)</code>,</p></li>
+<li><p>the covariance matrix <code>mat_covar</code> and its square root <code>R</code> are size <code>m*m</code>,</p></li>
 <li><p><code>Y = R %*% Z</code> is a vector of size <code>m</code>,</p></li>
-<li><p><code>X = R %*% incidence_mat</code> is a matrix of size size <code>m*(n+m)</code>.</p></li>
+<li><p><code>X = R %*% mat_incidence</code> is a matrix of size size <code>m*(n+m)</code>.</p></li>
 </ul>
 </div>
 </div>

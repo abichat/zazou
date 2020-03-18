@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>", 
   fig.align = "center",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 
@@ -100,7 +100,7 @@ estimation
 plot(estimation, true_scores = true_shifts)
 
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = estimation$zscores_est), 
+                 estimated = estimation$zscores_est$estimate), 
       digits = 4)
 ```
 
@@ -113,7 +113,7 @@ estimation
 plot(estimation, true_scores = true_shifts)
 
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = estimation$zscores_est), 
+                 estimated = estimation$zscores_est$estimate), 
       digits = 4)
 ```
 
@@ -128,7 +128,7 @@ estimation
 plot(estimation, true_scores = true_shifts)
 
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = estimation$zscores_est), 
+                 estimated = estimation$zscores_est$estimate), 
       digits = 4)
 ```
 
@@ -198,6 +198,7 @@ estimation$optim_info$bic_selection %>%
 
 ```{r detected}
 detected <- names(which(estimation$zscores_est != 0))
+detected <- estimation$zscores_est$leaf[estimation$zscores_est$estimate != 0]
 pvalues_bh <- p.adjust(pvalues, method = "BH")
 detected_bh <- names(which(pvalues_bh < 0.05))
 mm <- c("TPR", "FPR", "FDR", "ACC", "F1", "BACC")
@@ -228,7 +229,9 @@ plot(estimation,
 
 ```{r AUC}
 df_measures_zazou <-
-  ebc_tidy_by_threshold(estimation$zscores_est, true = otus_da, 
+  estimation$zscores_est$estimate %>% 
+  setNames(estimation$zscores_est$leaf) %>% 
+  ebc_tidy_by_threshold(true = otus_da, 
                         m  = length(otu_to_kepp), measures = mm) %>% 
   mutate(method = "zazou")
 df_measures_bh <-
@@ -245,7 +248,9 @@ df_measures %>%
   geom_point() +
   geom_line()
 
-ebc_AUC(estimation$zscores_est, true = otus_da, m  = length(otu_to_kepp))
+estimation$zscores_est$estimate %>% 
+  setNames(estimation$zscores_est$leaf) %>% 
+  ebc_AUC(true = otus_da, m  = length(otu_to_kepp))
 ebc_AUC(pvalues_bh, true = otus_da, m  = length(otu_to_kepp))
 
 ```
