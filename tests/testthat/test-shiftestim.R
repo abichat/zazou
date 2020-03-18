@@ -34,7 +34,7 @@ expect_shiftestim <- function(x){
   px <- plot(x)
   expect_equal(class(x), "shiftestim")
   expect_is(x$zscores_obs, "numeric")
-  expect_is(x$zscores_est, "numeric")
+  expect_is(x$zscores_est, "data.frame")
   expect_is(x$shift_est, "data.frame")
   expect_is(x$method, "character")
   expect_is(x$optim_info, "list")

@@ -19,7 +19,22 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
   }
 
   zscores_est <- incidence_matrix(tree) %*% listopt$par$estimate
-  zscores_est <- zscores_est[, 1]
+  zscores_est <- data.frame(leaf = rownames(zscores_est),
+                            estimate = zscores_est[, 1])
+  rownames(zscores_est) <- NULL
+
+    if(listopt$method %in% "desparsified lasso"){
+    hciz <-
+      size_half_confint_zscores(
+        covariance_noise_mat = listopt$covariance_noise_matrix,
+        incidence_mat = incidence_matrix(tree),
+        hsigma = listopt$hsigma_scaledlasso,
+        alpha_conf = listopt$alpha_confint
+      )
+    zscores_est$lower <- zscores_est$estimate - hciz
+    zscores_est$upper <- zscores_est$estimate - hciz
+  }
+
 
   obj <- list(zscores_obs = zscores,
               zscores_est = zscores_est,
@@ -34,16 +49,20 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
   obj$is_bin <- is.binary(tree)
 
   ## Parsimony score
-  obj$pars_score <- fitch(multi2di(obj$tree), obj$zscores_est) # parsimony score
+  states <- obj$zscores_est$estimate
+  names(states) <- obj$zscores_est$leaf
+  obj$pars_score <- fitch(multi2di(obj$tree), states) # parsimony score
 
   ## Sigma
   h <- tree_height(obj$tree)
   obj$sigma <- sqrt(2 * obj$alpha) / (1 - exp(- 2 * obj$alpha * h))
 
   ## BIC & pBIC
-  obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
+  obj$bic <- bic(obs_zscores = obj$zscores_obs,
+                 est_zscores = obj$zscores_est$estimate,
                  est_shifts = obj$shift_est$estimate, sigma = obj$sigma)
-  obj$pbic <- pbic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
+  obj$pbic <- pbic(obs_zscores = obj$zscores_obs,
+                   est_zscores = obj$zscores_est$estimate,
                   est_shifts = obj$shift_est$estimate, sigma = obj$sigma,
                   alpha = alpha, tree = tree)
 
@@ -80,7 +99,7 @@ print.shiftestim <- function(x, digits = 3, ...){
                       nrow(x$tree$edge), " branches\n")
 
   zobs <- as.character(head(round(x$zscores_obs, digits), 10))
-  zest <- as.character(head(round(x$zscores_est, digits), 10))
+  zest <- as.character(head(round(x$zscores_est$estimate, digits), 10))
   nchar <- pmax(nchar(zobs), nchar(zest))
 
   zobs <- str_pad(zobs, width = nchar, side = "left")
@@ -110,8 +129,9 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat("---\n")
   cat("Observed z-scores: ", zobs, dots_z)
   cat("Estimated z-scores:", zest, dots_z)
-  cat(norm0(x$zscores_est),  "z-scores have been shifted (ie",
-      100 * round(norm0(x$zscores_est, rev = TRUE, prop = TRUE), digits),
+  cat(norm0(x$zscores_est$estimate),  "z-scores have been shifted (ie",
+      100 * round(norm0(x$zscores_est$estimate, rev = TRUE, prop = TRUE),
+                  digits),
       "% of sparsity)\n")
 }
 
@@ -122,7 +142,7 @@ print.shiftestim <- function(x, digits = 3, ...){
 #' @export
 plot.shiftestim <- function(x, digits = 3, ...){
   plot_shifts(tree = x$tree, shifts = x$shift_est$estimate,
-              obs_scores = x$zscores_obs, est_scores = x$zscores_est,
+              obs_scores = x$zscores_obs, est_scores = x$zscores_est$estimate,
               digits = digits, ...)
 }
 

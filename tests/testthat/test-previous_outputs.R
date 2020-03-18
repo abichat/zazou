@@ -31,26 +31,29 @@ withr::with_preserve_seed({
 
 test_that("outputs do not change over time", {
   # Shooting
-  expect_known_value(estS$zscores_est, "previous_outputs/estS_zscore",
+  expect_known_value(estS$zscores_est$estimate, "previous_outputs/estS_zscore",
                      update = FALSE)
   expect_known_value(estS$shift_est, "previous_outputs/estS_shift",
                      update = FALSE)
   # L-BFGS-B
-  expect_known_value(estL$zscores_est, "previous_outputs/estL_zscore",
+  expect_known_value(estL$zscores_est$estimate, "previous_outputs/estL_zscore",
                      update = FALSE)
   expect_known_value(estL$shift_est, "previous_outputs/estL_shift",
                      update = FALSE)
   # Scaled Lasso
-  expect_known_value(estSL$zscores_est, "previous_outputs/estSL_zscore",
-                     update = FALSE)
+  expect_known_value(estSL$zscores_est$estimate,
+                     "previous_outputs/estSL_zscore", update = FALSE)
   expect_known_value(estSL$shift_est, "previous_outputs/estSL_shift",
                      update = FALSE)
   expect_known_value(estSL$optim_info$sigma_scaledlasso,
                      "previous_outputs/estSL_sigma", update = FALSE)
   # Desparsified Lasso
-  expect_known_value(estDL$zscores_est, "previous_outputs/estDL_zscore",
-                     update = FALSE)
+  expect_known_value(estDL$zscores_est$estimate,
+                     "previous_outputs/estDL_zscore", update = FALSE)
   expect_known_value(estDL$shift_est, "previous_outputs/estDL_shift",
+                     update = FALSE)
+  expect_known_value(estDL$optim_info$covariance_noise_matrix,
+                     "previous_outputs/estDL_conoma",
                      update = FALSE)
 })
 
