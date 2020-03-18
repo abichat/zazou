@@ -19,16 +19,17 @@ solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
   beta <- update_beta(X = X, y = Y, beta_init = scla$par$estimate,
                       score_system = scosys)
 
-  hci <- size_half_confint_shifts(noise_factor = tau,
+  hcis <- size_half_confint_shifts(noise_factor = tau,
                                   hsigma = scla$sigma_scaledlasso, alpha_conf)
 
   par <- data.frame(estimate = beta,
-                    lower = beta - hci$half_size,
-                    upper = beta + hci$half_size)
+                    lower = beta - hcis$half_size,
+                    upper = beta + hcis$half_size)
 
   mat_covar_noise <- covariance_noise_matrix(X = X, score_system = scosys)
 
   list(par = par, value = NA, method = "desparsified lasso",
+       hsigma_scaledlasso = scla$sigma_scaledlasso,
        alpha_confint = alpha_conf, covariance_noise_matrix = mat_covar_noise)
 
 }
@@ -123,11 +124,11 @@ size_half_confint_zscores <-
     n <- nrow(incidence_mat)
     first_term <- size_half_confint_shifts(noise_factor = rep(1, n),
                                            hsigma = hsigma,
-                                           alpha_conf = alpha_conf)
+                                           alpha_conf = alpha_conf)$half_size
     second_term <- rep(NA, n)
     for(i in seq_len(n)){
       a <- incidence_mat[i, ]
-      second_term <- sum(crossprod(a, covariance_noise_mat) * a)
+      second_term[i] <- sum(crossprod(a, covariance_noise_mat) * a)
     }
     second_term <- sqrt(second_term)
 
