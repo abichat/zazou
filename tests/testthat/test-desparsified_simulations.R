@@ -90,3 +90,14 @@ test_that("changing confindence interval works", {
   expect_equal(ESDbis$shift_est$lower, ESD005$shift_est$lower)
 })
 
+
+ESD09 <- update_confint(ESD, alpha_confint = 0.9)
+ind <- which(ESD09$zscores_est$lower * ESD09$zscores_est$upper > 0)
+
+test_that("extraction works", {
+  expect_equal(extract_significant_leaves(ESD09, side = "both"),
+               ESD09$zscores_est$leaf[ind])
+})
+
+
+
