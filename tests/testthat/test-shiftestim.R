@@ -114,3 +114,10 @@ test_that("desparsified output is correct", {
                estDL$zscores_est$estimate - estDL$zscores_est$lower)
 })
 
+test_that("warnings and errors for shiftestims functions are correct", {
+  expect_error(update_confint(tree), "x must be a 'shiftestim' object.")
+  expect_warning(update_confint(estL))
+  # expect_warning(update_confint(estL),
+  #              "There is no confindence interval for this method (L-BFGS-B).")
+})
+

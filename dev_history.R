@@ -104,6 +104,8 @@ library(testthat)
 
 # file.remove("tests/testthat/test-desparsified_midlevel.R")
 
+# use_r("shiftestim_utils")
+
 
 ####
 

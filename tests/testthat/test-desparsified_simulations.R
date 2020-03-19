@@ -85,10 +85,8 @@ test_that("intermediary outputs are correct", {
 
 test_that("changing confindence interval works", {
   ESDbis <- update_confint(ESD, alpha_confint = 0.05)
-  expect_equal(ESD$optim_info$alpha_confint, 0.05)
+  expect_equal(ESDbis$optim_info$alpha_confint, 0.05)
   expect_equal(ESDbis$zscores_est$lower, ESD005$zscores_est$lower)
   expect_equal(ESDbis$shift_est$lower, ESD005$shift_est$lower)
 })
-
-
 
