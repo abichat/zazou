@@ -119,6 +119,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   }
 
   best_model$optim_info$supp_arg <- list(...)
+  best_model$optim_info$supp_arg$alpha_conf <- NULL
 
   return(best_model)
 }

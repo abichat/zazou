@@ -16,7 +16,6 @@ ESD <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
 test_that("ESD has its specific components / dimensions", {
   expect_equal(ESD$method, "desparsified lasso")
   expect_equal(ESD$optim_info$alpha_confint, 0.01)
-  expect_equal(ESD$optim_info$supp_arg$alpha_conf, 0.01)
   expect_true(is.na(ESD$objective_value))
   expect_equal(ncol(ESD$shift_est), 3)
   expect_is(ESD$optim_info$covariance_noise_matrix, "matrix")
@@ -40,6 +39,7 @@ beta <- update_beta(X = X, y = Y, beta_init = scla$par$estimate,
                     score_system = scosys)
 hci <- size_half_confint_shifts(noise_factor = tau,
                                 hsigma = scla$sigma_scaledlasso)$half_size
+tau <- noise_factor(X, scosys)
 
 
 test_that("intermediary outputs are correct", {
@@ -55,7 +55,10 @@ test_that("intermediary outputs are correct", {
   expect_equal(V[j, k],
                sum(scosys[, j] * scosys[, k]) /
                  (abs(sum(scosys[, j] * X[, j]) * sum(scosys[, k] * X[, k]))))
-  ## Deterministic
+  # Noise factor
+  expect_length(tau, nplusm)
+  expect_equal(tau, ESD$optim_info$noise_factor)
+  ## Non-deterministic
   # scaled lasso
   expect_length(scla, 6)
   expect_length(scla$par$estimate, nplusm)

@@ -33,7 +33,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
         alpha_conf = listopt$alpha_confint
       )
     zscores_est$lower <- zscores_est$estimate - hciz
-    zscores_est$upper <- zscores_est$estimate - hciz
+    zscores_est$upper <- zscores_est$estimate + hciz
   }
 
 

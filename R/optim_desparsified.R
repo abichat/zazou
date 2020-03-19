@@ -3,7 +3,7 @@
 #' @param Delta0 Initial value for Delta.
 #' @param Y A vector of size m.
 #' @param X A vector of size m*(n+m).
-#' @param alpha_conf Confidence interval for Delta values.
+#' @param alpha_conf Confidence level.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @return A list composed by \code{par} (beta estimate) among others.
@@ -30,7 +30,8 @@ solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
 
   list(par = par, value = NA, method = "desparsified lasso",
        hsigma_scaledlasso = scla$sigma_scaledlasso,
-       alpha_confint = alpha_conf, covariance_noise_matrix = mat_covar_noise)
+       alpha_confint = alpha_conf, noise_factor = tau,
+       covariance_noise_matrix = mat_covar_noise)
 
 }
 

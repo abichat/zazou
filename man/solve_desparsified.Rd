@@ -13,7 +13,7 @@ solve_desparsified(Delta0, Y, X, alpha_conf = 0.05, ...)
 
 \item{X}{A vector of size m*(n+m).}
 
-\item{alpha_conf}{Confidence interval for Delta values.}
+\item{alpha_conf}{Confidence level.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
