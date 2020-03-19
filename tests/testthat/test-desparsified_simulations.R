@@ -8,9 +8,20 @@ zscores <- simu_zscores(tree, 1, shifts = NULL, Nshifts = 3)
 
 # High level
 
-ESD <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-                       tree = tree, alpha = 1, lambda = 100,
-                       method = "desparsified", alpha_conf = 0.01)
+
+withr::with_preserve_seed({
+  set.seed(42)
+  ESD <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
+                         tree = tree, alpha = 1, lambda = 100,
+                         method = "desparsifiedlasso", alpha_conf = 0.01)
+})
+
+withr::with_preserve_seed({
+  set.seed(42)
+  ESD005 <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
+                         tree = tree, alpha = 1, lambda = 100,
+                         method = "desparsifiedlasso", alpha_conf = 0.05)
+})
 
 
 test_that("ESD has its specific components / dimensions", {
@@ -72,7 +83,12 @@ test_that("intermediary outputs are correct", {
 })
 
 
-
+test_that("changing confindence interval works", {
+  ESDbis <- update_confint(ESD, alpha_confint = 0.05)
+  expect_equal(ESD$optim_info$alpha_confint, 0.05)
+  expect_equal(ESDbis$zscores_est$lower, ESD005$zscores_est$lower)
+  expect_equal(ESDbis$shift_est$lower, ESD005$shift_est$lower)
+})
 
 
 
