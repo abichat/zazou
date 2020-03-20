@@ -182,23 +182,30 @@ plot_shifts(tree, NA, obs_scores = zscores,
 
 ```{r estimationwithselection}
 tic()
-estimation <- estimate_shifts(rep(0, N_branch), zscores = zscores, tree = tree,
-                              alpha = c(0.2, 0.5, 1, 2, 5), method = "shooting")
+estimation_shooting <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
+                                       tree = tree, alpha = c(0.2, 0.5, 1, 2, 5), 
+                                       method = "shooting", constraint_type = "beta")
+estimation_despar <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
+                                     tree = tree, alpha = estimation_shooting$alpha, 
+                                     lambda = estimation_shooting$lambda, # not taken into account
+                                     method = "desparsifiedlasso", constraint_type = "yhat")
 toc()
-estimation
-plot(estimation, 
+estimation_shooting
+estimation_despar
+plot(estimation_shooting, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original)))))
-estimation$optim_info$bic_selection %>%
+plot(estimation_despar)
+estimation_shooting$optim_info$bic_selection %>%
   mutate(n_shifts = map_dbl(shift_est, ~ sum(. != 0))) %>% 
   select(-shift_est)
 ```
 
 
 ```{r detected}
-detected <- names(which(estimation$zscores_est != 0))
-detected <- estimation$zscores_est$leaf[estimation$zscores_est$estimate != 0]
+detected <- names(which(estimation_shooting$zscores_est != 0))
+detected <- estimation_shooting$zscores_est$leaf[estimation_shooting$zscores_est$estimate != 0]
 pvalues_bh <- p.adjust(pvalues, method = "BH")
 detected_bh <- names(which(pvalues_bh < 0.05))
 mm <- c("TPR", "FPR", "FDR", "ACC", "F1", "BACC")
@@ -216,7 +223,7 @@ map_dfr(list(detected, detected_bh, c(), otu_to_kepp), ebc_tidy,
 
 ```{r plotswithbh}
 ran <- rnorm(127)
-plot(estimation, 
+plot(estimation_shooting, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original))),
@@ -229,11 +236,11 @@ plot(estimation,
 
 ```{r AUC}
 df_measures_zazou <-
-  estimation$zscores_est$estimate %>% 
-  setNames(estimation$zscores_est$leaf) %>% 
+  estimation_shooting$zscores_est$estimate %>% 
+  setNames(estimation_shooting$zscores_est$leaf) %>% 
   ebc_tidy_by_threshold(true = otus_da, 
                         m  = length(otu_to_kepp), measures = mm) %>% 
-  mutate(method = "zazou")
+  mutate(method = "shooting")
 df_measures_bh <-
   ebc_tidy_by_threshold(pvalues_bh, true = otus_da, 
                         m  = length(otu_to_kepp), measures = mm)%>% 
@@ -248,10 +255,36 @@ df_measures %>%
   geom_point() +
   geom_line()
 
-estimation$zscores_est$estimate %>% 
-  setNames(estimation$zscores_est$leaf) %>% 
+estimation_shooting$zscores_est$estimate %>% 
+  setNames(estimation_shooting$zscores_est$leaf) %>% 
   ebc_AUC(true = otus_da, m  = length(otu_to_kepp))
+
 ebc_AUC(pvalues_bh, true = otus_da, m  = length(otu_to_kepp))
 
 ```
+
+
+```{r}
+models <-
+  seq(from = 0, to = 1, by = 0.1) %>% 
+  enframe(value = "level", name = NULL) %>% 
+  mutate(model = map(level, update_confint, x = estimation_despar),
+         da_species = map(model, extract_significant_leaves, side = "left")) %>% 
+  add_row(level = Inf, model = list(NULL), da_species = list(otu_to_kepp)) %>% 
+  mutate(nested_measures = map(da_species, ebc_tidy, 
+                               true = .env$otus_da, m = length(otu_to_kepp))) %>% 
+  unnest(nested_measures) %>% 
+  mutate(method = "despars")
+
+evabic:::area_rect(models$FPR, models$TPR)
+
+df_measures %>% 
+  select(FPR, TPR, method) %>% 
+  bind_rows(select(models, FPR, TPR, method)) %>%
+  ggplot() +
+  aes(x = FPR, y = TPR, color = method) +
+  geom_point() +
+  geom_line()
+```
+
 

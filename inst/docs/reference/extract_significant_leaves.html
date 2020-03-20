@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Desparsified lasso — solve_desparsified • zazou</title>
+<title>Extract significant leafs — extract_significant_leaves • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Desparsified lasso — solve_desparsified" />
-<meta property="og:description" content="Desparsified lasso" />
+<meta property="og:title" content="Extract significant leafs — extract_significant_leaves" />
+<meta property="og:description" content="Extract significant leafs" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,45 +129,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Desparsified lasso</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/optim_desparsified.R'><code>R/optim_desparsified.R</code></a></small>
-    <div class="hidden name"><code>solve_desparsified.Rd</code></div>
+    <h1>Extract significant leafs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/shiftestim_utils.R'><code>R/shiftestim_utils.R</code></a></small>
+    <div class="hidden name"><code>extract_significant_leaves.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Desparsified lasso</p>
+    <p>Extract significant leafs</p>
     </div>
 
-    <pre class="usage"><span class='fu'>solve_desparsified</span>(<span class='no'>Delta0</span>, <span class='no'>Y</span>, <span class='no'>X</span>, <span class='kw'>alpha_conf</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>extract_significant_leaves</span>(<span class='no'>x</span>, <span class='kw'>side</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"left"</span>, <span class='st'>"both"</span>, <span class='st'>"right"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>Delta0</th>
-      <td><p>Initial value for Delta.</p></td>
+      <th>x</th>
+      <td><p>a 'shiftestim' object.</p></td>
     </tr>
     <tr>
-      <th>Y</th>
-      <td><p>A vector of size m.</p></td>
-    </tr>
-    <tr>
-      <th>X</th>
-      <td><p>A vector of size m*(n+m).</p></td>
-    </tr>
-    <tr>
-      <th>alpha_conf</th>
-      <td><p>Confidence level.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Further arguments passed to or from other methods.</p></td>
+      <th>side</th>
+      <td><p>The side where z-scores are significant (<code>"left"</code>
+(default), <code>"both"</code> or <code>"right"</code>). Used when method is
+<code>"desparsified lasso"</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list composed by <code>par</code> (beta estimate) among others.</p>
+    <p>The names of the significant leafs</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
