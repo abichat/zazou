@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, message=FALSE}
 library(ggplot2)
+library(ggrepel)
 library(tibble)
 library(evabic)
 library(tictoc)
@@ -141,9 +142,9 @@ data(alcohol)
 abund <- alcohol$X[, alcohol$Y == "Low"]
 groups <- sample(c("A", "B"), size = ncol(abund), replace = TRUE)
 tree <- force_ultrametric(alcohol$tree)
-otu_to_kepp <- names(which(rowSums(abund > 0) > 20))
-abund <- abund[otu_to_kepp, ]
-tree <- drop.tip(tree, setdiff(tree$tip.label, otu_to_kepp))
+otu_to_keep <- names(which(rowSums(abund > 0) > 20))
+abund <- abund[otu_to_keep, ]
+tree <- drop.tip(tree, setdiff(tree$tip.label, otu_to_keep))
 N_branch <- length(tree$edge.length)
 ```
 
@@ -163,6 +164,7 @@ clustering <- create_clusters(tree, N_clusters = 20, method = "paraphyletic")
 clusters <- sample(10, 4)
 table(clustering[which(clustering %in% clusters)])
 otus_da <- names(clustering[which(clustering %in% clusters)])
+pi0 <- 1 - length(otus_da) / length(otu_to_keep)
 abund[otus_da, groups == "B"] <- 4 * abund[otus_da,  groups == "B"]
 ```
 
@@ -209,13 +211,13 @@ detected <- estimation_shooting$zscores_est$leaf[estimation_shooting$zscores_est
 pvalues_bh <- p.adjust(pvalues, method = "BH")
 detected_bh <- names(which(pvalues_bh < 0.05))
 mm <- c("TPR", "FPR", "FDR", "ACC", "F1", "BACC")
-ebc_tidy(detected, otus_da, m = length(otu_to_kepp), measures = )
-ebc_tidy(detected_bh, otus_da, m = length(otu_to_kepp), measures = mm)
-ebc_tidy(c(), otus_da, m = length(otu_to_kepp), measures = mm)
-ebc_tidy(otu_to_kepp, otus_da, m = length(otu_to_kepp), measures = mm)
+ebc_tidy(detected, otus_da, m = length(otu_to_keep), measures = )
+ebc_tidy(detected_bh, otus_da, m = length(otu_to_keep), measures = mm)
+ebc_tidy(c(), otus_da, m = length(otu_to_keep), measures = mm)
+ebc_tidy(otu_to_keep, otus_da, m = length(otu_to_keep), measures = mm)
 
-map_dfr(list(detected, detected_bh, c(), otu_to_kepp), ebc_tidy, 
-        detected = otus_da, m = length(otu_to_kepp), measures = mm) %>% 
+map_dfr(list(detected, detected_bh, c(), otu_to_keep), ebc_tidy, 
+        detected = otus_da, m = length(otu_to_keep), measures = mm) %>% 
   mutate(method = c("zazou", "bh", "nothing", "everything")) %>% 
   select(method, everything())
 ```
@@ -239,11 +241,11 @@ df_measures_zazou <-
   estimation_shooting$zscores_est$estimate %>% 
   setNames(estimation_shooting$zscores_est$leaf) %>% 
   ebc_tidy_by_threshold(true = otus_da, 
-                        m  = length(otu_to_kepp), measures = mm) %>% 
+                        m  = length(otu_to_keep), measures = mm) %>% 
   mutate(method = "shooting")
 df_measures_bh <-
   ebc_tidy_by_threshold(pvalues_bh, true = otus_da, 
-                        m  = length(otu_to_kepp), measures = mm)%>% 
+                        m  = length(otu_to_keep), measures = mm)%>% 
   mutate(method = "bh")
 
 df_measures <- rbind(df_measures_zazou, df_measures_bh)
@@ -257,34 +259,57 @@ df_measures %>%
 
 estimation_shooting$zscores_est$estimate %>% 
   setNames(estimation_shooting$zscores_est$leaf) %>% 
-  ebc_AUC(true = otus_da, m  = length(otu_to_kepp))
+  ebc_AUC(true = otus_da, m  = length(otu_to_keep))
 
-ebc_AUC(pvalues_bh, true = otus_da, m  = length(otu_to_kepp))
+ebc_AUC(pvalues_bh, true = otus_da, m  = length(otu_to_keep))
 
 ```
 
 
 ```{r}
-models <-
-  seq(from = 0, to = 1, by = 0.1) %>% 
+several_confint <-
+  seq(from = 0, to = 1, by = 0.01) %>% 
   enframe(value = "level", name = NULL) %>% 
   mutate(model = map(level, update_confint, x = estimation_despar),
-         da_species = map(model, extract_significant_leaves, side = "left")) %>% 
-  add_row(level = Inf, model = list(NULL), da_species = list(otu_to_kepp)) %>% 
+         da_species = map(model, extract_significant_leaves, side = "left"),
+         N = map_dbl(.data$da_species, length)) %>%
+  group_split(N) %>% 
+  map(head, 1) %>% 
+  reduce(bind_rows) %>% 
+  select(-N) %>% 
+  add_row(level = Inf, model = list(NULL), da_species = list(otu_to_keep)) %>% 
   mutate(nested_measures = map(da_species, ebc_tidy, 
-                               true = .env$otus_da, m = length(otu_to_kepp))) %>% 
+                               true = .env$otus_da, m = length(otu_to_keep))) %>% 
   unnest(nested_measures) %>% 
   mutate(method = "despars")
 
-evabic:::area_rect(models$FPR, models$TPR)
+several_confint
 
-df_measures %>% 
-  select(FPR, TPR, method) %>% 
-  bind_rows(select(models, FPR, TPR, method)) %>%
-  ggplot() +
+evabic:::area_rect(several_confint$FPR, several_confint$TPR)
+```
+
+```{r}
+all_measures <-
+  df_measures %>% 
+  select(level = threshold, TPR:method) %>% 
+  bind_rows(select(several_confint, -model, -da_species))
+
+all_measures %>% 
+  group_by(method) %>% 
+  summarise(AUC = evabic:::area_rect(FPR, TPR))
+
+ggplot(all_measures) +
   aes(x = FPR, y = TPR, color = method) +
   geom_point() +
-  geom_line()
+  geom_line() +
+  geom_text_repel(aes(label = round(FDR, 2)), show.legend = FALSE) 
+
+ggplot(all_measures) +
+  aes(x = level, y = FDR, color = method) +
+  geom_point() +
+  geom_line() +
+  geom_abline(slope = pi0, intercept = 0) +
+  facet_grid(cols = vars(method), scales = "free_x")
 ```
 
 
