@@ -106,6 +106,10 @@ library(testthat)
 
 # use_r("shiftestim_utils")
 
+# use_r("shiftconf")
+# use_r("confint_desparsified")
+# use_r("confint_global")
+
 
 ####
 
