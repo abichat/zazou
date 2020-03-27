@@ -33,7 +33,7 @@ solve_scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
 
   while (it < p || progress > eps) {
     beta <- solve_multivariate(beta0 = beta, y = y, X = X,
-                               lambda = n * sigma * lambda, ...)$par$estimate
+                               lambda = n * sigma * lambda, ...)$par
     sigma <- update_sigma(y, X, beta)
     new_obj <- compute_objective_function(Y = y, X = X,
                                           lambda = lambda, sigma = sigma,
@@ -44,7 +44,7 @@ solve_scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
     it <- it + 1
   }
 
-  list(par = data.frame(estimate = beta), sigma_scaledlasso = sigma,
+  list(par = beta, sigma_scaledlasso = sigma,
        method = "scaled lasso", value = obj,
        iterations = it, last_progress = progress)
 }

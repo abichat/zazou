@@ -13,6 +13,5 @@ solve_lbfgsb <- function(Delta0, X, Y, lambda,
                upper = upbbound, method = "L-BFGS-B")
                # ... removed because optim is closed
   opt <- c(opt, method = "L-BFGS-B")
-  opt$par <- data.frame(estimate = opt$par)
   opt
 }

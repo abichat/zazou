@@ -147,7 +147,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
     progress <- abs(new_obj_vals - obj_vals) / obj_vals
     obj_vals <- new_obj_vals
   }
-  beta <- data.frame(estimate = beta)
+
   list(par = beta, value = obj_vals, method = "shooting",
        iterations = it, last_progress = progress)
 }

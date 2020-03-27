@@ -1,39 +1,39 @@
-#' Desparsified lasso
-#'
-#' @param Delta0 Initial value for Delta.
-#' @param Y A vector of size m.
-#' @param X A vector of size m*(n+m).
-#' @param alpha_conf Confidence level.
-#' @param ... Further arguments passed to or from other methods.
-#'
-#' @return A list composed by \code{par} (beta estimate) among others.
-#' @export
-#'
-solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
-  scla <- solve_scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
-
-  scosys <- calculate_Z(X = X)
-
-  tau <- noise_factor(X = X, score_system = scosys)
-
-  beta <- update_beta(X = X, y = Y, beta_init = scla$par$estimate,
-                      score_system = scosys)
-
-  hcis <- size_half_confint_shifts(noise_factor = tau,
-                                  hsigma = scla$sigma_scaledlasso, alpha_conf)
-
-  par <- data.frame(estimate = beta,
-                    lower = beta - hcis$half_size,
-                    upper = beta + hcis$half_size)
-
-  mat_covar_noise <- covariance_noise_matrix(X = X, score_system = scosys)
-
-  list(par = par, value = NA, method = "desparsified lasso",
-       hsigma_scaledlasso = scla$sigma_scaledlasso,
-       alpha_confint = alpha_conf, noise_factor = tau,
-       covariance_noise_matrix = mat_covar_noise)
-
-}
+# #' Desparsified lasso
+# #'
+# #' @param Delta0 Initial value for Delta.
+# #' @param Y A vector of size m.
+# #' @param X A vector of size m*(n+m).
+# #' @param alpha_conf Confidence level.
+# #' @param ... Further arguments passed to or from other methods.
+# #'
+# #' @return A list composed by \code{par} (beta estimate) among others.
+# #' @export
+# #'
+# solve_desparsified <- function(Delta0, Y, X, alpha_conf = 0.05, ...){
+#   scla <- solve_scaled_lasso(y = Y, X = X, beta0 = Delta0, ...)
+#
+#   scosys <- calculate_Z(X = X)
+#
+#   tau <- noise_factor(X = X, score_system = scosys)
+#
+#   beta <- update_beta(X = X, y = Y, beta_init = scla$par$estimate,
+#                       score_system = scosys)
+#
+#   hcis <- size_half_confint_shifts(noise_factor = tau,
+#                                   hsigma = scla$sigma_scaledlasso, alpha_conf)
+#
+#   par <- data.frame(estimate = beta,
+#                     lower = beta - hcis$half_size,
+#                     upper = beta + hcis$half_size)
+#
+#   mat_covar_noise <- covariance_noise_matrix(X = X, score_system = scosys)
+#
+#   list(par = par, value = NA, method = "desparsified lasso",
+#        hsigma_scaledlasso = scla$sigma_scaledlasso,
+#        alpha_confint = alpha_conf, noise_factor = tau,
+#        covariance_noise_matrix = mat_covar_noise)
+#
+# }
 
 #' Noise factor
 #'

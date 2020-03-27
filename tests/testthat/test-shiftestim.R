@@ -21,9 +21,6 @@ estL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
 estSL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                          lambda = 1, tree = tree,
                          alpha = 1, method = "scaledlasso")
-estDL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                         lambda = 1, tree = tree, alpha_conf = 0.01,
-                         alpha = 1, method = "desparsifiedlasso")
 
 expect_scalnum <- function(x){
   expect_is(x, "numeric")
@@ -35,7 +32,7 @@ expect_shiftestim <- function(x){
   expect_equal(class(x), "shiftestim")
   expect_is(x$zscores_obs, "numeric")
   expect_is(x$zscores_est, "numeric")
-  expect_is(x$shift_est, "data.frame")
+  expect_is(x$shift_est, "numeric")
   expect_is(x$method, "character")
   expect_is(x$optim_info, "list")
   expect_is(x$optim_info$supp_arg, "list")
@@ -44,7 +41,7 @@ expect_shiftestim <- function(x){
   expect_scalnum(x$lambda)
   expect_scalnum(x$alpha)
   expect_scalnum(x$sigma)
-  # expect_scalnum(x$objective_value) # Not available for DL for the moment
+  expect_scalnum(x$objective_value)
   expect_scalnum(x$bic)
   expect_scalnum(x$pbic)
   expect_scalnum(x$pars_score)
@@ -63,21 +60,19 @@ test_that("Shiftestim class is correct", {
   expect_shiftestim(estS)
   expect_shiftestim(estL)
   expect_shiftestim(estSL)
-  expect_shiftestim(estDL)
+  # expect_shiftestim(estDL)
 })
 
 # Methods specificities
 
 test_that("shooting output is correct", {
   expect_equal(estS$method, "shooting with model selection")
-  expect_equal(ncol(estS$shift_est), 1)
   expect_scalnum(estS$optim_info$last_progress)
   expect_scalnum(estS$optim_info$iterations)
 })
 
 test_that("L-BFGS-B output is correct", {
   expect_equal(estL$method, "L-BFGS-B")
-  expect_equal(ncol(estL$shift_est), 1)
   expect_is(estL$optim_info$message, "character")
   expect_error(
     estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
@@ -88,7 +83,6 @@ test_that("L-BFGS-B output is correct", {
 
 test_that("scaled lasso output is correct", {
   expect_equal(estSL$method, "scaled lasso")
-  expect_equal(ncol(estSL$shift_est), 1)
   expect_scalnum(estSL$optim_info$last_progress)
   expect_scalnum(estSL$optim_info$iterations)
   expect_scalnum(estSL$optim_info$sigma_scaledlasso)
@@ -98,26 +92,26 @@ test_that("scaled lasso output is correct", {
     "No model selection can be done with scaledlasso.")
 })
 
-test_that("desparsified output is correct", {
-  expect_equal(estDL$method, "desparsified lasso")
-  expect_equal(ncol(estDL$shift_est), 3)
-  expect_equal(estDL$optim_info$alpha_confint, 0.01)
-  expect_true(is.na(estDL$objective_value))
-  # Check confidence interval
-  # expect_true(all(estDL$shift_est$lower < estDL$shift_est$estimate))
-  # expect_true(all(estDL$shift_est$upper > estDL$shift_est$estimate))
-  # expect_equal(estDL$shift_est$upper - estDL$shift_est$estimate,
-  #              estDL$shift_est$estimate - estDL$shift_est$lower)
-  # expect_true(all(estDL$zscores_est$lower < estDL$zscores_est$estimate))
-  # expect_true(all(estDL$zscores_est$upper > estDL$zscores_est$estimate))
-  # expect_equal(estDL$zscores_est$upper - estDL$zscores_est$estimate,
-  #              estDL$zscores_est$estimate - estDL$zscores_est$lower)
-})
+# test_that("desparsified output is correct", {
+#   # expect_equal(estDL$method, "desparsified lasso")
+#   # expect_equal(ncol(estDL$shift_est), 3)
+#   # expect_equal(estDL$optim_info$alpha_confint, 0.01)
+#   # expect_true(is.na(estDL$objective_value))
+#   # Check confidence interval
+#   # expect_true(all(estDL$shift_est$lower < estDL$shift_est$estimate))
+#   # expect_true(all(estDL$shift_est$upper > estDL$shift_est$estimate))
+#   # expect_equal(estDL$shift_est$upper - estDL$shift_est$estimate,
+#   #              estDL$shift_est$estimate - estDL$shift_est$lower)
+#   # expect_true(all(estDL$zscores_est$lower < estDL$zscores_est$estimate))
+#   # expect_true(all(estDL$zscores_est$upper > estDL$zscores_est$estimate))
+#   # expect_equal(estDL$zscores_est$upper - estDL$zscores_est$estimate,
+#   #              estDL$zscores_est$estimate - estDL$zscores_est$lower)
+# })
 
-test_that("warnings and errors for shiftestims functions are correct", {
-  expect_error(update_confint(tree), "x must be a 'shiftestim' object.")
-  expect_warning(update_confint(estL))
-  # expect_warning(update_confint(estL),
-  #              "There is no confindence interval for this method (L-BFGS-B).")
-})
+# test_that("warnings and errors for shiftestims functions are correct", {
+#   expect_error(update_confint(tree), "x must be a 'shiftestim' object.")
+#   expect_warning(update_confint(estL))
+#   # expect_warning(update_confint(estL),
+#   #              "There is no confindence interval for this method (L-BFGS-B).")
+# })
 

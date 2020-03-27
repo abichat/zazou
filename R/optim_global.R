@@ -49,11 +49,8 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
 
                    "scaledlasso" = solve_scaled_lasso(
                      beta0 = Delta0, y = Y, X = X, lambda = lambda,
-                     constraint_type = constraint_type, ...),
-
-                   "desparsifiedlasso" = solve_desparsified(
-                     Delta0 = Delta0, Y = Y, X = X, lambda = lambda,
-                     constraint_type = constraint_type, ...))
+                     constraint_type = constraint_type, ...)
+                   )
     return(opt)
   }
 
