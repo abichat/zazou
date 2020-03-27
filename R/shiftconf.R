@@ -17,3 +17,30 @@ as_shiftconf <- function(x, shiftestim){
   class(x) <- "shiftconf"
   return(x)
 }
+
+#' @rdname as_shiftconf
+#'
+#' @name print.shiftconf
+#'
+#' @param x a 'shiftconf' object.
+#' @param ... further arguments to be passed to or from other methods.
+#' @inheritParams plot_shifts
+#'
+#' @importFrom utils head
+#' @importFrom stringr str_pad
+#' @importFrom ape is.binary multi2di
+#'
+#' @export
+print.shiftconf <- function(x, digits = 3, ...){
+
+  txt_tree1 <- paste0("Tree is", ifelse(x$shiftestim$is_bin, " ", " not "),
+                      "binary")
+  tree <- x$shiftestim$tree
+
+  txt_tree2 <- paste0("with ", length(tree$tip.label), " leafs and ",
+                      nrow(tree$edge), " branches\n")
+  cat(txt_tree1, txt_tree2)
+  cat(paste("Method:", x$method, "\n"))
+  cat(paste("Confidence threshold:", x$alpha_conf, "\n"))
+  print(head(x$zscores_est))
+}
