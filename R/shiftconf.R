@@ -1,3 +1,11 @@
+#' Title
+#'
+#' @param x a list.
+#' @param shiftestim a \code{shiftestim} object.
+#'
+#' @return a \code{shiftconf} object.
+#' @export
+#'
 as_shiftconf <- function(x, shiftestim){
 
   required_names <- c("shifts_est", "zscores_est", "alpha_conf", "method")

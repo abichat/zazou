@@ -101,7 +101,7 @@ estimation
 plot(estimation, true_scores = true_shifts)
 
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = estimation$zscores_est$estimate), 
+                 estimated = estimation$zscores_est), 
       digits = 4)
 ```
 
@@ -114,7 +114,7 @@ estimation
 plot(estimation, true_scores = true_shifts)
 
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = estimation$zscores_est$estimate), 
+                 estimated = estimation$zscores_est), 
       digits = 4)
 ```
 
@@ -129,7 +129,7 @@ estimation
 plot(estimation, true_scores = true_shifts)
 
 round(data.frame(true = true_shifts, observed  = zscores,
-                 estimated = estimation$zscores_est$estimate), 
+                 estimated = estimation$zscores_est), 
       digits = 4)
 ```
 
@@ -187,18 +187,20 @@ tic()
 estimation_shooting <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
                                        tree = tree, alpha = c(0.2, 0.5, 1, 2, 5), 
                                        method = "shooting", constraint_type = "beta")
-estimation_despar <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
-                                     tree = tree, alpha = estimation_shooting$alpha, 
-                                     lambda = estimation_shooting$lambda, # not taken into account
-                                     method = "desparsifiedlasso", constraint_type = "yhat")
+estimation_scla <- estimate_shifts(rep(0, N_branch), zscores = zscores, tree = tree, 
+                                   alpha = estimation_shooting$alpha, 
+                                   lambda = estimation_shooting$lambda, 
+                                   method = "scaledlasso", constraint_type = "beta")
+
+desparsified <- estimate_confint(estimation_scla, method = "desparsified")
 toc()
 estimation_shooting
-estimation_despar
+desparsified
 plot(estimation_shooting, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original)))))
-plot(estimation_despar)
+# plot(desparsified)
 estimation_shooting$optim_info$bic_selection %>%
   mutate(n_shifts = map_dbl(shift_est, ~ sum(. != 0))) %>% 
   select(-shift_est)
@@ -206,17 +208,16 @@ estimation_shooting$optim_info$bic_selection %>%
 
 
 ```{r detected}
-detected <- names(which(estimation_shooting$zscores_est != 0))
-detected <- estimation_shooting$zscores_est$leaf[estimation_shooting$zscores_est$estimate != 0]
+detected_sh <- names(which(estimation_shooting$zscores_est != 0))
 pvalues_bh <- p.adjust(pvalues, method = "BH")
 detected_bh <- names(which(pvalues_bh < 0.05))
 mm <- c("TPR", "FPR", "FDR", "ACC", "F1", "BACC")
-ebc_tidy(detected, otus_da, m = length(otu_to_keep), measures = )
+ebc_tidy(detected_sh, otus_da, m = length(otu_to_keep), measures = )
 ebc_tidy(detected_bh, otus_da, m = length(otu_to_keep), measures = mm)
 ebc_tidy(c(), otus_da, m = length(otu_to_keep), measures = mm)
 ebc_tidy(otu_to_keep, otus_da, m = length(otu_to_keep), measures = mm)
 
-map_dfr(list(detected, detected_bh, c(), otu_to_keep), ebc_tidy, 
+map_dfr(list(detected_sh, detected_bh, c(), otu_to_keep), ebc_tidy, 
         detected = otus_da, m = length(otu_to_keep), measures = mm) %>% 
   mutate(method = c("zazou", "bh", "nothing", "everything")) %>% 
   select(method, everything())
@@ -238,8 +239,7 @@ plot(estimation_shooting,
 
 ```{r AUC}
 df_measures_zazou <-
-  estimation_shooting$zscores_est$estimate %>% 
-  setNames(estimation_shooting$zscores_est$leaf) %>% 
+  estimation_shooting$zscores_est %>% 
   ebc_tidy_by_threshold(true = otus_da, 
                         m  = length(otu_to_keep), measures = mm) %>% 
   mutate(method = "shooting")
@@ -257,8 +257,7 @@ df_measures %>%
   geom_point() +
   geom_line()
 
-estimation_shooting$zscores_est$estimate %>% 
-  setNames(estimation_shooting$zscores_est$leaf) %>% 
+estimation_shooting$zscores_est %>% 
   ebc_AUC(true = otus_da, m  = length(otu_to_keep))
 
 ebc_AUC(pvalues_bh, true = otus_da, m  = length(otu_to_keep))
@@ -270,7 +269,7 @@ ebc_AUC(pvalues_bh, true = otus_da, m  = length(otu_to_keep))
 several_confint <-
   seq(from = 0, to = 1, by = 0.01) %>% 
   enframe(value = "level", name = NULL) %>% 
-  mutate(model = map(level, update_confint, x = estimation_despar),
+  mutate(model = map(level, update_confint, x = desparsified),
          da_species = map(model, extract_significant_leaves, side = "left"),
          N = map_dbl(.data$da_species, length)) %>%
   group_split(N) %>% 

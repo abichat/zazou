@@ -118,17 +118,17 @@ est_shooting_n$optim_info
 
 
 ```{r}
-qplot(est_lbfgsb$zscores_obs, est_lbfgsb$zscores_est$estimate) +
+qplot(est_lbfgsb$zscores_obs, est_lbfgsb$zscores_est) +
   geom_abline() + geom_vline(xintercept = 0) + coord_equal()
-qplot(est_shooting$zscores_obs, est_shooting$zscores_est$estimate) +
+qplot(est_shooting$zscores_obs, est_shooting$zscores_est) +
   geom_abline() + geom_vline(xintercept = 0) + coord_equal()
 # qplot(est_shooting_p$zscores_obs, est_shooting_p$zscores_est) +
 #   geom_abline() + geom_vline(xintercept = 0) + coord_equal()
-qplot(-est_shooting$zscores_est$estimate, -est_lbfgsb$zscores_est$estimate) +
+qplot(-est_shooting$zscores_est, -est_lbfgsb$zscores_est) +
   geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()
-qplot(-est_shooting$shift_est$estimate, -est_lbfgsb$shift_est$estimate) +
+qplot(-est_shooting$shift_est, -est_lbfgsb$shift_est) +
   geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()
-# qplot(-est_shooting$shift_est$estimate, -est_shooting_p$shift_est$estimate) +
+# qplot(-est_shooting$shift_est, -est_shooting_p$shift_est) +
   # geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()
 ```
 

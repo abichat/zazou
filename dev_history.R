@@ -128,7 +128,6 @@ run_examples()
 covr::report()
 
 check()
-check(args = "--no-build-vignettes", build_args = "--no-build-vignettes")
 goodpractice::gp()
 
 

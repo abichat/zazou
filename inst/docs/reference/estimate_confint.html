@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract significant indices — extract_from_cidf • zazou</title>
+<title>Estimate confidence interval from scaled lasso. — estimate_confint • zazou</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,8 @@
 
 
 
-<meta property="og:title" content="Extract significant indices — extract_from_cidf" />
-<meta property="og:description" content="Extract indices where lower and upper components of the dataframe
-are both positive or both negative." />
+<meta property="og:title" content="Estimate confidence interval from scaled lasso. — estimate_confint" />
+<meta property="og:description" content="Estimate confidence interval from scaled lasso." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,40 +129,53 @@ are both positive or both negative." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract significant indices</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/shiftconf_utils.R'><code>R/shiftconf_utils.R</code></a></small>
-    <div class="hidden name"><code>extract_from_cidf.Rd</code></div>
+    <h1>Estimate confidence interval from scaled lasso.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/confint_global.R'><code>R/confint_global.R</code></a></small>
+    <div class="hidden name"><code>estimate_confint.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Extract indices where lower and upper components of the dataframe
-are both positive or both negative.</p>
+    <p>Estimate confidence interval from scaled lasso.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extract_from_cidf</span>(<span class='no'>cidf</span>, <span class='kw'>side</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"left"</span>, <span class='st'>"both"</span>, <span class='st'>"right"</span>))</pre>
+    <pre class="usage"><span class='fu'>estimate_confint</span>(
+  <span class='no'>shiftestim</span>,
+  <span class='kw'>alpha_conf</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"desparsified"</span>),
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>cidf</th>
-      <td><p>dataframe with <code>"estimate"</code>, <code>"lower"</code>,
-<code>"upper"</code> columns.</p></td>
+      <th>shiftestim</th>
+      <td><p>a <code>shiftestim</code> object with method <code>scaledlasso</code>.</p></td>
     </tr>
     <tr>
-      <th>side</th>
-      <td><p>The side where z-scores are significant (<code>"left"</code>
-(default), <code>"both"</code> or <code>"right"</code>). Used when method is
-<code>"desparsified lasso"</code>.</p></td>
+      <th>alpha_conf</th>
+      <td><p>the confidence level.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>For the moment, only <code>desparsified</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further argument...</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a <code>shiftconf</code> object.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>
