@@ -8,15 +8,15 @@
 #'
 update_confint <- function(x, alpha_confint){
 
-  if(!inherits(x, "shiftestim")){
-    stop("x must be a 'shiftestim' object.")
+  if(!inherits(x, "shiftconf")){
+    stop("x must be a 'shiftconf' object.")
   }
 
-  if(x$method == "desparsified lasso"){
+  if(x$method == "desparsified"){
     tau <- x$optim_info$noise_factor
     V <- x$optim_info$covariance_noise_matrix
-    hsigma <- x$optim_info$hsigma_scaledlasso
-    mat_incidence <- incidence_matrix(x$tree)
+    hsigma <- x$shiftestim$optim_info$sigma_scaledlasso
+    mat_incidence <- incidence_matrix(x$shiftestim$tree)
 
     shcs <- size_half_confint_shifts(noise_factor = tau,
                                      hsigma = hsigma,
@@ -26,7 +26,7 @@ update_confint <- function(x, alpha_confint){
                                       hsigma = hsigma,
                                       alpha_conf = alpha_confint)
 
-    x$optim_info$alpha_confint <- alpha_confint
+    x$alpha_conf <- alpha_confint
     x$shift_est$lower <- x$shift_est$estimate - shcs
     x$shift_est$upper <- x$shift_est$estimate + shcs
     x$zscores_est$lower <- x$zscores_est$estimate - shcz

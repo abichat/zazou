@@ -12,7 +12,7 @@ confint_desparsified <- function(x, alpha_conf = 0.05, ...){
 
   tau <- noise_factor(X = X, score_system = scosys)
 
-  new_beta <- update_beta(X = X, y = Y, beta_init = x$shift_est$estimate,
+  new_beta <- update_beta(X = X, y = Y, beta_init = x$shift_est,
                           score_system = scosys)
 
   mat_covar_noise <- covariance_noise_matrix(X = X, score_system = scosys)
