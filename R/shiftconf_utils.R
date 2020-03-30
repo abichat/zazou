@@ -12,7 +12,7 @@ update_confint <- function(x, alpha_confint){
     stop("x must be a 'shiftconf' object.")
   }
 
-  if(x$method == "desparsified"){
+  if(x$method == "desparsified lasso"){
     tau <- x$optim_info$noise_factor
     V <- x$optim_info$covariance_noise_matrix
     hsigma <- x$shiftestim$optim_info$sigma_scaledlasso
@@ -27,8 +27,8 @@ update_confint <- function(x, alpha_confint){
                                       alpha_conf = alpha_confint)
 
     x$alpha_conf <- alpha_confint
-    x$shift_est$lower <- x$shift_est$estimate - shcs
-    x$shift_est$upper <- x$shift_est$estimate + shcs
+    x$shifts_est$lower <- x$shifts_est$estimate - shcs
+    x$shifts_est$upper <- x$shifts_est$estimate + shcs
     x$zscores_est$lower <- x$zscores_est$estimate - shcz
     x$zscores_est$upper <- x$zscores_est$estimate + shcz
 

@@ -38,6 +38,6 @@ confint_desparsified <- function(x, alpha_conf = 0.05, ...){
 
   list(shifts_est = shifts_est, zscores_est = zscores_est,
        noise_factor = tau, covariance_noise_matrix = mat_covar_noise,
-       alpha_conf = alpha_conf, method = "desparsified")
+       alpha_conf = alpha_conf, method = "desparsified lasso")
 }
 

@@ -1,38 +1,37 @@
 context("Example desparsified with a tree")
 
-# n <- 15
-# tree <- ape::rtree(n)
-# tree <- force_ultrametric(tree)
-# nplusm <- length(tree$edge.length)
-# zscores <- simu_zscores(tree, 1, shifts = NULL, Nshifts = 3)
-#
-# # High level
-#
-#
-# withr::with_preserve_seed({
-#   set.seed(42)
-#   ESD <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-#                          tree = tree, alpha = 1, lambda = 100,
-#                          method = "desparsifiedlasso", alpha_conf = 0.01)
-# })
-#
-# withr::with_preserve_seed({
-#   set.seed(42)
-#   ESD005 <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-#                          tree = tree, alpha = 1, lambda = 100,
-#                          method = "desparsifiedlasso", alpha_conf = 0.05)
-# })
-#
-#
-# test_that("ESD has its specific components / dimensions", {
-#   expect_equal(ESD$method, "desparsified lasso")
-#   expect_equal(ESD$optim_info$alpha_confint, 0.01)
-#   expect_true(is.na(ESD$objective_value))
-#   expect_equal(ncol(ESD$shift_est), 3)
-#   expect_is(ESD$optim_info$covariance_noise_matrix, "matrix")
-# })
-#
-#
+n <- 15
+tree <- ape::rtree(n)
+tree <- force_ultrametric(tree)
+nplusm <- length(tree$edge.length)
+zscores <- simu_zscores(tree, 1, shifts = NULL, Nshifts = 3)
+
+est_scaled <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
+                              tree = tree, alpha = 1, lambda = 0.1,
+                              method = "scaledlasso")
+
+
+withr::with_preserve_seed({
+  set.seed(42)
+  ESD <- estimate_confint(est_scaled, alpha_conf = 0.05,
+                          method = c("desparsified"))
+})
+
+withr::with_preserve_seed({
+  set.seed(42)
+  ESD002 <- estimate_confint(est_scaled, alpha_conf = 0.02,
+                             method = c("desparsified"))
+})
+
+
+test_that("ESD has its specific components / dimensions", {
+  expect_equal(ESD$method, "desparsified lasso")
+  expect_equal(ESD$alpha_conf, 0.05)
+  expect_equal(ncol(ESD$shifts_est), 3)
+  expect_is(ESD$optim_info$covariance_noise_matrix, "matrix")
+})
+
+
 # mat_covar <- covariance_matrix(tree, alpha =  1)
 # mat_incidence <- incidence_matrix(tree)
 # R <- inverse_sqrt(mat_covar)
@@ -83,12 +82,12 @@ context("Example desparsified with a tree")
 # })
 
 
-# test_that("changing confindence interval works", {
-#   ESDbis <- update_confint(ESD, alpha_confint = 0.05)
-#   expect_equal(ESDbis$optim_info$alpha_confint, 0.05)
-#   expect_equal(ESDbis$zscores_est$lower, ESD005$zscores_est$lower)
-#   expect_equal(ESDbis$shift_est$lower, ESD005$shift_est$lower)
-# })
+test_that("changing confindence interval works", {
+  ESD5to2 <- update_confint(ESD, alpha_confint = 0.02)
+  expect_equal(ESD5to2$alpha_conf, 0.02)
+  expect_equal(ESD5to2$zscores_est$lower, ESD002$zscores_est$lower)
+  expect_equal(ESD5to2$shifts_est$lower, ESD002$shifts_est$lower)
+})
 
 
 # ESD09 <- update_confint(ESD, alpha_confint = 0.9)
