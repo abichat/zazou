@@ -81,8 +81,8 @@ extract_from_cidf <- function(cidf, side = c("left", "both", "right")) {
 #' @export
 #'
 extract_significant_leaves <- function(x, side = c("left", "both", "right")){
-  if(!inherits(x, "shiftestim")){
-    stop("x must be a 'shiftestim' object.")
+  if(!inherits(x, "shiftconf")){
+    stop("x must be a 'shiftconf' object.")
   }
   if(x$method == "desparsified lasso"){
 
