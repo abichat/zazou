@@ -3,11 +3,14 @@
 \name{as_shiftconf}
 \alias{as_shiftconf}
 \alias{print.shiftconf}
-\title{Title}
+\alias{plot.shiftconf}
+\title{'shiftconf' object}
 \usage{
 as_shiftconf(x, shiftestim)
 
 \method{print}{shiftconf}(x, digits = 3, ...)
+
+\method{plot}{shiftconf}(x, digits = 3, ...)
 }
 \arguments{
 \item{x}{a 'shiftconf' object.}
@@ -22,5 +25,5 @@ as_shiftconf(x, shiftestim)
 a \code{shiftconf} object.
 }
 \description{
-Title
+'shiftconf' object
 }

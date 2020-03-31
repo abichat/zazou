@@ -200,7 +200,7 @@ plot(estimation_shooting,
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original)))))
-# plot(desparsified)
+plot(desparsified)
 estimation_shooting$optim_info$bic_selection %>%
   mutate(n_shifts = map_dbl(shifts_est, ~ sum(. != 0))) %>% 
   select(-shifts_est)
@@ -225,7 +225,6 @@ map_dfr(list(detected_sh, detected_bh, c(), otu_to_keep), ebc_tidy,
 
 
 ```{r plotswithbh}
-ran <- rnorm(127)
 plot(estimation_shooting, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",

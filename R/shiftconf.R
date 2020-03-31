@@ -1,4 +1,4 @@
-#' Title
+#' 'shiftconf' object
 #'
 #' @param x a list.
 #' @param shiftestim a \code{shiftestim} object.
@@ -51,4 +51,24 @@ print.shiftconf <- function(x, digits = 3, ...){
   cat(paste("Method:", x$method, "\n"))
   cat(paste("Confidence threshold:", x$alpha_conf, "\n"))
   print(head(x$zscores_est))
+}
+
+
+#' @rdname as_shiftconf
+#' @inheritParams plot_shifts
+#'
+#' @importFrom ggstance geom_pointrangeh
+#'
+#' @export
+plot.shiftconf <- function(x, digits = 3, ...){
+  p <- plot_shifts(x$shiftestim$tree, shifts = x$shifts_est$estimate,
+                   digits = digits, obs_scores = x$shiftestim$zscores_obs)
+  # Ok for the moment, must be completly integrated in plot_shifts() later
+  facet_plot(p, panel   = "Estimated confidence interval",
+             data    = x$zscores_est,
+             geom    = geom_pointrangeh,
+             mapping = aes(x = .data$estimate, xmin = .data$lower,
+                           xmax = .data$upper, color = .data$estimate >= 0,
+                           shape = .data$lower * .data$upper > 0),
+             show.legend = FALSE)
 }
