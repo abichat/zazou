@@ -126,9 +126,9 @@ qplot(est_shooting$zscores_obs, est_shooting$zscores_est) +
 #   geom_abline() + geom_vline(xintercept = 0) + coord_equal()
 qplot(-est_shooting$zscores_est, -est_lbfgsb$zscores_est) +
   geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()
-qplot(-est_shooting$shift_est, -est_lbfgsb$shift_est) +
+qplot(-est_shooting$shifts_est, -est_lbfgsb$shifts_est) +
   geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()
-# qplot(-est_shooting$shift_est, -est_shooting_p$shift_est) +
+# qplot(-est_shooting$shifts_est, -est_shooting_p$shifts_est) +
   # geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()
 ```
 

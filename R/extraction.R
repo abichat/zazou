@@ -12,15 +12,15 @@ check_selection <- function(shiftestim){
 #' Create a list from
 #'
 #' @param objective_value the objective value.
-#' @param shift_est the estimated shifts.
+#' @param shifts_est the estimated shifts.
 #' @param method the used method.
 #' @param best_alpha the best alpha during the model selection phase.
 #' @param best_lambda the best lambda during the model selection phase.
 #'
 #' @return a list.
-create_listopt_pms <- function(objective_value, shift_est, method,
+create_listopt_pms <- function(objective_value, shifts_est, method,
                                best_alpha, best_lambda){
-  list(par = shift_est, value = objective_value,
+  list(par = shifts_est, value = objective_value,
        method = paste0(method, ", part of model selection"),
        better_parameters = c(better_alpha  = best_alpha,
                              better_lambda = best_lambda))
@@ -46,7 +46,7 @@ extract_models <- function(shiftestim){
   for(i in seq_len(nrow(df_selection))){
     listopt <-
       create_listopt_pms(objective_value = df_selection$objective_value[i],
-                         shift_est = df_selection$shift_est[[i]],
+                         shifts_est = df_selection$shifts_est[[i]],
                          method = sub(pattern = " with model selection",
                                       replacement = "", x = shiftestim$method),
                          best_alpha = shiftestim$alpha,

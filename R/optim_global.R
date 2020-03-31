@@ -88,7 +88,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
       current_model <- as_shiftestim(
         listopt = opt, tree = tree, zscores = zscores,
         lambda = lam, alpha = alp)
-      shifts <- c(shifts, list(current_model$shift_est))
+      shifts <- c(shifts, list(current_model$shifts_est))
 
       ## Update bic table
       bic_df <- rbind(bic_df,
@@ -109,7 +109,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   } ## Close alpha loop
 
   if(any(c(length(alpha), length(current_lambda)) >= 2)){
-    bic_df$shift_est <- shifts
+    bic_df$shifts_est <- shifts
     best_model$optim_info$bic_selection <- bic_df
     best_model$optim_info$criterion <- criterion
     best_model$method <- paste(method, "with model selection")

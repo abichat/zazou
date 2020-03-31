@@ -39,7 +39,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
 
   obj <- list(zscores_obs = zscores,
               zscores_est = zscores_est,
-              shift_est = listopt$par,
+              shifts_est = listopt$par,
               objective_value = listopt$value, lambda = lambda,
               tree = tree, alpha = alpha,
               method = listopt$method,
@@ -58,9 +58,9 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
 
   ## BIC & pBIC
   obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
-                 est_shifts = obj$shift_est, sigma = obj$sigma)
+                 est_shifts = obj$shifts_est, sigma = obj$sigma)
   obj$pbic <- pbic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
-                  est_shifts = obj$shift_est, sigma = obj$sigma,
+                  est_shifts = obj$shifts_est, sigma = obj$sigma,
                   alpha = alpha, tree = tree)
 
   class(obj) <- "shiftestim"
@@ -117,10 +117,10 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat(paste0("BIC: ", round(x$bic, digits), "\n"))
   cat(paste0("pBIC: ", round(x$pbic, digits), "\n"))
   cat("---\n")
-  cat("Estimated shifts:", head(round(x$shift_est, digits), 10),
+  cat("Estimated shifts:", head(round(x$shifts_est, digits), 10),
       "...\n")
-  cat(norm0(x$shift_est), "shifts have been identified (ie",
-      100 * round(norm0(x$shift_est, rev = TRUE, prop = TRUE), digits),
+  cat(norm0(x$shifts_est), "shifts have been identified (ie",
+      100 * round(norm0(x$shifts_est, rev = TRUE, prop = TRUE), digits),
       "% of sparsity)\n")
   cat("A parsimonious solution would involve", x$pars_score, "shifts\n")
   cat("---\n")
@@ -137,7 +137,7 @@ print.shiftestim <- function(x, digits = 3, ...){
 #'
 #' @export
 plot.shiftestim <- function(x, digits = 3, ...){
-  plot_shifts(tree = x$tree, shifts = x$shift_est,
+  plot_shifts(tree = x$tree, shifts = x$shifts_est,
               obs_scores = x$zscores_obs, est_scores = x$zscores_est,
               digits = digits, ...)
 }

@@ -70,7 +70,7 @@ estL_notbest <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
 
 
 test_that("the choosen model is the best one", {
-  expect_equal(estL$shift_est, estL_best$shift_est)
+  expect_equal(estL$shifts_est, estL_best$shifts_est)
   expect_true(estL_best$bic <= estL_notbest$bic)
   expect_lte(estL$bic, min(df_selection$bic))
 })
@@ -88,11 +88,11 @@ test_that("selection on pbic criterion is OK", {
 test_that("the shifts inside `bic_selection` are correct", {
   expect_equal(df_selection[df_selection$alpha == estL$alpha &
                               df_selection$lambda == estL$lambda,
-                            "shift_est"][[1]],
-               estL$shift_est)
+                            "shifts_est"][[1]],
+               estL$shifts_est)
   expect_equal(df_selection[df_selection$alpha == alpha_notbest &
                               df_selection$lambda == lambda_notbest, 6][[1]],
-               estL_notbest$shift_est)
+               estL_notbest$shifts_est)
 })
 
 all_est <- extract_models(estL)

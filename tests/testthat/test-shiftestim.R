@@ -32,7 +32,7 @@ expect_shiftestim <- function(x){
   expect_equal(class(x), "shiftestim")
   expect_is(x$zscores_obs, "numeric")
   expect_is(x$zscores_est, "numeric")
-  expect_is(x$shift_est, "numeric")
+  expect_is(x$shifts_est, "numeric")
   expect_is(x$method, "character")
   expect_is(x$optim_info, "list")
   expect_is(x$optim_info$supp_arg, "list")
@@ -94,14 +94,14 @@ test_that("scaled lasso output is correct", {
 
 # test_that("desparsified output is correct", {
 #   # expect_equal(estDL$method, "desparsified lasso")
-#   # expect_equal(ncol(estDL$shift_est), 3)
+#   # expect_equal(ncol(estDL$shifts_est), 3)
 #   # expect_equal(estDL$optim_info$alpha_confint, 0.01)
 #   # expect_true(is.na(estDL$objective_value))
 #   # Check confidence interval
-#   # expect_true(all(estDL$shift_est$lower < estDL$shift_est$estimate))
-#   # expect_true(all(estDL$shift_est$upper > estDL$shift_est$estimate))
-#   # expect_equal(estDL$shift_est$upper - estDL$shift_est$estimate,
-#   #              estDL$shift_est$estimate - estDL$shift_est$lower)
+#   # expect_true(all(estDL$shifts_est$lower < estDL$shifts_est$estimate))
+#   # expect_true(all(estDL$shifts_est$upper > estDL$shifts_est$estimate))
+#   # expect_equal(estDL$shifts_est$upper - estDL$shifts_est$estimate,
+#   #              estDL$shifts_est$estimate - estDL$shifts_est$lower)
 #   # expect_true(all(estDL$zscores_est$lower < estDL$zscores_est$estimate))
 #   # expect_true(all(estDL$zscores_est$upper > estDL$zscores_est$estimate))
 #   # expect_equal(estDL$zscores_est$upper - estDL$zscores_est$estimate,

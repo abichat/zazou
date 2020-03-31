@@ -75,8 +75,8 @@ plot(mthd2)
 
 ```{r shifts}
 true_shifts
-mthd1$shift_est
-mthd2$shift_est
+mthd1$shifts_est
+mthd2$shifts_est
 ```
 
 ### Z-scores

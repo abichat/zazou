@@ -202,8 +202,8 @@ plot(estimation_shooting,
                             color = as.character(sign(zscores - zscores_original)))))
 # plot(desparsified)
 estimation_shooting$optim_info$bic_selection %>%
-  mutate(n_shifts = map_dbl(shift_est, ~ sum(. != 0))) %>% 
-  select(-shift_est)
+  mutate(n_shifts = map_dbl(shifts_est, ~ sum(. != 0))) %>% 
+  select(-shifts_est)
 ```
 
 

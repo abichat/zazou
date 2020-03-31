@@ -4,12 +4,18 @@
 \alias{create_listopt_pms}
 \title{Create a list from}
 \usage{
-create_listopt_pms(objective_value, shift_est, method, best_alpha, best_lambda)
+create_listopt_pms(
+  objective_value,
+  shifts_est,
+  method,
+  best_alpha,
+  best_lambda
+)
 }
 \arguments{
 \item{objective_value}{the objective value.}
 
-\item{shift_est}{the estimated shifts.}
+\item{shifts_est}{the estimated shifts.}
 
 \item{method}{the used method.}
 
