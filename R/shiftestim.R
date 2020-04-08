@@ -40,11 +40,16 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
   obj$sigma <- sqrt(2 * obj$alpha) / (1 - exp(- 2 * obj$alpha * h))
 
   ## BIC & pBIC
+  mat_covar <- covariance_matrix(obj$tree, obj$alpha)
+  mat_incidence <- incidence_matrix(obj$tree)
+
+  # obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
+  #                est_shifts = obj$shifts_est, sigma = obj$sigma)
   obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
-                 est_shifts = obj$shifts_est, sigma = obj$sigma)
+                 est_shifts = obj$shifts_est, mat_covar = mat_covar)
   obj$pbic <- pbic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
-                  est_shifts = obj$shifts_est, sigma = obj$sigma,
-                  alpha = alpha, tree = tree)
+                  est_shifts = obj$shifts_est, mat_incidence = mat_incidence,
+                  mat_covar = mat_covar)
 
   class(obj) <- "shiftestim"
   return(obj)

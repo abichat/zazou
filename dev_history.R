@@ -123,6 +123,7 @@ spell_check()
 # spelling::update_wordlist()
 test()
 
+
 run_examples()
 
 covr::report()

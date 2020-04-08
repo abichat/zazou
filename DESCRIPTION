@@ -26,6 +26,7 @@ Imports:
     ggtree,
     glmnet,
     graphics,
+    mnormt,
     rlang,
     stats,
     stringr,

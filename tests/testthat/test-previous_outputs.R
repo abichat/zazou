@@ -34,6 +34,9 @@ test_that("outputs do not change over time", {
                      update = FALSE)
   expect_known_value(estS$shifts_est, "previous_outputs/estS_shift",
                      update = FALSE)
+  expect_known_value(estS$optim_info$bic_selection,
+                     "previous_outputs/estS_bicselection",
+                     update = FALSE)
   # L-BFGS-B
   expect_known_value(estL$zscores_est, "previous_outputs/estL_zscore",
                      update = FALSE)

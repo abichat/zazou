@@ -81,7 +81,7 @@ est_pbic <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
 
 test_that("selection on pbic criterion is OK", {
   expect_true(grepl("with model selection", est_pbic$method))
-  expect_equal(est_pbic$bic, min(est_pbic$optim_info$bic_selection$bic))
+  expect_equal(est_pbic$pbic, min(est_pbic$optim_info$bic_selection$pbic))
   expect_equal(est_pbic$optim_info$criterion, "pbic")
 })
 

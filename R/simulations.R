@@ -52,6 +52,7 @@ simu_zscores <- function(tree, alpha, shifts = NULL, Nshifts = NULL,
   true_zs <- mat_incidence %*% shifts
 
   obs_zs <- true_zs + sqrtcovar %*% rnorm(N)
+  obs_zs <- obs_zs[, 1]
 
   if(graph){
     plot(plot_shifts(tree, shifts, true_scores = true_zs,
