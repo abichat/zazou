@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create clusters — create_clusters • zazou</title>
+<title>Compute score system based confidence intervals — confint_desparsified • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Create clusters — create_clusters" />
-<meta property="og:description" content="Create clusters" />
+<meta property="og:title" content="Compute score system based confidence intervals — confint_desparsified" />
+<meta property="og:description" content="Compute score system based confidence intervals" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,56 +129,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create clusters</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/clusters.R'><code>R/clusters.R</code></a></small>
-    <div class="hidden name"><code>create_clusters.Rd</code></div>
+    <h1>Compute score system based confidence intervals</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/confint_desparsified.R'><code>R/confint_desparsified.R</code></a></small>
+    <div class="hidden name"><code>confint_desparsified.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create clusters</p>
+    <p>Compute score system based confidence intervals</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_clusters</span>(
-  <span class='no'>tree</span>,
-  <span class='no'>N_clusters</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"monophyletic"</span>, <span class='st'>"paraphyletic"</span>, <span class='st'>"uniform"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>confint_desparsified</span>(<span class='no'>x</span>, <span class='kw'>alpha_conf</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>tree</th>
-      <td><p>tree whose tips must be clustered.</p></td>
+      <th>x</th>
+      <td><p>a 'shiftestim' object.</p></td>
     </tr>
     <tr>
-      <th>N_clusters</th>
-      <td><p>number of clusters.</p></td>
+      <th>alpha_conf</th>
+      <td><p>the confidence level.</p></td>
     </tr>
     <tr>
-      <th>method</th>
-      <td><p>method to create clusters among <code>"monophyletic"</code>,
-<code>"paraphyletic"</code> and <code>"uniform"</code>.</p></td>
+      <th>...</th>
+      <td><p>further arguments to be passed to or from other methods.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The belonging of each tip to a cluster as a named integer.</p>
+    <p>a list</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rtree</a></span>(<span class='fl'>10</span>)
-<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>3</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>tree</span>)</div><div class='img'><img src='create_clusters-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>create_clusters</span>(<span class='no'>tree</span>, <span class='no'>N</span>)</div><div class='output co'>#&gt;  t8  t2  t6  t7  t3 t10  t1  t4  t9  t5 
-#&gt;   1   1   1   1   2   3   3   3   3   3 </div><div class='input'><span class='fu'>create_clusters</span>(<span class='no'>tree</span>, <span class='no'>N</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"paraphyletic"</span>)</div><div class='output co'>#&gt;  t8  t2  t6  t7  t3 t10  t1  t4  t9  t5 
-#&gt;   1   1   1   1   2   2   2   3   3   3 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

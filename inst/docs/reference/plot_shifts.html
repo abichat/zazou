@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9007</span>
       </span>
     </div>
 
@@ -195,7 +195,10 @@ list must contain at least a 'scores" element and eventually a
     <pre class="examples"><div class='input'><span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/read.tree.html'>read.tree</a></span>(<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"(((A,B),C),(D,E));"</span>)
 <span class='no'>shifts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, -<span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>2</span>, <span class='fl'>0</span>)
 <span class='no'>scores</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>3.2</span>, -<span class='fl'>2.8</span>, <span class='fl'>0.1</span>, -<span class='fl'>2.1</span>, -<span class='fl'>0.1</span>)
-<span class='fu'>plot_shifts</span>(<span class='no'>tree</span>, <span class='no'>shifts</span>, <span class='kw'>obs_scores</span> <span class='kw'>=</span> <span class='no'>scores</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 7 rows containing missing values (geom_label).</span></div><div class='img'><img src='plot_shifts-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plot_shifts</span>(<span class='no'>tree</span>, <span class='no'>shifts</span>, <span class='kw'>obs_scores</span> <span class='kw'>=</span> <span class='no'>scores</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `data_frame()` is deprecated as of tibble 1.1.0.</span>
+#&gt; <span class='warning'>Please use `tibble()` instead.</span>
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 7 rows containing missing values (geom_label).</span></div><div class='img'><img src='plot_shifts-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
