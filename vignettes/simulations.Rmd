@@ -44,7 +44,8 @@ incidence_mat + 0
 
 ```{r zscores}
 true_shifts <- c(0, -3, 0, 0, 0, 0, -2, 0)
-obs_zscores <- true_zscores <- incidence_mat %*% true_shifts
+true_zscores <- incidence_mat %*% true_shifts
+obs_zscores <- true_zscores <- true_zscores[, 1]
 covar_mat <- diag(nrow = 5, ncol = 5)
 ```
 
@@ -87,6 +88,7 @@ corrplot::corrplot(covar_mat, type = "upper")
 true_shifts <- c(-3, -3, 0, -2, 0)
 sqrtcovar <- t(chol(covar_mat))
 zscores <- true_shifts + sqrtcovar %*% rnorm(5) # simulate 
+zscores <- zscores[, 1]
 zscores
 ```
 

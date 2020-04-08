@@ -123,12 +123,13 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">true_shifts &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, M)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">true_shifts[<span class="dv">9</span> <span class="op">*</span><span class="st"> </span>M <span class="op">/</span><span class="st"> </span><span class="dv">16</span>] &lt;-<span class="st"> </span><span class="dv">-3</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">true_zscores &lt;-<span class="st"> </span>mat_incid <span class="op">%*%</span><span class="st"> </span>true_shifts</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, true_shifts, <span class="dt">true_scores =</span> true_zscores)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Warning: `data_frame()` is deprecated as of tibble 1.1.0.</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Please use `tibble()` instead.</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; This warning is displayed once every 8 hours.</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; Warning: Removed 32 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-4" data-line-number="4">true_zscores &lt;-<span class="st"> </span>true_zscores[, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, true_shifts, <span class="dt">true_scores =</span> true_zscores)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Warning: `data_frame()` is deprecated as of tibble 1.1.0.</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; Please use `tibble()` instead.</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; This warning is displayed once every 8 hours.</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; Warning: Removed 32 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="constraints_files/figure-html/unnamed-chunk-2-1.png" width="700" style="display: block; margin: auto;"></p>
 <div id="constraint-on-beta" class="section level3">
 <h3 class="hasAnchor">
@@ -143,8 +144,8 @@
 <a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; Objective value: 0.299</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; BIC: 48.695</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; pBIC: 66.206</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; BIC: 36.893</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; pBIC: 54.404</span></a>
 <a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 2 shifts have been identified (ie 93.8 % of sparsity)</span></a>
@@ -163,8 +164,9 @@
 <a href="#all-z-scores-are-negative-but-shifts-could-be-positive" class="anchor"></a>All z-scores are negative but shifts could be positive</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">true_shifts[<span class="dv">13</span> <span class="op">*</span><span class="st"> </span>M <span class="op">/</span><span class="st"> </span><span class="dv">16</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">true_zscores &lt;-<span class="st"> </span>mat_incid <span class="op">%*%</span><span class="st"> </span>true_shifts</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, true_shifts, <span class="dt">true_scores =</span> true_zscores)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; Warning: Removed 31 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-3" data-line-number="3">true_zscores &lt;-<span class="st"> </span>true_zscores[, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, true_shifts, <span class="dt">true_scores =</span> true_zscores)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; Warning: Removed 31 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="constraints_files/figure-html/unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
 <div id="constraint-on-beta-1" class="section level3">
 <h3 class="hasAnchor">
@@ -179,8 +181,8 @@
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Objective value: 0.568</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; BIC: 60.06</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; pBIC: 94.697</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; BIC: 48.288</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; pBIC: 82.926</span></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; 6 shifts have been identified (ie 81.2 % of sparsity)</span></a>
@@ -208,8 +210,8 @@
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.394</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; BIC: 51.534</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; pBIC: 73.724</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; BIC: 39.737</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; pBIC: 61.927</span></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; 3 shifts have been identified (ie 90.6 % of sparsity)</span></a>
@@ -228,8 +230,9 @@
 <a href="#all-z-scores-could-be-positive" class="anchor"></a>All z-scores could be positive</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">true_shifts[<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>M <span class="op">/</span><span class="st"> </span><span class="dv">16</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">true_zscores &lt;-<span class="st"> </span>mat_incid <span class="op">%*%</span><span class="st"> </span>true_shifts</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, true_shifts, <span class="dt">true_scores =</span> true_zscores)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; Warning: Removed 30 rows containing missing values (geom_label).</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-3" data-line-number="3">true_zscores &lt;-<span class="st"> </span>true_zscores[, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(tree, true_shifts, <span class="dt">true_scores =</span> true_zscores)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Warning: Removed 30 rows containing missing values (geom_label).</span></a></code></pre></div>
 <p><img src="constraints_files/figure-html/unnamed-chunk-7-1.png" width="700" style="display: block; margin: auto;"></p>
 <div id="constraint-on-yhat-1" class="section level3">
 <h3 class="hasAnchor">
@@ -245,8 +248,8 @@
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.894</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; BIC: 52.034</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; pBIC: 74.552</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; BIC: 40.737</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; pBIC: 63.256</span></a>
 <a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; 3 shifts have been identified (ie 90.6 % of sparsity)</span></a>
@@ -273,8 +276,8 @@
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; Optimisation algorithm: shooting</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; Regularization parameter: lambda = 0.1 </span></a>
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; Objective value: 0.489</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; BIC: 54.372</span></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; pBIC: 81.611</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; BIC: 42.58</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; pBIC: 69.82</span></a>
 <a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; ---</span></a>
 <a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; Estimated shifts: 0 0 0 0 0.9 0 0 0 0 0 ...</span></a>
 <a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 4 shifts have been identified (ie 87.5 % of sparsity)</span></a>

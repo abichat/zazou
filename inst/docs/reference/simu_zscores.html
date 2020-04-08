@@ -180,17 +180,9 @@
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
 <span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rcoal</a></span>(<span class='fl'>5</span>)
 <span class='no'>shift</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>)
-<span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='no'>shift</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 8 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;           [,1]
-#&gt; t4  2.28664539
-#&gt; t2 -4.38886070
-#&gt; t5 -2.53530326
-#&gt; t1  0.02227707
-#&gt; t3  1.97763678</div><div class='input'><span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>Nshifts</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 7 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;         [,1]
-#&gt; t4 -2.440467
-#&gt; t2 -2.567665
-#&gt; t5 -4.986076
-#&gt; t1 -3.722039
-#&gt; t3  1.914937</div></pre>
+<span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='no'>shift</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 8 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;          t4          t2          t5          t1          t3 
+#&gt;  2.28664539 -4.38886070 -2.53530326  0.02227707  1.97763678 </div><div class='input'><span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>Nshifts</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 7 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;        t4        t2        t5        t1        t3 
+#&gt; -2.440467 -2.567665 -4.986076 -3.722039  1.914937 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
