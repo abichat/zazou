@@ -45,8 +45,8 @@ update_confint <- function(x, alpha_confint){
 #' Extract indices where lower and upper components of the dataframe
 #' are both positive or both negative.
 #'
-#' @param cidf dataframe with \code{"estimate"}, \code{"lower"},
-#' \code{"upper"} columns.
+#' @param cidf confidence interval dataframe with \code{"estimate"},
+#' \code{"lower"}, \code{"upper"} columns.
 #' @inheritParams extract_significant_leaves
 #'
 extract_from_cidf <- function(cidf, side = c("left", "both", "right")) {

@@ -7,8 +7,8 @@
 extract_from_cidf(cidf, side = c("left", "both", "right"))
 }
 \arguments{
-\item{cidf}{dataframe with \code{"estimate"}, \code{"lower"},
-\code{"upper"} columns.}
+\item{cidf}{confidence interval dataframe with \code{"estimate"},
+\code{"lower"}, \code{"upper"} columns.}
 
 \item{side}{The side where z-scores are significant (\code{"left"}
 (default), \code{"both"} or \code{"right"}). Used when method is

@@ -211,15 +211,18 @@ estimation_shooting$optim_info$bic_selection %>%
 detected_sh <- names(which(estimation_shooting$zscores_est != 0))
 pvalues_bh <- p.adjust(pvalues, method = "BH")
 detected_bh <- names(which(pvalues_bh < 0.05))
+pvalues_bonf <- p.adjust(pvalues, method = "bonferroni")
+detected_bonf <- names(which(pvalues_bonf < 0.05))
 mm <- c("TPR", "FPR", "FDR", "ACC", "F1", "BACC")
 ebc_tidy(detected_sh, otus_da, m = length(otu_to_keep), measures = )
 ebc_tidy(detected_bh, otus_da, m = length(otu_to_keep), measures = mm)
+ebc_tidy(detected_bonf, otus_da, m = length(otu_to_keep), measures = mm)
 ebc_tidy(c(), otus_da, m = length(otu_to_keep), measures = mm)
 ebc_tidy(otu_to_keep, otus_da, m = length(otu_to_keep), measures = mm)
 
-map_dfr(list(detected_sh, detected_bh, c(), otu_to_keep), ebc_tidy, 
+map_dfr(list(detected_sh, detected_bh, detected_bonf, c(), otu_to_keep), ebc_tidy, 
         detected = otus_da, m = length(otu_to_keep), measures = mm) %>% 
-  mutate(method = c("zazou", "bh", "nothing", "everything")) %>% 
+  mutate(method = c("zazou", "bh", "bonf", "nothing", "everything")) %>% 
   select(method, everything())
 ```
 
@@ -229,9 +232,10 @@ plot(estimation_shooting,
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original))),
-                       list(scores = p.adjust(pvalues, method = "BH"),
-                            title = "Detected by BH",
-                            color = p.adjust(pvalues, method = "BH") < 0.05)))
+                       list(scores = pvalues_bh, title = "Detected by BH",
+                            color = pvalues_bh < 0.05),
+                       list(scores = pvalues_bonf, title = "Detected by Bonferroni",
+                            color = pvalues_bonf < 0.05)))
 ```
 
 
@@ -246,8 +250,12 @@ df_measures_bh <-
   ebc_tidy_by_threshold(pvalues_bh, true = otus_da, 
                         m  = length(otu_to_keep), measures = mm)%>% 
   mutate(method = "bh")
+df_measures_bonf <-
+  ebc_tidy_by_threshold(pvalues_bonf, true = otus_da, 
+                        m  = length(otu_to_keep), measures = mm)%>% 
+  mutate(method = "bonferonni")
 
-df_measures <- rbind(df_measures_zazou, df_measures_bh)
+df_measures <- rbind(df_measures_zazou, df_measures_bh, df_measures_bonf)
 
 df_measures %>%
   arrange(FPR, TPR) %>%
@@ -260,6 +268,7 @@ estimation_shooting$zscores_est %>%
   ebc_AUC(true = otus_da, m  = length(otu_to_keep))
 
 ebc_AUC(pvalues_bh, true = otus_da, m  = length(otu_to_keep))
+ebc_AUC(pvalues_bonf, true = otus_da, m  = length(otu_to_keep))
 
 ```
 
@@ -283,7 +292,7 @@ several_confint <-
 
 several_confint
 
-evabic:::area_rect(several_confint$FPR, several_confint$TPR)
+evabic::ebc_AUC_from_measures(several_confint)
 ```
 
 ```{r}
