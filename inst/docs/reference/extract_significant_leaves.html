@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9008</span>
       </span>
     </div>
 
@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract significant leafs</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/shiftconf_utils.R'><code>R/shiftconf_utils.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/extract_leaves.R'><code>R/extract_leaves.R</code></a></small>
     <div class="hidden name"><code>extract_significant_leaves.Rd</code></div>
     </div>
 
@@ -138,26 +138,28 @@
     <p>Extract significant leafs</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extract_significant_leaves</span>(<span class='no'>x</span>, <span class='kw'>side</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"left"</span>, <span class='st'>"both"</span>, <span class='st'>"right"</span>))</pre>
+    <pre class="usage"><span class='fu'>extract_significant_leaves</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a 'shiftestim' object.</p></td>
+      <td><p>Object of class</p></td>
     </tr>
     <tr>
-      <th>side</th>
-      <td><p>The side where z-scores are significant (<code>"left"</code>
-(default), <code>"both"</code> or <code>"right"</code>). Used when method is
-<code>"desparsified lasso"</code>.</p></td>
+      <th>...</th>
+      <td><p>further arguments to be passed to or from other methods.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The names of the significant leafs</p>
+    <p>The names of the significant leafs.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>[extract_significant_leaves.shiftestim()]
+[extract_significant_leaves.shiftconf()]</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -165,6 +167,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>

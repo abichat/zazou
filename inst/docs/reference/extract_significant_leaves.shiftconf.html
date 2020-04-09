@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Covariance noise matrix — covariance_noise_matrix • zazou</title>
+<title>Extract significant leafs — extract_significant_leaves.shiftconf • zazou</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Covariance noise matrix — covariance_noise_matrix" />
-<meta property="og:description" content="Covariance noise matrix" />
+<meta property="og:title" content="Extract significant leafs — extract_significant_leaves.shiftconf" />
+<meta property="og:description" content="Extract significant leafs" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,33 +129,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Covariance noise matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/confint_desparsified.R'><code>R/confint_desparsified.R</code></a></small>
-    <div class="hidden name"><code>covariance_noise_matrix.Rd</code></div>
+    <h1>Extract significant leafs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/extract_leaves.R'><code>R/extract_leaves.R</code></a></small>
+    <div class="hidden name"><code>extract_significant_leaves.shiftconf.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Covariance noise matrix</p>
+    <p>Extract significant leafs</p>
     </div>
 
-    <pre class="usage"><span class='fu'>covariance_noise_matrix</span>(<span class='no'>X</span>, <span class='no'>score_system</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for shiftconf</span>
+<span class='fu'><a href='extract_significant_leaves.html'>extract_significant_leaves</a></span>(<span class='no'>x</span>, <span class='kw'>side</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"left"</span>, <span class='st'>"both"</span>, <span class='st'>"right"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>X</th>
-      <td><p>Matrix size m*(n+m).</p></td>
+      <th>x</th>
+      <td><p>A "shiftconf" object.</p></td>
     </tr>
     <tr>
-      <th>score_system</th>
-      <td><p>Score system of X.</p></td>
+      <th>side</th>
+      <td><p>The side where z-scores are significant (<code>"left"</code>
+(default), <code>"both"</code> or <code>"right"</code>).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The covariance of the noise component for the leaves (size n*n)</p>
+    <p>The names of the significant leafs.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
