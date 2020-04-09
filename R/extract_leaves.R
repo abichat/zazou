@@ -20,6 +20,7 @@ extract_significant_leaves <- function (x, ...) {
 #' Default to \code{"<"}.
 #'
 #' @return The names of the significant leafs
+#' @export
 #'
 extract_significant_leaves.shiftestim <-
   function(x, threshold = 0, direction = c("<", "<=", ">", ">=")) {
@@ -42,6 +43,7 @@ extract_significant_leaves.shiftestim <-
 #' (default), \code{"both"} or \code{"right"}).
 #'
 #' @return The names of the significant leafs.
+#' @export
 #'
 extract_significant_leaves.shiftconf <-
   function(x, side = c("left", "both", "right")) {
