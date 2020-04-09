@@ -18,12 +18,13 @@ extract_significant_leaves <- function (x, ...) {
 #' @param threshold The threshold where selection begins.
 #' @param direction The direction of the selection from the threshold.
 #' Default to \code{"<"}.
+#' @inheritDotParams extract_significant_leaves
 #'
 #' @return The names of the significant leafs
 #' @export
 #'
 extract_significant_leaves.shiftestim <-
-  function(x, threshold = 0, direction = c("<", "<=", ">", ">=")) {
+  function(x, threshold = 0, direction = c("<", "<=", ">", ">="), ...) {
 
     direction <- match.arg(direction)
 
@@ -41,12 +42,13 @@ extract_significant_leaves.shiftestim <-
 #' @param x A "shiftconf" object.
 #' @param side The side where z-scores are significant (\code{"left"}
 #' (default), \code{"both"} or \code{"right"}).
+#' @inheritDotParams extract_significant_leaves
 #'
 #' @return The names of the significant leafs.
 #' @export
 #'
 extract_significant_leaves.shiftconf <-
-  function(x, side = c("left", "both", "right")) {
+  function(x, side = c("left", "both", "right"), ...) {
     signif_ind <- extract_from_cidf(x$zscores_est, side = side)
     x$zscores_est$leaf[signif_ind]
   }

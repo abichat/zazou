@@ -7,7 +7,8 @@
 \method{extract_significant_leaves}{shiftestim}(
   x,
   threshold = 0,
-  direction = c("<", "<=", ">", ">=")
+  direction = c("<", "<=", ">", ">="),
+  ...
 )
 }
 \arguments{
@@ -17,6 +18,12 @@
 
 \item{direction}{The direction of the selection from the threshold.
 Default to \code{"<"}.}
+
+\item{...}{
+  Arguments passed on to \code{\link[=extract_significant_leaves]{extract_significant_leaves}}
+  \describe{
+    \item{\code{}}{}
+  }}
 }
 \value{
 The names of the significant leafs

@@ -4,13 +4,19 @@
 \alias{extract_significant_leaves.shiftconf}
 \title{Extract significant leafs}
 \usage{
-\method{extract_significant_leaves}{shiftconf}(x, side = c("left", "both", "right"))
+\method{extract_significant_leaves}{shiftconf}(x, side = c("left", "both", "right"), ...)
 }
 \arguments{
 \item{x}{A "shiftconf" object.}
 
 \item{side}{The side where z-scores are significant (\code{"left"}
 (default), \code{"both"} or \code{"right"}).}
+
+\item{...}{
+  Arguments passed on to \code{\link[=extract_significant_leaves]{extract_significant_leaves}}
+  \describe{
+    \item{\code{}}{}
+  }}
 }
 \value{
 The names of the significant leafs.
