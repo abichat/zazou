@@ -110,6 +110,7 @@ library(testthat)
 # use_r("confint_desparsified")
 # use_r("confint_global")
 
+# use_package_doc()
 
 ####
 
