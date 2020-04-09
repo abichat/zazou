@@ -189,16 +189,20 @@ tic()
 estimation_shooting <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
                                        tree = tree, alpha = c(0.2, 0.5, 1, 2, 5), 
                                        method = "shooting", constraint_type = "beta")
-estimation_scla <- estimate_shifts(rep(0, N_branch), zscores = zscores, tree = tree, 
-                                   alpha = estimation_shooting$alpha, 
-                                   lambda = estimation_shooting$lambda, 
+estimation_scla <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
+                                   tree = tree, alpha = c(0.2, 0.5, 1, 2, 5), 
                                    method = "scaledlasso", constraint_type = "beta")
 
 desparsified <- estimate_confint(estimation_scla, method = "desparsified")
 toc()
 estimation_shooting
+estimation_scla
 desparsified
 plot(estimation_shooting, 
+     sup_scores = list(list(scores = zscores - zscores_original,
+                            title = "Difference in z-scores after fold-change",
+                            color = as.character(sign(zscores - zscores_original)))))
+plot(estimation_scla, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original)))))

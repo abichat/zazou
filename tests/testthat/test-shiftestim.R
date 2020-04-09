@@ -86,10 +86,6 @@ test_that("scaled lasso output is correct", {
   expect_scalnum(estSL$optim_info$last_progress)
   expect_scalnum(estSL$optim_info$iterations)
   expect_scalnum(estSL$optim_info$sigma_scaledlasso)
-  expect_error(
-    estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                    tree = tree, alpha = 1, method = "scaledlasso"),
-    "No model selection can be done with scaledlasso.")
 })
 
 # test_that("desparsified output is correct", {

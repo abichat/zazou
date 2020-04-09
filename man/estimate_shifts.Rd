@@ -10,7 +10,7 @@ estimate_shifts(
   tree,
   alpha,
   lambda = NULL,
-  method = c("L-BFGS-B", "shooting", "scaledlasso", "desparsifiedlasso"),
+  method = c("L-BFGS-B", "shooting", "scaledlasso"),
   criterion = c("bic", "pbic"),
   constraint_type = c("beta", "yhat", "none"),
   ...
