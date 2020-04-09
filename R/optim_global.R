@@ -20,20 +20,13 @@
 #' @export
 #' @importFrom stats optim
 estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
-                            method = c("L-BFGS-B", "shooting",
-                                       "scaledlasso", "desparsifiedlasso"),
+                            method = c("L-BFGS-B", "shooting", "scaledlasso"),
                             criterion = c("bic", "pbic"),
                             constraint_type = c("beta", "yhat", "none"), ...){
 
   method <- match.arg(method)
   criterion <- match.arg(criterion)
   constraint_type <- match.arg(constraint_type)
-
-  if(method %in% c("scaledlasso", "desparsifiedlasso")){
-    if(any(c(length(alpha), length(lambda)) != 1)){
-      stop(paste0("No model selection can be done with ", method, "."))
-    }
-  }
 
   ## local estimation routine (for a single lambda)
   fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
