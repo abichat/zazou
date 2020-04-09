@@ -18,6 +18,6 @@ The names of the significant leafs.
 Extract significant leafs
 }
 \seealso{
-[extract_significant_leaves.shiftestim()]
-[extract_significant_leaves.shiftconf()]
+\code{\link{extract_significant_leaves.shiftestim}},
+\code{\link{extract_significant_leaves.shiftconf}}
 }

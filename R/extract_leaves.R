@@ -5,8 +5,8 @@
 #'
 #' @return The names of the significant leafs.
 #' @export
-#' @seealso [extract_significant_leaves.shiftestim()]
-#' [extract_significant_leaves.shiftconf()]
+#' @seealso \code{\link{extract_significant_leaves.shiftestim}},
+#' \code{\link{extract_significant_leaves.shiftconf}}
 #'
 extract_significant_leaves <- function (x, ...) {
   UseMethod("extract_significant_leaves")
