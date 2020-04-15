@@ -11,7 +11,7 @@ solve_colwiseinverse <- function(A, gamma){
 solve_colwiseinverse_col <- function(col, A, gamma){
   dim <- ncol(A)
   m <- rep(0, dim)
-  for(iter in 1:1000){
+  for(iter in 1:10){
     sampled_ind <- sample(dim)
     for(ind in sampled_ind){
       m[ind] <- solve_colwiseinverse_col_cell(m, ind, col, A, gamma)
@@ -61,12 +61,18 @@ compute_bounds <- function(m, ind, col, A, gamma){
   bounds <- matrix(c(-gamma, gamma), byrow = TRUE,
                    ncol = 2, nrow = dim)
   bounds <- (bounds + ecol - as.numeric(Am_minus_ind)) / A[, ind]
+  # correct the case when A[, ind] < 0
+  for(i in seq_len(dim)){
+    if(A[i, ind] < 0){
+      bounds[i, ] <- rev(bounds[i, ])
+    }
+  }
   lb <- max(bounds[, 1])
   up <- min(bounds[, 2])
   if(lb > up){
     stop("Constrains are not feasible")
   }
-  return(list(lower_bound = lb, upper_bound = ub))
+  return(list(lower_bound = lb, upper_bound = up))
 }
 
 argmin_between_two <- function(m, ind, A, prop1, prop2){

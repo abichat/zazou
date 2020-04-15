@@ -25,7 +25,7 @@ test_that("estimation of polynom coefficients is correct for 3*3", {
 
 test_that("global_constrains are repected", {
   dim <- 4
-  gamma <- 100
+  gamma <- 0.1
   X <- matrix(rnorm(16), ncol = dim)
   A <- t(X) %*% X
   M <- solve_colwiseinverse(A, gamma)
