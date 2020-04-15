@@ -1,7 +1,6 @@
 context("Column-wise inverse matrix")
 
 
-
 test_that("estimation of polynom coefficients is correct for random 2*2", {
   m <- rnorm(2)
   a <- rnorm(4)
@@ -21,4 +20,18 @@ test_that("estimation of polynom coefficients is correct for 3*3", {
   A <- matrix(1:9, ncol = 3, nrow = 3, byrow = TRUE)
   coefs <- coef_p2(A = A, m = m, ind = 3)
   expect_equal(coefs, list(a = 9, b = 38, c = 33))
+})
+
+
+test_that("global_constrains are repected", {
+  dim <- 4
+  gamma <- 100
+  X <- matrix(rnorm(16), ncol = dim)
+  A <- t(X) %*% X
+  M <- solve_colwiseinverse(A, gamma)
+  for(i in seq_len(dim)){
+    e <- rep(0, dim)
+    e[i] <- 1
+    expect_lte(max(A %*% M[, i] - e), gamma)
+  }
 })
