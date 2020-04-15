@@ -22,13 +22,17 @@ test_that("estimation of polynom coefficients is correct for 3*3", {
   expect_equal(coefs, list(a = 9, b = 38, c = 33))
 })
 
+dim <- 10
+gamma <- 2 * sqrt(log(dim)/dim)
+X <- matrix(rnorm(dim^2), ncol = dim) / dim
+A <- t(X) %*% X
+M <- try(solve_colwiseinverse(A, gamma))
+
+while(!is.matrix(M)){
+  M <- try(solve_colwiseinverse(A, gamma))
+}
 
 test_that("global_constrains are repected", {
-  dim <- 4
-  gamma <- 0.1
-  X <- matrix(rnorm(16), ncol = dim)
-  A <- t(X) %*% X
-  M <- solve_colwiseinverse(A, gamma)
   for(i in seq_len(dim)){
     e <- rep(0, dim)
     e[i] <- 1

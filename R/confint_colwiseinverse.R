@@ -10,8 +10,9 @@ solve_colwiseinverse <- function(A, gamma){
 
 solve_colwiseinverse_col <- function(col, A, gamma){
   dim <- ncol(A)
-  m <- rep(0, dim)
-  for(iter in 1:10){
+  # m <- rep(0, dim)
+  m <- rnorm(dim, sd = 0.1)
+  for(iter in 1:1000){
     sampled_ind <- sample(dim)
     for(ind in sampled_ind){
       m[ind] <- solve_colwiseinverse_col_cell(m, ind, col, A, gamma)
