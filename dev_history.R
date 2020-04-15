@@ -1,5 +1,4 @@
 library(devtools)
-library(usethis)
 library(testthat)
 
 
@@ -113,6 +112,10 @@ library(testthat)
 # use_package_doc()
 
 # use_r("extract_leaves")
+
+# use_r("confint_colwiseinverse")
+# use_test("confint_colwiseinverse")
+
 
 ####
 
