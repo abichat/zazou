@@ -11,12 +11,27 @@ solve_colwiseinverse <- function(A, gamma){
 solve_colwiseinverse_col <- function(col, A, gamma){
   dim <- ncol(A)
   # m <- rep(0, dim)
-  m <- rnorm(dim, sd = 0.1)
-  for(iter in 1:1000){
+  m <- rnorm(dim, sd = 1)
+
+  max_it <- 500
+  eps <- 10 ^ -8
+
+  iter <- 1
+  obj <- m %*% A %*% m
+  progress <- +Inf
+
+  while(iter < max_it && progress > eps){
     sampled_ind <- sample(dim)
+
     for(ind in sampled_ind){
       m[ind] <- solve_colwiseinverse_col_cell(m, ind, col, A, gamma)
     }
+
+    new_obj <- m %*% A %*% m
+    progress <- abs((obj - new_obj) / obj)
+    obj <- new_obj
+
+    iter <- iter + 1
   }
   return(m)
 }
