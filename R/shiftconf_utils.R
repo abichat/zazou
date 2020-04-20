@@ -39,3 +39,36 @@ update_confint <- function(x, alpha_confint){
   }
   return(x)
 }
+
+
+#' Confidence interval and p-values for estimates
+#'
+#' @param estimate Punctual estimate. Eventually named
+#' @param sigma Associated standard error, length \code{1}.
+#' @param tau Noise factor, same length as \code{estimate}.
+#' @param alpha_conf Confidence level.
+#'
+#' @return A dataframe with 4 (or 5 if \code{estimate} has names) columns.
+#' @export
+#'
+df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf){
+
+  names <- names(estimate)
+  if(is.null(names)){
+    df <- data.frame(estimate = estimate)
+  } else {
+    estimate <- unname(estimate)
+    df <- data.frame(name = names, estimate = estimate)
+  }
+
+  sigma_tau <- sigma * tau
+  half_confint_size <- qnorm(1 - alpha_conf / 2) * sigma_tau
+  p_value <- 2 * (1 - pnorm(estimate / sigma_tau)) # pnorm = distribution/repartition
+
+  df$lower <- estimate - half_confint_size
+  df$upper <- estimate + half_confint_size
+  df$pvalue <- p_value
+
+  return(df)
+
+}

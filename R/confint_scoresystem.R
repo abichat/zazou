@@ -37,6 +37,9 @@ confint_desparsified <- function(x, alpha_conf = 0.05, ...){
                            lower = new_beta - hcis$half_size,
                            upper = new_beta + hcis$half_size)
 
+  shifts_est2 <- df_confint_pvalue(estimate = new_beta, sigma = hsigma,
+                                   tau = tau, alpha_conf = alpha_conf)
+
   zscores_est <- mat_incidence %*% shifts_est$estimate
   zscores_est <- data.frame(leaf = rownames(zscores_est),
                             estimate = zscores_est[, 1],
@@ -45,7 +48,7 @@ confint_desparsified <- function(x, alpha_conf = 0.05, ...){
   zscores_est$upper <- zscores_est$estimate + hciz
   rownames(zscores_est) <- NULL
 
-  list(shifts_est = shifts_est, zscores_est = zscores_est,
+  list(shifts_est = shifts_est, shifts_est2 = shifts_est2, zscores_est = zscores_est,
        noise_factor = tau, covariance_noise_matrix = mat_covar_noise,
        alpha_conf = alpha_conf, method = "desparsified lasso")
 }
