@@ -4,19 +4,14 @@
 \alias{estimate_confint}
 \title{Estimate confidence interval from scaled lasso.}
 \usage{
-estimate_confint(
-  shiftestim,
-  alpha_conf = 0.05,
-  method = c("desparsified"),
-  ...
-)
+estimate_confint(shiftestim, alpha_conf = 0.05, method = c("scoresystem"), ...)
 }
 \arguments{
 \item{shiftestim}{a \code{shiftestim} object with method \code{scaledlasso}.}
 
 \item{alpha_conf}{the confidence level.}
 
-\item{method}{For the moment, only \code{desparsified}.}
+\item{method}{For the moment, only \code{scoresystem}.}
 
 \item{...}{further argument...}
 }

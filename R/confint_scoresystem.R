@@ -1,4 +1,4 @@
-#' Compute score system based confidence intervals
+#' Desparsified lasso based on score system
 #'
 #' @param x a 'shiftestim' object.
 #' @param alpha_conf the confidence level.
@@ -7,7 +7,7 @@
 #' @return a list
 #' @export
 #'
-confint_desparsified <- function(x, alpha_conf = 0.05, ...){
+confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
   stopifnot(inherits(x, "shiftestim"))
 
   mat_covar <- covariance_matrix(x$tree, x$alpha)
@@ -50,7 +50,7 @@ confint_desparsified <- function(x, alpha_conf = 0.05, ...){
 
   list(shifts_est = shifts_est, shifts_est2 = shifts_est2, zscores_est = zscores_est,
        noise_factor = tau, covariance_noise_matrix = mat_covar_noise,
-       alpha_conf = alpha_conf, method = "desparsified lasso")
+       alpha_conf = alpha_conf, method = "scoresystem")
 }
 
 
@@ -92,6 +92,8 @@ update_beta <- function(X, y, beta_init, score_system) {
 #' @param noise_factor Noise factor, size m.
 #' @param hsigma Estimate value of sigma, found with scaled lasso.
 #' @param alpha_conf The confidence level.
+#'
+#' @importFrom stats qnorm
 #'
 #' @return The half-size of the confidence interval for each beta, size m+n.
 #' @export

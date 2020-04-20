@@ -193,11 +193,11 @@ estimation_scla <- estimate_shifts(rep(0, N_branch), zscores = zscores,
                                    tree = tree, alpha = c(0.2, 0.5, 1, 2, 5), 
                                    method = "scaledlasso", constraint_type = "beta")
 
-desparsified <- estimate_confint(estimation_scla, method = "desparsified")
+confint_scoresystem <- estimate_confint(estimation_scla, method = "scoresystem")
 toc()
 estimation_shooting
 estimation_scla
-desparsified
+confint_scoresystem
 plot(estimation_shooting, 
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
@@ -206,11 +206,25 @@ plot(estimation_scla,
      sup_scores = list(list(scores = zscores - zscores_original,
                             title = "Difference in z-scores after fold-change",
                             color = as.character(sign(zscores - zscores_original)))))
-plot(desparsified)
+plot(confint_scoresystem)
 estimation_shooting$optim_info$bic_selection %>%
   mutate(n_shifts = map_dbl(shifts_est, ~ sum(. != 0))) %>% 
   select(-shifts_est)
 ```
+
+```{r}
+data.frame(punct_scla = estimation_scla$shifts_est, 
+           punct_scoresystem = confint_scoresystem$shifts_est$estimate) %>% 
+  ggplot() + 
+  aes(punct_scla, punct_scoresystem) +
+  geom_point()
+data.frame(punct_scla = estimation_scla$zscores_est, 
+           punct_scoresystem = confint_scoresystem$zscores_est$estimate) %>% 
+  ggplot() + 
+  aes(punct_scla, punct_scoresystem) +
+  geom_point()
+```
+
 
 
 ```{r detected}
@@ -283,7 +297,7 @@ ebc_AUC(pvalues_bonf, true = otus_da, m  = length(otu_to_keep))
 several_confint <-
   seq(from = 0, to = 1, by = 0.01) %>% 
   enframe(value = "level", name = NULL) %>% 
-  mutate(model = map(level, update_confint, x = desparsified),
+  mutate(model = map(level, update_confint, x = confint_scoresystem),
          da_species = map(model, extract_significant_leaves, side = "left"),
          N = map_dbl(.data$da_species, length)) %>%
   group_split(N) %>% 

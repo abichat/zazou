@@ -2,20 +2,20 @@
 #'
 #' @param shiftestim a \code{shiftestim} object with method \code{scaledlasso}.
 #' @param alpha_conf the confidence level.
-#' @param method For the moment, only \code{desparsified}.
+#' @param method For the moment, only \code{scoresystem}.
 #' @param ... further argument...
 #'
 #' @return a \code{shiftconf} object.
 #' @export
 #'
 estimate_confint <- function(shiftestim, alpha_conf = 0.05,
-                             method = c("desparsified"), ...){
+                             method = c("scoresystem"), ...){
 
   stopifnot(inherits(shiftestim, "shiftestim"))
 
   obj <- switch (method,
 
-                 "desparsified" = confint_desparsified(
+                 "scoresystem" = confint_scoresystem(
                    x = shiftestim, alpha_conf = alpha_conf, ...)
 
                  )

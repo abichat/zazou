@@ -21,7 +21,7 @@ withr::with_preserve_seed({
                           lambda = 0.1, tree = tree,
                           alpha = 1, method = "scaledlasso")
   estDL <- estimate_confint(estSL, alpha_conf = 0.05,
-                            method = "desparsified")
+                            method = "scoresystem")
 })
 
 ######################################################################

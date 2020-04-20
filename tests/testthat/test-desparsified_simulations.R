@@ -1,4 +1,4 @@
-context("Example desparsified with a tree")
+context("Example scoresystem with a tree")
 
 n <- 15
 tree <- ape::rtree(n)
@@ -14,18 +14,18 @@ est_scaled <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
 withr::with_preserve_seed({
   set.seed(42)
   ESD <- estimate_confint(est_scaled, alpha_conf = 0.05,
-                          method = c("desparsified"))
+                          method = c("scoresystem"))
 })
 
 withr::with_preserve_seed({
   set.seed(42)
   ESD002 <- estimate_confint(est_scaled, alpha_conf = 0.02,
-                             method = c("desparsified"))
+                             method = c("scoresystem"))
 })
 
 
 test_that("ESD has its specific components / dimensions", {
-  expect_equal(ESD$method, "desparsified lasso")
+  expect_equal(ESD$method, "scoresystem")
   expect_equal(ESD$alpha_conf, 0.05)
   expect_equal(ncol(ESD$shifts_est), 3)
   expect_is(ESD$optim_info$covariance_noise_matrix, "matrix")

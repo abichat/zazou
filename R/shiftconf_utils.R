@@ -12,7 +12,7 @@ update_confint <- function(x, alpha_confint){
     stop("x must be a 'shiftconf' object.")
   }
 
-  if(x$method == "desparsified lasso"){
+  if(x$method == "scoresystem"){
     tau <- x$optim_info$noise_factor
     V <- x$optim_info$covariance_noise_matrix
     hsigma <- x$shiftestim$optim_info$sigma_scaledlasso
@@ -48,6 +48,7 @@ update_confint <- function(x, alpha_confint){
 #' @param tau Noise factor, same length as \code{estimate}.
 #' @param alpha_conf Confidence level.
 #'
+#' @importFrom stats pnorm qnorm
 #' @return A dataframe with 4 (or 5 if \code{estimate} has names) columns.
 #' @export
 #'

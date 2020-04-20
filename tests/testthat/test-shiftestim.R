@@ -88,8 +88,8 @@ test_that("scaled lasso output is correct", {
   expect_scalnum(estSL$optim_info$sigma_scaledlasso)
 })
 
-# test_that("desparsified output is correct", {
-#   # expect_equal(estDL$method, "desparsified lasso")
+# test_that("scoresystem output is correct", {
+#   # expect_equal(estDL$method, "scoresystem")
 #   # expect_equal(ncol(estDL$shifts_est), 3)
 #   # expect_equal(estDL$optim_info$alpha_confint, 0.01)
 #   # expect_true(is.na(estDL$objective_value))
