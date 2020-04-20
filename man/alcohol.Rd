@@ -5,13 +5,17 @@
 \alias{alcohol}
 \alias{chlamydiae}
 \title{Datasets}
-\format{A list containing
+\format{
+A list containing
 \describe{
   \item{\code{X}}{the normalized OTU data,}
   \item{\code{Y}}{the alcohol intake phenotype,}
   \item{\code{tree}}{the corresponding phylogenetic tree,}
   \item{\code{taxonomy}}{the taxonomic lineages of the OTUs.}
-}}
+}
+
+An object of class \code{list} of length 4.
+}
 \source{
 Wu, Gary D., et al. "Linking long-term dietary patterns with gut
 microbial enterotypes." Science 334.6052 (2011): 105-108.
