@@ -113,8 +113,10 @@ library(testthat)
 
 # use_r("extract_leaves")
 
+# use_r("method_colwiseinverse")
+# use_test("method_colwiseinverse")
+
 # use_r("confint_colwiseinverse")
-# use_test("confint_colwiseinverse")
 
 
 ####

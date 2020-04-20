@@ -13,22 +13,25 @@ est_scaled <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
 
 withr::with_preserve_seed({
   set.seed(42)
-  ESD <- estimate_confint(est_scaled, alpha_conf = 0.05,
+  est_scosys <- estimate_confint(est_scaled, alpha_conf = 0.05,
                           method = c("scoresystem"))
 })
 
 withr::with_preserve_seed({
   set.seed(42)
-  ESD002 <- estimate_confint(est_scaled, alpha_conf = 0.02,
+  est_scosys002 <- estimate_confint(est_scaled, alpha_conf = 0.02,
                              method = c("scoresystem"))
 })
 
+est_colwinv <- estimate_confint(est_scaled, alpha_conf = 0.02,
+                                method = c("colwiseinverse"))
 
-test_that("ESD has its specific components / dimensions", {
-  expect_equal(ESD$method, "scoresystem")
-  expect_equal(ESD$alpha_conf, 0.05)
-  expect_equal(ncol(ESD$shifts_est), 3)
-  expect_is(ESD$optim_info$covariance_noise_matrix, "matrix")
+
+test_that("est_scosys has its specific components / dimensions", {
+  expect_equal(est_scosys$method, "scoresystem")
+  expect_equal(est_scosys$alpha_conf, 0.05)
+  expect_equal(ncol(est_scosys$shifts_est), 3)
+  expect_is(est_scosys$optim_info$covariance_noise_matrix, "matrix")
 })
 
 
@@ -62,7 +65,7 @@ test_that("intermediary outputs are correct", {
   # noise factor
   expect_length(tau, nplusm)
   # covariance noise matrix
-  expect_equal(V, ESD$optim_info$covariance_noise_matrix)
+  expect_equal(V, est_scosys$optim_info$covariance_noise_matrix)
   expect_equal(dim(V), c(nplusm, nplusm))
   expect_equal(V, t(V))
   expect_equal(V[j, k],
@@ -70,7 +73,7 @@ test_that("intermediary outputs are correct", {
                  (abs(sum(scosys[, j] * X[, j]) * sum(scosys[, k] * X[, k]))))
   # Noise factor
   expect_length(tau, nplusm)
-  expect_equal(tau, ESD$optim_info$noise_factor)
+  expect_equal(tau, est_scosys$optim_info$noise_factor)
   ## Non-deterministic
   # scaled lasso
   expect_length(scla, 6)
@@ -86,19 +89,20 @@ test_that("intermediary outputs are correct", {
 
 
 test_that("changing confindence interval works", {
-  ESD5to2 <- update_confint(ESD, alpha_confint = 0.02)
-  expect_equal(ESD5to2$alpha_conf, 0.02)
-  expect_equal(ESD5to2$zscores_est$lower, ESD002$zscores_est$lower)
-  expect_equal(ESD5to2$shifts_est$lower, ESD002$shifts_est$lower)
+  est_scosys5to2 <- update_confint(est_scosys, alpha_confint = 0.02)
+  expect_equal(est_scosys5to2$alpha_conf, 0.02)
+  expect_equal(est_scosys5to2$zscores_est$lower,
+               est_scosys002$zscores_est$lower)
+  expect_equal(est_scosys5to2$shifts_est$lower, est_scosys002$shifts_est$lower)
 })
 
 
-ESD09 <- update_confint(ESD, alpha_confint = 0.9)
-ind <- which(ESD09$zscores_est$lower * ESD09$zscores_est$upper > 0)
+est_scosys09 <- update_confint(est_scosys, alpha_confint = 0.9)
+ind <- which(est_scosys09$zscores_est$lower * est_scosys09$zscores_est$upper > 0)
 
 test_that("extraction works", {
-  expect_equal(extract_significant_leaves(ESD09, side = "both"),
-               ESD09$zscores_est$leaf[ind])
+  expect_equal(extract_significant_leaves(est_scosys09, side = "both"),
+               est_scosys09$zscores_est$leaf[ind])
 })
 
 

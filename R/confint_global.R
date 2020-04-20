@@ -9,13 +9,19 @@
 #' @export
 #'
 estimate_confint <- function(shiftestim, alpha_conf = 0.05,
-                             method = c("scoresystem"), ...){
+                             method = c("scoresystem", "colwiseinverse"),
+                             ...){
+
+  method <- match.arg(method)
 
   stopifnot(inherits(shiftestim, "shiftestim"))
 
   obj <- switch (method,
 
                  "scoresystem" = confint_scoresystem(
+                   x = shiftestim, alpha_conf = alpha_conf, ...),
+
+                 "colwiseinverse" = confint_colwiseinverse(
                    x = shiftestim, alpha_conf = alpha_conf, ...)
 
                  )
