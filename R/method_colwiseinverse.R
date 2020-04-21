@@ -91,8 +91,8 @@ solve_colwiseinverse_col_cell <- function(m, ind, col, A, gamma){
 #'   coef_p2(A = A, m = m, ind = 2)
 coef_p2 <- function(m, ind, A){
   a <- A[ind, ind]
-  b <- sum(m[-ind] * A[-ind, ind]) + sum(m[-ind] * A[ind, -ind])
-  c <- as.vector(m[-ind] %*% A[-ind, -ind] %*% m[-ind])
+  b <- sum(m[-ind] * A[-ind, ind]) + sum(m[-ind] * A[ind, -ind, drop = FALSE])
+  c <- as.vector(m[-ind] %*% A[-ind, -ind, drop = FALSE] %*% m[-ind])
   return(list(a = a, b = b, c = c))
 }
 
@@ -135,7 +135,7 @@ minimun_p2 <- function(coef) {
 #'
 compute_bounds <- function(m, ind, col, A, gamma){
   dim <- length(m)
-  Am_minus_ind <- A[, -ind] %*% m[- ind]
+  Am_minus_ind <- A[, -ind, drop = FALSE] %*% m[- ind, drop = FALSE]
   # Am_ind <- A[, ind] * m[ind]
   ecol <- rep(0, dim)
   ecol[col] <- 1
