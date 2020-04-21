@@ -5,28 +5,29 @@ tree <- ape::rtree(n)
 tree <- force_ultrametric(tree)
 nplusm <- length(tree$edge.length)
 zscores <- simu_zscores(tree, 1, shifts = NULL, Nshifts = 3)
+alpha <- 0.1
 
 est_scaled <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-                              tree = tree, alpha = c(0.05, 0.1, 0.2),
+                              tree = tree, alpha = alpha,
                               method = "scaledlasso")
 est_lasso <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-                              tree = tree, alpha = c(0.05, 0.1, 0.2),
+                              tree = tree, alpha = alpha,
                               method = "shooting")
 
 withr::with_preserve_seed({
   set.seed(42)
   est_scosys <- estimate_confint(est_scaled, alpha_conf = 0.05,
-                          method = c("scoresystem"))
+                          method = "scoresystem")
 })
 
 withr::with_preserve_seed({
   set.seed(42)
   est_scosys002 <- estimate_confint(est_scaled, alpha_conf = 0.02,
-                             method = c("scoresystem"))
+                             method = "scoresystem")
 })
 
-est_colwinv <- estimate_confint(est_scaled, alpha_conf = 0.05,
-                                method = c("colwiseinverse"))
+# est_colwiseinv <- estimate_confint(est_scaled, alpha_conf = 0.05,
+#                                    method = "colwiseinverse")
 
 
 test_that("est_scosys has its specific components / dimensions", {
@@ -38,7 +39,7 @@ test_that("est_scosys has its specific components / dimensions", {
 })
 
 
-mat_covar <- covariance_matrix(tree, alpha =  1)
+mat_covar <- covariance_matrix(tree, alpha =  alpha)
 mat_incidence <- incidence_matrix(tree)
 R <- inverse_sqrt(mat_covar)
 Y <- R %*% zscores

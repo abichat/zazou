@@ -17,10 +17,10 @@ solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
 
     new_col <- try(solve_colwiseinverse_col(col, A, gamma), silent = silent_on_errors)
 
+    ntry_max_per_column <- 500
     ntry <- 0
-    ntry_max <- 500
 
-    while(!is.numeric(new_col) && ntry < ntry_max){
+    while(!is.numeric(new_col) && ntry < ntry_max_per_column){
 
       # cat("\n####### ntry for col", col, "=", ntry, "#######\n\n")
 

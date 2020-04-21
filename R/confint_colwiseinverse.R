@@ -22,12 +22,13 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, ...){
   gamma <- 2 * sqrt(log(ncol(X))/nrow(X))
 
   M <- try(solve_colwiseinverse(XTXn, gamma), silent = TRUE)
-  # Error in if (lb > up) { : valeur manquante là où TRUE / FALSE est requis ??
-  i <- 0
 
-  while(!is.matrix(M) && i < 20){
+  ntry_max_for_matrix <- 100
+  ntry_mat <- 0
+
+  while(!is.matrix(M) && ntry_mat < ntry_max_for_matrix){
     M <- try(solve_colwiseinverse(XTXn, gamma), silent = TRUE)
-    i <- i + 1
+    ntry_mat <- ntry_mat + 1
   }
 
   if(!is.matrix(M)){

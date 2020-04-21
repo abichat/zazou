@@ -4,12 +4,14 @@
 \alias{solve_colwiseinverse}
 \title{Solve column-wise inverse}
 \usage{
-solve_colwiseinverse(A, gamma)
+solve_colwiseinverse(A, gamma, silent_on_errors = TRUE)
 }
 \arguments{
 \item{A}{A square matrix to column-wise inverse.}
 
 \item{gamma}{Non-negative.}
+
+\item{silent_on_errors}{Logical, default to TRUE.}
 }
 \value{
 The column-wise, inverse, same size as \code{A}.
