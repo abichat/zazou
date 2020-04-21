@@ -7,9 +7,11 @@ nplusm <- length(tree$edge.length)
 zscores <- simu_zscores(tree, 1, shifts = NULL, Nshifts = 3)
 
 est_scaled <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-                              tree = tree, alpha = 1, lambda = 0.1,
+                              tree = tree, alpha = c(0.05, 0.1, 0.2),
                               method = "scaledlasso")
-
+est_lasso <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
+                              tree = tree, alpha = c(0.05, 0.1, 0.2),
+                              method = "shooting")
 
 withr::with_preserve_seed({
   set.seed(42)
@@ -23,7 +25,7 @@ withr::with_preserve_seed({
                              method = c("scoresystem"))
 })
 
-est_colwinv <- estimate_confint(est_scaled, alpha_conf = 0.02,
+est_colwinv <- estimate_confint(est_scaled, alpha_conf = 0.05,
                                 method = c("colwiseinverse"))
 
 
@@ -32,6 +34,7 @@ test_that("est_scosys has its specific components / dimensions", {
   expect_equal(est_scosys$alpha_conf, 0.05)
   expect_equal(ncol(est_scosys$shifts_est), 3)
   expect_is(est_scosys$optim_info$covariance_noise_matrix, "matrix")
+  expect_equal(dim(est_scosys$optim_info$covariance_noise_matrix), rep(nplusm, 2))
 })
 
 

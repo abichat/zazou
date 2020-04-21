@@ -24,6 +24,7 @@ test_that("estimation of polynom coefficients is correct for 3*3", {
 
 dim <- 10
 gamma <- 2 * sqrt(log(dim)/dim)
+# gamma <- 1
 X <- matrix(rnorm(dim^2), ncol = dim) / dim
 A <- t(X) %*% X
 M <- try(solve_colwiseinverse(A, gamma))
