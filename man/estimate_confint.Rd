@@ -4,7 +4,12 @@
 \alias{estimate_confint}
 \title{Estimate confidence interval from scaled lasso.}
 \usage{
-estimate_confint(shiftestim, alpha_conf = 0.05, method = c("scoresystem"), ...)
+estimate_confint(
+  shiftestim,
+  alpha_conf = 0.05,
+  method = c("scoresystem", "colwiseinverse"),
+  ...
+)
 }
 \arguments{
 \item{shiftestim}{a \code{shiftestim} object with method \code{scaledlasso}.}
