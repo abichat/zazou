@@ -27,7 +27,7 @@ solve_colwiseinverse <- function(A, gamma){
 solve_colwiseinverse_col <- function(col, A, gamma){
   dim <- ncol(A)
   # m <- rep(0, dim)
-  m <- rnorm(dim, sd = 1)
+  m <- rnorm(dim, sd = 1 / sqrt(dim))
 
   max_it <- 500
   eps <- 10 ^ -8
