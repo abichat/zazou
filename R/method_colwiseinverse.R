@@ -2,15 +2,39 @@
 #'
 #' @param A A square matrix to column-wise inverse.
 #' @param gamma Non-negative.
+#' @param silent_on_errors Logical, default to TRUE.
 #'
 #' @return The column-wise, inverse, same size as \code{A}.
 #' @export
 #'
-solve_colwiseinverse <- function(A, gamma){
+solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
   dim <- ncol(A)
   M <- matrix(NA, nrow = dim, ncol = dim)
+
   for(col in seq_len(dim)){
-    M[, col] <- solve_colwiseinverse_col(col, A, gamma)
+
+    # cat("\n###############\n### col =", col, "###\n###############\n")
+
+    new_col <- try(solve_colwiseinverse_col(col, A, gamma), silent = silent_on_errors)
+
+    ntry <- 0
+    ntry_max <- 500
+
+    while(!is.numeric(new_col) && ntry < ntry_max){
+
+      # cat("\n####### ntry for col", col, "=", ntry, "#######\n\n")
+
+      new_col <- try(solve_colwiseinverse_col(col, A, gamma), silent = silent_on_errors)
+      ntry <- ntry + 1
+    }
+
+    if(is.numeric(new_col)){
+      M[, col] <- new_col
+    } else {
+      stop("Constrains are not feasible.")
+    }
+
+
   }
   return(M)
 }
@@ -27,12 +51,18 @@ solve_colwiseinverse <- function(A, gamma){
 solve_colwiseinverse_col <- function(col, A, gamma){
   dim <- ncol(A)
   # m <- rep(0, dim)
-  m <- rnorm(dim, sd = 1 / sqrt(dim))
+  # m <- rnorm(dim, sd = 1 / sqrt(dim))
+  # m <- rnorm(dim, sd = 1 / sqrt(dim))
+  # m <- rep(1, dim)
+  m <- 2 * (rbinom(dim, 1, 0.5) - 0.5) * rnorm(dim, mean = 1, sd = 1 / sqrt(dim))
 
-  max_it <- 500
+  # cat("# First m =", m, "\n")
+
+
+  max_it <- 100
   eps <- 10 ^ -8
 
-  iter <- 1
+  iter <- 0
   obj <- m %*% A %*% m
   progress <- +Inf
 
@@ -40,15 +70,21 @@ solve_colwiseinverse_col <- function(col, A, gamma){
     sampled_ind <- sample(dim)
 
     for(ind in sampled_ind){
+      # cat("| > cell:", ind, "\n")
       m[ind] <- solve_colwiseinverse_col_cell(m, ind, col, A, gamma)
     }
 
     new_obj <- m %*% A %*% m
     progress <- abs((obj - new_obj) / obj)
+    if(is.nan(progress)) progress <- 0
     obj <- new_obj
-
     iter <- iter + 1
+    # cat("##--------------#\n")
+    # cat("## iter:", iter, "| progress:", progress, "| obj:", obj, "\n")
+    # cat("## m: ", m, "\n")
+    # cat("##--------------#\n")
   }
+  # cat("###################\n")
   return(m)
 }
 
@@ -63,6 +99,7 @@ solve_colwiseinverse_col <- function(col, A, gamma){
 solve_colwiseinverse_col_cell <- function(m, ind, col, A, gamma){
   vec_coef_p2 <- coef_p2(m, ind, A)
   argmin_unconstrained <- minimun_p2(vec_coef_p2)
+  # cat("|   >   argmin unconstrained:", argmin_unconstrained, "\n")
   bounds <- compute_bounds(m, ind, col, A, gamma)
   if(length(argmin_unconstrained) == 1){
     argmin <- min(bounds$upper_bound,
@@ -72,6 +109,8 @@ solve_colwiseinverse_col_cell <- function(m, ind, col, A, gamma){
                                  bounds$lower_bound,
                                  bounds$upper_bound)
   }
+  # cat("|   >   argmin:", argmin, "\n")
+  if(abs(argmin) < 10^-15) argmin <- 0
   return(argmin)
 }
 
@@ -149,11 +188,12 @@ compute_bounds <- function(m, ind, col, A, gamma){
     }
   }
   lb <- max(bounds[, 1])
-  up <- min(bounds[, 2])
-  if(lb > up){
+  ub <- min(bounds[, 2])
+  # cat("|   >   lower bound:", lb, "upper bound:", ub, "\n")
+  if(lb > ub){
     stop("Constrains are not feasible")
   }
-  return(list(lower_bound = lb, upper_bound = up))
+  return(list(lower_bound = lb, upper_bound = ub))
 }
 
 #' Find the argmin between two propositions
