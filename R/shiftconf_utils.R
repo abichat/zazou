@@ -43,6 +43,10 @@ update_confint <- function(x, alpha_confint){
 
 #' Confidence interval and p-values for estimates
 #'
+#' From a vector of estimates computes the lower and upper bound and a p-value.
+#'
+#' The confidence interval is bivariate whereas the p-value is univariate.
+#'
 #' @param estimate Punctual estimate. Eventually named
 #' @param sigma Associated standard error, length \code{1}.
 #' @param tau Noise factor, same length as \code{estimate}.
@@ -52,7 +56,7 @@ update_confint <- function(x, alpha_confint){
 #' @return A dataframe with 4 (or 5 if \code{estimate} has names) columns.
 #' @export
 #'
-df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf){
+df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf = 0.05){
 
   names <- names(estimate)
   if(is.null(names)){
@@ -63,8 +67,8 @@ df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf){
   }
 
   sigma_tau <- sigma * tau
-  half_confint_size <- qnorm(1 - alpha_conf / 2) * sigma_tau
-  p_value <- 2 * (1 - pnorm(estimate / sigma_tau)) # pnorm = distribution/repartition
+  half_confint_size <- qnorm(1 - alpha_conf / 2) * sigma_tau # bivariate
+  p_value <- pnorm(estimate / sigma_tau) # univariate
 
   df$lower <- estimate - half_confint_size
   df$upper <- estimate + half_confint_size

@@ -4,7 +4,7 @@
 \alias{df_confint_pvalue}
 \title{Confidence interval and p-values for estimates}
 \usage{
-df_confint_pvalue(estimate, sigma, tau, alpha_conf)
+df_confint_pvalue(estimate, sigma, tau, alpha_conf = 0.05)
 }
 \arguments{
 \item{estimate}{Punctual estimate. Eventually named}
@@ -19,5 +19,8 @@ df_confint_pvalue(estimate, sigma, tau, alpha_conf)
 A dataframe with 4 (or 5 if \code{estimate} has names) columns.
 }
 \description{
-Confidence interval and p-values for estimates
+From a vector of estimates computes the lower and upper bound and a p-value.
+}
+\details{
+The confidence interval is bivariate whereas the p-value is univariate.
 }
