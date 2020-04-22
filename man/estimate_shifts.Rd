@@ -8,7 +8,7 @@ estimate_shifts(
   Delta0,
   zscores,
   tree,
-  alpha,
+  alphaOU,
   lambda = NULL,
   method = c("L-BFGS-B", "shooting", "scaledlasso"),
   criterion = c("bic", "pbic"),
@@ -24,7 +24,7 @@ estimate_shifts(
 \item{tree}{the tree used to compute the incidence and covariance matrices
 (if not specified)}
 
-\item{alpha}{a grid of positive alpha parameters}
+\item{alphaOU}{a grid of positive alpha parameters}
 
 \item{lambda}{a grid of positive regularization parameters}
 

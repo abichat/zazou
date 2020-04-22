@@ -4,12 +4,12 @@
 \alias{simu_zscores}
 \title{Simulation of z-scores on branches}
 \usage{
-simu_zscores(tree, alpha, shifts = NULL, Nshifts = NULL, graph = FALSE, ...)
+simu_zscores(tree, alphaOU, shifts = NULL, Nshifts = NULL, graph = FALSE, ...)
 }
 \arguments{
 \item{tree}{tree.}
 
-\item{alpha}{the parameter for the OU process.}
+\item{alphaOU}{the parameter for the OU process.}
 
 \item{shifts}{vector of shifts.}
 
@@ -32,6 +32,6 @@ Shifts are sampled from "statistically significant values of z-scores"
 set.seed(42)
 tree <- ape::rcoal(5)
 shift <- c(0, 0, -3, 0, 0, 0, 0, 0)
-simu_zscores(tree, alpha = 0.2, shift = shift, graph = TRUE)
-simu_zscores(tree, alpha = 0.2, Nshifts = 2, graph = TRUE)
+simu_zscores(tree, alphaOU = 0.2, shift = shift, graph = TRUE)
+simu_zscores(tree, alphaOU = 0.2, Nshifts = 2, graph = TRUE)
 }

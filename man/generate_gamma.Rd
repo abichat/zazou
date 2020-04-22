@@ -15,5 +15,5 @@ generate_gamma(X, factor = 2)
 A suggested value of \eqn{\gamma}.
 }
 \description{
-Generate a gamma for the colwise-inverse procedure
+Generate a gamma for the colwise-inverse procedure.
 }

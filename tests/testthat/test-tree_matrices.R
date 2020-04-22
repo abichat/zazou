@@ -23,7 +23,7 @@ test_that("the postorder is required for incidence matrix ", {
 
 test_that("the covariance matrix is correct", {
   a <- rpois(1, lambda = 3) + 1
-  covar <- covariance_matrix(tree, alpha = a)
+  covar <- covarianceOU_matrix(tree, alpha = a)
   expect_equal(covar, t(covar))
   expect_equivalent(diag(covar), rep(1, length(tree$tip.label)))
   expect_equal(covar[1, 2],

@@ -4,11 +4,11 @@
 #' @param tree tree
 #' @param zscores vector of observed z-scores
 #' @param lambda regularization parameter
-#' @param alpha parameter
+#' @param alphaOU parameter
 #'
 #' @return a 'shiftestim' object
 #' @export
-as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
+as_shiftestim <- function(listopt, tree, zscores, lambda, alphaOU) {
 
   required_names <- c("par", "value", "method")
 
@@ -24,7 +24,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
               zscores_est = zscores_est,
               shifts_est = listopt$par,
               objective_value = listopt$value, lambda = lambda,
-              tree = tree, alpha = alpha,
+              tree = tree, alphaOU = alphaOU,
               method = listopt$method,
               optim_info = listopt[setdiff(names(listopt), required_names)])
 
@@ -37,19 +37,17 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
 
   ## Sigma
   h <- tree_height(obj$tree)
-  obj$sigma <- sqrt(2 * obj$alpha) / (1 - exp(- 2 * obj$alpha * h))
+  obj$sigmaOU <- sqrt(2 * obj$alphaOU) / (1 - exp(- 2 * obj$alphaOU * h))
 
   ## BIC & pBIC
-  mat_covar <- covariance_matrix(obj$tree, obj$alpha)
+  mat_covarOU <- covarianceOU_matrix(obj$tree, obj$alphaOU)
   mat_incidence <- incidence_matrix(obj$tree)
 
-  # obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
-  #                est_shifts = obj$shifts_est, sigma = obj$sigma)
   obj$bic <- bic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
-                 est_shifts = obj$shifts_est, mat_covar = mat_covar)
+                 est_shifts = obj$shifts_est, mat_covarOU = mat_covarOU)
   obj$pbic <- pbic(obs_zscores = obj$zscores_obs, est_zscores = obj$zscores_est,
                   est_shifts = obj$shifts_est, mat_incidence = mat_incidence,
-                  mat_covar = mat_covar)
+                  mat_covarOU = mat_covarOU)
 
   class(obj) <- "shiftestim"
   return(obj)
@@ -74,8 +72,8 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alpha) {
 print.shiftestim <- function(x, digits = 3, ...){
 
   txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
-                      " with alpha = ", round(x$alpha, digits),
-                      " and sigma = ", round(x$sigma, digits), "")
+                      " with alpha = ", round(x$alphaOU, digits),
+                      " and sigma = ", round(x$sigmaOU, digits), "")
 
   txt_tree1 <- paste0("Tree is", ifelse(x$is_bin, " ", " not "), "binary")
   tree <- x$tree

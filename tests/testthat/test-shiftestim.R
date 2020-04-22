@@ -14,13 +14,13 @@ N_branch <- length(tree$edge.length)
 
 estS <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                         lambda = c(1, 2), tree = tree,
-                        alpha = 1, method = "shooting")
+                        alphaOU = 1, method = "shooting")
 estL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                         lambda = 1, tree = tree,
-                        alpha = 1, method = "L-BFGS-B")
+                        alphaOU = 1, method = "L-BFGS-B")
 estSL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                          lambda = 1, tree = tree,
-                         alpha = 1, method = "scaledlasso")
+                         alphaOU = 1, method = "scaledlasso")
 
 expect_scalnum <- function(x){
   expect_is(x, "numeric")
@@ -40,7 +40,7 @@ expect_shiftestim <- function(x){
   expect_is(x$is_bin, "logical")
   expect_scalnum(x$lambda)
   expect_scalnum(x$alpha)
-  expect_scalnum(x$sigma)
+  expect_scalnum(x$sigmaOU)
   expect_scalnum(x$objective_value)
   expect_scalnum(x$bic)
   expect_scalnum(x$pbic)

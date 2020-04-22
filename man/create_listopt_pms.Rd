@@ -8,7 +8,7 @@ create_listopt_pms(
   objective_value,
   shifts_est,
   method,
-  best_alpha,
+  best_alphaOU,
   best_lambda
 )
 }
@@ -19,7 +19,7 @@ create_listopt_pms(
 
 \item{method}{the used method.}
 
-\item{best_alpha}{the best alpha during the model selection phase.}
+\item{best_alphaOU}{the best alpha during the model selection phase.}
 
 \item{best_lambda}{the best lambda during the model selection phase.}
 }

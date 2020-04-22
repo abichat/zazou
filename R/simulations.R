@@ -5,7 +5,7 @@
 #' Shifts are sampled from "statistically significant values of z-scores"
 #'
 #' @param tree tree.
-#' @param alpha the parameter for the OU process.
+#' @param alphaOU the parameter for the OU process.
 #' @param shifts vector of shifts.
 #' @param Nshifts number of shifts. Must be specified if \code{shifts} is not.
 #' @param graph show the tree, shifts and z-scores be plotted?
@@ -22,9 +22,9 @@
 #' set.seed(42)
 #' tree <- ape::rcoal(5)
 #' shift <- c(0, 0, -3, 0, 0, 0, 0, 0)
-#' simu_zscores(tree, alpha = 0.2, shift = shift, graph = TRUE)
-#' simu_zscores(tree, alpha = 0.2, Nshifts = 2, graph = TRUE)
-simu_zscores <- function(tree, alpha, shifts = NULL, Nshifts = NULL,
+#' simu_zscores(tree, alphaOU = 0.2, shift = shift, graph = TRUE)
+#' simu_zscores(tree, alphaOU = 0.2, Nshifts = 2, graph = TRUE)
+simu_zscores <- function(tree, alphaOU, shifts = NULL, Nshifts = NULL,
                          graph = FALSE, ...){
 
   if(is.null(Nshifts)  && is.null(shifts)){
@@ -46,8 +46,8 @@ simu_zscores <- function(tree, alpha, shifts = NULL, Nshifts = NULL,
 
   mat_incidence <- incidence_matrix(tree)
 
-  mat_covar <- covariance_matrix(tree, alpha = alpha)
-  sqrtcovar <- inverse_sqrt(mat_covar)
+  mat_covarOU <- covarianceOU_matrix(tree, alphaOU = alphaOU)
+  sqrtcovar <- inverse_sqrt(mat_covarOU)
 
   true_zs <- mat_incidence %*% shifts
 

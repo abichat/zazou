@@ -7,7 +7,7 @@
 #' @param lambda a grid of positive regularization parameters
 #' @param tree the tree used to compute the incidence and covariance matrices
 #' (if not specified)
-#' @param alpha a grid of positive alpha parameters
+#' @param alphaOU a grid of positive alpha parameters
 #' @param method method to use for the optimization. One of \code{L-BFGS-B}
 #' or \code{shooting}.
 #' @param criterion criterion on which the selection is done.
@@ -19,7 +19,7 @@
 #'
 #' @export
 #' @importFrom stats optim
-estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
+estimate_shifts <- function(Delta0, zscores, tree, alphaOU, lambda = NULL,
                             method = c("L-BFGS-B", "shooting", "scaledlasso"),
                             criterion = c("bic", "pbic"),
                             constraint_type = c("beta", "yhat", "none"), ...){
@@ -49,7 +49,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
 
   ## Bookkeeping variables
   best_criterion <- Inf
-  bic_df <- data.frame(alpha  = numeric(0),
+  bic_df <- data.frame(alphaOU  = numeric(0),
                        lambda = numeric(0),
                        objective_value = numeric(0),
                        bic    = numeric(0),
@@ -57,12 +57,12 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
   best_model <- NULL
   shifts <- list()
 
-  ## Outer loop on alpha
-  for (alp in alpha) {
+  ## Outer loop on alphaOU
+  for (alp in alphaOU) {
     ## Compute covariance matrices, design matrix and response vector
-    mat_covar <- covariance_matrix(tree, alp)
+    mat_covarOU <- covarianceOU_matrix(tree, alp)
     mat_incidence <- incidence_matrix(tree)
-    R <- inverse_sqrt(mat_covar)
+    R <- inverse_sqrt(mat_covarOU)
     Y <- R %*% zscores
     X <- R %*% mat_incidence
 
@@ -80,12 +80,12 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
                                mat_incidence = mat_incidence, ...)
       current_model <- as_shiftestim(
         listopt = opt, tree = tree, zscores = zscores,
-        lambda = lam, alpha = alp)
+        lambda = lam, alphaOU = alp)
       shifts <- c(shifts, list(current_model$shifts_est))
 
       ## Update bic table
       bic_df <- rbind(bic_df,
-                      data.frame(alpha = alp, lambda = lam,
+                      data.frame(alphaOU = alp, lambda = lam,
                                  objective_value =
                                    current_model$objective_value,
                                  bic = current_model$bic,
@@ -99,9 +99,9 @@ estimate_shifts <- function(Delta0, zscores, tree, alpha, lambda = NULL,
         best_criterion <- current_criterion
       }
     } ## Close lambda loop
-  } ## Close alpha loop
+  } ## Close alphaOU loop
 
-  if(any(c(length(alpha), length(current_lambda)) >= 2)){
+  if(any(c(length(alphaOU), length(current_lambda)) >= 2)){
     bic_df$shifts_est <- shifts
     best_model$optim_info$bic_selection <- bic_df
     best_model$optim_info$criterion <- criterion

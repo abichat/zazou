@@ -6,7 +6,7 @@
 #' \eqn{exp(- \alpha * d_{i,j}) - exp(-2 * \alpha * h) / (2 * \alpha)}
 #'
 #' @param tree a phylo object
-#' @param alpha hyperparameter
+#' @param alphaOU hyperparameter
 #'
 #' @return the covariance matrix of the OU process on the tree
 #' @export
@@ -15,10 +15,11 @@
 #'
 #' @examples
 #' tree <- ape::rtree(3)
-#' covariance_matrix(tree, alpha = 1)
-covariance_matrix <- function(tree, alpha){
+#' covarianceOU_matrix(tree, alpha = 1)
+covarianceOU_matrix <- function(tree, alphaOU){
   distance_matrix <- cophenetic(tree)
   h <- max(distance_matrix) / 2
-  covar <- (exp(- alpha * distance_matrix) - exp(-2 * alpha * h)) / (2 * alpha)
+  covar <-
+    (exp(- alphaOU * distance_matrix) - exp(-2 * alphaOU * h)) / (2 * alphaOU)
   covar / covar[1, 1]
 }

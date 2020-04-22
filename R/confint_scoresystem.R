@@ -10,9 +10,9 @@
 confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
   stopifnot(inherits(x, "shiftestim"))
 
-  mat_covar <- covariance_matrix(x$tree, x$alpha)
+  mat_covarOU <- covarianceOU_matrix(x$tree, x$alpha)
   mat_incidence <- incidence_matrix(x$tree)
-  R <- inverse_sqrt(mat_covar)
+  R <- inverse_sqrt(mat_covarOU)
   Y <- R %*% x$zscores_obs
   X <- R %*% mat_incidence
   hsigma <- x$optim_info$sigma_scaledlasso

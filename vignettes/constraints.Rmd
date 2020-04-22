@@ -49,7 +49,7 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 
 ```{r}
 estimation1 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alpha = 1, lambda = 0.1, 
+                              tree = tree, alphaOU = 1, lambda = 0.1, 
                               method = "shooting")
 estimation1
 plot(estimation1)
@@ -68,7 +68,7 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 
 ```{r}
 estimation2 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alpha = 1, lambda = 0.1,
+                              tree = tree, alphaOU = 1, lambda = 0.1,
                               method = "shooting")
 estimation2
 plot(estimation2)
@@ -80,7 +80,7 @@ Z-score are well recovered but the solution is absolutely not sparse. We should 
 
 ```{r}
 estimation3 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alpha = 1, lambda = 0.1,  
+                              tree = tree, alphaOU = 1, lambda = 0.1,  
                               method = "shooting",
                               constraint_type = "yhat")
 estimation3
@@ -101,7 +101,7 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 
 ```{r}
 estimation4 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alpha = 1, lambda = 0.1,  
+                              tree = tree, alphaOU = 1, lambda = 0.1,  
                               method = "shooting",
                               constraint_type = "yhat")
 estimation4
@@ -112,7 +112,7 @@ plot(estimation4)
 
 ```{r}
 estimation5 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alpha = 1, lambda = 0.1, 
+                              tree = tree, alphaOU = 1, lambda = 0.1, 
                               method = "shooting",
                               constraint_type = "none")
 estimation5

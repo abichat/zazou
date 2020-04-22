@@ -6,11 +6,11 @@
 \alias{pbic}
 \title{Information criteria}
 \usage{
-bic(obs_zscores, est_zscores, est_shifts, mat_covar)
+bic(obs_zscores, est_zscores, est_shifts, mat_covarOU)
 
-loglikelihood(obs_zscores, est_zscores, mat_covar)
+loglikelihood(obs_zscores, est_zscores, mat_covarOU)
 
-pbic(obs_zscores, est_zscores, est_shifts, mat_incidence, mat_covar)
+pbic(obs_zscores, est_zscores, est_shifts, mat_incidence, mat_covarOU)
 }
 \arguments{
 \item{obs_zscores}{Observed z-scores.}
@@ -19,7 +19,7 @@ pbic(obs_zscores, est_zscores, est_shifts, mat_incidence, mat_covar)
 
 \item{est_shifts}{Estimated z-scores.}
 
-\item{mat_covar}{Covariance matrix.}
+\item{mat_covarOU}{Covariance matrix.}
 
 \item{mat_incidence}{Incidence matrix.}
 }
@@ -33,5 +33,5 @@ Loglikelihood, Bayesian Information Criterion and Phylogenetic BIC
 bic(obs_zscores = c(-2.7, -2.3, 0.2, -0.1, -2, 0.1),
     est_zscores = c(-2.5, -2.5, 0, 0, -1, 0),
     est_shifts = c(0, 0, 0, 0, -1, 0, -2.5, 0, 0, 0),
-    mat_covar = diag(rep(1, 6)))
+    mat_covarOU = diag(rep(1, 6)))
 }

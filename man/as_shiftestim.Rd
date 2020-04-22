@@ -6,7 +6,7 @@
 \alias{plot.shiftestim}
 \title{'shiftestim' object}
 \usage{
-as_shiftestim(listopt, tree, zscores, lambda, alpha)
+as_shiftestim(listopt, tree, zscores, lambda, alphaOU)
 
 \method{print}{shiftestim}(x, digits = 3, ...)
 
@@ -21,7 +21,7 @@ as_shiftestim(listopt, tree, zscores, lambda, alpha)
 
 \item{lambda}{regularization parameter}
 
-\item{alpha}{parameter}
+\item{alphaOU}{parameter}
 
 \item{x}{a 'shiftestim' object.}
 

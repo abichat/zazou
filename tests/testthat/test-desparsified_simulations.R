@@ -8,10 +8,10 @@ zscores <- simu_zscores(tree, 1, shifts = NULL, Nshifts = 3)
 alpha <- 0.1
 
 est_scaled <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-                              tree = tree, alpha = alpha,
+                              tree = tree, alphaOU = alpha,
                               method = "scaledlasso")
 est_lasso <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-                              tree = tree, alpha = alpha,
+                              tree = tree, alphaOU = alpha,
                               method = "shooting")
 
 withr::with_preserve_seed({
@@ -39,9 +39,9 @@ test_that("est_scosys has its specific components / dimensions", {
 })
 
 
-mat_covar <- covariance_matrix(tree, alpha =  alpha)
+mat_covarOU <- covarianceOU_matrix(tree, alpha =  alpha)
 mat_incidence <- incidence_matrix(tree)
-R <- inverse_sqrt(mat_covar)
+R <- inverse_sqrt(mat_covarOU)
 Y <- R %*% zscores
 X <- R %*% mat_incidence
 withr::with_preserve_seed({

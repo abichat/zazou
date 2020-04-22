@@ -45,6 +45,7 @@ solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
 #' @param col The column number.
 #' @inheritParams solve_colwiseinverse
 #'
+#'
 #' @return The column, wile respecting constrains.
 #' @export
 #'

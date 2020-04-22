@@ -16,13 +16,13 @@ grid <- sample(c(1, 3))
 
 estS <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                         lambda = grid, tree = tree,
-                        alpha = grid, method = "shooting")
+                        alphaOU = grid, method = "shooting")
 
 estS2 <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                         tree = tree, alpha = grid, method = "shooting")
+                         tree = tree, alphaOU = grid, method = "shooting")
 
 estS3 <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                         tree = tree, alpha = 1, lambda = 2,
+                         tree = tree, alphaOU = 1, lambda = 2,
                          method = "shooting", allow_positive = TRUE,
                          unknow = 3)
 
@@ -51,19 +51,19 @@ grid <- sample(c(0.9, 1, 1.1))
 
 estL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                         lambda = grid, tree = tree,
-                        alpha = sample(grid), method = "L-BFGS-B")
+                        alphaOU = sample(grid), method = "L-BFGS-B")
 
 df_selection <- estL$optim_info$bic_selection
 
 estL_best <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                              lambda = estL$lambda, tree = tree,
-                             alpha = estL$alpha, method = "L-BFGS-B")
+                             alphaOU = estL$alphaOU, method = "L-BFGS-B")
 
-alpha_notbest <- sample(setdiff(grid, estL$alpha), 1)
+alpha_notbest <- sample(setdiff(grid, estL$alphaOU), 1)
 lambda_notbest <- sample(setdiff(grid, estL$lambda), 1)
 
 estL_notbest <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                alpha = alpha_notbest,
+                                alphaOU = alpha_notbest,
                                 lambda = lambda_notbest,
                                 tree = tree, method = "L-BFGS-B")
 
@@ -77,7 +77,7 @@ test_that("the choosen model is the best one", {
 
 est_pbic <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                             lambda = grid, tree = tree, criterion = "pbic",
-                            alpha = grid, method = "shooting")
+                            alphaOU = grid, method = "shooting")
 
 test_that("selection on pbic criterion is OK", {
   expect_true(grepl("with model selection", est_pbic$method))
@@ -86,11 +86,11 @@ test_that("selection on pbic criterion is OK", {
 })
 
 test_that("the shifts inside `bic_selection` are correct", {
-  expect_equal(df_selection[df_selection$alpha == estL$alpha &
+  expect_equal(df_selection[df_selection$alphaOU == estL$alphaOU &
                               df_selection$lambda == estL$lambda,
                             "shifts_est"][[1]],
                estL$shifts_est)
-  expect_equal(df_selection[df_selection$alpha == alpha_notbest &
+  expect_equal(df_selection[df_selection$alphaOU == alpha_notbest &
                               df_selection$lambda == lambda_notbest, 6][[1]],
                estL_notbest$shifts_est)
 })
@@ -101,15 +101,15 @@ r <- sample(seq_len(length(grid) ^ 2), size = 1)
 est_r <- all_est[[r]]
 est_r_fs <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
                             lambda = est_r$lambda, tree = tree,
-                            alpha = est_r$alpha, method = "L-BFGS-B")
+                            alphaOU = est_r$alphaOU, method = "L-BFGS-B")
 
 test_that("extraction works correctly", {
   expect_length(all_est, length(grid) ^ 2)
   expect_true(grepl(", part of model selection", est_r$method))
   expect_equal(est_r$zscores_est, est_r_fs$zscores_est)
   expect_equal(est_r$objective_value, est_r_fs$objective_value)
-  expect_equal(unname(est_r$optim_info$better_parameters["better_alpha"]),
-               estL$alpha)
+  expect_equal(unname(est_r$optim_info$better_parameters["better_alphaOU"]),
+               estL$alphaOU)
   expect_equal(unname(est_r$optim_info$better_parameters["better_lambda"]),
                estL$lambda)
   expect_warning(extract_models(estL_best))

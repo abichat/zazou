@@ -27,7 +27,7 @@ set.seed(42)
 ```{r parameters}
 tree <- read.tree(text = "(((A:1,B:1):1,C:2):1,(D:1,E:1):2);")
 true_shifts <- c(0, -3, 0, 0, 0, 0, -2, 0)
-alpha <- 1
+alphaOU <- 1
 lambda <- 0.1
 ```
 
@@ -40,7 +40,7 @@ lambda <- 0.1
 
 ```{r simulations}
 observed_zscores <- simu_zscores(tree = tree, shifts = true_shifts, 
-                                 alpha = 1, graph = TRUE)
+                                 alphaOU = 1, graph = TRUE)
 observed_zscores
 ```
 
@@ -51,7 +51,7 @@ observed_zscores
 
 ```{r lbfgsb}
 mthd1 <- estimate_shifts(Delta0 = rep(0, 8), zscores = observed_zscores, 
-                         lambda = lambda, tree = tree, alpha = alpha, 
+                         lambda = lambda, tree = tree, alphaOU = alphaOU, 
                          method = "L-BFGS-B")
 mthd1
 plot(mthd1)
@@ -62,7 +62,7 @@ plot(mthd1)
 
 ```{r shooting}
 mthd2 <- estimate_shifts(Delta0 = rep(0, 8), zscores = observed_zscores, 
-                         lambda = lambda, tree = tree, alpha = alpha, 
+                         lambda = lambda, tree = tree, alphaOU = alphaOU, 
                          method = "shooting")
 mthd2
 plot(mthd2)

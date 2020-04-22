@@ -35,8 +35,8 @@ To keep consistent notations in the package:
 
   - the incidence matrix `mat_incidence` is size `m*(n+m)`,
 
-  - the covariance matrix `mat_covar` and its square root `R` are size
-    `m*m`,
+  - the OU covariance matrix `mat_covarOU` and its square root `R` are
+    size `m*m`,
 
   - `Y = R %*% Z` is a vector of size `m`,
 

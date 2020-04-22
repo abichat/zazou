@@ -59,7 +59,7 @@ plot_shifts(tree, NA, obs_scores = zsco_obs)
 ```{r lbfgsb}
 tic()
 est_lbfgsb <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                              lambda = 2, tree = tree, alpha = 0.1,
+                              lambda = 2, tree = tree, alphaOU = 0.1,
                               method = "L-BFGS-B")
 toc()
 est_lbfgsb
@@ -71,7 +71,7 @@ plot(est_lbfgsb)
 ```{r shooting}
 tic()
 est_shooting <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                lambda = 2, tree = tree, alpha = 0.1,
+                                lambda = 2, tree = tree, alphaOU = 0.1,
                                 method = "shooting", constraint_type = "beta")
 toc() # 10 times faster
 est_shooting # similar results
@@ -83,7 +83,7 @@ plot(est_shooting)
 ```{r shootingp, error = TRUE}
 tic()
 est_shooting_p <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                  lambda = 2, tree = tree, alpha = 0.1,
+                                  lambda = 2, tree = tree, alphaOU = 0.1,
                                   method = "shooting", constraint_type = "yhat")
 toc()
 est_shooting_p # similar results
@@ -95,7 +95,7 @@ plot(est_shooting_p)
 ```{r shootingn, error = TRUE}
 tic()
 est_shooting_n <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
-                                  lambda = 2, tree = tree, alpha = 0.1,
+                                  lambda = 2, tree = tree, alphaOU = 0.1,
                                   method = "shooting", constraint_type = "none")
 toc() # 10 times faster
 est_shooting_n # similar results
