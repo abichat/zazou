@@ -118,6 +118,8 @@ library(testthat)
 
 # use_r("confint_colwiseinverse")
 
+# use_r("generate_hyperparameters")
+
 
 ####
 
