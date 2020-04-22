@@ -24,7 +24,7 @@ lambda_grid <- function(x, y, n_lambda = 10, min_ratio = 1e-2, ...) {
 
 #' Gamma
 #'
-#' Generate a gamma for the colwise-inverse procedure.
+#' Generate a gamma for the column-wise inverse procedure.
 #'
 #' @param X Design matrix, size \code{m*(n+m)}.
 #' @param factor Numeric.
