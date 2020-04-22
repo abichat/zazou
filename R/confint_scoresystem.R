@@ -19,12 +19,13 @@ confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
 
   scosys <- calculate_Z(X = X)
 
-  tau <- noise_factor(X = X, score_system = scosys)
+  tau <- noise_factor_scoresystem(X = X, score_system = scosys)
 
-  new_beta <- update_beta(X = X, y = Y, beta_init = x$shifts_est,
-                          score_system = scosys)
+  new_beta <- update_beta_scoresystem(X = X, y = Y, beta_init = x$shifts_est,
+                                      score_system = scosys)
 
-  mat_covar_noise <- covariance_noise_matrix(X = X, score_system = scosys)
+  mat_covar_noise <-
+    covariance_noise_matrix_scoresystem(X = X, score_system = scosys)
 
   hcis <- size_half_confint_shifts(noise_factor = tau,
                                    hsigma = hsigma, alpha_conf = alpha_conf)
@@ -54,36 +55,6 @@ confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
 }
 
 
-#' Noise factor
-#'
-#' @param X Matrix size m*(n+m).
-#' @param score_system Score system of X.
-#'
-#' @return The vector of noise factor for the shifts, size (n+m)
-#' @export
-noise_factor <- function(X, score_system) {
-  num <- sqrt(colSums(score_system ^ 2))
-  # den <- colSums(X * score_system)
-  den <- nrow(X)
-  num / den
-}
-
-#' Update beta
-#'
-#' @param y A vector of size m.
-#' @param beta_init Initial value of beta found with scaled lasso.
-#' @inheritParams noise_factor
-#'
-#' @return The one-step self-bias corrected estimator of beta, size m.
-#' @export
-update_beta <- function(X, y, beta_init, score_system) {
-  res <- y - X %*% beta_init
-  num <- t(score_system) %*% res
-  # den <- colSums(score_system * X)
-  den <- nrow(X)
-  beta_init + num / den
-}
-
 #' Size of the half confidence interval for the shifts
 #'
 #' Compute the size of the half confidence interval for the shifts,
@@ -105,27 +76,6 @@ size_half_confint_shifts <- function(noise_factor, hsigma, alpha_conf = 0.05){
               alpha_conf = alpha_conf))
 }
 
-
-#' Covariance noise matrix
-#'
-#' @inheritParams noise_factor
-#'
-#' @return The covariance of the noise component for the leaves (size n*n)
-#' @export
-#'
-covariance_noise_matrix <- function(X, score_system){
-  STS <- crossprod(score_system)
-  STX <- crossprod(score_system, X)
-  n <- ncol(STS)
-  V <- matrix(NA, nrow = n, ncol = n)
-  for(i in seq_len(n)){
-    for(j in i:n){
-      # cat(paste0("i = ", i, ", j =", j), sep = "\n")
-      V[i, j] <- V[j, i] <- STS[i, j] / abs(STX[i, i] * STX[j, j])
-    }
-  }
-  V
-}
 
 
 #' Size of the half confidence interval for the z-scores

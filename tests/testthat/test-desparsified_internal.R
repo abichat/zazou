@@ -2,7 +2,7 @@ context("Desparsified internal")
 
 X <- matrix(1:12, ncol = 3)
 Z <- matrix(rpois(12, 3), ncol = 3)
-tau <- noise_factor(X, Z)
+tau <- noise_factor_scoresystem(X, Z)
 
 test_that("noise_factor() is correct", {
   expect_length(tau, 3)

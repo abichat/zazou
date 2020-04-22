@@ -35,7 +35,8 @@ test_that("est_scosys has its specific components / dimensions", {
   expect_equal(est_scosys$alpha_conf, 0.05)
   expect_equal(ncol(est_scosys$shifts_est), 3)
   expect_is(est_scosys$optim_info$covariance_noise_matrix, "matrix")
-  expect_equal(dim(est_scosys$optim_info$covariance_noise_matrix), rep(nplusm, 2))
+  expect_equal(dim(est_scosys$optim_info$covariance_noise_matrix),
+               rep(nplusm, 2))
 })
 
 
@@ -48,18 +49,18 @@ withr::with_preserve_seed({
   set.seed(42)
   scosys <- calculate_Z(X = X)
 })
-tau <- noise_factor(X = X, score_system = scosys)
-V <- covariance_noise_matrix(X = X, score_system = scosys)
+tau <- noise_factor_scoresystem(X = X, score_system = scosys)
+V <- covariance_noise_matrix_scoresystem(X = X, score_system = scosys)
 j <- sample(nplusm, 1)
 k <- sample(nplusm, 1)
 
 scla <- solve_scaled_lasso(y = Y, X = X, beta0 = rep(0, nplusm),
                            constraint_type = "beta")
-beta <- update_beta(X = X, y = Y, beta_init = scla$par,
+beta <- update_beta_scoresystem(X = X, y = Y, beta_init = scla$par,
                     score_system = scosys)
 hci <- size_half_confint_shifts(noise_factor = tau,
                                 hsigma = scla$sigma_scaledlasso)$half_size
-tau <- noise_factor(X, scosys)
+tau <- noise_factor_scoresystem(X, scosys)
 
 
 test_that("intermediary outputs are correct", {

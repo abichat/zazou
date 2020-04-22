@@ -15,7 +15,8 @@ solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
 
     # cat("\n###############\n### col =", col, "###\n###############\n")
 
-    new_col <- try(solve_colwiseinverse_col(col, A, gamma), silent = silent_on_errors)
+    new_col <- try(solve_colwiseinverse_col(col, A, gamma),
+                   silent = silent_on_errors)
 
     ntry_max_per_column <- 500
     ntry <- 0
@@ -24,7 +25,8 @@ solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
 
       # cat("\n####### ntry for col", col, "=", ntry, "#######\n\n")
 
-      new_col <- try(solve_colwiseinverse_col(col, A, gamma), silent = silent_on_errors)
+      new_col <- try(solve_colwiseinverse_col(col, A, gamma),
+                     silent = silent_on_errors)
       ntry <- ntry + 1
     }
 
@@ -56,7 +58,8 @@ solve_colwiseinverse_col <- function(col, A, gamma){
   # m <- rnorm(dim, sd = 1 / sqrt(dim))
   # m <- rnorm(dim, sd = 1 / sqrt(dim))
   # m <- rep(1, dim)
-  m <- 2 * (rbinom(dim, 1, 0.5) - 0.5) * rnorm(dim, mean = 1, sd = 1 / sqrt(dim))
+  m <- 2 * (rbinom(dim, 1, 0.5) - 0.5) * rnorm(dim, mean = 1,
+                                               sd = 1 / sqrt(dim))
 
   # cat("# First m =", m, "\n")
 

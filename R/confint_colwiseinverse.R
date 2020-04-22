@@ -52,15 +52,4 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, ...){
 }
 
 
-update_beta_colwiseinverse <- function(X, y, beta_init, colwiseinverse){
-  res <- y - X %*% beta_init
-  correction <- colwiseinverse %*% t(X) %*% res / nrow(X)
-  beta_init + correction
-}
-
-noise_factor_colwiseinverse <- function(X, colwiseinverse, XTXn) {
-  MXTXxM <- colwiseinverse %*% XTXn %*% t(colwiseinverse)
-  sqrt(diag(MXTXxM) / nrow(X))
-}
-
 
