@@ -33,9 +33,9 @@ withr::with_preserve_seed({
 test_that("est_scosys has its specific components / dimensions", {
   expect_equal(est_scosys$method, "scoresystem")
   expect_equal(est_scosys$alpha_conf, 0.05)
-  expect_equal(ncol(est_scosys$shifts_est), 3)
-  expect_is(est_scosys$optim_info$covariance_noise_matrix, "matrix")
-  expect_equal(dim(est_scosys$optim_info$covariance_noise_matrix),
+  expect_equal(ncol(est_scosys$shifts_est), 4)
+  expect_is(est_scosys$covariance_noise_matrix, "matrix")
+  expect_equal(dim(est_scosys$covariance_noise_matrix),
                rep(nplusm, 2))
 })
 
@@ -70,7 +70,7 @@ test_that("intermediary outputs are correct", {
   # noise factor
   expect_length(tau, nplusm)
   # covariance noise matrix
-  expect_equal(V, est_scosys$optim_info$covariance_noise_matrix)
+  expect_equal(V, est_scosys$covariance_noise_matrix)
   expect_equal(dim(V), c(nplusm, nplusm))
   expect_equal(V, t(V))
   expect_equal(V[j, k],
@@ -78,7 +78,7 @@ test_that("intermediary outputs are correct", {
                  (abs(sum(scosys[, j] * X[, j]) * sum(scosys[, k] * X[, k]))))
   # Noise factor
   expect_length(tau, nplusm)
-  expect_equal(tau, est_scosys$optim_info$noise_factor)
+  expect_equal(tau, est_scosys$noise_factor)
   ## Non-deterministic
   # scaled lasso
   expect_length(scla, 6)
@@ -96,9 +96,8 @@ test_that("intermediary outputs are correct", {
 test_that("changing confindence interval works", {
   est_scosys5to2 <- update_confint(est_scosys, alpha_confint = 0.02)
   expect_equal(est_scosys5to2$alpha_conf, 0.02)
-  expect_equal(est_scosys5to2$zscores_est$lower,
-               est_scosys002$zscores_est$lower)
-  expect_equal(est_scosys5to2$shifts_est$lower, est_scosys002$shifts_est$lower)
+  expect_equal(est_scosys5to2$zscores_est, est_scosys002$zscores_est)
+  expect_equal(est_scosys5to2$shifts_est, est_scosys002$shifts_est)
 })
 
 

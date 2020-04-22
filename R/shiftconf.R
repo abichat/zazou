@@ -8,7 +8,8 @@
 #'
 as_shiftconf <- function(x, shiftestim){
 
-  required_names <- c("shifts_est", "zscores_est", "alpha_conf", "method")
+  required_names <- c("shifts_est", "zscores_est", "alpha_conf", "noise_factor",
+                      "covariance_noise_matrix", "method")
 
   if (!is.list(x) ||
       !all(required_names %in% names(x))) {
@@ -19,6 +20,8 @@ as_shiftconf <- function(x, shiftestim){
             zscores_est = x$zscores_est,
             alpha_conf = x$alpha_conf,
             method = x$method,
+            noise_factor = x$noise_factor,
+            covariance_noise_matrix = x$covariance_noise_matrix,
             shiftestim = shiftestim,
             optim_info = x[setdiff(names(x), required_names)])
 

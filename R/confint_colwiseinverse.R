@@ -23,7 +23,8 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, ...){
 
   M <- try(solve_colwiseinverse(XTXn, gamma), silent = TRUE)
 
-  ntry_max_for_matrix <- 100
+  # ntry_max_for_matrix <- 100
+  ntry_max_for_matrix <- 10
   ntry_mat <- 0
 
   while(!is.matrix(M) && ntry_mat < ntry_max_for_matrix){
@@ -41,14 +42,16 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, ...){
                                          colwiseinverse = M)
 
   tau <- noise_factor_colwiseinverse(X, colwiseinverse = M, XTXn = XTXn)
+  mat_covar_noise <-
+    covariance_noise_matrix_colwiseinverse(X, colwiseinverse = M, XTXn = XTXn)
 
   shifts_est <- df_confint_pvalue(estimate = new_beta, sigma = hsigma,
                                  tau = tau, alpha_conf = alpha_conf)
 
 
   list(shifts_est = shifts_est, zscores_est = x$zscores_est,
-       noise_factor = tau, alpha_conf = alpha_conf,
-       method = "colwiseinverse")
+       noise_factor = tau, covariance_noise_matrix = mat_covar_noise,
+       colwiseinverse = M, alpha_conf = alpha_conf, method = "colwiseinverse")
 }
 
 

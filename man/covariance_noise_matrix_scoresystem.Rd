@@ -2,14 +2,21 @@
 % Please edit documentation in R/confint_utils.R
 \name{covariance_noise_matrix_scoresystem}
 \alias{covariance_noise_matrix_scoresystem}
+\alias{covariance_noise_matrix_colwiseinverse}
 \title{Covariance noise matrix}
 \usage{
 covariance_noise_matrix_scoresystem(X, score_system)
+
+covariance_noise_matrix_colwiseinverse(X, colwiseinverse, XTXn)
 }
 \arguments{
 \item{X}{Matrix size m*(n+m).}
 
 \item{score_system}{Score system of \code{X}.}
+
+\item{colwiseinverse}{The columnwise inverse.}
+
+\item{XTXn}{Matrix.}
 }
 \value{
 The covariance of the noise component for the leaves (size n*n)

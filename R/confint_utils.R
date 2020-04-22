@@ -13,8 +13,8 @@ update_confint <- function(x, alpha_confint){
   }
 
   if(x$method == "scoresystem"){
-    tau <- x$optim_info$noise_factor
-    V <- x$optim_info$covariance_noise_matrix
+    tau <- x$noise_factor
+    V <- x$covariance_noise_matrix
     hsigma <- x$shiftestim$optim_info$sigma_scaledlasso
     mat_incidence <- incidence_matrix(x$shiftestim$tree)
 
@@ -27,8 +27,13 @@ update_confint <- function(x, alpha_confint){
                                       alpha_conf = alpha_confint)
 
     x$alpha_conf <- alpha_confint
-    x$shifts_est$lower <- x$shifts_est$estimate - shcs
-    x$shifts_est$upper <- x$shifts_est$estimate + shcs
+    # x$shifts_est$lower <- x$shifts_est$estimate - shcs
+    # x$shifts_est$upper <- x$shifts_est$estimate + shcs
+
+    x$shifts_est <- df_confint_pvalue(estimate = x$shifts_est$estimate,
+                                      sigma = hsigma, tau = tau,
+                                      alpha_conf = alpha_confint)
+
     x$zscores_est$lower <- x$zscores_est$estimate - shcz
     x$zscores_est$upper <- x$zscores_est$estimate + shcz
 
@@ -70,6 +75,7 @@ df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf = 0.05){
   half_confint_size <- qnorm(1 - alpha_conf / 2) * sigma_tau # bivariate
   p_value <- pnorm(estimate / sigma_tau) # univariate
 
+
   df$lower <- estimate - half_confint_size
   df$upper <- estimate + half_confint_size
   df$pvalue <- p_value
@@ -94,7 +100,7 @@ update_beta_scoresystem <- function(X, y, beta_init, score_system) {
   num <- t(score_system) %*% res
   # den <- colSums(score_system * X)
   den <- nrow(X)
-  beta_init + num / den
+  as.numeric(beta_init + num / den)
 }
 
 #' @rdname update_beta_scoresystem
@@ -104,7 +110,7 @@ update_beta_scoresystem <- function(X, y, beta_init, score_system) {
 update_beta_colwiseinverse <- function(X, y, beta_init, colwiseinverse){
   res <- y - X %*% beta_init
   correction <- colwiseinverse %*% t(X) %*% res / nrow(X)
-  beta_init + correction
+  as.numeric(beta_init + correction)
 }
 
 
@@ -151,4 +157,13 @@ covariance_noise_matrix_scoresystem <- function(X, score_system){
     }
   }
   V
+}
+
+
+#' @rdname covariance_noise_matrix_scoresystem
+#' @inheritParams noise_factor_colwiseinverse
+#' @export
+#'
+covariance_noise_matrix_colwiseinverse <- function(X, colwiseinverse, XTXn){
+  colwiseinverse %*% XTXn %*% t(colwiseinverse) / nrow(X)
 }

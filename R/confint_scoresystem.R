@@ -27,19 +27,19 @@ confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
   mat_covar_noise <-
     covariance_noise_matrix_scoresystem(X = X, score_system = scosys)
 
-  hcis <- size_half_confint_shifts(noise_factor = tau,
-                                   hsigma = hsigma, alpha_conf = alpha_conf)
+  # hcis <- size_half_confint_shifts(noise_factor = tau,
+  #                                  hsigma = hsigma, alpha_conf = alpha_conf)
 
   hciz <- size_half_confint_zscores(covariance_noise_mat = mat_covar_noise,
                                     incidence_mat = mat_incidence,
                                     hsigma = hsigma, alpha_conf = alpha_conf)
 
-  shifts_est <- data.frame(estimate = new_beta,
-                           lower = new_beta - hcis$half_size,
-                           upper = new_beta + hcis$half_size)
+  # shifts_est <- data.frame(estimate = new_beta,
+  #                          lower = new_beta - hcis$half_size,
+  #                          upper = new_beta + hcis$half_size)
 
-  shifts_est2 <- df_confint_pvalue(estimate = new_beta, sigma = hsigma,
-                                   tau = tau, alpha_conf = alpha_conf)
+  shifts_est <- df_confint_pvalue(estimate = new_beta, sigma = hsigma,
+                                  tau = tau, alpha_conf = alpha_conf)
 
   zscores_est <- mat_incidence %*% shifts_est$estimate
   zscores_est <- data.frame(leaf = rownames(zscores_est),
@@ -49,9 +49,9 @@ confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
   zscores_est$upper <- zscores_est$estimate + hciz
   rownames(zscores_est) <- NULL
 
-  list(shifts_est = shifts_est, shifts_est2 = shifts_est2, zscores_est = zscores_est,
+  list(shifts_est = shifts_est, zscores_est = zscores_est,
        noise_factor = tau, covariance_noise_matrix = mat_covar_noise,
-       alpha_conf = alpha_conf, method = "scoresystem")
+       scoresystem = scosys, alpha_conf = alpha_conf, method = "scoresystem")
 }
 
 

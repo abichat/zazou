@@ -54,7 +54,7 @@ test_that("outputs do not change over time", {
                      "previous_outputs/estDL_zscore", update = FALSE)
   expect_known_value(estDL$shifts_est, "previous_outputs/estDL_shift",
                      update = FALSE)
-  expect_known_value(estDL$optim_info$covariance_noise_matrix,
+  expect_known_value(estDL$covariance_noise_matrix,
                      "previous_outputs/estDL_conoma",
                      update = FALSE)
   expect_known_value(estDL$shiftestim$zscores_est,
