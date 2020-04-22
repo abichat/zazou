@@ -20,3 +20,19 @@ lambda_grid <- function(x, y, n_lambda = 10, min_ratio = 1e-2, ...) {
   return(10 ^ seq(from = log10(lambda_max), to = log10(min_ratio * lambda_max),
                   len = n_lambda))
 }
+
+
+#' Gamma
+#'
+#' Generate a gamma for the colwise-inverse procedure.
+#'
+#' @param X Design matrix, size \code{m*(n+m)}.
+#' @param factor Numeric.
+#'
+#' @return A suggested value of \eqn{\gamma}.
+#' @export
+#'
+generate_gamma <- function(X, factor = 2){
+  stopifnot(factor > 0)
+  factor * sqrt(log(ncol(X)) / nrow(X))
+}

@@ -19,7 +19,7 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, ...){
 
   XTXn <- crossprod(X) / nrow(X)
 
-  gamma <- 2 * sqrt(log(ncol(X))/nrow(X))
+  gamma <- generate_gamma(X)
 
   M <- try(solve_colwiseinverse(XTXn, gamma), silent = TRUE)
 
