@@ -334,7 +334,7 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   if (it == max_it) warning("Convergence not reached")
 
   ## return solution
-  t(U) %*% m
+  U %*% m
 }
 
 
