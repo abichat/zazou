@@ -1,7 +1,7 @@
 #' Solve column-wise inverse
 #'
-#' @param A A square matrix to column-wise inverse.
-#' @param gamma Non-negative.
+#' @param A A semi positive definite matrix
+#' @param gamma Numeric. Non-negative
 #' @param ntry_max Integer. Maximum umber of try for each column.
 #' @param silent_on_errors Logical, default to TRUE.
 #' @param silent_on_try Logical, default to TRUE.
@@ -13,6 +13,12 @@
 solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
                                  silent_on_tries = TRUE, silent_on_errors = TRUE,
                                  ...){
+  ## Validate that A is semi definite positive
+  stopifnot(
+    isSymmetric(A),
+    all(eigen(A, symmetric = TRUE, only.values = TRUE) >= 0)
+  )
+
   dim <- ncol(A)
   gen_inv <- solve(A + diag(gamma, nrow = dim))
   M <- matrix(NA, nrow = dim, ncol = dim)
@@ -76,7 +82,7 @@ solve_colwiseinverse_col <- function(col, A, gamma, m0){
     # m <- rep(0, dim)
     # m <- rnorm(dim, sd = 1 / sqrt(dim))
     # m <- rep(1, dim)
-    m <- 2 * (rbinom(dim, 1, 0.5) - 0.5) * rnorm(dim, mean = 1,
+    m <- sample(x = c(-1, 1), size = dim, replace = TRUE) * rnorm(dim, mean = 1,
                                                  sd = 1 / sqrt(dim))
   } else {
     m <- m0
