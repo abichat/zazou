@@ -30,9 +30,9 @@ confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
   # hcis <- size_half_confint_shifts(noise_factor = tau,
   #                                  hsigma = hsigma, alpha_conf = alpha_conf)
 
-  hciz <- size_half_confint_zscores(covariance_noise_mat = mat_covar_noise,
-                                    incidence_mat = mat_incidence,
-                                    hsigma = hsigma, alpha_conf = alpha_conf)
+  # hciz <- size_half_confint_zscores(covariance_noise_mat = mat_covar_noise,
+  #                                   incidence_mat = mat_incidence,
+  #                                   hsigma = hsigma, alpha_conf = alpha_conf)
 
   # shifts_est <- data.frame(estimate = new_beta,
   #                          lower = new_beta - hcis$half_size,
@@ -41,13 +41,19 @@ confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
   shifts_est <- df_confint_pvalue(estimate = new_beta, sigma = hsigma,
                                   tau = tau, alpha_conf = alpha_conf)
 
-  zscores_est <- mat_incidence %*% shifts_est$estimate
-  zscores_est <- data.frame(leaf = rownames(zscores_est),
-                            estimate = zscores_est[, 1],
-                            stringsAsFactors = FALSE)
-  zscores_est$lower <- zscores_est$estimate - hciz
-  zscores_est$upper <- zscores_est$estimate + hciz
-  rownames(zscores_est) <- NULL
+  # zscores_est <- mat_incidence %*% shifts_est$estimate
+  # zscores_est <- data.frame(leaf = rownames(zscores_est),
+  #                           estimate = zscores_est[, 1],
+  #                           stringsAsFactors = FALSE)
+  # zscores_est$lower <- zscores_est$estimate - hciz
+  # zscores_est$upper <- zscores_est$estimate + hciz
+  # rownames(zscores_est) <- NULL
+
+  zscores_est <- df_conf_leaves(shifts = shifts_est$estimate,
+                                covariance_noise_mat = mat_covar_noise,
+                                mat_incidence = mat_incidence, sigma = hsigma,
+                                alpha_conf = alpha_conf)
+
 
   list(shifts_est = shifts_est, zscores_est = zscores_est,
        noise_factor = tau, covariance_noise_matrix = mat_covar_noise,

@@ -20,11 +20,11 @@ solve_colwiseinverse(
 
 \item{ntry_max}{Integer. Maximum umber of try for each column.}
 
+\item{silent_on_tries}{Logical, default to TRUE.}
+
 \item{silent_on_errors}{Logical, default to TRUE.}
 
 \item{...}{Further arguments to be passed to or from other methods.}
-
-\item{silent_on_try}{Logical, default to TRUE.}
 }
 \value{
 The column-wise, inverse, same size as \code{A}.

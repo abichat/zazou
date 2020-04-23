@@ -48,8 +48,13 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, gamma, silent_on_errors
   shifts_est <- df_confint_pvalue(estimate = new_beta, sigma = hsigma,
                                  tau = tau, alpha_conf = alpha_conf)
 
+  zscores_est <- df_conf_leaves(shifts = shifts_est$estimate,
+                                covariance_noise_mat = mat_covar_noise,
+                                mat_incidence = mat_incidence, sigma = hsigma,
+                                alpha_conf = alpha_conf)
 
-  list(shifts_est = shifts_est, zscores_est = x$zscores_est,
+
+  list(shifts_est = shifts_est, zscores_est = zscores_est,
        noise_factor = tau, covariance_noise_matrix = mat_covar_noise,
        colwiseinverse = M, gamma = gamma, alpha_conf = alpha_conf,
        method = "colwiseinverse")

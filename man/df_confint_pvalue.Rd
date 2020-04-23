@@ -2,18 +2,33 @@
 % Please edit documentation in R/confint_utils.R
 \name{df_confint_pvalue}
 \alias{df_confint_pvalue}
+\alias{df_conf_leaves}
 \title{Confidence interval and p-values for estimates}
 \usage{
 df_confint_pvalue(estimate, sigma, tau, alpha_conf = 0.05)
+
+df_conf_leaves(
+  shifts,
+  covariance_noise_mat,
+  mat_incidence,
+  sigma,
+  alpha_conf = 0.05
+)
 }
 \arguments{
-\item{estimate}{Punctual estimate. Eventually named}
+\item{estimate}{Shift estimate from \code{shiftestim} object. Eventually named}
 
 \item{sigma}{Associated standard error, length \code{1}.}
 
 \item{tau}{Noise factor, same length as \code{estimate}.}
 
 \item{alpha_conf}{Confidence level.}
+
+\item{shifts}{Punctual shift estimation from desparsified procedure.}
+
+\item{covariance_noise_mat}{Covariance noise matrix.}
+
+\item{mat_incidence}{Incidence matrix}
 }
 \value{
 A dataframe with 4 (or 5 if \code{estimate} has names) columns.

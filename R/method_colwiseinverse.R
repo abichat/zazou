@@ -4,7 +4,7 @@
 #' @param gamma Non-negative.
 #' @param ntry_max Integer. Maximum umber of try for each column.
 #' @param silent_on_errors Logical, default to TRUE.
-#' @param silent_on_try Logical, default to TRUE.
+#' @param silent_on_tries Logical, default to TRUE.
 #' @param ... Further arguments to be passed to or from other methods.
 #'
 #' @return The column-wise, inverse, same size as \code{A}.

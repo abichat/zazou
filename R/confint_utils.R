@@ -52,7 +52,7 @@ update_confint <- function(x, alpha_confint){
 #'
 #' The confidence interval is bivariate whereas the p-value is univariate.
 #'
-#' @param estimate Punctual estimate. Eventually named
+#' @param estimate Shift estimate from \code{shiftestim} object. Eventually named
 #' @param sigma Associated standard error, length \code{1}.
 #' @param tau Noise factor, same length as \code{estimate}.
 #' @param alpha_conf Confidence level.
@@ -68,7 +68,8 @@ df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf = 0.05){
     df <- data.frame(estimate = estimate)
   } else {
     estimate <- unname(estimate)
-    df <- data.frame(name = names, estimate = estimate)
+    df <- data.frame(name = names, estimate = estimate,
+                     stringsAsFactors = FALSE)
   }
 
   sigma_tau <- sigma * tau
@@ -82,6 +83,35 @@ df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf = 0.05){
 
   return(df)
 
+}
+
+#' @rdname df_confint_pvalue
+#'
+#' @param shifts Punctual shift estimation from desparsified procedure.
+#' @param covariance_noise_mat Covariance noise matrix.
+#' @param mat_incidence Incidence matrix
+#'
+#' @export
+#'
+df_conf_leaves <- function(shifts, covariance_noise_mat, mat_incidence, sigma, alpha_conf = 0.05){
+
+  n <- nrow(mat_incidence)
+
+  tau <- rep(NA, n)
+
+  for(i in seq_len(n)){
+    a <- mat_incidence[i, ]
+    tau[i] <- sum(crossprod(a, covariance_noise_mat) * a)
+  }
+  tau <- sqrt(tau)
+
+  zscores_est <- as.numeric(mat_incidence %*% shifts)
+  names(zscores_est) <- rownames(mat_incidence)
+
+  df <- df_confint_pvalue(zscores_est, sigma = sigma, tau = tau,
+                          alpha_conf = alpha_conf)
+  colnames(df)[1] <- "leaf"
+  df
 }
 
 
