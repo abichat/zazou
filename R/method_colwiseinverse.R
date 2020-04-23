@@ -274,15 +274,20 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   svd <- svd(A, nv = 0)
   U <- svd$u; d <- svd$d
   B <- U %*% diag(d)
+  e_i <- rep(c(0, 1, 0), times = c(col - 1, 1, dim - col))
 
   ##  Initialize m
-  if (missing(m)) m <- rnorm(
-    n = dim,
-    mean = c(-1, 1)[sample.int(2, dim, TRUE)],
-    sd = 1 / sqrt(dim)
-  )
+  if (missing(m)) {
+    ## Not too costly initialization, should be in the feasible set
+    m <- diag( 1 / (d + min(1e-3, max(d)/1e3))) %*% t(U) %*% e_i
+  # m <- rnorm(
+  #   n = dim,
+  #   mean = c(-1, 1)[sample.int(2, dim, TRUE)],
+  #   sd = 1 / sqrt(dim)
+  # )
+  }
   ## constraint vectors: Bm - e_i
-  constraint <- B %*% m - rep(c(0, 1, 0), times = c(col - 1, 1, dim - col))
+  constraint <- B %*% m - e_i
 
   if (any(abs(constraint) > gamma)) warning("The starting point is not in the feasible set. Updates may be meaningless.")
 
