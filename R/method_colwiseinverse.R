@@ -16,7 +16,7 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
   ## Validate that A is semi definite positive
   stopifnot(
     isSymmetric(A),
-    all(eigen(A, symmetric = TRUE, only.values = TRUE) >= 0)
+    all(eigen(A, symmetric = TRUE, only.values = TRUE)$values >= 0)
   )
 
   dim <- ncol(A)
