@@ -135,7 +135,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
   ## Keep track of objective value
   obj_vals <- fn_obj(beta0)
 
-  while (it < max_it && progress > eps) {
+  while (it < max_it && progress > eps && obj_vals > 0) {
     ## Update coordinates in random order (rather than random coordinates)
     coord_order <- sample(p)
     for (coord in coord_order) {
