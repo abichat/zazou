@@ -73,7 +73,8 @@ test_that("fast_solve_colwiseinverse_col() returns a warning when the initial ve
 test_that("global_constrains are respected", {
   A <- toeplitz(x = 0.5^seq(0, 9))
   # B <- toeplitz(x = c(4/3, -2/3, rep(0, 8))) + diag(rep(c(0, 1/3, 0), times = c(1, 8, 1))) ## = solve(A)
-  m <- fast_solve_colwiseinverse_col(1, A, 0.01)
+  gamma <- 0.01
+  m <- fast_solve_colwiseinverse_col(1, A, gamma)
   e1 <- c(1, rep(0, 9))
-  expect_lte(max(abs(A %*% m - e1)), 0.01 + sqrt(.Machine$double.eps))
+  expect_lte(max(abs(A %*% m - e1)), gamma + sqrt(.Machine$double.eps))
 })
