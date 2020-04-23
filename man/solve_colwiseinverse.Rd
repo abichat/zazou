@@ -14,9 +14,9 @@ solve_colwiseinverse(
 )
 }
 \arguments{
-\item{A}{A square matrix to column-wise inverse.}
+\item{A}{A semi positive definite matrix}
 
-\item{gamma}{Non-negative.}
+\item{gamma}{Numeric. Non-negative}
 
 \item{ntry_max}{Integer. Maximum umber of try for each column.}
 

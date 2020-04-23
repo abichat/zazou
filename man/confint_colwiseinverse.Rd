@@ -17,7 +17,7 @@ confint_colwiseinverse(
 
 \item{alpha_conf}{The confidence level.}
 
-\item{gamma}{Non-negative.}
+\item{gamma}{Numeric. Non-negative}
 
 \item{silent_on_errors}{Logical, default to TRUE.}
 

@@ -11,7 +11,7 @@ argmin_between_two(m, ind, A, prop1, prop2)
 
 \item{ind}{The number of the cell in the column.}
 
-\item{A}{A square matrix to column-wise inverse.}
+\item{A}{A semi positive definite matrix}
 
 \item{prop1}{First proposition for the \code{ind} cell in \code{m}.}
 

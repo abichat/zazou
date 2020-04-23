@@ -40,3 +40,32 @@ test_that("global_constrains are repected", {
     expect_lte(max(A %*% M[, i] - e), gamma)
   }
 })
+
+test_that("Computation of m works for easy cases", {
+  dim <- 10
+  A <- diag(1, dim)
+  gamma <- 0.1
+  for(i in seq_len(dim)){
+    e <- rep(0, dim)
+    e[i] <- 1
+    ## Small gamma
+    expect_identical(
+      fast_solve_colwiseinverse_col(i, A, gamma, e),
+      matrix((1 - gamma) * e, ncol = 1)
+    )
+    ## Large gamma
+    expect_identical(
+      fast_solve_colwiseinverse_col(i, A, 1, e),
+      matrix(0, nrow = dim, ncol = 1)
+    )
+  }
+})
+
+test_that("fast_solve_colwiseinverse_col() returns a warning when the initial vector is not feasible.", {
+  dim <- 10
+  A <- diag(1, dim)
+  gamma <- 0.1
+  expect_warning(fast_solve_colwiseinverse_col(1, A, 0.1, rep(1, dim)),
+                 "The starting point is not in the feasible set. Updates may be meaningless.",
+                 fixed = TRUE)
+})

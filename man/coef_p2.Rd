@@ -11,7 +11,7 @@ coef_p2(m, ind, A)
 
 \item{ind}{The number of the cell in the column.}
 
-\item{A}{A square matrix to column-wise inverse.}
+\item{A}{A semi positive definite matrix}
 }
 \value{
 A list with \code{a}, \code{b} and \code{c} components.
