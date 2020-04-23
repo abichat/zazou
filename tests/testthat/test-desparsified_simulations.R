@@ -10,9 +10,7 @@ alpha <- 0.1
 est_scaled <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
                               tree = tree, alphaOU = alpha,
                               method = "scaledlasso")
-est_lasso <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
-                              tree = tree, alphaOU = alpha,
-                              method = "shooting")
+
 
 withr::with_preserve_seed({
   set.seed(42)
@@ -26,8 +24,12 @@ withr::with_preserve_seed({
                              method = "scoresystem")
 })
 
-# est_colwiseinv <- estimate_confint(est_scaled, alpha_conf = 0.05,
-#                                    method = "colwiseinverse")
+# est_colwiseinv <-
+#   estimate_confint(est_scaled, alpha_conf = 0.05, # Fail
+#                    method = "colwiseinverse", silent_on_tries = FALSE)
+# est_colwiseinv <-
+#   estimate_confint(est_scaled, alpha_conf = 0.05, factor = 3, # Success
+#                    method = "colwiseinverse", silent_on_tries = FALSE)
 
 
 test_that("est_scosys has its specific components / dimensions", {

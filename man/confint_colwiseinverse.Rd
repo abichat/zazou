@@ -4,14 +4,16 @@
 \alias{confint_colwiseinverse}
 \title{Desparsified lasso based on column-wise inverse matrix}
 \usage{
-confint_colwiseinverse(x, alpha_conf = 0.05, ...)
+confint_colwiseinverse(x, alpha_conf = 0.05, silent_on_errors = TRUE, ...)
 }
 \arguments{
-\item{x}{a 'shiftestim' object.}
+\item{x}{A 'shiftestim' object.}
 
-\item{alpha_conf}{the confidence level.}
+\item{alpha_conf}{The confidence level.}
 
-\item{...}{further arguments to be passed to or from other methods.}
+\item{silent_on_errors}{Logical, default to TRUE.}
+
+\item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
 a list

@@ -28,11 +28,12 @@ lambda_grid <- function(x, y, n_lambda = 10, min_ratio = 1e-2, ...) {
 #'
 #' @param X Design matrix, size \code{m*(n+m)}.
 #' @param factor Numeric.
+#' @param ... Further arguments to be passed to or from other methods.
 #'
 #' @return A suggested value of \eqn{\gamma}.
 #' @export
 #'
-generate_gamma <- function(X, factor = 2){
+generate_gamma <- function(X, factor = 2, ...){
   stopifnot(factor > 0)
   factor * sqrt(log(ncol(X)) / nrow(X))
 }

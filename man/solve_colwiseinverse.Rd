@@ -4,14 +4,24 @@
 \alias{solve_colwiseinverse}
 \title{Solve column-wise inverse}
 \usage{
-solve_colwiseinverse(A, gamma, silent_on_errors = TRUE)
+solve_colwiseinverse(
+  A,
+  gamma,
+  ntry_max = 5e+05,
+  silent_on_tries = TRUE,
+  silent_on_errors = TRUE
+)
 }
 \arguments{
 \item{A}{A square matrix to column-wise inverse.}
 
 \item{gamma}{Non-negative.}
 
+\item{ntry_max}{Integer. Maximum umber of try for each column.}
+
 \item{silent_on_errors}{Logical, default to TRUE.}
+
+\item{silent_on_try}{Logical, default to TRUE.}
 }
 \value{
 The column-wise, inverse, same size as \code{A}.

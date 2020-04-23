@@ -1,13 +1,18 @@
 #' Desparsified lasso based on column-wise inverse matrix
 #'
-#' @param x a 'shiftestim' object.
-#' @param alpha_conf the confidence level.
-#' @param ... further arguments to be passed to or from other methods.
+#' @details If \code{gamma} is missing, it is chose with
+#' \code{generate_gamma} whose \code{factor} argument could be passed to with
+#' \code{...}.
+#'
+#' @param x A 'shiftestim' object.
+#' @param alpha_conf The confidence level.
+#' @param ... Further arguments to be passed to or from other methods.
+#' @inheritParams solve_colwiseinverse
 #'
 #' @return a list
 #' @export
 #'
-confint_colwiseinverse <- function(x, alpha_conf = 0.05, ...){
+confint_colwiseinverse <- function(x, alpha_conf = 0.05, gamma, silent_on_errors = TRUE, ...){
   stopifnot(inherits(x, "shiftestim"))
 
   mat_covarOU <- covarianceOU_matrix(x$tree, x$alpha)
@@ -19,18 +24,13 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, ...){
 
   XTXn <- crossprod(X) / nrow(X)
 
-  gamma <- generate_gamma(X)
-
-  M <- try(solve_colwiseinverse(XTXn, gamma), silent = TRUE)
-
-  # ntry_max_for_matrix <- 100
-  ntry_max_for_matrix <- 10
-  ntry_mat <- 0
-
-  while(!is.matrix(M) && ntry_mat < ntry_max_for_matrix){
-    M <- try(solve_colwiseinverse(XTXn, gamma), silent = TRUE)
-    ntry_mat <- ntry_mat + 1
+  if(missing(gamma)){
+    gamma <- generate_gamma(X, ...)
   }
+
+  M <- try(solve_colwiseinverse(A = XTXn, gamma = gamma,
+                                silent_on_errors = silent_on_errors, ...),
+           silent = silent_on_errors)
 
   if(!is.matrix(M)){
     warning("Constrains are not feasible. M is set to identity matrix.")

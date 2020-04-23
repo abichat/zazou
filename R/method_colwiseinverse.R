@@ -2,12 +2,17 @@
 #'
 #' @param A A square matrix to column-wise inverse.
 #' @param gamma Non-negative.
+#' @param ntry_max Integer. Maximum umber of try for each column.
 #' @param silent_on_errors Logical, default to TRUE.
+#' @param silent_on_try Logical, default to TRUE.
+#' @param ... Further arguments to be passed to or from other methods.
 #'
 #' @return The column-wise, inverse, same size as \code{A}.
 #' @export
 #'
-solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
+solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
+                                 silent_on_tries = TRUE, silent_on_errors = TRUE,
+                                 ...){
   dim <- ncol(A)
   gen_inv <- solve(A + diag(gamma, nrow = dim))
   M <- matrix(NA, nrow = dim, ncol = dim)
@@ -19,10 +24,9 @@ solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
     col0 <- gen_inv[, col]
 
     new_col <- NULL
-    ntry_max_per_column <- 50000
     ntry <- 0
 
-    while(!is.numeric(new_col) && ntry < ntry_max_per_column){
+    while(!is.numeric(new_col) && ntry < ntry_max){
 
       # cat("\n####### ntry for col", col, "=", ntry, "#######\n\n")
       col0 <- col0 + rnorm(dim, sd = 1 / sqrt(dim))
@@ -33,12 +37,19 @@ solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
       ntry <- ntry + 1
     }
 
-    if(is.numeric(new_col)){
+    try_ies <- ifelse(ntry >= 2, "tries", "try")
+
+    if (is.numeric(new_col)) {
       M[, col] <- new_col
-      cat("Column", col, "succeed after", ntry, "tries.\n")
+      if (!silent_on_tries)
+        cat("Column ", col, " succeeded after ", ntry, " ", try_ies, ".\n",
+            sep = "")
     } else {
-      cat("Column", col, "fails after", ntry, "tries.\n")
-      stop("Constrains are not feasible.")
+      if (!silent_on_tries)
+        cat("Column ", col, " failed after ", ntry, " ", try_ies, ".\n",
+            sep = "")
+      stop(paste0("Algorithm fails to converge for column ", col, "."))
+
     }
 
 
@@ -206,7 +217,7 @@ compute_bounds <- function(m, ind, col, A, gamma){
   ub <- min(bounds[, 2])
   # cat("|   >   lower bound:", lb, "upper bound:", ub, "\n")
   if(lb > ub){
-    stop("Constrains are not feasible")
+    stop("Constrains are not feasible.")
   }
   return(list(lower_bound = lb, upper_bound = ub))
 }
