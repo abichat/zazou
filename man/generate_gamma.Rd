@@ -4,12 +4,14 @@
 \alias{generate_gamma}
 \title{Gamma}
 \usage{
-generate_gamma(X, factor = 2)
+generate_gamma(X, factor = 2, ...)
 }
 \arguments{
 \item{X}{Design matrix, size \code{m*(n+m)}.}
 
 \item{factor}{Numeric.}
+
+\item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
 A suggested value of \eqn{\gamma}.

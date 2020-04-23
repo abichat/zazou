@@ -4,12 +4,20 @@
 \alias{confint_colwiseinverse}
 \title{Desparsified lasso based on column-wise inverse matrix}
 \usage{
-confint_colwiseinverse(x, alpha_conf = 0.05, silent_on_errors = TRUE, ...)
+confint_colwiseinverse(
+  x,
+  alpha_conf = 0.05,
+  gamma,
+  silent_on_errors = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{A 'shiftestim' object.}
 
 \item{alpha_conf}{The confidence level.}
+
+\item{gamma}{Non-negative.}
 
 \item{silent_on_errors}{Logical, default to TRUE.}
 
@@ -20,4 +28,9 @@ a list
 }
 \description{
 Desparsified lasso based on column-wise inverse matrix
+}
+\details{
+If \code{gamma} is missing, it is chose with
+\code{generate_gamma} whose \code{factor} argument could be passed to with
+\code{...}.
 }

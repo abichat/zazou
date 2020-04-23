@@ -51,7 +51,8 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, gamma, silent_on_errors
 
   list(shifts_est = shifts_est, zscores_est = x$zscores_est,
        noise_factor = tau, covariance_noise_matrix = mat_covar_noise,
-       colwiseinverse = M, alpha_conf = alpha_conf, method = "colwiseinverse")
+       colwiseinverse = M, gamma = gamma, alpha_conf = alpha_conf,
+       method = "colwiseinverse")
 }
 
 
