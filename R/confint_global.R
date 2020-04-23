@@ -28,5 +28,7 @@ estimate_confint <- function(shiftestim, alpha_conf = 0.05,
 
   obj <- as_shiftconf(obj, shiftestim)
 
+  obj$optim_info$supp_arg <- list(...)
+
   return(obj)
 }
