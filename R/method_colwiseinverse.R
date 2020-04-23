@@ -343,21 +343,18 @@ update_cell <- function(c, b, gamma) {
   ## Rounding to avoid numerical errors
   b[abs(b) < 10 * .Machine$double.eps] <- 0
   active_set <- b != 0
-  ## Upper bound of feasible set: min_{i: b[i] != 0} (c[i]+gamma)/b[i]
-  if (any( (-c + gamma < - sqrt(.Machine$double.eps)) & b == 0)) {
-    upper_bound <- -Inf
-  } else {
-    upper_bound <- min( (-c + gamma)[active_set] / b[active_set] )
-  }
-  ## Lower bound of feasible set: max_{i: b[i] != 0} (c[i]-gamma)/b[i]
-  if (any( (-c - gamma > sqrt(.Machine$double.eps)) & b == 0)) {
-    lower_bound <- Inf
-  } else {
-    lower_bound <- max( (-c - gamma)[active_set] / b[active_set] )
-  }
-  ## Check that feasible set (u + v * beta <= 0) is not empty
+  ## If |c_i| > gamma for any i such that b_i = 0, the feasible set is empty
+  if (any(abs(c[!active_set]) > gamma)) stop("Feasible set is empty")
+  ## Bounds of feasible sets are (-c_i +/- gamma) / b_i
+  bound_1 <- (-c + gamma)[active_set] / b[active_set]
+  bound_2 <- (-c - gamma)[active_set] / b[active_set]
+  ## Min of all upper bounds
+  upper_bound <- min(ifelse(bound_1 > bound_2, bound_1, bound_2))
+  ## Max of all lower bounds
+  lower_bound <- max(ifelse(bound_1 > bound_2, bound_2, bound_1))
+  ## Check that feasible set is not empty
   if (upper_bound - lower_bound < sqrt(.Machine$double.eps)) {
-    stop("The constraint is not feasible. Consider changing the constraint.")
+    stop("Feasible set is empty.")
   }
   ## Project 0 on feasibility set and return result
   max(lower_bound, min(0, upper_bound))
