@@ -253,3 +253,107 @@ argmin_between_two <- function(m, ind, A, prop1, prop2){
 }
 
 
+
+
+
+
+#' Compute a column for the column-wise inverse.
+#'
+#' @param col The column number.
+#' @param m Startup column.
+#' @param max_it Integer. Maximum number of iterations
+#' @inheritParams solve_colwiseinverse
+#'
+#' @return The column, while respecting constrains.
+#' @export
+#'
+fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
+
+  ### Bookkeeping and transformation (should be move to outer loop)
+  dim <- ncol(A)
+  svd <- svd(A, nv = 0)
+  U <- svd$u; d <- svd$d
+  B <- U %*% diag(d)
+
+  ##  Initialize m
+  if (missing(m)) m <- rnorm(
+    n = dim,
+    mean = c(-1, 1)[sample.int(2, dim, TRUE)],
+    sd = 1 / sqrt(dim)
+  )
+  ## constraint vectors: Bm - e_i
+  constraint <- B %*% m - rep(c(0, 1, 0), times = c(col - 1, 1, dim - col))
+
+  if (any(abs(constraint) > gamma)) warning("The starting point is not in the feasible set. Updates may be meaningless.")
+
+  ## Objective function
+  fn_obj <- function(x) { sum(svd$d*x^2) }
+  obj_vals <- fn_obj(m)
+
+  # Helper functions:
+  ## update coord only has side effects
+  update_coord <- function(coord){
+    mi <- m[coord]
+    b <- B[, coord]
+    c <- constraint - mi * b ## B[ , -coord] %*% m[-coord] - e_i
+
+    # update cell mi
+    mi <- try(update_cell(c, b, gamma), silent = TRUE)
+    if (is.numeric(mi)) {
+      # update m and constraints only if mi is numeric
+      m[coord] <<- mi
+      constraint <<- c + mi * b
+    }
+  }
+
+  it <- 1
+  eps <- 10 ^ -8
+  progress <- +Inf
+
+  while (it < max_it && progress > eps && obj_vals > 0) {
+    ## Update coordinates in random order (rather than random coordinates)
+    coord_order <- sample.int(dim)
+    for (coord in coord_order) {
+      # cat(coord, sep = "\n")
+      update_coord(coord)
+      # cat(paste(m, collapse = ","), sep = "\n")
+    }
+    ## Store current objective value and compute progress
+    it <- it + 1
+    new_obj_vals <- fn_obj(m)
+    progress <- abs(new_obj_vals - obj_vals) / obj_vals
+    obj_vals <- new_obj_vals
+  }
+
+  ## Checkfor problems
+  if (it == max_it) warning("Convergence not reached")
+
+  ## return solution
+  t(U) %*% m
+}
+
+
+update_cell <- function(c, b, gamma) {
+  ## c = c - e
+  ## Rounding to avoid numerical errors
+  b[abs(b) < 10 * .Machine$double.eps] <- 0
+  active_set <- b != 0
+  ## Upper bound of feasible set: min_{i: b[i] != 0} (c[i]+gamma)/b[i]
+  if (any( (-c + gamma < - sqrt(.Machine$double.eps)) & b == 0)) {
+    upper_bound <- -Inf
+  } else {
+    upper_bound <- min( (-c + gamma)[active_set] / b[active_set] )
+  }
+  ## Lower bound of feasible set: max_{i: b[i] != 0} (c[i]-gamma)/b[i]
+  if (any( (-c - gamma > sqrt(.Machine$double.eps)) & b == 0)) {
+    lower_bound <- Inf
+  } else {
+    lower_bound <- max( (-c - gamma)[active_set] / b[active_set] )
+  }
+  ## Check that feasible set (u + v * beta <= 0) is not empty
+  if (upper_bound - lower_bound < sqrt(.Machine$double.eps)) {
+    stop("The constraint is not feasible. Consider changing the constraint.")
+  }
+  ## Project 0 on feasibility set and return result
+  max(lower_bound, min(0, upper_bound))
+}
