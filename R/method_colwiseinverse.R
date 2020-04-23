@@ -70,8 +70,6 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
 #' @param m0 Startup column.
 #' @inheritParams solve_colwiseinverse
 #'
-#' @importFrom stats rbinom
-#'
 #' @return The column, wile respecting constrains.
 #' @export
 #'

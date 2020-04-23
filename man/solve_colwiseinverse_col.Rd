@@ -9,9 +9,9 @@ solve_colwiseinverse_col(col, A, gamma, m0)
 \arguments{
 \item{col}{The column number.}
 
-\item{A}{A square matrix to column-wise inverse.}
+\item{A}{A semi positive definite matrix}
 
-\item{gamma}{Non-negative.}
+\item{gamma}{Numeric. Non-negative}
 
 \item{m0}{Startup column.}
 }

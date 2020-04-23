@@ -13,9 +13,9 @@ compute_bounds(m, ind, col, A, gamma)
 
 \item{col}{The column number.}
 
-\item{A}{A square matrix to column-wise inverse.}
+\item{A}{A semi positive definite matrix}
 
-\item{gamma}{Non-negative.}
+\item{gamma}{Numeric. Non-negative}
 }
 \value{
 A list with \code{lower_bound} and \code{upper_bound} components.
