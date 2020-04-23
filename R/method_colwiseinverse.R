@@ -9,30 +9,35 @@
 #'
 solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
   dim <- ncol(A)
+  gen_inv <- solve(A + diag(gamma, nrow = dim))
   M <- matrix(NA, nrow = dim, ncol = dim)
 
   for(col in seq_len(dim)){
 
     # cat("\n###############\n### col =", col, "###\n###############\n")
 
-    new_col <- try(solve_colwiseinverse_col(col, A, gamma),
-                   silent = silent_on_errors)
+    col0 <- gen_inv[, col]
 
-    ntry_max_per_column <- 500
+    new_col <- NULL
+    ntry_max_per_column <- 50000
     ntry <- 0
 
     while(!is.numeric(new_col) && ntry < ntry_max_per_column){
 
       # cat("\n####### ntry for col", col, "=", ntry, "#######\n\n")
+      col0 <- col0 + rnorm(dim, sd = 1 / sqrt(dim))
 
-      new_col <- try(solve_colwiseinverse_col(col, A, gamma),
+      new_col <- try(solve_colwiseinverse_col(col, A, gamma,
+                                              m0 = col0),
                      silent = silent_on_errors)
       ntry <- ntry + 1
     }
 
     if(is.numeric(new_col)){
       M[, col] <- new_col
+      cat("Column", col, "succeed after", ntry, "tries.\n")
     } else {
+      cat("Column", col, "fails after", ntry, "tries.\n")
       stop("Constrains are not feasible.")
     }
 
@@ -45,6 +50,7 @@ solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
 #' Compute a column for the column-wise inverse.
 #'
 #' @param col The column number.
+#' @param m0 Startup column.
 #' @inheritParams solve_colwiseinverse
 #'
 #' @importFrom stats rbinom
@@ -52,14 +58,18 @@ solve_colwiseinverse <- function(A, gamma, silent_on_errors = TRUE){
 #' @return The column, wile respecting constrains.
 #' @export
 #'
-solve_colwiseinverse_col <- function(col, A, gamma){
+solve_colwiseinverse_col <- function(col, A, gamma, m0){
   dim <- ncol(A)
-  # m <- rep(0, dim)
-  # m <- rnorm(dim, sd = 1 / sqrt(dim))
-  # m <- rnorm(dim, sd = 1 / sqrt(dim))
-  # m <- rep(1, dim)
-  m <- 2 * (rbinom(dim, 1, 0.5) - 0.5) * rnorm(dim, mean = 1,
-                                               sd = 1 / sqrt(dim))
+
+  if(missing(m0)){
+    # m <- rep(0, dim)
+    # m <- rnorm(dim, sd = 1 / sqrt(dim))
+    # m <- rep(1, dim)
+    m <- 2 * (rbinom(dim, 1, 0.5) - 0.5) * rnorm(dim, mean = 1,
+                                                 sd = 1 / sqrt(dim))
+  } else {
+    m <- m0
+  }
 
   # cat("# First m =", m, "\n")
 

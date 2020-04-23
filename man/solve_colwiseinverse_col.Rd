@@ -4,7 +4,7 @@
 \alias{solve_colwiseinverse_col}
 \title{Compute a column for the column-wise inverse.}
 \usage{
-solve_colwiseinverse_col(col, A, gamma)
+solve_colwiseinverse_col(col, A, gamma, m0)
 }
 \arguments{
 \item{col}{The column number.}
@@ -12,6 +12,8 @@ solve_colwiseinverse_col(col, A, gamma)
 \item{A}{A square matrix to column-wise inverse.}
 
 \item{gamma}{Non-negative.}
+
+\item{m0}{Startup column.}
 }
 \value{
 The column, wile respecting constrains.
