@@ -327,6 +327,8 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
       # update m and constraints only if mi is numeric
       m[coord] <<- mi
       constraint <<- c + mi * b
+    } else {
+      n_skip <<- n_skip + 1
     }
   }
 
@@ -361,6 +363,7 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   progress <- +Inf
 
   while (it < max_it && progress > eps && obj_vals > 0) {
+    # cat("Iteration", it, "\n")
     ## Try all coordinates and move along best one to avoid being stuck
     ## in local optimum
     if (it == 1) {
@@ -369,10 +372,15 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
     }
     ## Update coordinates in random order (rather than random coordinates)
     coord_order <- sample.int(dim)
+    n_skip <- 0
     for (coord in coord_order) {
       # cat(coord, sep = "\n")
       update_coord(coord)
       # cat(paste(m, collapse = ","), sep = "\n")
+    }
+    ## Stop if no coord has been updated
+    if(n_skip == dim){
+      stop("No cell could be updated in column ", col, ".")
     }
     ## Store current objective value and compute progress
     it <- it + 1
@@ -382,7 +390,7 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   }
 
   ## Checkfor problems
-  if (it == max_it) warning("Convergence not reached")
+  if (it == max_it) warning("Convergence not reached for column ", col, ".")
 
   ## return solution
   U %*% m
@@ -394,6 +402,8 @@ update_cell <- function(c, b, gamma) {
   ## Rounding to avoid numerical errors
   b[abs(b) < 10 * .Machine$double.eps] <- 0
   active_set <- b != 0
+  # cat("Active set:\n")
+  # print(active_set)
   ## If |c_i| > gamma for any i such that b_i = 0, the feasible set is empty
   if (any(abs(c[!active_set]) > gamma)) {
     stop("Feasible set is empty")
@@ -401,6 +411,9 @@ update_cell <- function(c, b, gamma) {
   ## Bounds of feasible sets are (-c_i +/- gamma) / b_i
   bound_1 <- (-c + gamma)[active_set] / b[active_set]
   bound_2 <- (-c - gamma)[active_set] / b[active_set]
+  # cat("Bounds:\n")
+  # print(bound_1)
+  # print(bound_2)
   ## Min of all upper bounds
   upper_bound <- min(ifelse(bound_1 > bound_2, bound_1, bound_2))
   ## Max of all lower bounds
