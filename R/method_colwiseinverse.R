@@ -14,14 +14,17 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
                                  silent_on_tries = TRUE, silent_on_errors = TRUE,
                                  fast = FALSE,
                                  ...){
-  ## Validate that A is semi definite positive
-  stopifnot(
-    isSymmetric(A),
-    all(eigen(A, symmetric = TRUE, only.values = TRUE)$values >= 0)
-  )
-
+  ## Validate that A is semi definite positive through SVD decompisition
+  if (!isSymmetric(A)) stop("Matrix A should be symmetric.")
   dim <- ncol(A)
-  gen_inv <- solve(A + diag(gamma, nrow = dim))
+  svd <- svd(A, nu = dim, nv = 0)
+  U <- svd$u; d <- svd$d
+  if (any(d < 0)) stop("Matrix A should be semi positive definite.")
+
+  B <- U * d[col(U)] ## equivalent to but faster than U %*% diag(d)
+  ## Compute generalized inverse through svd
+  gen_inv <- t(U) %*% diag(1 / (d+gamma)) %*% U
+  # gen_inv <- solve(A + diag(gamma, nrow = dim))
   M <- matrix(NA, nrow = dim, ncol = dim)
 
   if(fast){
@@ -282,7 +285,7 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   dim <- ncol(A)
   svd <- svd(A, nv = 0)
   U <- svd$u; d <- svd$d
-  B <- U %*% diag(d)
+  B <- U * d[col(U)] ## equivalent to but faster than U %*% diag(d)
   e_i <- rep(c(0, 1, 0), times = c(col - 1, 1, dim - col))
 
   ##  Initialize m
