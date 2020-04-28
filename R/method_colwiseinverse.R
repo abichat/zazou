@@ -293,7 +293,7 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
     ## Not too costly initialization, should be in the feasible set
     ## If d is ill-conditioned, increase eigenvalues before inversion
     d_inv <- d
-    if (d[length(d)] / d[1] < 1e-6) d_inv <- d + max(1e-6, max(d)/1e6)
+    if (d[length(d)] / d[1] < 1e-5) d_inv <- d + max(1e-5, max(d)/1e5)
     m <- (1/d_inv) * U[col, ]
     ## Equivalent to but faster than
     # m <- diag(1 / d_inv) %*% t(U) %*% e_i
@@ -323,11 +323,38 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
     }
   }
 
+  ## update best: Update coord that leads to smallest l2 norm
+  ##
+  update_smallest <- function() {
+    best <- list(obj = Inf, i = NULL, mi <- NA)
+    ## Try all coordinates in turn and record the one with max decrease in the objective function
+    for (i in 1:dim) {
+      mi <- try(update_cell(constraint - m[i]*B[, i], B[, i], gamma),
+                silent = TRUE)
+      if (is.numeric(mi)) {
+        m_temp <- m; m_temp[i] <- mi
+        obj <- sum( (U %*% m_temp)^2 )
+        if (obj <= best$obj) {
+          best$obj <- obj; best$i <- i; best$mi <- mi
+        }
+      }
+    }
+    if (!is.null(best$i)) {
+      constraint <<- constraint + (best$mi - m[best$i]) * B[, best$i]
+      m[best$i] <<- best$mi
+    }
+  }
+
   it <- 1
   eps <- 10 ^ -8
   progress <- +Inf
 
   while (it < max_it && progress > eps && obj_vals > 0) {
+    ## Try all coordinates and move along best one to avoid being stuck in local optimum
+    if (it == 1) {
+      ## Hacky: start with update leading to smallest l2 norm
+      update_smallest()
+    }
     ## Update coordinates in random order (rather than random coordinates)
     coord_order <- sample.int(dim)
     for (coord in coord_order) {
