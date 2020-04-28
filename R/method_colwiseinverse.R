@@ -12,6 +12,7 @@
 #'
 solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
                                  silent_on_tries = TRUE, silent_on_errors = TRUE,
+                                 fast = FALSE,
                                  ...){
   ## Validate that A is semi definite positive
   stopifnot(
@@ -22,6 +23,14 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
   dim <- ncol(A)
   gen_inv <- solve(A + diag(gamma, nrow = dim))
   M <- matrix(NA, nrow = dim, ncol = dim)
+
+  if(fast){
+    print("new")
+    solve_col <- fast_solve_colwiseinverse_col
+  } else {
+    print("old")
+    solve_col <- solve_colwiseinverse_col
+  }
 
   for(col in seq_len(dim)){
 
@@ -37,7 +46,7 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
       # cat("\n####### ntry for col", col, "=", ntry, "#######\n\n")
       col0 <- col0 + rnorm(dim, sd = 1 / sqrt(dim))
 
-      new_col <- try(solve_colwiseinverse_col(col, A, gamma,
+      new_col <- try(solve_col(col, A, gamma,
                                               m0 = col0),
                      silent = silent_on_errors)
       ntry <- ntry + 1
@@ -91,7 +100,7 @@ solve_colwiseinverse_col <- function(col, A, gamma, m0){
   # cat("# First m =", m, "\n")
 
 
-  max_it <- 100
+  max_it <- 5000
   eps <- 10 ^ -8
 
   iter <- 0
