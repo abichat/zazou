@@ -293,8 +293,10 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
     ## Not too costly initialization, should be in the feasible set
     ## If d is ill-conditioned, increase eigenvalues before inversion
     d_inv <- d
-    if (d[length(d)] / d[1] < 1e-6) d_inv <- d + max(1e-6, max(d)/1e6)
-    m <- (1/d_inv) * U[col, ]
+    if (d[length(d)] / d[1] < 1e-6) {
+      d_inv <- d + max(1e-6, max(d) / 1e6)
+    }
+    m <- (1 / d_inv) * U[col,]
     ## Equivalent to but faster than
     # m <- diag(1 / d_inv) %*% t(U) %*% e_i
   }
