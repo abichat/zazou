@@ -11,19 +11,20 @@
 #' @export
 #'
 solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
-                                 silent_on_tries = TRUE, silent_on_errors = TRUE,
-                                 fast = FALSE,
-                                 ...){
+                                 silent_on_tries = TRUE,
+                                 silent_on_errors = TRUE,
+                                 fast = FALSE, ...){
   ## Validate that A is semi definite positive through SVD decompisition
   if (!isSymmetric(A)) stop("Matrix A should be symmetric.")
   dim <- ncol(A)
   svd <- svd(A, nu = dim, nv = 0)
-  U <- svd$u; d <- svd$d
+  U <- svd$u
+  d <- svd$d
   if (any(d < 0)) stop("Matrix A should be semi positive definite.")
 
   B <- U * d[col(U)] ## equivalent to but faster than U %*% diag(d)
   ## Compute generalized inverse through svd
-  gen_inv <- t(U) %*% diag(1 / (d+gamma)) %*% U
+  gen_inv <- t(U) %*% diag(1 / (d + gamma)) %*% U
   # gen_inv <- solve(A + diag(gamma, nrow = dim))
   M <- matrix(NA, nrow = dim, ncol = dim)
 
@@ -94,8 +95,8 @@ solve_colwiseinverse_col <- function(col, A, gamma, m0){
     # m <- rep(0, dim)
     # m <- rnorm(dim, sd = 1 / sqrt(dim))
     # m <- rep(1, dim)
-    m <- sample(x = c(-1, 1), size = dim, replace = TRUE) * rnorm(dim, mean = 1,
-                                                 sd = 1 / sqrt(dim))
+    m <- sample(x = c(-1, 1), size = dim, replace = TRUE) *
+                                 rnorm(dim, mean = 1, sd = 1 / sqrt(dim))
   } else {
     m <- m0
   }
@@ -284,7 +285,8 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   ### Bookkeeping and transformation (should be move to outer loop)
   dim <- ncol(A)
   svd <- svd(A, nv = 0)
-  U <- svd$u; d <- svd$d
+  U <- svd$u
+  d <- svd$d
   B <- U * d[col(U)] ## equivalent to but faster than U %*% diag(d)
   e_i <- rep(c(0, 1, 0), times = c(col - 1, 1, dim - col))
 
@@ -293,7 +295,9 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
     ## Not too costly initialization, should be in the feasible set
     ## If d is ill-conditioned, increase eigenvalues before inversion
     d_inv <- d
-    if (d[length(d)] / d[1] < 1e-5) d_inv <- d + max(1e-5, max(d)/1e5)
+    if (d[length(d)] / d[1] < 1e-5){
+      d_inv <- d + max(1e-5, max(d) / 1e5)
+    }
     m <- (1/d_inv) * U[col, ]
     ## Equivalent to but faster than
     # m <- diag(1 / d_inv) %*% t(U) %*% e_i
@@ -301,7 +305,10 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   ## constraint vectors: Bm - e_i
   constraint <- B %*% m - e_i
 
-  if (any(abs(constraint) > gamma)) warning("The starting point is not in the feasible set. Updates may be meaningless.")
+  if (any(abs(constraint) > gamma)) {
+    warning(paste("The starting point is not in the feasible set.",
+                  "Updates may be meaningless."))
+  }
 
   ## Objective function
   fn_obj <- function(x) { sum(d*x^2) }
@@ -326,16 +333,20 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   ## update best: Update coord that leads to smallest l2 norm
   ##
   update_smallest <- function() {
-    best <- list(obj = Inf, i = NULL, mi <- NA)
-    ## Try all coordinates in turn and record the one with max decrease in the objective function
+    best <- list(obj = Inf, i = NULL, mi = NA)
+    ## Try all coordinates in turn and record the one with max decrease in the
+    ## objective function
     for (i in 1:dim) {
       mi <- try(update_cell(constraint - m[i]*B[, i], B[, i], gamma),
                 silent = TRUE)
       if (is.numeric(mi)) {
-        m_temp <- m; m_temp[i] <- mi
-        obj <- sum( (U %*% m_temp)^2 )
+        m_temp <- m
+        m_temp[i] <- mi
+        obj <- sum((U %*% m_temp) ^ 2)
         if (obj <= best$obj) {
-          best$obj <- obj; best$i <- i; best$mi <- mi
+          best$obj <- obj
+          best$i <- i
+          best$mi <- mi
         }
       }
     }
@@ -350,7 +361,8 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
   progress <- +Inf
 
   while (it < max_it && progress > eps && obj_vals > 0) {
-    ## Try all coordinates and move along best one to avoid being stuck in local optimum
+    ## Try all coordinates and move along best one to avoid being stuck
+    ## in local optimum
     if (it == 1) {
       ## Hacky: start with update leading to smallest l2 norm
       update_smallest()
@@ -383,7 +395,9 @@ update_cell <- function(c, b, gamma) {
   b[abs(b) < 10 * .Machine$double.eps] <- 0
   active_set <- b != 0
   ## If |c_i| > gamma for any i such that b_i = 0, the feasible set is empty
-  if (any(abs(c[!active_set]) > gamma)) stop("Feasible set is empty")
+  if (any(abs(c[!active_set]) > gamma)) {
+    stop("Feasible set is empty")
+  }
   ## Bounds of feasible sets are (-c_i +/- gamma) / b_i
   bound_1 <- (-c + gamma)[active_set] / b[active_set]
   bound_2 <- (-c - gamma)[active_set] / b[active_set]
