@@ -50,8 +50,7 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
       # cat("\n####### ntry for col", col, "=", ntry, "#######\n\n")
       col0 <- col0 + rnorm(dim, sd = 1 / sqrt(dim))
 
-      new_col <- try(solve_col(col, A, gamma,
-                                              m0 = col0),
+      new_col <- try(solve_col(col = col, svdA = svd, A = A, gamma = gamma, m0 = col0),
                      silent = silent_on_errors)
       ntry <- ntry + 1
     }
@@ -88,7 +87,7 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
 #' @return The column, wile respecting constrains.
 #' @export
 #'
-solve_colwiseinverse_col <- function(col, A, gamma, m0){
+solve_colwiseinverse_col <- function(col, A, gamma, m0, max_it = 5000, ...){
   dim <- ncol(A)
 
   if(missing(m0)){
@@ -104,7 +103,6 @@ solve_colwiseinverse_col <- function(col, A, gamma, m0){
   # cat("# First m =", m, "\n")
 
 
-  max_it <- 5000
   eps <- 10 ^ -8
 
   iter <- 0
@@ -273,25 +271,27 @@ argmin_between_two <- function(m, ind, A, prop1, prop2){
 #' Compute a column for the column-wise inverse.
 #'
 #' @param col The column number.
-#' @param m Startup column.
+#' @param m0 Startup column.
 #' @param max_it Integer. Maximum number of iterations
 #' @inheritParams solve_colwiseinverse
 #'
 #' @return The column, while respecting constrains.
 #' @export
 #'
-fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
+fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000, ...) {
 
   ### Bookkeeping and transformation (should be move to outer loop)
-  dim <- ncol(A)
-  svd <- svd(A, nv = 0)
-  U <- svd$u
-  d <- svd$d
+  if(missing(svdA)){
+    svdA <- svd(A, nv = 0)
+  }
+  U <- svdA$u
+  d <- svdA$d
+  dim <- ncol(U)
   B <- U * d[col(U)] ## equivalent to but faster than U %*% diag(d)
   e_i <- rep(c(0, 1, 0), times = c(col - 1, 1, dim - col))
 
   ##  Initialize m
-  if (missing(m)) {
+  if (missing(m0)) {
     ## Not too costly initialization, should be in the feasible set
     ## If d is ill-conditioned, increase eigenvalues before inversion
     d_inv <- d
@@ -301,6 +301,8 @@ fast_solve_colwiseinverse_col <- function(col, A, gamma, m, max_it = 5000) {
     m <- (1/d_inv) * U[col, ]
     ## Equivalent to but faster than
     # m <- diag(1 / d_inv) %*% t(U) %*% e_i
+  } else {
+    m <- m0
   }
   ## constraint vectors: Bm - e_i
   constraint <- B %*% m - e_i
