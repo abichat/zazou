@@ -29,10 +29,8 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
   M <- matrix(NA, nrow = dim, ncol = dim)
 
   if(fast){
-    print("new")
     solve_col <- fast_solve_colwiseinverse_col
   } else {
-    print("old")
     solve_col <- solve_colwiseinverse_col
   }
 
@@ -308,6 +306,8 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
   constraint <- B %*% m - e_i
 
   if (any(abs(constraint) > gamma)) {
+    cat("The starting point is not in the feasible set.",
+        "Updates may be meaningless.\n")
     warning(paste("The starting point is not in the feasible set.",
                   "Updates may be meaningless."))
   }
@@ -332,6 +332,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     } else {
       n_skip <<- n_skip + 1
     }
+    cat("nskip = ", n_skip, "\n")
   }
 
   ## update best: Update coord that leads to smallest l2 norm
@@ -341,6 +342,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     ## Try all coordinates in turn and record the one with max decrease in the
     ## objective function
     for (i in 1:dim) {
+      cat("Small ", i, "\n")
       mi <- try(update_cell(constraint - m[i]*B[, i], B[, i], gamma),
                 silent = TRUE)
       if (is.numeric(mi)) {
@@ -355,8 +357,11 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
       }
     }
     if (!is.null(best$i)) {
+      cat("Small not NULL\n")
       constraint <<- constraint + (best$mi - m[best$i]) * B[, best$i]
       m[best$i] <<- best$mi
+    } else {
+      stop("No cell could be updated in column ", col, ".")
     }
   }
 
@@ -375,6 +380,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     ## Update coordinates in random order (rather than random coordinates)
     coord_order <- sample.int(dim)
     n_skip <- 0
+    cat("Reinitialization of nskip.\n")
     for (coord in coord_order) {
       # cat(coord, sep = "\n")
       update_coord(coord)
@@ -382,6 +388,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     }
     ## Stop if no coord has been updated
     if(n_skip == dim){
+      cat("## Exit ##\n")
       stop("No cell could be updated in column ", col, ".")
     }
     ## Store current objective value and compute progress
