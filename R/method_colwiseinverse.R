@@ -46,7 +46,7 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
     while(!is.numeric(new_col) && ntry < ntry_max){
 
       # cat("\n####### ntry for col", col, "=", ntry, "#######\n\n")
-      col0 <- col0 + rnorm(dim, sd = 1 / sqrt(dim))
+      col0 <- col0 #+ rnorm(dim, sd = 1 / sqrt(dim))
 
       new_col <- try(solve_col(col = col, svdA = svd, A = A, gamma = gamma, m0 = col0),
                      silent = silent_on_errors)
@@ -305,9 +305,9 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
   ## constraint vectors: Bm - e_i
   constraint <- B %*% m - e_i
 
+  # print(m)
   if (any(abs(constraint) > gamma)) {
-    cat("The starting point is not in the feasible set.",
-        "Updates may be meaningless.\n")
+    # cat("Starting point is not in the feasible set.\n")
     warning(paste("The starting point is not in the feasible set.",
                   "Updates may be meaningless."))
   }
@@ -332,7 +332,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     } else {
       n_skip <<- n_skip + 1
     }
-    cat("nskip = ", n_skip, "\n")
+    # cat("nskip = ", n_skip, "\n")
   }
 
   ## update best: Update coord that leads to smallest l2 norm
@@ -342,7 +342,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     ## Try all coordinates in turn and record the one with max decrease in the
     ## objective function
     for (i in 1:dim) {
-      cat("Small ", i, "\n")
+      # cat("Small ", i, "\n")
       mi <- try(update_cell(constraint - m[i]*B[, i], B[, i], gamma),
                 silent = TRUE)
       if (is.numeric(mi)) {
@@ -357,11 +357,12 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
       }
     }
     if (!is.null(best$i)) {
-      cat("Small not NULL\n")
+      # cat("We are in the feasible region !!!! ##############\n")
       constraint <<- constraint + (best$mi - m[best$i]) * B[, best$i]
       m[best$i] <<- best$mi
     } else {
-      stop("No cell could be updated in column ", col, ".")
+      # cat("Smallest NULL: EXIT\n")
+      stop("No cell could be updated for the first time in column ", col, ".")
     }
   }
 
@@ -380,7 +381,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     ## Update coordinates in random order (rather than random coordinates)
     coord_order <- sample.int(dim)
     n_skip <- 0
-    cat("Reinitialization of nskip.\n")
+    # cat("Reinitialization of nskip.\n")
     for (coord in coord_order) {
       # cat(coord, sep = "\n")
       update_coord(coord)
@@ -388,7 +389,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     }
     ## Stop if no coord has been updated
     if(n_skip == dim){
-      cat("## Exit ##\n")
+      # cat("## Exit ##\n")
       stop("No cell could be updated in column ", col, ".")
     }
     ## Store current objective value and compute progress
@@ -396,6 +397,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     new_obj_vals <- fn_obj(m)
     progress <- abs(new_obj_vals - obj_vals) / obj_vals
     obj_vals <- new_obj_vals
+    # cat("iteration", it, "done\n")
   }
 
   ## Checkfor problems
