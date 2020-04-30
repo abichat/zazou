@@ -10,7 +10,7 @@
 #' @return The column-wise, inverse, same size as \code{A}.
 #' @export
 #'
-solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
+solve_colwiseinverse <- function(A, gamma, ntry_max = 10000,
                                  silent_on_tries = TRUE,
                                  silent_on_errors = TRUE,
                                  fast = FALSE, ...){
@@ -29,6 +29,7 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
   M <- matrix(NA, nrow = dim, ncol = dim)
 
   if(fast){
+    # print("new")
     solve_col <- fast_solve_colwiseinverse_col
   } else {
     solve_col <- solve_colwiseinverse_col
@@ -126,6 +127,7 @@ solve_colwiseinverse_col <- function(col, A, gamma, m0, max_it = 5000, ...){
     # cat("##--------------#\n")
   }
   # cat("###################\n")
+  cat("Column ", col, " succeeded after ", iter, " iterations.\n", sep = "")
   return(m)
 }
 
@@ -232,6 +234,7 @@ compute_bounds <- function(m, ind, col, A, gamma){
   ub <- min(bounds[, 2])
   # cat("|   >   lower bound:", lb, "upper bound:", ub, "\n")
   if(lb > ub){
+    cat("Column ", col, " failed after ", it, " iterations.\n", sep = "")
     stop("Constrains are not feasible.")
   }
   return(list(lower_bound = lb, upper_bound = ub))
@@ -389,7 +392,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     }
     ## Stop if no coord has been updated
     if(n_skip == dim){
-      # cat("## Exit ##\n")
+      cat("## Exit ##\n")
       stop("No cell could be updated in column ", col, ".")
     }
     ## Store current objective value and compute progress
@@ -402,7 +405,7 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
 
   ## Checkfor problems
   if (it == max_it) warning("Convergence not reached for column ", col, ".")
-
+  cat("Column ", col, " succeeded after ", it, " iterations.\n", sep = "")
   ## return solution
   U %*% m
 }
@@ -431,6 +434,7 @@ update_cell <- function(c, b, gamma) {
   lower_bound <- max(ifelse(bound_1 > bound_2, bound_2, bound_1))
   ## Check that feasible set is not empty
   if (upper_bound - lower_bound < sqrt(.Machine$double.eps)) {
+    cat("Column ", col, " failed after ", it, " iterations.\n", sep = "")
     stop("Feasible set is empty.")
   }
   ## Project 0 on feasibility set and return result

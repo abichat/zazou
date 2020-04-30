@@ -83,16 +83,15 @@ test_that("global_constrains are respected", {
   expect_lte(max(abs(A %*% m - e1)), gamma + sqrt(.Machine$double.eps))
 })
 
-A <- matrix(c(2, 4, 4, 9), ncol = 2)
-svdA <- svd(A)
 
 test_that("giving A or svd(A) throws the same output", {
+  A <- matrix(c(2, 4, 4, 9), ncol = 2)
+  svdA <- svd(A)
   r1 <- withr::with_seed(2, fast_solve_colwiseinverse_col(col = 1, A = A,
                                                           gamma = 0.02))
   r2 <- withr::with_seed(2, fast_solve_colwiseinverse_col(col = 1, svdA = svdA,
                                                           gamma = 0.02))
   expect_equal(r1, r2)
-
 })
 
 
