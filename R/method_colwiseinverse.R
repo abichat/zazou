@@ -451,12 +451,16 @@ update_cell <- function(c, b, gamma) {
 #' @export
 #'
 #' @examples
-#' B <- diag(1, 10)
-#' find_feasible(B, 1, 0)
+#' B <- diag(1, 3)
+#' find_feasible(B, 1, 0) ## c(1, 0, 0)
+#' find_feasible(B, 1, 0.5) ## c(0.5, 0, 0)
+#' B <- matrix(c(1, 1, 0, 0), 2)
+#' find_feasible(B, 1, gamma = 0.4) ## No solution for gamma lower than 0.5
+#' find_feasible(B, 1, gamma = 0.6) ## Plenty of solutions for gamma higher than 0.5
 find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5) {
   ## bookkeeping variables
   it <- 1
-  n <- ncol(B)
+  n <- nrow(B) ## Ensures that procedures works for non square matrices
   e_i <- rep.int(c(0, 1, 0), times = c(col - 1, 1 , n - col))
   constraint <- B %*% m0
   B_normed <- B / rowSums(B^2) ## B[j, ] / \| B[j, ] \|_2^2
