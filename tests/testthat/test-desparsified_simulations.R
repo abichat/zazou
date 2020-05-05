@@ -27,9 +27,20 @@ withr::with_preserve_seed({
 # est_colwiseinv <-
 #   estimate_confint(est_scaled, alpha_conf = 0.05, # Fail
 #                    method = "colwiseinverse", silent_on_tries = FALSE)
+# tic()
 # est_colwiseinv <-
-#   estimate_confint(est_scaled, alpha_conf = 0.05, factor = 3, # Success
+#   estimate_confint(est_scaled, alpha_conf = 0.05, # Success
 #                    method = "colwiseinverse", silent_on_tries = FALSE)
+# toc()
+#
+# tic()
+# est_colwiseinv_fast <-
+#   estimate_confint(est_scaled, alpha_conf = 0.05,# Success
+#                    method = "colwiseinverse", silent_on_tries = FALSE, fast = TRUE)
+# toc()
+#
+# est_colwiseinv$shifts_est$estimate
+
 
 
 test_that("est_scosys has its specific components / dimensions", {
