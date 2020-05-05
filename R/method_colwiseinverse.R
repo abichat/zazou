@@ -445,6 +445,7 @@ update_cell <- function(c, b, gamma) {
 #' Find a feasible solution for a set of affine constraints
 #'
 #' @param B Matrix coding for a set of affine constraints
+#' @param tol Tolerance allowed for the constraints (mostly used to avoid floating point errors)
 #' @inheritParams solve_colwiseinverse
 #'
 #' @return A feasible point
@@ -457,7 +458,7 @@ update_cell <- function(c, b, gamma) {
 #' B <- matrix(c(1, 1, 0, 0), 2)
 #' find_feasible(B, 1, gamma = 0.4) ## No solution for gamma lower than 0.5
 #' find_feasible(B, 1, gamma = 0.6) ## Plenty of solutions for gamma higher than 0.5
-find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5) {
+find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5, tol = 1e-14) {
   ## bookkeeping variables
   it <- 1
   n <- nrow(B) ## Ensures that procedures works for non square matrices
@@ -469,7 +470,7 @@ find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5) {
 
   ## Helper functions (called only for their side effects)
   is_feasible <- function() {
-    all(abs(constraint - e_i) <= gamma)
+    all(abs(constraint - e_i) <= gamma + tol)
   }
   update_m0 <- function() {  ## used only for its side effect
     ## find most violated constraint

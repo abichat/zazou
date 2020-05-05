@@ -4,12 +4,14 @@
 \alias{find_feasible}
 \title{Find a feasible solution for a set of affine constraints}
 \usage{
-find_feasible(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e+05)
+find_feasible(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e+05, tol = 1e-14)
 }
 \arguments{
 \item{B}{Matrix coding for a set of affine constraints}
 
 \item{gamma}{Numeric. Non-negative}
+
+\item{tol}{Tolerance allowed for the constraints (mostly used to avoid floating point errors)}
 }
 \value{
 A feasible point
