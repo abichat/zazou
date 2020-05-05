@@ -440,3 +440,52 @@ update_cell <- function(c, b, gamma) {
   ## Project 0 on feasibility set and return result
   max(lower_bound, min(0, upper_bound))
 }
+
+
+#' Find a feasible solution for a set of affine constraints
+#'
+#' @param B Matrix coding for a set of affine constraints
+#' @tol   tolerance used for the update
+#' @inheritParams solve_colwiseinverse
+#'
+#' @return A feasible point
+#' @export
+#'
+#' @examples
+#' B <- diag(1, 10)
+#' find_feasible(B, 1, 0)
+find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5, tol = 0.01) {
+  ## bookkeeping variables
+  it <- 1
+  n <- ncol(B)
+  e_i <- rep.int(c(0, 1, 0), times = c(col - 1, 1 , n - col))
+  constraint <- B %*% m0
+  B_normed <- B / rowSums(B^2)
+
+  ## Helper functions (called only for their side effects)
+  is_feasible <- function() {
+    all(abs(constraint - e_i) <= gamma)
+  }
+  update_m0 <- function() {  ## used only for its side effect
+    ## find most violated constraint
+    j <- which.max(abs(constraint - e_i))
+    ## Compute update for x
+    step_length <- abs(constraint[j] - e_i[j]) - gamma
+    direction <- -sign(constraint[j] - e_i[j])
+    update <- direction * step_length * B_normed[j, ]
+    ## Update m0 and constraint
+    m0 <<- m0 + update
+    constraint <<- constraint + B %*% update
+    ## TO DO: speed up by precomputing all vectors B %*% B_normed[j, ]
+  }
+
+  while (it <= max_it & !is_feasible()) {
+    update_m0()
+    it <- it + 1
+  }
+
+  if (!is_feasible()) warning(paste("No feasible solution found after", max_it, "iterations. Aborting"))
+
+  return(m0)
+}
+
