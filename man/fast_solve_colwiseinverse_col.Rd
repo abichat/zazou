@@ -4,7 +4,7 @@
 \alias{fast_solve_colwiseinverse_col}
 \title{Compute a column for the column-wise inverse.}
 \usage{
-fast_solve_colwiseinverse_col(col, A, gamma, m, max_it = 5000)
+fast_solve_colwiseinverse_col(col, svdA, A, gamma, m0, max_it = 5000, ...)
 }
 \arguments{
 \item{col}{The column number.}
@@ -13,9 +13,11 @@ fast_solve_colwiseinverse_col(col, A, gamma, m, max_it = 5000)
 
 \item{gamma}{Numeric. Non-negative}
 
-\item{m}{Startup column.}
+\item{m0}{Startup column.}
 
 \item{max_it}{Integer. Maximum number of iterations}
+
+\item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
 The column, while respecting constrains.
