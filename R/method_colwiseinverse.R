@@ -440,3 +440,57 @@ update_cell <- function(c, b, gamma) {
   ## Project 0 on feasibility set and return result
   max(lower_bound, min(0, upper_bound))
 }
+
+
+#' Find a feasible solution for a set of affine constraints
+#'
+#' @param B Matrix coding for a set of affine constraints
+#' @param tol Tolerance allowed for the constraints (mostly used to avoid floating point errors)
+#' @inheritParams solve_colwiseinverse
+#'
+#' @return A feasible point
+#' @export
+#'
+#' @examples
+#' B <- diag(1, 3)
+#' find_feasible(B, 1, 0) ## c(1, 0, 0)
+#' find_feasible(B, 1, 0.5) ## c(0.5, 0, 0)
+#' B <- matrix(c(1, 1, 0, 0), 2)
+#' find_feasible(B, 1, gamma = 0.4) ## No solution for gamma lower than 0.5
+#' find_feasible(B, 1, gamma = 0.6) ## Plenty of solutions for gamma higher than 0.5
+find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5, tol = 1e-14) {
+  ## bookkeeping variables
+  it <- 1
+  n <- nrow(B) ## Ensures that procedures works for non square matrices
+  e_i <- rep.int(c(0, 1, 0), times = c(col - 1, 1 , n - col))
+  constraint <- B %*% m0
+  B_normed <- B / rowSums(B^2) ## B[j, ] / \| B[j, ] \|_2^2
+  B_normed[rowSums(B^2) == 0, ] <- 0 ## By construction, if B[j, ] is a null row, set B_normed[j, ] to a null row
+  BtB_normed <- tcrossprod(B, B_normed) ## B %*% t(B_normed)
+
+  ## Helper functions (called only for their side effects)
+  is_feasible <- function() {
+    all(abs(constraint - e_i) <= gamma + tol)
+  }
+  update_m0 <- function() {  ## used only for its side effect
+    ## find most violated constraint
+    j <- which.max(abs(constraint - e_i))
+    ## Compute update for x
+    step_length <- abs(constraint[j] - e_i[j]) - gamma
+    direction <- -sign(constraint[j] - e_i[j])
+    update <- direction * step_length
+    ## Update m0 and constraint
+    m0 <<- m0 + update * B_normed[j, ]
+    constraint <<- constraint + update * BtB_normed[, j] ## BtB_normed[, j] = B %*% t(B_normed[j, ])
+  }
+
+  while (it <= max_it & !is_feasible()) {
+    update_m0()
+    it <- it + 1
+  }
+
+  if (!is_feasible()) warning(paste("No feasible solution found after", max_it, "iterations. Aborting"))
+
+  return(m0)
+}
+

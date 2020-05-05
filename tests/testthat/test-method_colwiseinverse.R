@@ -44,11 +44,11 @@ test_that("global_constrains are repected", {
 test_that("Computation of m works for easy cases", {
   dim <- 10
   A <- diag(1, dim)
-  gamma <- 0.1
   for(i in seq_len(dim)){
     e <- rep(0, dim)
     e[i] <- 1
     ## Small gamma
+    gamma <- 0.1
     expect_identical(
       fast_solve_colwiseinverse_col(col = i, A = A, gamma = gamma, m0 = e),
       matrix((1 - gamma) * e, ncol = 1)
@@ -94,8 +94,41 @@ test_that("giving A or svd(A) throws the same output", {
   expect_equal(r1, r2)
 })
 
+test_that("find_feasible() returns a vector with correct dimensions", {
+  B <- diag(1, 3)
+  expect_length(object = find_feasible(B, 1, 0), n = ncol(B))
+  B <- matrix(c(1, 0, 0, 1, 0, 0), ncol = 3)
+  expect_length(object = find_feasible(B, 1, 0), n = ncol(B))
+})
 
+test_that("find_feasible() returns correct solution on easy cases", {
+  B <- diag(1, 3)
+  for (i in 1:ncol(B)) {
+    expect_equal(object   = find_feasible(B, col = i, 0),
+                 expected = rep(c(0, 1, 0), times = c(i - 1, 1, ncol(B) - i)))
+  }
+})
 
+test_that("find_feasible() returns feasible solution", {
+  B <- matrix(c(-1L, 0L, 1L, 1L, -1L, 3L, 1L, 1L, 0L), nrow = 3L) ## invertible matrix
+  gamma <- 0.1
+  for (i in 1:ncol(B)) {
+    m <- find_feasible(B, i, gamma)
+    e_i <- rep(c(0, 1, 0), times = c(i - 1, 1, ncol(B) - i))
+    expect_lte(max(abs(B %*% m - e_i)), gamma + 1e-14)
+  }
+})
+
+test_that("find_feasible() throws a warning when it does not find a feasible solution", {
+  B <- matrix(c(1, 1, 0, 0), 2)
+  gamma <- 0.4 ## Problem has no solution for gamma < 0.5
+  expect_warning(find_feasible(B, 1, gamma = 0.4),
+                 "No feasible solution found after 1e+05 iterations. Aborting",
+                 fixed = TRUE)
+  expect_warning(find_feasible(B, 1, gamma = 0.4, max_it = 10),
+                 "No feasible solution found after 10 iterations. Aborting",
+                 fixed = TRUE)
+})
 
 
 
