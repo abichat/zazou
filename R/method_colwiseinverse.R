@@ -445,7 +445,6 @@ update_cell <- function(c, b, gamma) {
 #' Find a feasible solution for a set of affine constraints
 #'
 #' @param B Matrix coding for a set of affine constraints
-#' @tol   tolerance used for the update
 #' @inheritParams solve_colwiseinverse
 #'
 #' @return A feasible point
@@ -454,7 +453,7 @@ update_cell <- function(c, b, gamma) {
 #' @examples
 #' B <- diag(1, 10)
 #' find_feasible(B, 1, 0)
-find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5, tol = 0.01) {
+find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5) {
   ## bookkeeping variables
   it <- 1
   n <- ncol(B)
