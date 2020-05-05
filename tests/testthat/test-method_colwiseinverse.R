@@ -44,13 +44,12 @@ test_that("global_constrains are repected", {
 test_that("Computation of m works for easy cases", {
   dim <- 10
   A <- diag(1, dim)
-  gamma <- 0.1
   for(i in seq_len(dim)){
     e <- rep(0, dim)
     e[i] <- 1
     ## Small gamma
     expect_identical(
-      fast_solve_colwiseinverse_col(col = i, A = A, gamma = gamma, m0 = e),
+      fast_solve_colwiseinverse_col(col = i, A = A, gamma = 0.1, m0 = e),
       matrix((1 - gamma) * e, ncol = 1)
     )
     ## Large gamma
