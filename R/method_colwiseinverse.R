@@ -292,6 +292,10 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
   e_i <- rep(c(0, 1, 0), times = c(col - 1, 1, dim - col))
 
   ##  Initialize m
+  ## TO DO:
+  ## - truncate d to d[1:K] where d[(K+1):n] = 0
+  ## - keep only m_small = m[1:K] and optimize only on m_small
+  ## - return m = c(m_small, rep(0, n-K))
   if (missing(m0)) {
     ## Not too costly initialization, should be in the feasible set
     ## If d is ill-conditioned, increase eigenvalues before inversion
