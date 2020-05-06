@@ -99,14 +99,5 @@ test_that("changing confindence interval works", {
 })
 
 
-est_scosys09 <- update_confint(est_scosys, alpha_conf = 0.9)
-ind <- which(est_scosys09$zscores_est$lower *
-               est_scosys09$zscores_est$upper > 0)
-
-test_that("extraction works", {
-  expect_equal(extract_significant_leaves(est_scosys09, side = "both"),
-               est_scosys09$zscores_est$leaf[ind])
-})
-
 
 
