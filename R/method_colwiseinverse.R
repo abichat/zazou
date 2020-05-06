@@ -11,7 +11,8 @@
 #' @export
 #'
 solve_colwiseinverse <- function(A, gamma, ntry_max = 500000,
-                                 silent_on_tries = TRUE, silent_on_errors = TRUE,
+                                 silent_on_tries = TRUE,
+                                 silent_on_errors = TRUE,
                                  ...){
   ## Validate that A is semi definite positive
   stopifnot(

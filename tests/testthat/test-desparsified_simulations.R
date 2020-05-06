@@ -80,7 +80,7 @@ test_that("intermediary outputs are correct", {
                  (abs(sum(scosys[, j] * X[, j]) * sum(scosys[, k] * X[, k]))))
   # Noise factor
   expect_length(tau, nplusm)
-  expect_equal(tau, est_scosys$noise_factor)
+  expect_equal(tau, sqrt(diag(est_scosys$covariance_noise_matrix)))
   ## Non-deterministic
   # scaled lasso
   expect_length(scla, 6)
@@ -96,15 +96,16 @@ test_that("intermediary outputs are correct", {
 
 
 test_that("changing confindence interval works", {
-  est_scosys5to2 <- update_confint(est_scosys, alpha_confint = 0.02)
+  est_scosys5to2 <- update_confint(est_scosys, alpha_conf = 0.02)
   expect_equal(est_scosys5to2$alpha_conf, 0.02)
   expect_equal(est_scosys5to2$zscores_est, est_scosys002$zscores_est)
   expect_equal(est_scosys5to2$shifts_est, est_scosys002$shifts_est)
 })
 
 
-est_scosys09 <- update_confint(est_scosys, alpha_confint = 0.9)
-ind <- which(est_scosys09$zscores_est$lower * est_scosys09$zscores_est$upper > 0)
+est_scosys09 <- update_confint(est_scosys, alpha_conf = 0.9)
+ind <- which(est_scosys09$zscores_est$lower *
+               est_scosys09$zscores_est$upper > 0)
 
 test_that("extraction works", {
   expect_equal(extract_significant_leaves(est_scosys09, side = "both"),

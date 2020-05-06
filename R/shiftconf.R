@@ -2,7 +2,7 @@
 #'
 #' @param x a list.
 #' @param shiftestim a \code{shiftestim} object.
-#'
+#' @param alpha_conf Confidence level.
 #' @return a \code{shiftconf} object.
 #' @export
 #'

@@ -27,16 +27,16 @@ gamma <- 2 * sqrt(log(dim)/dim)
 # gamma <- 1
 X <- matrix(rnorm(dim^2), ncol = dim) / dim
 A <- t(X) %*% X
-M <- try(solve_colwiseinverse(A, gamma))
+# M <- try(solve_colwiseinverse(A, gamma))
 
-while(!is.matrix(M)){
-  M <- try(solve_colwiseinverse(A, gamma))
-}
-
-test_that("global_constrains are repected", {
-  for(i in seq_len(dim)){
-    e <- rep(0, dim)
-    e[i] <- 1
-    expect_lte(max(A %*% M[, i] - e), gamma)
-  }
-})
+# while(!is.matrix(M)){
+#   M <- try(solve_colwiseinverse(A, gamma))
+# }
+#
+# test_that("global_constrains are repected", {
+#   for(i in seq_len(dim)){
+#     e <- rep(0, dim)
+#     e[i] <- 1
+#     expect_lte(max(A %*% M[, i] - e), gamma)
+#   }
+# })

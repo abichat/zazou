@@ -16,7 +16,8 @@ df_conf_leaves(
 )
 }
 \arguments{
-\item{estimate}{Shift estimate from \code{shiftestim} object. Eventually named}
+\item{estimate}{Shift estimate from \code{shiftestim} object.
+Eventually named.}
 
 \item{sigma}{Associated standard error, length \code{1}.}
 

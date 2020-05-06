@@ -4,12 +4,12 @@
 \alias{update_confint}
 \title{Update confidence interval}
 \usage{
-update_confint(x, alpha_confint)
+update_confint(x, alpha_conf)
 }
 \arguments{
-\item{x}{a 'shiftestim' object.}
+\item{x}{A shiftconf object.}
 
-\item{alpha_confint}{Confidence level.}
+\item{alpha_conf}{Confidence level.}
 }
 \value{
 a 'shiftestim' object

@@ -12,7 +12,8 @@
 #' @return a list
 #' @export
 #'
-confint_colwiseinverse <- function(x, alpha_conf = 0.05, gamma, silent_on_errors = TRUE, ...){
+confint_colwiseinverse <- function(x, alpha_conf = 0.05, gamma,
+                                   silent_on_errors = TRUE, ...){
   stopifnot(inherits(x, "shiftestim"))
 
   mat_covarOU <- covarianceOU_matrix(x$tree, x$alpha)

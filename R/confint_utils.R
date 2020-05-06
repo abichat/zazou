@@ -1,48 +1,18 @@
 #' Update confidence interval
 #'
-#' @inheritParams as_shiftestim
-#' @param alpha_confint Confidence level.
+#' @param x A shiftconf object.
+#' @inheritParams as_shiftconf
 #'
 #' @return a 'shiftestim' object
 #' @export
 #'
-update_confint <- function(x, alpha_confint){
+update_confint <- function(x, alpha_conf){
 
   if(!inherits(x, "shiftconf")){
     stop("x must be a 'shiftconf' object.")
   }
 
-  if(x$method == "scoresystem"){
-    tau <- x$noise_factor
-    V <- x$covariance_noise_matrix
-    hsigma <- x$shiftestim$optim_info$sigma_scaledlasso
-    mat_incidence <- incidence_matrix(x$shiftestim$tree)
-
-    shcs <- size_half_confint_shifts(noise_factor = tau,
-                                     hsigma = hsigma,
-                                     alpha_conf = alpha_confint)$half_size
-    shcz <- size_half_confint_zscores(covariance_noise_mat = V,
-                                      incidence_mat = mat_incidence,
-                                      hsigma = hsigma,
-                                      alpha_conf = alpha_confint)
-
-    x$alpha_conf <- alpha_confint
-    # x$shifts_est$lower <- x$shifts_est$estimate - shcs
-    # x$shifts_est$upper <- x$shifts_est$estimate + shcs
-
-    x$shifts_est <- df_confint_pvalue(estimate = x$shifts_est$estimate,
-                                      sigma = hsigma, tau = tau,
-                                      alpha_conf = alpha_confint)
-
-    x$zscores_est$lower <- x$zscores_est$estimate - shcz
-    x$zscores_est$upper <- x$zscores_est$estimate + shcz
-
-  } else {
-    msg <- paste0("There is no confindence interval for this method (",
-                  x$method, ").")
-    warning(msg)
-  }
-  return(x)
+  add_ci_pv(x, alpha_conf = alpha_conf)
 }
 
 add_ci_pv <- function(x, alpha_conf){
@@ -78,7 +48,8 @@ add_ci_pv <- function(x, alpha_conf){
 #'
 #' The confidence interval is bivariate whereas the p-value is univariate.
 #'
-#' @param estimate Shift estimate from \code{shiftestim} object. Eventually named
+#' @param estimate Shift estimate from \code{shiftestim} object.
+#' Eventually named.
 #' @param sigma Associated standard error, length \code{1}.
 #' @param tau Noise factor, same length as \code{estimate}.
 #' @param alpha_conf Confidence level.
@@ -119,7 +90,8 @@ df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf = 0.05){
 #'
 #' @export
 #'
-df_conf_leaves <- function(shifts, covariance_noise_mat, mat_incidence, sigma, alpha_conf = 0.05){
+df_conf_leaves <- function(shifts, covariance_noise_mat, mat_incidence,
+                           sigma, alpha_conf = 0.05){
 
   n <- nrow(mat_incidence)
 
