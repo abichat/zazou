@@ -62,4 +62,30 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, gamma,
 }
 
 
+#' @rdname update_beta_scoresystem
+#' @param colwiseinverse The columnwise inverse.
+#'
+#' @export
+update_beta_colwiseinverse <- function(X, y, beta_init, colwiseinverse){
+  res <- y - X %*% beta_init
+  correction <- colwiseinverse %*% t(X) %*% res / nrow(X)
+  as.numeric(beta_init + correction)
+}
 
+#' @rdname noise_factor_scoresystem
+#' @inheritParams update_beta_colwiseinverse
+#' @param XTXn Matrix.
+#'
+#' @export
+noise_factor_colwiseinverse <- function(X, colwiseinverse, XTXn) {
+  MXTXxM <- colwiseinverse %*% XTXn %*% t(colwiseinverse)
+  sqrt(diag(MXTXxM) / nrow(X))
+}
+
+#' @rdname covariance_noise_matrix_scoresystem
+#' @inheritParams noise_factor_colwiseinverse
+#' @export
+#'
+covariance_noise_matrix_colwiseinverse <- function(X, colwiseinverse, XTXn){
+  colwiseinverse %*% XTXn %*% t(colwiseinverse) / nrow(X)
+}
