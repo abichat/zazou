@@ -45,6 +45,32 @@ update_confint <- function(x, alpha_confint){
   return(x)
 }
 
+add_ci_pv <- function(x, alpha_conf){
+
+  if(!inherits(x, "shiftconf")){
+    stop("x must be a 'shiftconf' object.")
+  }
+
+  noise_mat <- x$covariance_noise_matrix
+  noise_fact <- sqrt(diag(noise_mat))
+  hsigma <- x$shiftestim$optim_info$sigma_scaledlasso
+  mat_incidence <- incidence_matrix(x$shiftestim$tree)
+
+  shifts_est <- df_confint_pvalue(estimate = x$shifts_est$estimate,
+                                  sigma = hsigma, tau = noise_fact,
+                                  alpha_conf = alpha_conf)
+
+  zscores_est <- df_conf_leaves(shifts = x$shifts_est$estimate,
+                                covariance_noise_mat = noise_mat,
+                                mat_incidence = mat_incidence,
+                                sigma = hsigma, alpha_conf = alpha_conf)
+
+  x$shifts_est <- shifts_est
+  x$zscores_est <- zscores_est
+  x$alpha_conf <- alpha_conf
+
+  return(x)
+}
 
 #' Confidence interval and p-values for estimates
 #'

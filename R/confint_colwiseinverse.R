@@ -41,23 +41,23 @@ confint_colwiseinverse <- function(x, alpha_conf = 0.05, gamma, silent_on_errors
   new_beta <- update_beta_colwiseinverse(X = X, y = Y, beta_init = x$shifts_est,
                                          colwiseinverse = M)
 
-  tau <- noise_factor_colwiseinverse(X, colwiseinverse = M, XTXn = XTXn)
+  # tau <- noise_factor_colwiseinverse(X, colwiseinverse = M, XTXn = XTXn)
   mat_covar_noise <-
     covariance_noise_matrix_colwiseinverse(X, colwiseinverse = M, XTXn = XTXn)
 
-  shifts_est <- df_confint_pvalue(estimate = new_beta, sigma = hsigma,
-                                 tau = tau, alpha_conf = alpha_conf)
+  # shifts_est <- df_confint_pvalue(estimate = new_beta, sigma = hsigma,
+  #                                tau = tau, alpha_conf = alpha_conf)
+  #
+  # zscores_est <- df_conf_leaves(shifts = shifts_est$estimate,
+  #                               covariance_noise_mat = mat_covar_noise,
+  #                               mat_incidence = mat_incidence, sigma = hsigma,
+  #                               alpha_conf = alpha_conf)
 
-  zscores_est <- df_conf_leaves(shifts = shifts_est$estimate,
-                                covariance_noise_mat = mat_covar_noise,
-                                mat_incidence = mat_incidence, sigma = hsigma,
-                                alpha_conf = alpha_conf)
 
-
-  list(shifts_est = shifts_est, zscores_est = zscores_est,
-       noise_factor = tau, covariance_noise_matrix = mat_covar_noise,
-       colwiseinverse = M, gamma = gamma, alpha_conf = alpha_conf,
-       method = "colwiseinverse")
+  list(shifts_est = data.frame(estimate = new_beta),
+       zscores_est = NA, covariance_noise_matrix = mat_covar_noise,
+       method = "colwiseinverse",
+       colwiseinverse = M, gamma = gamma)
 }
 
 

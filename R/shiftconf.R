@@ -6,9 +6,9 @@
 #' @return a \code{shiftconf} object.
 #' @export
 #'
-as_shiftconf <- function(x, shiftestim){
+as_shiftconf <- function(x, shiftestim, alpha_conf){
 
-  required_names <- c("shifts_est", "zscores_est", "alpha_conf", "noise_factor",
+  required_names <- c("shifts_est", "zscores_est",
                       "covariance_noise_matrix", "method")
 
   if (!is.list(x) ||
@@ -20,12 +20,14 @@ as_shiftconf <- function(x, shiftestim){
             zscores_est = x$zscores_est,
             alpha_conf = x$alpha_conf,
             method = x$method,
-            noise_factor = x$noise_factor,
             covariance_noise_matrix = x$covariance_noise_matrix,
             shiftestim = shiftestim,
             optim_info = x[setdiff(names(x), required_names)])
 
   class(x) <- "shiftconf"
+
+  x <- add_ci_pv(x, alpha_conf = alpha_conf)
+
   return(x)
 }
 

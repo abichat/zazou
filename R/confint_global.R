@@ -19,14 +19,14 @@ estimate_confint <- function(shiftestim, alpha_conf = 0.05,
   obj <- switch (method,
 
                  "scoresystem" = confint_scoresystem(
-                   x = shiftestim, alpha_conf = alpha_conf, ...),
+                   x = shiftestim, ...),
 
                  "colwiseinverse" = confint_colwiseinverse(
-                   x = shiftestim, alpha_conf = alpha_conf, ...)
+                   x = shiftestim, ...)
 
                  )
 
-  obj <- as_shiftconf(obj, shiftestim)
+  obj <- as_shiftconf(obj, shiftestim, alpha_conf = alpha_conf)
 
   obj$optim_info$supp_arg <- list(...)
 
