@@ -10,7 +10,6 @@ solve_colwiseinverse(
   ntry_max = 10000,
   silent_on_tries = TRUE,
   silent_on_errors = TRUE,
-  fast = FALSE,
   ...
 )
 }
@@ -24,8 +23,6 @@ solve_colwiseinverse(
 \item{silent_on_tries}{Logical, default to TRUE.}
 
 \item{silent_on_errors}{Logical, default to TRUE.}
-
-\item{fast}{Method to use.}
 
 \item{...}{Further arguments to be passed to or from other methods.}
 }
