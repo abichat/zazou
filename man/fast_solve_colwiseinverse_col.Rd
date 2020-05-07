@@ -9,13 +9,16 @@ fast_solve_colwiseinverse_col(col, svdA, A, gamma, m0, max_it = 5000, ...)
 \arguments{
 \item{col}{The column number.}
 
+\item{svdA}{The SVD decomposition of \code{A} as e list with \code{d} and
+\code{u} components.}
+
 \item{A}{A semi positive definite matrix}
 
 \item{gamma}{Numeric. Non-negative}
 
 \item{m0}{Startup column.}
 
-\item{max_it}{Integer. Maximum number of iterations}
+\item{max_it}{Integer. Maximum number of iterations.}
 
 \item{...}{Further arguments to be passed to or from other methods.}
 }

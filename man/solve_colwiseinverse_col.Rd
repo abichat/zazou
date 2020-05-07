@@ -15,6 +15,8 @@ solve_colwiseinverse_col(col, A, gamma, m0, max_it = 5000, ...)
 
 \item{m0}{Startup column.}
 
+\item{max_it}{Maximum number of iterations.}
+
 \item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{

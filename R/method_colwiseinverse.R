@@ -5,6 +5,7 @@
 #' @param ntry_max Integer. Maximum umber of try for each column.
 #' @param silent_on_errors Logical, default to TRUE.
 #' @param silent_on_tries Logical, default to TRUE.
+#' @param fast Method to use.
 #' @param ... Further arguments to be passed to or from other methods.
 #'
 #' @return The column-wise, inverse, same size as \code{A}.
@@ -79,6 +80,7 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 10000,
 #'
 #' @param col The column number.
 #' @param m0 Startup column.
+#' @param max_it Maximum number of iterations.
 #' @inheritParams solve_colwiseinverse
 #'
 #' @return The column, wile respecting constrains.
@@ -269,9 +271,11 @@ argmin_between_two <- function(m, ind, A, prop1, prop2){
 
 #' Compute a column for the column-wise inverse.
 #'
+#' @param svdA The SVD decomposition of \code{A} as e list with \code{d} and
+#' \code{u} components.
 #' @param col The column number.
 #' @param m0 Startup column.
-#' @param max_it Integer. Maximum number of iterations
+#' @param max_it Integer. Maximum number of iterations.
 #' @inheritParams solve_colwiseinverse
 #'
 #' @return The column, while respecting constrains.
@@ -444,11 +448,12 @@ update_cell <- function(c, b, gamma) {
 }
 
 
-#' Find a feasible solution for a set of affine constraints
+#' Find a feasible solution for a set of linear constraints
 #'
-#' @param B Matrix coding for a set of affine constraints
-#' @param tol Tolerance allowed for the constraints (mostly used to avoid floating point errors)
-#' @inheritParams solve_colwiseinverse
+#' @param B Matrix coding for a set of linear constraints
+#' @param tol Tolerance allowed for the constraints
+#' (mostly used to avoid floating point errors)
+#' @inheritParams fast_solve_colwiseinverse_col
 #'
 #' @return A feasible point
 #' @export
@@ -458,7 +463,8 @@ update_cell <- function(c, b, gamma) {
 #' find_feasible(B, 1, 0) ## c(1, 0, 0)
 #' find_feasible(B, 1, 0.5) ## c(0.5, 0, 0)
 #' B <- matrix(c(1, 1, 0, 0), 2)
-#' find_feasible(B, 1, gamma = 0.4) ## No solution for gamma lower than 0.5
+#' \dontrun{
+#' find_feasible(B, 1, gamma = 0.4) ## No solution for gamma lower than 0.5}
 #' find_feasible(B, 1, gamma = 0.6) ## Plenty of solutions for gamma higher than 0.5
 find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5, tol = 1e-14) {
   ## bookkeeping variables

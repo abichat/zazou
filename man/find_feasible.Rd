@@ -2,28 +2,36 @@
 % Please edit documentation in R/method_colwiseinverse.R
 \name{find_feasible}
 \alias{find_feasible}
-\title{Find a feasible solution for a set of affine constraints}
+\title{Find a feasible solution for a set of linear constraints}
 \usage{
 find_feasible(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e+05, tol = 1e-14)
 }
 \arguments{
-\item{B}{Matrix coding for a set of affine constraints}
+\item{B}{Matrix coding for a set of linear constraints}
+
+\item{col}{The column number.}
 
 \item{gamma}{Numeric. Non-negative}
 
-\item{tol}{Tolerance allowed for the constraints (mostly used to avoid floating point errors)}
+\item{m0}{Startup column.}
+
+\item{max_it}{Integer. Maximum number of iterations.}
+
+\item{tol}{Tolerance allowed for the constraints
+(mostly used to avoid floating point errors)}
 }
 \value{
 A feasible point
 }
 \description{
-Find a feasible solution for a set of affine constraints
+Find a feasible solution for a set of linear constraints
 }
 \examples{
 B <- diag(1, 3)
 find_feasible(B, 1, 0) ## c(1, 0, 0)
 find_feasible(B, 1, 0.5) ## c(0.5, 0, 0)
 B <- matrix(c(1, 1, 0, 0), 2)
-find_feasible(B, 1, gamma = 0.4) ## No solution for gamma lower than 0.5
+\dontrun{
+find_feasible(B, 1, gamma = 0.4) ## No solution for gamma lower than 0.5}
 find_feasible(B, 1, gamma = 0.6) ## Plenty of solutions for gamma higher than 0.5
 }

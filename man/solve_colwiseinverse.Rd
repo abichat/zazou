@@ -25,6 +25,8 @@ solve_colwiseinverse(
 
 \item{silent_on_errors}{Logical, default to TRUE.}
 
+\item{fast}{Method to use.}
+
 \item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
