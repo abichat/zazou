@@ -40,44 +40,15 @@ extract_significant_leaves.shiftestim <-
 #' Extract significant leafs
 #'
 #' @param x A "shiftconf" object.
-#' @param side The side where z-scores are significant (\code{"left"}
-#' (default), \code{"both"} or \code{"right"}).
+#' @param threshold P-value threshold.
 #' @inheritDotParams extract_significant_leaves
 #'
 #' @return The names of the significant leafs.
 #' @export
 #'
 extract_significant_leaves.shiftconf <-
-  function(x, side = c("left", "both", "right"), ...) {
-    signif_ind <- extract_from_cidf(x$zscores_est, side = side)
-    x$zscores_est$leaf[signif_ind]
+  function(x, threshold = 0.05, ...) {
+    lgl <- x$zscores_est$pvalue < threshold
+    x$zscores_est$leaf[lgl]
   }
 
-#' Extract significant indices
-#'
-#' Extract indices where lower and upper components of the dataframe
-#' are both positive or both negative.
-#'
-#' @param cidf confidence interval dataframe with \code{"estimate"},
-#' \code{"lower"}, \code{"upper"} columns.
-#' @inheritParams extract_significant_leaves.shiftconf
-#'
-extract_from_cidf <- function(cidf, side = c("left", "both", "right")) {
-
-  stopifnot(c("lower", "upper") %in% colnames(cidf))
-  stopifnot(cidf$lower <= cidf$upper)
-  side <- match.arg(side)
-
-  signif_left <- c()
-  signif_right <- c()
-
-  if (side %in% c("left", "both")) {
-    signif_left <- which(cidf$upper < 0)
-  }
-  if (side %in% c("both", "right")) {
-    signif_right <- which(cidf$lower > 0)
-  }
-
-  return(sort(union(signif_left, signif_right))
-  )
-}

@@ -4,7 +4,7 @@
 #' @param gamma Numeric. Non-negative
 #' @param ntry_max Integer. Maximum umber of try for each column.
 #' @param silent_on_errors Logical, default to TRUE.
-#' @param silent_on_try Logical, default to TRUE.
+#' @param silent_on_tries Logical, default to TRUE.
 #' @param ... Further arguments to be passed to or from other methods.
 #'
 #' @return The column-wise, inverse, same size as \code{A}.
@@ -80,8 +80,6 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 10000,
 #' @param col The column number.
 #' @param m0 Startup column.
 #' @inheritParams solve_colwiseinverse
-#'
-#' @importFrom stats rbinom
 #'
 #' @return The column, wile respecting constrains.
 #' @export
@@ -497,4 +495,3 @@ find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5, tol
 
   return(m0)
 }
-

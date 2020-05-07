@@ -27,7 +27,7 @@ gamma <- 2 * sqrt(log(dim)/dim)
 # gamma <- 1
 X <- matrix(rnorm(dim^2), ncol = dim) / dim
 A <- t(X) %*% X
-M <- try(solve_colwiseinverse(A, gamma))
+# M <- try(solve_colwiseinverse(A, gamma))
 
 while(!is.matrix(M)){
   M <- try(solve_colwiseinverse(A, gamma))
@@ -129,8 +129,3 @@ test_that("find_feasible() throws a warning when it does not find a feasible sol
                  "No feasible solution found after 10 iterations. Aborting",
                  fixed = TRUE)
 })
-
-
-
-
-
