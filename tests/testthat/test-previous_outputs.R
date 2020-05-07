@@ -31,6 +31,11 @@ withr::with_seed(42, {
                             method = "scoresystem")
 })
 
+withr::with_seed(42, {
+  estCI <- suppressWarnings(estimate_confint(estSL, alpha_conf = 0.05,
+                                             method = "colwiseinverse"))
+})
+
 ######################################################################
 ## Do not run this interactively. Insted, use Run Tests in RStudio. ##
 ######################################################################
@@ -76,6 +81,22 @@ test_that("Score system outputs do not change over time", {
                      "previous_outputs/estSS_scoresystem",
                      update = FALSE)
   expect_known_value(estSS$shiftestim$zscores_est,
+                     "previous_outputs/estSL_zscore",
+                     update = FALSE)
+})
+
+test_that("Columnwise inverse outputs do not change over time", {
+  expect_known_value(estCI$zscores_est,
+                     "previous_outputs/estCI_zscore", update = FALSE)
+  expect_known_value(estCI$shifts_est, "previous_outputs/estCI_shift",
+                     update = FALSE)
+  expect_known_value(estCI$covariance_noise_matrix,
+                     "previous_outputs/estCI_conoma",
+                     update = FALSE)
+  expect_known_value(estCI$optim_info$colwiseinverse,
+                     "previous_outputs/estCI_scoresystem",
+                     update = FALSE)
+  expect_known_value(estCI$shiftestim$zscores_est,
                      "previous_outputs/estSL_zscore",
                      update = FALSE)
 })
