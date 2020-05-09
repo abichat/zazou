@@ -1,4 +1,5 @@
 library(devtools)
+library(usethis)
 library(testthat)
 
 
@@ -119,6 +120,9 @@ library(testthat)
 # use_r("confint_colwiseinverse")
 
 # use_r("generate_hyperparameters")
+
+# use_github_action_check_release()
+# use_github_action_check_standard()
 
 
 ####
