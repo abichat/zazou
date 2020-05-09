@@ -124,6 +124,8 @@ library(testthat)
 # use_github_action_check_release()
 # use_github_action_check_standard()
 
+# use_dev_package("evabic")
+
 
 ####
 

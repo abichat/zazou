@@ -34,7 +34,7 @@ Imports:
 Suggests: 
     corrplot,
     dplyr,
-    evabic,
+    evabic (>= 0.0.2),
     ggplot2,
     ggrepel,
     hdi,
@@ -49,6 +49,8 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
+Remotes: 
+    abichat/evabic
 biocViews: ggtree
 Encoding: UTF-8
 Language: en-US
