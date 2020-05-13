@@ -21,7 +21,6 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 10000,
   d <- svd$d
   if (any(d < 0)) stop("Matrix A should be semi positive definite.")
 
-  B <- U * d[col(U)] ## equivalent to but faster than U %*% diag(d)
   ## Compute generalized inverse through svd
   gen_inv <- t(U) %*% diag(1 / (d + gamma)) %*% U
   # gen_inv <- solve(A + diag(gamma, nrow = dim))
@@ -420,7 +419,7 @@ update_cell <- function(c, b, gamma) {
   if (any(abs(c[!active_set]) > gamma)) {
     stop("Feasible set is empty")
   }
-  if(any(active_set)) {
+  if (any(active_set)) {
     ## Bounds of feasible sets are (-c_i +/- gamma) / b_i
     bound_1 <- (-c + gamma)[active_set] / b[active_set]
     bound_2 <- (-c - gamma)[active_set] / b[active_set]
@@ -436,7 +435,7 @@ update_cell <- function(c, b, gamma) {
       # cat("Column ", col, " failed after ", it, " iterations.\n", sep = "")
       stop("Feasible set is empty.")
     }
-  } else { # b is null and c <= gamma
+  } else {# b is null and c <= gamma
     # upper_bound <- Inf
     # lower_bound <- -Inf
     return(0)
