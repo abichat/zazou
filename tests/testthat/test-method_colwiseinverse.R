@@ -61,18 +61,6 @@ test_that("Computation of m works for easy cases", {
   }
 })
 
-test_that("fast_solve_colwiseinverse_col() returns a warning/error
-          when the initial vector is not feasible.", {
-  dim <- 10
-  A <- diag(1, dim)
-  gamma <- 0.1
-  expect_warning(try(fast_solve_colwiseinverse_col(col = 1, A = A, gamma = 0.1, m0 = rep(1, dim)), silent = TRUE),
-                 "The starting point is not in the feasible set. Updates may be meaningless.",
-                 fixed = TRUE)
-  expect_error(suppressWarnings(fast_solve_colwiseinverse_col(col = 1, A = A, gamma = 0.1, m0 = rep(1, dim))),
-               "No cell could be updated for the first time in column 1.",
-               fixed = TRUE)
-})
 
 test_that("global_constrains are respected", {
   A <- toeplitz(x = 0.5^seq(0, 9))
@@ -122,10 +110,11 @@ test_that("find_feasible() returns feasible solution", {
 test_that("find_feasible() throws a warning when it does not find a feasible solution", {
   B <- matrix(c(1, 1, 0, 0), 2)
   gamma <- 0.4 ## Problem has no solution for gamma < 0.5
-  expect_warning(find_feasible(B, 1, gamma = 0.4),
-                 "No feasible solution found after 1e+05 iterations. Aborting",
-                 fixed = TRUE)
-  expect_warning(find_feasible(B, 1, gamma = 0.4, max_it = 10),
-                 "No feasible solution found after 10 iterations. Aborting",
-                 fixed = TRUE)
+  expect_error(find_feasible(B, 1, gamma = 0.4),
+               "No feasible solution found after 10000 iterations. Aborting.",
+               fixed = TRUE)
+  expect_error(find_feasible(B, 1, gamma = 0.4, max_it = 10),
+               "No feasible solution found after 10 iterations. Aborting.",
+               fixed = TRUE)
 })
+

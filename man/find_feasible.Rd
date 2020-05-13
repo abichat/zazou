@@ -4,7 +4,7 @@
 \alias{find_feasible}
 \title{Find a feasible solution for a set of linear constraints}
 \usage{
-find_feasible(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e+05, tol = 1e-14)
+find_feasible(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 10000, tol = 1e-14)
 }
 \arguments{
 \item{B}{Matrix coding for a set of linear constraints}

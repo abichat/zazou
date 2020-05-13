@@ -81,7 +81,7 @@ solve_colwiseinverse <- function(A, gamma, ntry_max = 10000,
 fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000, ...) {
 
   ### Bookkeeping and transformation (should be move to outer loop)
-  if(missing(svdA)){
+  if (missing(svdA)) {
     svdA <- svd(A, nv = 0)
   }
   U <- svdA$u
@@ -99,14 +99,16 @@ fast_solve_colwiseinverse_col <- function(col, svdA, A, gamma, m0, max_it = 5000
     ## Not too costly initialization, should be in the feasible set
     ## If d is ill-conditioned, increase eigenvalues before inversion
     d_inv <- d
-    if (d[length(d)] / d[1] < 1e-5){
+    if (d[length(d)] / d[1] < 1e-5) {
       d_inv <- d + max(1e-5, max(d) / 1e5)
     }
     m <- (1/d_inv) * U[col, ]
     ## Equivalent to but faster than
     # m <- diag(1 / d_inv) %*% t(U) %*% e_i
+    m <- find_feasible(B = B, col = col, gamma = gamma, m0 = m)
   } else {
-    m <- m0
+    m <- find_feasible(B = B, col = col, gamma = gamma, m0 = m0)
+    # m <- m0
   }
   ## constraint vectors: Bm - e_i
   constraint <- B %*% m - e_i
@@ -269,7 +271,7 @@ update_cell <- function(c, b, gamma) {
 #' \dontrun{
 #' find_feasible(B, 1, gamma = 0.4) ## No solution for gamma lower than 0.5}
 #' find_feasible(B, 1, gamma = 0.6) ## Plenty of solutions for gamma higher than 0.5
-find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5, tol = 1e-14) {
+find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 10000, tol = 1e-14) {
   ## bookkeeping variables
   it <- 1
   n <- nrow(B) ## Ensures that procedures works for non square matrices
@@ -300,7 +302,10 @@ find_feasible <- function(B, col, gamma, m0 = rep(0, ncol(B)), max_it = 1e5, tol
     it <- it + 1
   }
 
-  if (!is_feasible()) warning(paste("No feasible solution found after", max_it, "iterations. Aborting"))
+  if (!is_feasible()) {
+    stop(paste("No feasible solution found after", max_it,
+                "iterations. Aborting."))
+  }
 
   return(m0)
 }
