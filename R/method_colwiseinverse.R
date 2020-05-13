@@ -420,20 +420,26 @@ update_cell <- function(c, b, gamma) {
   if (any(abs(c[!active_set]) > gamma)) {
     stop("Feasible set is empty")
   }
-  ## Bounds of feasible sets are (-c_i +/- gamma) / b_i
-  bound_1 <- (-c + gamma)[active_set] / b[active_set]
-  bound_2 <- (-c - gamma)[active_set] / b[active_set]
-  # cat("Bounds:\n")
-  # print(bound_1)
-  # print(bound_2)
-  ## Min of all upper bounds
-  upper_bound <- min(ifelse(bound_1 > bound_2, bound_1, bound_2))
-  ## Max of all lower bounds
-  lower_bound <- max(ifelse(bound_1 > bound_2, bound_2, bound_1))
-  ## Check that feasible set is not empty
-  if (upper_bound - lower_bound < sqrt(.Machine$double.eps)) {
-    # cat("Column ", col, " failed after ", it, " iterations.\n", sep = "")
-    stop("Feasible set is empty.")
+  if(any(active_set)) {
+    ## Bounds of feasible sets are (-c_i +/- gamma) / b_i
+    bound_1 <- (-c + gamma)[active_set] / b[active_set]
+    bound_2 <- (-c - gamma)[active_set] / b[active_set]
+    # cat("Bounds:\n")
+    # print(bound_1)
+    # print(bound_2)
+    ## Min of all upper bounds
+    upper_bound <- min(ifelse(bound_1 > bound_2, bound_1, bound_2))
+    ## Max of all lower bounds
+    lower_bound <- max(ifelse(bound_1 > bound_2, bound_2, bound_1))
+    ## Check that feasible set is not empty
+    if (upper_bound - lower_bound < sqrt(.Machine$double.eps)) {
+      # cat("Column ", col, " failed after ", it, " iterations.\n", sep = "")
+      stop("Feasible set is empty.")
+    }
+  } else { # b is null and c <= gamma
+    # upper_bound <- Inf
+    # lower_bound <- -Inf
+    return(0)
   }
   ## Project 0 on feasibility set and return result
   max(lower_bound, min(0, upper_bound))
