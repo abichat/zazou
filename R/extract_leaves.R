@@ -8,7 +8,7 @@
 #' @seealso \code{\link{extract_significant_leaves.shiftestim}},
 #' \code{\link{extract_significant_leaves.shiftconf}}
 #'
-extract_significant_leaves <- function (x, ...) {
+extract_significant_leaves <- function(x, ...) {
   UseMethod("extract_significant_leaves")
 }
 

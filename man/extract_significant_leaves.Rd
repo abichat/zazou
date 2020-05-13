@@ -2,9 +2,12 @@
 % Please edit documentation in R/extract_leaves.R
 \name{extract_significant_leaves}
 \alias{extract_significant_leaves}
+\alias{extract_significant_leaves.NULL}
 \title{Extract significant leafs}
 \usage{
 extract_significant_leaves(x, ...)
+
+\method{extract_significant_leaves}{`NULL`}(x, ...)
 }
 \arguments{
 \item{x}{Object of class}
