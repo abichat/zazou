@@ -46,9 +46,16 @@ extract_significant_leaves.shiftestim <-
 #' @return The names of the significant leafs.
 #' @export
 #'
-extract_significant_leaves.shiftconf <-
-  function(x, threshold = 0.05, ...) {
+extract_significant_leaves.shiftconf <- function(x, threshold = 0.05, ...) {
     lgl <- x$zscores_est$pvalue < threshold
     x$zscores_est$leaf[lgl]
+  }
+
+
+#' @rdname extract_significant_leaves
+#' @export
+#'
+extract_significant_leaves.NULL <- function(x, ...) {
+    NULL
   }
 
