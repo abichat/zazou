@@ -11,7 +11,13 @@ name: R-CMD-check-dev
 jobs:
   R-CMD-check:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
-    runs-on: macOS-latest
+
+    runs-on: ubuntu-16.04
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"
+
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
