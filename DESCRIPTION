@@ -1,5 +1,5 @@
 Package: zazou
-Title: Z-scores az Ornstein-Uhlenbeck
+Title: Z-Scores As Ornstein-Uhlenbeck
 Version: 0.0.0.9013
 Authors@R: 
     c(person(given = "Antoine",
