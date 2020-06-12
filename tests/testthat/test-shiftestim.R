@@ -87,6 +87,12 @@ test_that("scaled lasso output is correct", {
   expect_scalnum(estSL$optim_info$sigma_scaledlasso)
 })
 
+# Methods
+
+test_that("pull_pvalues() works", {
+  expect_equal(pull_pvalues(estS), pnorm(estS$zscores_est))
+})
+
 # test_that("scoresystem output is correct", {
 #   # expect_equal(estDL$method, "scoresystem")
 #   # expect_equal(ncol(estDL$shifts_est), 3)

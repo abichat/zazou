@@ -6,7 +6,6 @@ pval_obs <- test_kruskalwallis(chlamydiae$X, chlamydiae$Y)$p.value
 zsco_obs <- p2z(pval_obs)
 
 tree <- force_ultrametric(chlamydiae$tree)
-N_branch <- length(tree$edge.length)
 
 withr::with_seed(42, {
   estS <- estimate_shifts(zscores = zsco_obs,
