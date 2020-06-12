@@ -50,7 +50,7 @@ observed_zscores
 ## L-BFGS-B algorithm
 
 ```{r lbfgsb}
-mthd1 <- estimate_shifts(Delta0 = rep(0, 8), zscores = observed_zscores, 
+mthd1 <- estimate_shifts(zscores = observed_zscores, 
                          lambda = lambda, tree = tree, alphaOU = alphaOU, 
                          method = "L-BFGS-B")
 mthd1
@@ -61,7 +61,7 @@ plot(mthd1)
 
 
 ```{r shooting}
-mthd2 <- estimate_shifts(Delta0 = rep(0, 8), zscores = observed_zscores, 
+mthd2 <- estimate_shifts(zscores = observed_zscores, 
                          lambda = lambda, tree = tree, alphaOU = alphaOU, 
                          method = "shooting")
 mthd2

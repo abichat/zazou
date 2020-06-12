@@ -29,7 +29,7 @@ m <- 17
 M <- 2 * (m - 1)
 tree <- stree(m, type = "left")
 edlength <- rep(1, M)
-edlength[1:M %% 2 == 1] <- (m-1):1
+edlength[1:M %% 2 == 1] <- (m - 1):1
 tree$edge.length <- edlength
 mat_incid <- incidence_matrix(tree)
 plot(tree)
@@ -48,9 +48,9 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 ### Constraint on beta
 
 ```{r}
-estimation1 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alphaOU = 1, lambda = 0.1, 
-                              method = "shooting")
+estimation1 <- estimate_shifts(zscores = true_zscores, 
+                               tree = tree, alphaOU = 1, lambda = 0.1, 
+                               method = "shooting")
 estimation1
 plot(estimation1)
 ```
@@ -67,9 +67,9 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 ### Constraint on beta
 
 ```{r}
-estimation2 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alphaOU = 1, lambda = 0.1,
-                              method = "shooting")
+estimation2 <- estimate_shifts(zscores = true_zscores, 
+                               tree = tree, alphaOU = 1, lambda = 0.1,
+                               method = "shooting")
 estimation2
 plot(estimation2)
 ```
@@ -79,10 +79,10 @@ Z-score are well recovered but the solution is absolutely not sparse. We should 
 ### Constraint on yhat
 
 ```{r}
-estimation3 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alphaOU = 1, lambda = 0.1,  
-                              method = "shooting",
-                              constraint_type = "yhat")
+estimation3 <- estimate_shifts(zscores = true_zscores, 
+                               tree = tree, alphaOU = 1, lambda = 0.1,  
+                               method = "shooting",
+                               constraint_type = "yhat")
 estimation3
 plot(estimation3)
 ```
@@ -100,10 +100,10 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 ### Constraint on yhat
 
 ```{r}
-estimation4 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alphaOU = 1, lambda = 0.1,  
-                              method = "shooting",
-                              constraint_type = "yhat")
+estimation4 <- estimate_shifts(zscores = true_zscores, 
+                               tree = tree, alphaOU = 1, lambda = 0.1,  
+                               method = "shooting",
+                               constraint_type = "yhat")
 estimation4
 plot(estimation4)
 ```
@@ -111,10 +111,10 @@ plot(estimation4)
 ### No constraint 
 
 ```{r}
-estimation5 <- estimate_shifts(rep(0, M), zscores = true_zscores, 
-                              tree = tree, alphaOU = 1, lambda = 0.1, 
-                              method = "shooting",
-                              constraint_type = "none")
+estimation5 <- estimate_shifts(zscores = true_zscores, 
+                               tree = tree, alphaOU = 1, lambda = 0.1, 
+                               method = "shooting",
+                               constraint_type = "none")
 estimation5
 plot(estimation5)
 ```

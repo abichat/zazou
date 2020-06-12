@@ -140,7 +140,7 @@ spell_check()
 test()
 
 
-run_examples()
+run_examples(fresh = TRUE)
 
 covr::report()
 

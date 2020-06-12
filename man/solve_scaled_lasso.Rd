@@ -4,17 +4,17 @@
 \alias{solve_scaled_lasso}
 \title{Scaled lasso}
 \usage{
-solve_scaled_lasso(beta0, y, X, lambda = NULL, ...)
+solve_scaled_lasso(y, X, lambda = NULL, beta0, ...)
 }
 \arguments{
-\item{beta0}{Initial value for beta.}
-
 \item{y}{A vector of size m.}
 
 \item{X}{A vector of size m*(n+m).}
 
 \item{lambda}{A regularization parameter. If \code{NULL}, a universal
 value is chosen.}
+
+\item{beta0}{Initial value for beta.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }

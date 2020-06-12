@@ -16,13 +16,13 @@ solve_univariate(
 )
 
 solve_multivariate(
-  beta0,
   y,
   X,
   lambda,
+  beta0,
+  mat_incidence,
   prob = NULL,
   max_it = 500,
-  mat_incidence,
   constraint_type = c("beta", "yhat", "none"),
   ...
 )
@@ -45,17 +45,17 @@ Ensures that all coordinates of \eqn{\beta}
 
 \item{...}{Further arguments passed to or from other methods.}
 
+\item{X}{A matrix of size  x p.}
+
 \item{beta0}{The initial position of beta.}
 
-\item{X}{A matrix of size  x p.}
+\item{mat_incidence}{Incidence matrix from the problem. Used only if
+\code{constraint_type} is set to \code{"yhat"}.}
 
 \item{prob}{A vector of probability weights for obtaining the coordinates
 to be sampled.}
 
 \item{max_it}{Maximum number of iterations.}
-
-\item{mat_incidence}{Incidence matrix from the problem. Used only if
-\code{constraint_type} is set to \code{"yhat"}.}
 }
 \value{
 The scalar solution \eqn{\beta} of the 1D optimization problem

@@ -5,20 +5,18 @@
 \title{Estimate shifts}
 \usage{
 estimate_shifts(
-  beta0,
   zscores,
   tree,
   alphaOU,
   lambda = NULL,
   method = c("L-BFGS-B", "shooting", "scaledlasso"),
   criterion = c("bic", "pbic"),
+  beta0 = rep(0, length(tree$edge.length)),
   constraint_type = c("beta", "yhat", "none"),
   ...
 )
 }
 \arguments{
-\item{beta0}{initial position (size n+m)}
-
 \item{zscores}{z-scores (size m)}
 
 \item{tree}{the tree used to compute the incidence and covariance matrices
@@ -32,6 +30,8 @@ estimate_shifts(
 or \code{shooting}.}
 
 \item{criterion}{criterion on which the selection is done.}
+
+\item{beta0}{initial position (size n+m)}
 
 \item{constraint_type}{Constrains on shifts.}
 

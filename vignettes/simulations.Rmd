@@ -60,7 +60,7 @@ plot_shifts(tree, true_shifts, true_scores = true_zscores)
 
 
 ```{r}
-estimation <- estimate_shifts(rep(0, 8), zscores = obs_zscores, 
+estimation <- estimate_shifts(zscores = obs_zscores, 
                               tree = tree, alphaOU = 10^3, lambda = 0)
 estimation
 plot(estimation)
@@ -70,7 +70,7 @@ Solution without penalty is not sparse due to ill-conditioning of the incidence 
 
 
 ```{r}
-estimation <- estimate_shifts(rep(0, 8), zscores = obs_zscores, 
+estimation <- estimate_shifts(zscores = obs_zscores, 
                               tree = tree, alphaOU = 10^3, lambda = 2)
 estimation
 plot(estimation)
@@ -97,7 +97,7 @@ zscores
 The fit is perfect since all observed $z$-scores are negative. 
 
 ```{r}
-estimation <- estimate_shifts(rep(0, 8), zscores = zscores, 
+estimation <- estimate_shifts(zscores = zscores, 
                               tree = tree, alphaOU = 1, lambda = 0)
 estimation
 plot(estimation, true_scores = true_shifts)
@@ -110,7 +110,7 @@ round(data.frame(true = true_shifts, observed  = zscores,
 The fit degrades as we increase sparsity. [Well, not so much...]
 
 ```{r}
-estimation <- estimate_shifts(rep(0, 8), zscores = zscores, 
+estimation <- estimate_shifts(zscores = zscores, 
                               tree = tree, alphaOU = 1, lambda = 0.1)
 estimation
 plot(estimation, true_scores = true_shifts)
@@ -123,8 +123,8 @@ round(data.frame(true = true_shifts, observed  = zscores,
 The fit does not depend a lot (on this toy example) on the initial solution. 
 
 ```{r}
-estimation <- estimate_shifts(c(0, -3, 0, 0, 0, 0, -2, 0), 
-                              zscores = zscores, tree = tree, 
+estimation <- estimate_shifts(zscores = zscores, tree = tree, 
+                              beta0 = c(0, -3, 0, 0, 0, 0, -2, 0), 
                               alphaOU = 1, lambda = 0.1)
 
 estimation
@@ -186,10 +186,10 @@ plot_shifts(tree, NA, obs_scores = zscores,
 
 ```{r estimationwithselection}
 tic()
-estimation_shooting <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
+estimation_shooting <- estimate_shifts(zscores = zscores, 
                                        tree = tree, alphaOU = c(0.2, 0.5, 1, 2, 5), 
                                        method = "shooting", constraint_type = "beta")
-estimation_scla <- estimate_shifts(rep(0, N_branch), zscores = zscores, 
+estimation_scla <- estimate_shifts(zscores = zscores, 
                                    tree = tree, alphaOU = c(0.2, 0.5, 1, 2, 5), 
                                    method = "scaledlasso", constraint_type = "beta")
 
@@ -234,7 +234,7 @@ detected_bh <- names(which(pvalues_bh < 0.05))
 pvalues_bonf <- p.adjust(pvalues, method = "bonferroni")
 detected_bonf <- names(which(pvalues_bonf < 0.05))
 mm <- c("TPR", "FPR", "FDR", "ACC", "F1", "BACC")
-ebc_tidy(detected_sh, otus_da, m = length(otu_to_keep), measures = )
+ebc_tidy(detected_sh, otus_da, m = length(otu_to_keep), measures = mm)
 ebc_tidy(detected_bh, otus_da, m = length(otu_to_keep), measures = mm)
 ebc_tidy(detected_bonf, otus_da, m = length(otu_to_keep), measures = mm)
 ebc_tidy(c(), otus_da, m = length(otu_to_keep), measures = mm)
