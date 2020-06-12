@@ -8,7 +8,7 @@ compute_objective_function(
   Y,
   X,
   lambda,
-  sigma,
+  sigma = NULL,
   type = c("lasso", "scaledlasso")
 )
 }

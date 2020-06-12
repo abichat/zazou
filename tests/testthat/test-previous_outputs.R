@@ -9,19 +9,19 @@ tree <- force_ultrametric(chlamydiae$tree)
 N_branch <- length(tree$edge.length)
 
 withr::with_seed(42, {
-  estS <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+  estS <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
                           lambda = c(1, 2), tree = tree,
                           alpha = c(0.1, 2), method = "shooting")
 })
 
 withr::with_seed(42, {
-  estL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+  estL <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
                           lambda = 1, tree = tree,
                           alpha = 1, method = "L-BFGS-B")
 })
 
 withr::with_seed(42, {
-  estSL <- estimate_shifts(Delta0 = rep(0, N_branch), zscores = zsco_obs,
+  estSL <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
                           lambda = 0.1, tree = tree,
                           alpha = 1, method = "scaledlasso")
 })

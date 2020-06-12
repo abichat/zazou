@@ -10,11 +10,15 @@
 #' @return a function that take Delta (a vector of size n+m) as argument
 #' and returns a scalar
 #' @export
-compute_objective_function <- function(Y, X, lambda, sigma,
+compute_objective_function <- function(Y, X, lambda, sigma = NULL,
                                        type = c("lasso", "scaledlasso")) {
-  objfun <- switch (type,
-                    "lasso" = compute_OF_lasso(Y, X, lambda),
-                    "scaledlasso" = compute_OF_scaledlasso(Y, X, lambda, sigma)
+  if (is.null(sigma) && type == "scaledlasso") {
+    stop('sigma must be specified when method is set to"scaledlasso"')
+  }
+
+  objfun <- switch(type,
+                   "lasso" = compute_OF_lasso(Y, X, lambda),
+                   "scaledlasso" = compute_OF_scaledlasso(Y, X, lambda, sigma)
   )
 
   return(objfun)

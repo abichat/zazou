@@ -5,7 +5,7 @@
 \title{Estimate shifts}
 \usage{
 estimate_shifts(
-  Delta0,
+  beta0,
   zscores,
   tree,
   alphaOU,
@@ -17,7 +17,7 @@ estimate_shifts(
 )
 }
 \arguments{
-\item{Delta0}{initial position (size n+m)}
+\item{beta0}{initial position (size n+m)}
 
 \item{zscores}{z-scores (size m)}
 

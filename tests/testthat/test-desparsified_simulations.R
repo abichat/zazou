@@ -7,7 +7,7 @@ nplusm <- length(tree$edge.length)
 zscores <- simu_zscores(tree, 1, shifts = NULL, Nshifts = 3)
 alpha <- 0.1
 
-est_scaled <- estimate_shifts(Delta0 = rep(0, nplusm), zscores = zscores,
+est_scaled <- estimate_shifts(beta = rep(0, nplusm), zscores = zscores,
                               tree = tree, alphaOU = alpha,
                               method = "scaledlasso")
 

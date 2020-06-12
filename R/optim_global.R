@@ -2,7 +2,7 @@
 #'
 #' @rdname estimate_shifts
 #'
-#' @param Delta0 initial position (size n+m)
+#' @param beta0 initial position (size n+m)
 #' @param zscores z-scores (size m)
 #' @param lambda a grid of positive regularization parameters
 #' @param tree the tree used to compute the incidence and covariance matrices
@@ -19,7 +19,7 @@
 #'
 #' @export
 #' @importFrom stats optim
-estimate_shifts <- function(Delta0, zscores, tree, alphaOU, lambda = NULL,
+estimate_shifts <- function(beta0, zscores, tree, alphaOU, lambda = NULL,
                             method = c("L-BFGS-B", "shooting", "scaledlasso"),
                             criterion = c("bic", "pbic"),
                             constraint_type = c("beta", "yhat", "none"), ...){
@@ -29,20 +29,20 @@ estimate_shifts <- function(Delta0, zscores, tree, alphaOU, lambda = NULL,
   constraint_type <- match.arg(constraint_type)
 
   ## local estimation routine (for a single lambda)
-  fitting_procedure <- function(Delta0, X, Y, lambda, ...) {
+  fitting_procedure <- function(beta0, X, Y, lambda, ...) {
 
-    opt <- switch (method,
-                   "L-BFGS-B" = solve_lbfgsb(
-                     Delta0 = Delta0, X = X, Y = Y, lambda = lambda,
-                     constraint_type = constraint_type, ...),
+    opt <- switch(method,
+                  "L-BFGS-B" = solve_lbfgsb(
+                    beta0 = beta0, X = X, Y = Y, lambda = lambda,
+                    constraint_type = constraint_type, ...),
 
-                   "shooting" = solve_multivariate(
-                     beta0 = Delta0, y = Y, X = X, lambda = lambda,
-                     constraint_type = constraint_type, ...),
+                  "shooting" = solve_multivariate(
+                    beta0 = beta0, y = Y, X = X, lambda = lambda,
+                    constraint_type = constraint_type, ...),
 
-                   "scaledlasso" = solve_scaled_lasso(
-                     beta0 = Delta0, y = Y, X = X, lambda = lambda,
-                     constraint_type = constraint_type, ...)
+                  "scaledlasso" = solve_scaled_lasso(
+                    beta0 = beta0, y = Y, X = X, lambda = lambda,
+                    constraint_type = constraint_type, ...)
                    )
     return(opt)
   }
@@ -76,7 +76,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alphaOU, lambda = NULL,
     ## Inner loop on lambda
     for (lam in current_lambda) {
       ## Compute current model
-      opt <- fitting_procedure(Delta0 = Delta0, X = X, Y = Y, lambda = lam,
+      opt <- fitting_procedure(beta0 = beta0, X = X, Y = Y, lambda = lam,
                                mat_incidence = mat_incidence, ...)
       current_model <- as_shiftestim(
         listopt = opt, tree = tree, zscores = zscores,
@@ -101,7 +101,7 @@ estimate_shifts <- function(Delta0, zscores, tree, alphaOU, lambda = NULL,
     } ## Close lambda loop
   } ## Close alphaOU loop
 
-  if(any(c(length(alphaOU), length(current_lambda)) >= 2)){
+  if (any(c(length(alphaOU), length(current_lambda)) >= 2)) {
     bic_df$shifts_est <- shifts
     best_model$optim_info$bic_selection <- bic_df
     best_model$optim_info$criterion <- criterion
