@@ -28,6 +28,10 @@ navbar:
 
 
 reference:
+  - title: Hierarchical correction
+    desc: ~
+    contents:
+    - '`correct_pvalues`'
   - title: Estimation of shifts
     desc: ~
     contents:
