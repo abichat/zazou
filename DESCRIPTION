@@ -34,7 +34,7 @@ Imports:
 Suggests: 
     corrplot,
     dplyr,
-    evabic (>= 0.0.2),
+    evabic,
     ggplot2,
     ggrepel,
     hdi,
