@@ -14,14 +14,14 @@ N_branch <- length(tree$edge.length)
 grid <- sample(c(1, 3))
 
 
-estS <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estS <- estimate_shifts(zscores = zsco_obs,
                         lambda = grid, tree = tree,
                         alphaOU = grid, method = "shooting")
 
-estS2 <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estS2 <- estimate_shifts(zscores = zsco_obs,
                          tree = tree, alphaOU = grid, method = "shooting")
 
-estS3 <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estS3 <- estimate_shifts(zscores = zsco_obs,
                          tree = tree, alphaOU = 1, lambda = 2,
                          method = "shooting", allow_positive = TRUE,
                          unknow = 3)
@@ -49,20 +49,20 @@ test_that("supplementary arguments are tracked", {
 
 grid <- sample(c(0.9, 1, 1.1))
 
-estL <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estL <- estimate_shifts(zscores = zsco_obs,
                         lambda = grid, tree = tree,
                         alphaOU = sample(grid), method = "L-BFGS-B")
 
 df_selection <- estL$optim_info$bic_selection
 
-estL_best <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estL_best <- estimate_shifts(zscores = zsco_obs,
                              lambda = estL$lambda, tree = tree,
                              alphaOU = estL$alphaOU, method = "L-BFGS-B")
 
 alpha_notbest <- sample(setdiff(grid, estL$alphaOU), 1)
 lambda_notbest <- sample(setdiff(grid, estL$lambda), 1)
 
-estL_notbest <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estL_notbest <- estimate_shifts(zscores = zsco_obs,
                                 alphaOU = alpha_notbest,
                                 lambda = lambda_notbest,
                                 tree = tree, method = "L-BFGS-B")
@@ -75,7 +75,7 @@ test_that("the choosen model is the best one", {
   expect_lte(estL$bic, min(df_selection$bic))
 })
 
-est_pbic <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+est_pbic <- estimate_shifts(zscores = zsco_obs,
                             lambda = grid, tree = tree, criterion = "pbic",
                             alphaOU = grid, method = "shooting")
 
@@ -99,7 +99,7 @@ all_est <- extract_models(estL)
 
 r <- sample(seq_len(length(grid) ^ 2), size = 1)
 est_r <- all_est[[r]]
-est_r_fs <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+est_r_fs <- estimate_shifts(zscores = zsco_obs,
                             lambda = est_r$lambda, tree = tree,
                             alphaOU = est_r$alphaOU, method = "L-BFGS-B")
 

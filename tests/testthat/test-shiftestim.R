@@ -8,17 +8,16 @@ pval_obs <- test_kruskalwallis(chlamydiae$X, chlamydiae$Y)$p.value
 zsco_obs <- p2z(pval_obs)
 
 tree <- force_ultrametric(chlamydiae$tree)
-N_branch <- length(tree$edge.length)
 
 # First tests
 
-estS <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estS <- estimate_shifts(zscores = zsco_obs,
                         lambda = c(1, 2), tree = tree,
                         alphaOU = 1, method = "shooting")
-estL <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estL <- estimate_shifts(zscores = zsco_obs,
                         lambda = 1, tree = tree,
                         alphaOU = 1, method = "L-BFGS-B")
-estSL <- estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+estSL <- estimate_shifts(zscores = zsco_obs,
                          lambda = 1, tree = tree,
                          alphaOU = 1, method = "scaledlasso")
 
@@ -75,7 +74,7 @@ test_that("L-BFGS-B output is correct", {
   expect_equal(estL$method, "L-BFGS-B")
   expect_is(estL$optim_info$message, "character")
   expect_error(
-    estimate_shifts(beta0 = rep(0, N_branch), zscores = zsco_obs,
+    estimate_shifts(zscores = zsco_obs,
                     lambda = 1, tree = tree, constraint_type = "yhat",
                     alpha = 1, method = "L-BFGS-B"),
     "The constraint 'yhat' is not available for L-BFGS-B solving.")

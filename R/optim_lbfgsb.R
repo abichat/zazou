@@ -1,4 +1,4 @@
-solve_lbfgsb <- function(beta0, X, Y, lambda,
+solve_lbfgsb <- function(X, Y, lambda, beta0,
                          constraint_type = c("beta", "yhat", "none"), ...){
 
   constraint_type <- match.arg(constraint_type)

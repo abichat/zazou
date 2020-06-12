@@ -80,8 +80,8 @@ solve_univariate <- function(y, x, u, v, lambda = 0,
 #'
 #' @return the estimated value of beta
 #' @export
-solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
-                               max_it = 500, mat_incidence,
+solve_multivariate <- function(y, X, lambda, beta0, mat_incidence,
+                               prob = NULL, max_it = 500,
                                constraint_type = c("beta", "yhat", "none"),
                                ...) {
   constraint_type <- match.arg(constraint_type)
@@ -89,7 +89,7 @@ solve_multivariate <- function(beta0, y, X, lambda, prob = NULL,
   beta <- beta0
 
   yhat <- X %*% beta
-  if(constraint_type == "yhat") {
+  if (constraint_type == "yhat") {
     J <- mat_incidence %*% beta
   }
   # fn_obj <- compute_objective_function(y, X, lambda)

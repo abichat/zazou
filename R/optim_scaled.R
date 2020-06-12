@@ -2,18 +2,18 @@
 #'
 #' Scaled lasso to compute \code{beta_init} and \code{hsigma}.
 #'
-#' @param beta0 Initial value for beta.
 #' @param y A vector of size m.
 #' @param X A vector of size m*(n+m).
 #' @param lambda A regularization parameter. If \code{NULL}, a universal
 #' value is chosen.
+#' @param beta0 Initial value for beta.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @return A list composed by \code{par} (beta estimate) and
 #' \code{sigma_scaledlasso} among others.
 #' @export
 #'
-solve_scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
+solve_scaled_lasso <- function(y, X, lambda = NULL, beta0, ...){
 
   n <- length(y)
   p <- ncol(X)
@@ -32,7 +32,7 @@ solve_scaled_lasso <- function(beta0, y, X, lambda = NULL, ...){
                                     type = "scaledlasso")(beta)
 
   while (it < p || progress > eps) {
-    beta <- solve_multivariate(beta0 = beta, y = y, X = X,
+    beta <- solve_multivariate(y = y, X = X, beta0 = beta,
                                lambda = n * sigma * lambda, ...)$par
     sigma <- update_sigma(y, X, beta)
     new_obj <- compute_objective_function(Y = y, X = X,
