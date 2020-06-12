@@ -9,12 +9,12 @@
 #' @importFrom stats wilcox.test
 #'
 #' @examples
-#' test_wilcoxon(alcohol$X, alcohol$Y)
-#' test_kruskalwallis(alcohol$X, alcohol$Y)
-#' test_fisher(alcohol$X, alcohol$Y)
-test_wilcoxon <- function (X, Y) {
+#' head(test_wilcoxon(alcohol$X, alcohol$Y)$p.value)
+#' head(test_kruskalwallis(alcohol$X, alcohol$Y)$p.value)
+#' head(test_fisher(alcohol$X, alcohol$Y)$p.value)
+test_wilcoxon <- function(X, Y) {
   Y <- factor(Y)
-  if(length(levels(Y)) != 2){
+  if (length(levels(Y)) != 2) {
     stop("You need exactly two different conditions for a Wilcoxon test.")
   }
   Y <- as.numeric(Y)
@@ -29,7 +29,7 @@ test_wilcoxon <- function (X, Y) {
 #' @rdname test_wilcoxon
 #' @export
 #' @importFrom stats kruskal.test
-test_kruskalwallis <- function (X, Y) {
+test_kruskalwallis <- function(X, Y) {
   Y <- as.numeric(factor(Y))
   obj <- apply(X, 1, function(x) {
     suppressWarnings(kruskal.test(x ~ Y)$p.value)
@@ -40,7 +40,7 @@ test_kruskalwallis <- function (X, Y) {
 #' @rdname test_wilcoxon
 #' @export
 #' @importFrom stats lm anova
-test_fisher <- function (X, Y) {
+test_fisher <- function(X, Y) {
   Y <- factor(Y)
   obj <- apply(X, 1, function(x) {
     model <- suppressWarnings(lm(x ~ Y))

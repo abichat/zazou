@@ -25,7 +25,7 @@ a \code{e.sign} component.
 Vectorized tests
 }
 \examples{
-test_wilcoxon(alcohol$X, alcohol$Y)
-test_kruskalwallis(alcohol$X, alcohol$Y)
-test_fisher(alcohol$X, alcohol$Y)
+head(test_wilcoxon(alcohol$X, alcohol$Y)$p.value)
+head(test_kruskalwallis(alcohol$X, alcohol$Y)$p.value)
+head(test_fisher(alcohol$X, alcohol$Y)$p.value)
 }
