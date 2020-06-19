@@ -4,7 +4,7 @@
 \name{zazou-package}
 \alias{zazou}
 \alias{zazou-package}
-\title{zazou: Z-scores az Ornstein-Uhlenbeck}
+\title{zazou: Z-Scores As Ornstein-Uhlenbeck}
 \description{
 Differentially abundance analysis with
     Ornstein-Uhlenbeck process on z-scores.

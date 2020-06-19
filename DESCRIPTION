@@ -41,7 +41,6 @@ Suggests:
     knitr,
     purrr,
     rmarkdown,
-    spelling,
     testthat (>= 2.1.0),
     tibble,
     tictoc,
