@@ -7,7 +7,7 @@
 
 <!-- [![Last-changedate](https://img.shields.io/badge/Last%20change-Dec-yellowgreen.svg)]() -->
 
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.0.9013-orange.svg)]()
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.0.9014-orange.svg)]()
 [![R build
 status](https://github.com/abichat/zazou/workflows/R-CMD-check/badge.svg)](https://github.com/abichat/zazou/actions)
 <!-- badges: end -->
