@@ -91,7 +91,7 @@ test_that("find_feasible() returns a vector with correct dimensions", {
 
 test_that("find_feasible() returns correct solution on easy cases", {
   B <- diag(1, 3)
-  for (i in 1:ncol(B)) {
+  for (i in seq_len(ncol(B))) {
     expect_equal(object   = find_feasible(B, col = i, 0),
                  expected = rep(c(0, 1, 0), times = c(i - 1, 1, ncol(B) - i)))
   }
@@ -100,7 +100,7 @@ test_that("find_feasible() returns correct solution on easy cases", {
 test_that("find_feasible() returns feasible solution", {
   B <- matrix(c(-1L, 0L, 1L, 1L, -1L, 3L, 1L, 1L, 0L), nrow = 3L) ## invertible matrix
   gamma <- 0.1
-  for (i in 1:ncol(B)) {
+  for (i in seq_len(ncol(B))) {
     m <- find_feasible(B, i, gamma)
     e_i <- rep(c(0, 1, 0), times = c(i - 1, 1, ncol(B) - i))
     expect_lte(max(abs(B %*% m - e_i)), gamma + 1e-14)
