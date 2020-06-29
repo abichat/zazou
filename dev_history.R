@@ -126,13 +126,15 @@ library(testthat)
 
 # use_dev_package("evabic")
 
-# use_r("correct_pvalues")
+# use_r("smooth_pvalues")
 
 # use_r("pull_pvalues")
 
 # use_test("correct_pvalues")
 
 # use_data_raw("age")
+
+# use_r("correction")
 
 
 ####
