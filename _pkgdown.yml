@@ -31,7 +31,7 @@ reference:
   - title: Hierarchical correction
     desc: ~
     contents:
-    - '`correct_pvalues`'
+    - '`smooth_pvalues`'
   - title: Estimation of shifts
     desc: ~
     contents:
