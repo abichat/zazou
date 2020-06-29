@@ -38,5 +38,7 @@ A dataframe with 4 (or 5 if \code{estimate} has names) columns.
 From a vector of estimates computes the lower and upper bound and a p-value.
 }
 \details{
-The confidence interval is bivariate whereas the p-value is univariate.
+The confidence interval is bivariate whereas the p-value and q-values are
+univariate. q-values are threshold-dependent and need to be recomputed when
+\code{alpha_conf} changes.
 }

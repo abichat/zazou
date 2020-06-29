@@ -15,8 +15,8 @@
 #' pval_obs <- test_kruskalwallis(chlamydiae$X, chlamydiae$Y)$p.value
 #' tree <- force_ultrametric(chlamydiae$tree)
 #' smooth_pvalues(pvalue = pval_obs, tree = tree,
-#'                 arg_shiftestim = list(alpha = c(0.1, 2),
-#'                                       method = "scaledlasso"))
+#'                arg_shiftestim = list(alpha = c(0.1, 2),
+#'                                      method = "scaledlasso"))
 smooth_pvalues <- function(pvalues, esign = NULL, tree,
                             arg_shiftestim =
                               list(alphaOU = 1, method = "scaledlasso"),

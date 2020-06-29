@@ -46,7 +46,7 @@ withr::with_preserve_seed({
 test_that("est_scosys has its specific components / dimensions", {
   expect_equal(est_scosys$method, "scoresystem")
   expect_equal(est_scosys$alpha_conf, 0.05)
-  expect_equal(ncol(est_scosys$shifts_est), 4)
+  expect_equal(ncol(est_scosys$shifts_est), 5)
   expect_is(est_scosys$covariance_noise_matrix, "matrix")
   expect_equal(dim(est_scosys$covariance_noise_matrix),
                rep(nplusm, 2))

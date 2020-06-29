@@ -46,7 +46,9 @@ add_ci_pv <- function(x, alpha_conf){
 #'
 #' From a vector of estimates computes the lower and upper bound and a p-value.
 #'
-#' The confidence interval is bivariate whereas the p-value is univariate.
+#' The confidence interval is bivariate whereas the p-value and q-values are
+#' univariate. q-values are threshold-dependent and need to be recomputed when
+#' \code{alpha_conf} changes.
 #'
 #' @param estimate Shift estimate from \code{shiftestim} object.
 #' Eventually named.
@@ -61,22 +63,26 @@ add_ci_pv <- function(x, alpha_conf){
 df_confint_pvalue <- function(estimate, sigma, tau, alpha_conf = 0.05){
 
   names <- names(estimate)
-  if(is.null(names)){
+  if (is.null(names)) {
     df <- data.frame(estimate = estimate)
   } else {
     estimate <- unname(estimate)
-    df <- data.frame(name = names, estimate = estimate,
+    df <- data.frame(name = names,
+                     estimate = estimate,
                      stringsAsFactors = FALSE)
   }
 
   sigma_tau <- sigma * tau
   half_confint_size <- qnorm(1 - alpha_conf / 2) * sigma_tau # bivariate
   p_value <- pnorm(estimate / sigma_tau) # univariate
+  q_value <- correct_pvalues(p_value, # univariate and threshold-dependent
+                             alpha = alpha_conf)
 
 
   df$lower <- estimate - half_confint_size
   df$upper <- estimate + half_confint_size
   df$pvalue <- p_value
+  df$qvalue <- q_value
 
   return(df)
 
@@ -97,8 +103,8 @@ df_conf_leaves <- function(shifts, covariance_noise_mat, mat_incidence,
 
   tau <- rep(NA, n)
 
-  for(i in seq_len(n)){
-    a <- mat_incidence[i, ]
+  for (i in seq_len(n)) {
+    a <- mat_incidence[i,]
     tau[i] <- sum(crossprod(a, covariance_noise_mat) * a)
   }
   tau <- sqrt(tau)

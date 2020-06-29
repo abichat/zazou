@@ -150,7 +150,7 @@ spell_check()
 test()
 
 
-run_examples(fresh = TRUE)
+run_examples(fresh = TRUE); unlink("Rplots.pdf")
 
 covr::report()
 
