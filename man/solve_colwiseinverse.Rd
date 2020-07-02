@@ -7,7 +7,7 @@
 solve_colwiseinverse(
   A,
   gamma,
-  ntry_max = 10000,
+  ntry_max = 1000,
   silent_on_tries = TRUE,
   silent_on_errors = TRUE,
   ...

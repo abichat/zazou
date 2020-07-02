@@ -10,7 +10,7 @@
 #' @return The column-wise, inverse, same size as \code{A}.
 #' @export
 #'
-solve_colwiseinverse <- function(A, gamma, ntry_max = 10000,
+solve_colwiseinverse <- function(A, gamma, ntry_max = 1000,
                                  silent_on_tries = TRUE,
                                  silent_on_errors = TRUE, ...){
   ## Validate that A is semi definite positive through SVD decompisition
