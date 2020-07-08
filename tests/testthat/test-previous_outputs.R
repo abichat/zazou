@@ -86,6 +86,7 @@ test_that("Score system outputs do not change over time", {
 
 
 test_that("Columnwise inverse outputs do not change over time", {
+  skip_on_os("linux")
   expect_known_value(estCI$zscores_est,
                      "previous_outputs/estCI_zscore", update = FALSE)
   expect_known_value(estCI$shifts_est, "previous_outputs/estCI_shift",
