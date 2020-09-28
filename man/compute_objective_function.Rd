@@ -9,7 +9,7 @@ compute_objective_function(
   X,
   lambda,
   sigma = NULL,
-  type = c("lasso", "scaledlasso")
+  type = c("lasso", "scaled lasso")
 )
 }
 \arguments{
@@ -19,10 +19,10 @@ compute_objective_function(
 
 \item{lambda}{a grid of positive regularization parameters}
 
-\item{sigma}{Needed if \code{type} is set to \code{"scaledlasso"}.}
+\item{sigma}{Needed if \code{type} is set to \code{"scaled lasso"}.}
 
 \item{type}{Character. If you want the \code{"lasso"} or
-\code{"scaledlasso"} objective function.}
+\code{"scaled lasso"} objective function.}
 }
 \value{
 a function that take Delta (a vector of size n+m) as argument

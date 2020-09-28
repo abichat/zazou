@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>", 
   fig.align = "center",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 
@@ -63,7 +63,7 @@ plot(mthd1)
 ```{r shooting}
 mthd2 <- estimate_shifts(zscores = observed_zscores, 
                          lambda = lambda, tree = tree, alphaOU = alphaOU, 
-                         method = "shooting")
+                         method = "lasso")
 mthd2
 plot(mthd2)
 ```

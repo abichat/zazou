@@ -13,13 +13,13 @@ tree <- force_ultrametric(chlamydiae$tree)
 
 estS <- estimate_shifts(zscores = zsco_obs,
                         lambda = c(1, 2), tree = tree,
-                        alphaOU = 1, method = "shooting")
+                        alphaOU = 1, method = "lasso")
 estL <- estimate_shifts(zscores = zsco_obs,
                         lambda = 1, tree = tree,
                         alphaOU = 1, method = "L-BFGS-B")
 estSL <- estimate_shifts(zscores = zsco_obs,
                          lambda = 1, tree = tree,
-                         alphaOU = 1, method = "scaledlasso")
+                         alphaOU = 1, method = "scaled lasso")
 
 expect_scalnum <- function(x){
   expect_is(x, "numeric")
@@ -64,8 +64,8 @@ test_that("Shiftestim class is correct", {
 
 # Methods specificities
 
-test_that("shooting output is correct", {
-  expect_equal(estS$method, "shooting with model selection")
+test_that("lasso output is correct", {
+  expect_equal(estS$method, "lasso with model selection")
   expect_scalnum(estS$optim_info$last_progress)
   expect_scalnum(estS$optim_info$iterations)
 })

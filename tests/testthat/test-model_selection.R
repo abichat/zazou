@@ -16,14 +16,14 @@ grid <- sample(c(1, 3))
 
 estS <- estimate_shifts(zscores = zsco_obs,
                         lambda = grid, tree = tree,
-                        alphaOU = grid, method = "shooting")
+                        alphaOU = grid, method = "lasso")
 
 estS2 <- estimate_shifts(zscores = zsco_obs,
-                         tree = tree, alphaOU = grid, method = "shooting")
+                         tree = tree, alphaOU = grid, method = "lasso")
 
 estS3 <- estimate_shifts(zscores = zsco_obs,
                          tree = tree, alphaOU = 1, lambda = 2,
-                         method = "shooting", allow_positive = TRUE,
+                         method = "lasso", allow_positive = TRUE,
                          unknow = 3)
 
 test_that("a selection is done or not", {
@@ -77,7 +77,7 @@ test_that("the choosen model is the best one", {
 
 est_pbic <- estimate_shifts(zscores = zsco_obs,
                             lambda = grid, tree = tree, criterion = "pbic",
-                            alphaOU = grid, method = "shooting")
+                            alphaOU = grid, method = "lasso")
 
 test_that("selection on pbic criterion is OK", {
   expect_true(grepl("with model selection", est_pbic$method))

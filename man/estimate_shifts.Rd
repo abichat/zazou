@@ -9,7 +9,7 @@ estimate_shifts(
   tree,
   alphaOU,
   lambda = NULL,
-  method = c("L-BFGS-B", "shooting", "scaledlasso"),
+  method = c("lasso", "scaled lasso", "L-BFGS-B"),
   criterion = c("bic", "pbic"),
   beta0 = rep(0, length(tree$edge.length)),
   constraint_type = c("beta", "yhat", "none"),
@@ -26,8 +26,8 @@ estimate_shifts(
 
 \item{lambda}{a grid of positive regularization parameters}
 
-\item{method}{method to use for the optimization. One of \code{L-BFGS-B}
-or \code{shooting}.}
+\item{method}{method to use for the optimization. One of \code{lasso},
+\code{scaled lasso}, or \code{L-BFGS-B}.}
 
 \item{criterion}{criterion on which the selection is done.}
 

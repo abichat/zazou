@@ -9,7 +9,7 @@ alpha <- 0.1
 
 est_scaled <- estimate_shifts(zscores = zscores,
                               tree = tree, alphaOU = alpha,
-                              method = "scaledlasso")
+                              method = "scaled lasso")
 
 
 withr::with_preserve_seed({

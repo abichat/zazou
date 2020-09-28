@@ -148,6 +148,6 @@ solve_multivariate <- function(y, X, lambda, beta0, mat_incidence,
     obj_vals <- new_obj_vals
   }
 
-  list(par = beta, value = obj_vals, method = "shooting",
+  list(par = beta, value = obj_vals, method = "lasso",
        iterations = it, last_progress = progress)
 }

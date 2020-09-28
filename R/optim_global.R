@@ -7,8 +7,8 @@
 #' @param tree the tree used to compute the incidence and covariance matrices
 #' (if not specified)
 #' @param alphaOU a grid of positive alpha parameters
-#' @param method method to use for the optimization. One of \code{L-BFGS-B}
-#' or \code{shooting}.
+#' @param method method to use for the optimization. One of \code{lasso},
+#' \code{scaled lasso}, or \code{L-BFGS-B}.
 #' @param criterion criterion on which the selection is done.
 #' @param beta0 initial position (size n+m)
 #' @param constraint_type Constrains on shifts.
@@ -20,7 +20,7 @@
 #' @export
 #' @importFrom stats optim
 estimate_shifts <- function(zscores, tree, alphaOU, lambda = NULL,
-                            method = c("L-BFGS-B", "shooting", "scaledlasso"),
+                            method = c("lasso", "scaled lasso", "L-BFGS-B"),
                             criterion = c("bic", "pbic"),
                             beta0 = rep(0, length(tree$edge.length)),
                             constraint_type = c("beta", "yhat", "none"),
@@ -34,17 +34,18 @@ estimate_shifts <- function(zscores, tree, alphaOU, lambda = NULL,
   fitting_procedure <- function(beta0, X, Y, lambda, ...) {
 
     opt <- switch(method,
+                  "lasso" = solve_multivariate(
+                    y = Y, X = X, lambda = lambda, beta0 = beta0,
+                    constraint_type = constraint_type, ...),
+
+                  "scaled lasso" = solve_scaled_lasso(
+                    y = Y, X = X, lambda = lambda, beta0 = beta0,
+                    constraint_type = constraint_type, ...),
+
                   "L-BFGS-B" = solve_lbfgsb(
                     X = X, Y = Y, lambda = lambda, beta0 = beta0,
-                    constraint_type = constraint_type, ...),
-
-                  "shooting" = solve_multivariate(
-                    y = Y, X = X, lambda = lambda, beta0 = beta0,
-                    constraint_type = constraint_type, ...),
-
-                  "scaledlasso" = solve_scaled_lasso(
-                    y = Y, X = X, lambda = lambda, beta0 = beta0,
                     constraint_type = constraint_type, ...)
+
                    )
     return(opt)
   }

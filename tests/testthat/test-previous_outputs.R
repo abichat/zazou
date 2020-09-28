@@ -10,7 +10,7 @@ tree <- force_ultrametric(chlamydiae$tree)
 withr::with_seed(42, {
   estS <- estimate_shifts(zscores = zsco_obs,
                           lambda = c(1, 2), tree = tree,
-                          alpha = c(0.1, 2), method = "shooting")
+                          alpha = c(0.1, 2), method = "lasso")
 })
 
 withr::with_seed(42, {
@@ -22,7 +22,7 @@ withr::with_seed(42, {
 withr::with_seed(42, {
   estSL <- estimate_shifts(zscores = zsco_obs,
                           lambda = 0.1, tree = tree,
-                          alpha = 1, method = "scaledlasso")
+                          alpha = 1, method = "scaled lasso")
 })
 
 withr::with_seed(42, {

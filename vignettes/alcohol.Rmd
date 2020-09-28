@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>", 
   fig.align = "center",
-  eval = FALSE
+  eval = TRUE
 )
 ```
 
@@ -72,7 +72,7 @@ plot(est_lbfgsb)
 tic()
 est_shooting <- estimate_shifts(zscores = zsco_obs,
                                 lambda = 2, tree = tree, alphaOU = 0.1,
-                                method = "shooting", constraint_type = "beta")
+                                method = "lasso", constraint_type = "beta")
 toc() # 10 times faster
 est_shooting # similar results
 plot(est_shooting)
@@ -84,7 +84,7 @@ plot(est_shooting)
 tic()
 est_shooting_p <- estimate_shifts(zscores = zsco_obs,
                                   lambda = 2, tree = tree, alphaOU = 0.1,
-                                  method = "shooting", constraint_type = "yhat")
+                                  method = "lasso", constraint_type = "yhat")
 toc()
 est_shooting_p # similar results
 plot(est_shooting_p)
@@ -96,7 +96,7 @@ plot(est_shooting_p)
 tic()
 est_shooting_n <- estimate_shifts(zscores = zsco_obs,
                                   lambda = 2, tree = tree, alphaOU = 0.1,
-                                  method = "shooting", constraint_type = "none")
+                                  method = "lasso", constraint_type = "none")
 toc() # 10 times faster
 est_shooting_n # similar results
 plot(est_shooting_n)

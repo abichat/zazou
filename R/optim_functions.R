@@ -2,23 +2,23 @@
 #'
 #' @param Y A vector of size m.
 #' @param X A vector of size m*(n+m).
-#' @param sigma Needed if \code{type} is set to \code{"scaledlasso"}.
+#' @param sigma Needed if \code{type} is set to \code{"scaled lasso"}.
 #' @param type Character. If you want the \code{"lasso"} or
-#' \code{"scaledlasso"} objective function.
+#' \code{"scaled lasso"} objective function.
 #' @inheritParams estimate_shifts
 #'
 #' @return a function that take Delta (a vector of size n+m) as argument
 #' and returns a scalar
 #' @export
 compute_objective_function <- function(Y, X, lambda, sigma = NULL,
-                                       type = c("lasso", "scaledlasso")) {
-  if (is.null(sigma) && type == "scaledlasso") {
-    stop('sigma must be specified when method is set to"scaledlasso"')
+                                       type = c("lasso", "scaled lasso")) {
+  if (is.null(sigma) && type == "scaled lasso") {
+    stop('sigma must be specified when method is set to "scaled lasso"')
   }
 
   objfun <- switch(type,
                    "lasso" = compute_OF_lasso(Y, X, lambda),
-                   "scaledlasso" = compute_OF_scaledlasso(Y, X, lambda, sigma)
+                   "scaled lasso" = compute_OF_scaledlasso(Y, X, lambda, sigma)
   )
 
   return(objfun)

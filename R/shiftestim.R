@@ -97,7 +97,7 @@ print.shiftestim <- function(x, digits = 3, ...){
   cat(txt_tree1, txt_tree2)
   cat(txt_alpha, "\n")
   cat("---\n")
-  cat("Optimisation algorithm: ", x$method, "\n", sep = "")
+  cat("Method: ", x$method, "\n", sep = "")
   cat("Regularization parameter: lambda =", round(x$lambda, digits), "\n")
   cat("Objective value: ", round(x$objective_value, digits), "\n", sep = "")
   cat(paste0("BIC: ", round(x$bic, digits), "\n"))
