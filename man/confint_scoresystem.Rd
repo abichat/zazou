@@ -7,7 +7,7 @@
 confint_scoresystem(x, alpha_conf = 0.05, ...)
 }
 \arguments{
-\item{x}{a 'shiftestim' object.}
+\item{x}{a 'shiftpunct' object.}
 
 \item{alpha_conf}{the confidence level.}
 

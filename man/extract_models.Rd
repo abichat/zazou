@@ -4,13 +4,13 @@
 \alias{extract_models}
 \title{Extract models computed during selection}
 \usage{
-extract_models(shiftestim)
+extract_models(shiftpunct)
 }
 \arguments{
-\item{shiftestim}{a shiftestim object.}
+\item{shiftpunct}{a shiftpunct object.}
 }
 \value{
-a list of shiftestim objects.
+a list of shiftpunct objects.
 }
 \description{
 Extract models computed during selection

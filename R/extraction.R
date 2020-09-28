@@ -1,11 +1,11 @@
 
-#' Check if a shiftestim came from model selection
+#' Check if a shiftpunct came from model selection
 #'
-#' @param shiftestim a shiftestim object.
+#' @param shiftpunct a shiftpunct object.
 #'
 #' @return logical.
-check_selection <- function(shiftestim){
-  str <- shiftestim$method
+check_selection <- function(shiftpunct){
+  str <- shiftpunct$method
   grepl("with model selection", str)
 }
 
@@ -28,18 +28,18 @@ create_listopt_pms <- function(objective_value, shifts_est, method,
 
 #' Extract models computed during selection
 #'
-#' @param shiftestim a shiftestim object.
+#' @param shiftpunct a shiftpunct object.
 #'
-#' @return a list of shiftestim objects.
+#' @return a list of shiftpunct objects.
 #' @export
-extract_models <- function(shiftestim){
+extract_models <- function(shiftpunct){
 
-  if(!check_selection(shiftestim)){
+  if(!check_selection(shiftpunct)){
     warning("No selection has been done during the computation of this model.")
-    return(shiftestim)
+    return(shiftpunct)
   }
 
-  df_selection <- shiftestim$optim_info$bic_selection
+  df_selection <- shiftpunct$optim_info$bic_selection
 
   list_models <- vector("list", nrow(df_selection))
 
@@ -48,12 +48,12 @@ extract_models <- function(shiftestim){
       create_listopt_pms(objective_value = df_selection$objective_value[i],
                          shifts_est = df_selection$shifts_est[[i]],
                          method = sub(pattern = " with model selection",
-                                      replacement = "", x = shiftestim$method),
-                         best_alphaOU = shiftestim$alphaOU,
-                         best_lambda = shiftestim$lambda)
+                                      replacement = "", x = shiftpunct$method),
+                         best_alphaOU = shiftpunct$alphaOU,
+                         best_lambda = shiftpunct$lambda)
 
-    list_models[[i]] <- as_shiftestim(listopt = listopt, tree = shiftestim$tree,
-                                      shiftestim$zscores_obs,
+    list_models[[i]] <- as_shiftpunct(listopt = listopt, tree = shiftpunct$tree,
+                                      shiftpunct$zscores_obs,
                                       alphaOU = df_selection$alphaOU[i],
                                       lambda = df_selection$lambda[i])
 

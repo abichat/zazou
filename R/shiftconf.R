@@ -1,12 +1,12 @@
 #' 'shiftconf' object
 #'
 #' @param x a list.
-#' @param shiftestim a \code{shiftestim} object.
+#' @param shiftpunct a \code{shiftpunct} object.
 #' @param alpha_conf Confidence level.
 #' @return a \code{shiftconf} object.
 #' @export
 #'
-as_shiftconf <- function(x, shiftestim, alpha_conf){
+as_shiftconf <- function(x, shiftpunct, alpha_conf){
 
   required_names <- c("shifts_est", "zscores_est",
                       "covariance_noise_matrix", "method")
@@ -21,7 +21,7 @@ as_shiftconf <- function(x, shiftestim, alpha_conf){
             alpha_conf = x$alpha_conf,
             method = x$method,
             covariance_noise_matrix = x$covariance_noise_matrix,
-            shiftestim = shiftestim,
+            shiftpunct = shiftpunct,
             optim_info = x[setdiff(names(x), required_names)])
 
   class(x) <- "shiftconf"
@@ -46,9 +46,9 @@ as_shiftconf <- function(x, shiftestim, alpha_conf){
 #' @export
 print.shiftconf <- function(x, digits = 3, ...){
 
-  txt_tree1 <- paste0("Tree is", ifelse(x$shiftestim$is_bin, " ", " not "),
+  txt_tree1 <- paste0("Tree is", ifelse(x$shiftpunct$is_bin, " ", " not "),
                       "binary")
-  tree <- x$shiftestim$tree
+  tree <- x$shiftpunct$tree
 
   txt_tree2 <- paste0("with ", length(tree$tip.label), " leafs and ",
                       nrow(tree$edge), " branches\n")
@@ -66,8 +66,8 @@ print.shiftconf <- function(x, digits = 3, ...){
 #'
 #' @export
 plot.shiftconf <- function(x, digits = 3, ...){
-  p <- plot_shifts(x$shiftestim$tree, shifts = x$shifts_est$estimate,
-                   digits = digits, obs_scores = x$shiftestim$zscores_obs)
+  p <- plot_shifts(x$shiftpunct$tree, shifts = x$shifts_est$estimate,
+                   digits = digits, obs_scores = x$shiftpunct$zscores_obs)
   # Ok for the moment, must be completly integrated in plot_shifts() later
   facet_plot(p, panel   = "Estimated confidence interval",
              data    = x$zscores_est,

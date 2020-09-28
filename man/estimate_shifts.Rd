@@ -38,7 +38,7 @@ estimate_shifts(
 \item{...}{further arguments passed to or from other methods.}
 }
 \value{
-an object of class \code{shiftestim}
+an object of class \code{shiftpunct}
 }
 \description{
 Estimate shifts

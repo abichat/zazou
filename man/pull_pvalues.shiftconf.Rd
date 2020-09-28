@@ -7,7 +7,7 @@
 \method{pull_pvalues}{shiftconf}(x)
 }
 \arguments{
-\item{x}{Object of class shiftestim or shiftconf}
+\item{x}{Object of class shiftpunct or shiftconf}
 }
 \value{
 The named vector of p-values

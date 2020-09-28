@@ -1,6 +1,6 @@
 #' Desparsified lasso based on score system
 #'
-#' @param x a 'shiftestim' object.
+#' @param x a 'shiftpunct' object.
 #' @param alpha_conf the confidence level.
 #' @param ... further arguments to be passed to or from other methods.
 #'
@@ -8,7 +8,7 @@
 #' @export
 #'
 confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
-  stopifnot(inherits(x, "shiftestim"))
+  stopifnot(inherits(x, "shiftpunct"))
 
   mat_covarOU <- covarianceOU_matrix(x$tree, x$alpha)
   mat_incidence <- incidence_matrix(x$tree)

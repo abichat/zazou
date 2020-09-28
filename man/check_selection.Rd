@@ -2,16 +2,16 @@
 % Please edit documentation in R/extraction.R
 \name{check_selection}
 \alias{check_selection}
-\title{Check if a shiftestim came from model selection}
+\title{Check if a shiftpunct came from model selection}
 \usage{
-check_selection(shiftestim)
+check_selection(shiftpunct)
 }
 \arguments{
-\item{shiftestim}{a shiftestim object.}
+\item{shiftpunct}{a shiftpunct object.}
 }
 \value{
 logical.
 }
 \description{
-Check if a shiftestim came from model selection
+Check if a shiftpunct came from model selection
 }

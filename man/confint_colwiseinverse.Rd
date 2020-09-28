@@ -13,7 +13,7 @@ confint_colwiseinverse(
 )
 }
 \arguments{
-\item{x}{A 'shiftestim' object.}
+\item{x}{A 'shiftpunct' object.}
 
 \item{alpha_conf}{The confidence level.}
 

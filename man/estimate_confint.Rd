@@ -5,14 +5,14 @@
 \title{Estimate confidence interval from scaled lasso.}
 \usage{
 estimate_confint(
-  shiftestim,
+  shiftpunct,
   alpha_conf = 0.05,
   method = c("scoresystem", "colwiseinverse"),
   ...
 )
 }
 \arguments{
-\item{shiftestim}{a \code{shiftestim} object with method \code{scaledlasso}.}
+\item{shiftpunct}{a \code{shiftpunct} object with method \code{scaledlasso}.}
 
 \item{alpha_conf}{the confidence level.}
 

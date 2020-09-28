@@ -16,7 +16,7 @@ withr::with_seed(42, {
 
 withr::with_seed(42, {
   pv <- smooth_pvalues(pvalues = pval_obs, tree = tree,
-                        arg_shiftestim = list(lambda = c(0.1, 2),
+                        arg_shiftpunct = list(lambda = c(0.1, 2),
                                               alpha = c(0.1, 2),
                                               method = "scaled lasso"))
 })

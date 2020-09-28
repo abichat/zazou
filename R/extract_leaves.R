@@ -5,7 +5,7 @@
 #'
 #' @return The names of the significant leafs.
 #' @export
-#' @seealso \code{\link{extract_significant_leaves.shiftestim}},
+#' @seealso \code{\link{extract_significant_leaves.shiftpunct}},
 #' \code{\link{extract_significant_leaves.shiftconf}}
 #'
 extract_significant_leaves <- function(x, ...) {
@@ -14,7 +14,7 @@ extract_significant_leaves <- function(x, ...) {
 
 #' Extract significant leafs
 #'
-#' @param x A "shiftestim" object.
+#' @param x A "shiftpunct" object.
 #' @param threshold The threshold where selection begins.
 #' @param direction The direction of the selection from the threshold.
 #' Default to \code{"<"}.
@@ -23,7 +23,7 @@ extract_significant_leaves <- function(x, ...) {
 #' @return The names of the significant leafs
 #' @export
 #'
-extract_significant_leaves.shiftestim <-
+extract_significant_leaves.shiftpunct <-
   function(x, threshold = 0, direction = c("<", "<=", ">", ">="), ...) {
 
     direction <- match.arg(direction)

@@ -6,7 +6,7 @@
 \alias{plot.shiftconf}
 \title{'shiftconf' object}
 \usage{
-as_shiftconf(x, shiftestim, alpha_conf)
+as_shiftconf(x, shiftpunct, alpha_conf)
 
 \method{print}{shiftconf}(x, digits = 3, ...)
 
@@ -15,7 +15,7 @@ as_shiftconf(x, shiftestim, alpha_conf)
 \arguments{
 \item{x}{a 'shiftconf' object.}
 
-\item{shiftestim}{a \code{shiftestim} object.}
+\item{shiftpunct}{a \code{shiftpunct} object.}
 
 \item{alpha_conf}{Confidence level.}
 

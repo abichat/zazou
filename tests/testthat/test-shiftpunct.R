@@ -1,4 +1,4 @@
-context("Shiftestim class")
+context("Shiftpunct class")
 
 
 data(chlamydiae)
@@ -26,9 +26,9 @@ expect_scalnum <- function(x){
   expect_equal(length(x), 1)
 }
 
-expect_shiftestim <- function(x){
+expect_shiftpunct <- function(x){
   px <- plot(x)
-  expect_equal(class(x), "shiftestim")
+  expect_equal(class(x), "shiftpunct")
   expect_is(x$zscores_obs, "numeric")
   expect_is(x$zscores_est, "numeric")
   expect_is(x$shifts_est, "numeric")
@@ -52,14 +52,14 @@ expect_shiftestim <- function(x){
 
 # General
 
-expect_error(as_shiftestim(tree),
+expect_error(as_shiftpunct(tree),
              "'listopt' must be the output of a optimisation function.")
 
-test_that("Shiftestim class is correct", {
-  expect_shiftestim(estS)
-  expect_shiftestim(estL)
-  expect_shiftestim(estSL)
-  # expect_shiftestim(estDL)
+test_that("Shiftpunct class is correct", {
+  expect_shiftpunct(estS)
+  expect_shiftpunct(estL)
+  expect_shiftpunct(estSL)
+  # expect_shiftpunct(estDL)
 })
 
 # Methods specificities
@@ -109,8 +109,8 @@ test_that("pull_pvalues() works", {
 #   #              estDL$zscores_est$estimate - estDL$zscores_est$lower)
 # })
 
-# test_that("warnings and errors for shiftestims functions are correct", {
-#   expect_error(update_confint(tree), "x must be a 'shiftestim' object.")
+# test_that("warnings and errors for shiftpuncts functions are correct", {
+#   expect_error(update_confint(tree), "x must be a 'shiftpunct' object.")
 #   expect_warning(update_confint(estL))
 #   # expect_warning(update_confint(estL),
 #   #              "There is no confindence interval for this method (L-BFGS-B).")

@@ -79,7 +79,7 @@ test_that("Score system outputs do not change over time", {
   expect_known_value(estSS$optim_info$scoresystem,
                      "previous_outputs/estSS_scoresystem",
                      update = FALSE)
-  expect_known_value(estSS$shiftestim$zscores_est,
+  expect_known_value(estSS$shiftpunct$zscores_est,
                      "previous_outputs/estSL_zscore",
                      update = FALSE)
 })
@@ -97,7 +97,7 @@ test_that("Columnwise inverse outputs do not change over time", {
   expect_known_value(estCI$optim_info$colwiseinverse,
                      "previous_outputs/estCI_scoresystem",
                      update = FALSE)
-  expect_known_value(estCI$shiftestim$zscores_est,
+  expect_known_value(estCI$shiftpunct$zscores_est,
                      "previous_outputs/estSL_zscore",
                      update = FALSE)
 })

@@ -12,7 +12,7 @@ update_confint(x, alpha_conf)
 \item{alpha_conf}{Confidence level.}
 }
 \value{
-a 'shiftestim' object
+a 'shiftconf' object
 }
 \description{
 Update confidence interval

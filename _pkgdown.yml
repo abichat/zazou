@@ -40,7 +40,7 @@ reference:
     - '`extract_models`'
     - '`bic`'
     - '`lambda_grid`'
-    - '`as_shiftestim`'
+    - '`as_shiftpunct`'
     - '`check_selection`'
     - '`create_listopt_pms`'
   - title: Desparsified lasso

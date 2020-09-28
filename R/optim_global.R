@@ -14,7 +14,7 @@
 #' @param constraint_type Constrains on shifts.
 #' @param ... further arguments passed to or from other methods.
 #'
-#' @return an object of class \code{shiftestim}
+#' @return an object of class \code{shiftpunct}
 #'
 #'
 #' @export
@@ -81,7 +81,7 @@ estimate_shifts <- function(zscores, tree, alphaOU, lambda = NULL,
       ## Compute current model
       opt <- fitting_procedure(beta0 = beta0, X = X, Y = Y, lambda = lam,
                                mat_incidence = mat_incidence, ...)
-      current_model <- as_shiftestim(
+      current_model <- as_shiftpunct(
         listopt = opt, tree = tree, zscores = zscores,
         lambda = lam, alphaOU = alp)
       shifts <- c(shifts, list(current_model$shifts_est))

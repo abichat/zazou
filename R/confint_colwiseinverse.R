@@ -4,7 +4,7 @@
 #' \code{generate_gamma} whose \code{factor} argument could be passed to with
 #' \code{...}.
 #'
-#' @param x A 'shiftestim' object.
+#' @param x A 'shiftpunct' object.
 #' @param alpha_conf The confidence level.
 #' @param ... Further arguments to be passed to or from other methods.
 #' @inheritParams solve_colwiseinverse
@@ -14,14 +14,14 @@
 #'
 confint_colwiseinverse <- function(x, alpha_conf = 0.05, gamma,
                                    silent_on_errors = TRUE, ...){
-  stopifnot(inherits(x, "shiftestim"))
+  stopifnot(inherits(x, "shiftpunct"))
 
   mat_covarOU <- covarianceOU_matrix(x$tree, x$alpha)
   mat_incidence <- incidence_matrix(x$tree)
   R <- inverse_sqrt(mat_covarOU)
   Y <- R %*% x$zscores_obs
   X <- R %*% mat_incidence
-  hsigma <- x$optim_info$sigma_scaledlasso
+  # hsigma <- x$optim_info$sigma_scaledlasso
 
   XTXn <- crossprod(X) / nrow(X)
 

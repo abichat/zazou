@@ -8,7 +8,7 @@ smooth_pvalues(
   pvalues,
   esign = NULL,
   tree,
-  arg_shiftestim = list(alphaOU = 1, method = "scaled lasso"),
+  arg_shiftpunct = list(alphaOU = 1, method = "scaled lasso"),
   arg_shiftconf = list(alpha_conf = 0.05, method = "scoresystem")
 )
 }
@@ -19,7 +19,7 @@ smooth_pvalues(
 
 \item{tree}{Tree, as a \code{phylo} object.}
 
-\item{arg_shiftestim}{Arguments to be passed to
+\item{arg_shiftpunct}{Arguments to be passed to
 \code{estimate_shifts} function.}
 
 \item{arg_shiftconf}{Arguments to be passed to
@@ -35,6 +35,6 @@ Hierarchical correction of p-values
 pval_obs <- test_kruskalwallis(chlamydiae$X, chlamydiae$Y)$p.value
 tree <- force_ultrametric(chlamydiae$tree)
 smooth_pvalues(pvalue = pval_obs, tree = tree,
-               arg_shiftestim = list(alpha = c(0.1, 2),
+               arg_shiftpunct = list(alpha = c(0.1, 2),
                                      method = "scaled lasso"))
 }

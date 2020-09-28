@@ -1,4 +1,4 @@
-#' 'shiftestim' object
+#' 'shiftpunct' object
 #'
 #' @param listopt an output of 'estimate_shifts()'
 #' @param tree tree
@@ -6,9 +6,9 @@
 #' @param lambda regularization parameter
 #' @param alphaOU parameter
 #'
-#' @return a 'shiftestim' object
+#' @return a 'shiftpunct' object
 #' @export
-as_shiftestim <- function(listopt, tree, zscores, lambda, alphaOU) {
+as_shiftpunct <- function(listopt, tree, zscores, lambda, alphaOU) {
 
   required_names <- c("par", "value", "method")
 
@@ -49,18 +49,18 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alphaOU) {
                   est_shifts = obj$shifts_est, mat_incidence = mat_incidence,
                   mat_covarOU = mat_covarOU)
 
-  class(obj) <- "shiftestim"
+  class(obj) <- "shiftpunct"
   return(obj)
 }
 
 
 
 
-#' @rdname as_shiftestim
+#' @rdname as_shiftpunct
 #'
-#' @name print.shiftestim
+#' @name print.shiftpunct
 #'
-#' @param x a 'shiftestim' object.
+#' @param x a 'shiftpunct' object.
 #' @param ... further arguments to be passed to or from other methods.
 #' @inheritParams plot_shifts
 #'
@@ -69,7 +69,7 @@ as_shiftestim <- function(listopt, tree, zscores, lambda, alphaOU) {
 #' @importFrom ape is.binary multi2di
 #'
 #' @export
-print.shiftestim <- function(x, digits = 3, ...){
+print.shiftpunct <- function(x, digits = 3, ...){
 
   txt_alpha <- paste0("Covariance matrix has been estimated from an OU",
                       " with alpha = ", round(x$alphaOU, digits),
@@ -118,11 +118,11 @@ print.shiftestim <- function(x, digits = 3, ...){
 }
 
 
-#' @rdname as_shiftestim
+#' @rdname as_shiftpunct
 #' @inheritParams plot_shifts
 #'
 #' @export
-plot.shiftestim <- function(x, digits = 3, ...){
+plot.shiftpunct <- function(x, digits = 3, ...){
   plot_shifts(tree = x$tree, shifts = x$shifts_est,
               obs_scores = x$zscores_obs, est_scores = x$zscores_est,
               digits = digits, ...)

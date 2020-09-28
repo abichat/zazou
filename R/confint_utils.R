@@ -3,7 +3,7 @@
 #' @param x A shiftconf object.
 #' @inheritParams as_shiftconf
 #'
-#' @return a 'shiftestim' object
+#' @return a 'shiftconf' object
 #' @export
 #'
 update_confint <- function(x, alpha_conf){
@@ -23,8 +23,8 @@ add_ci_pv <- function(x, alpha_conf){
 
   noise_mat <- x$covariance_noise_matrix
   noise_fact <- sqrt(diag(noise_mat))
-  hsigma <- x$shiftestim$optim_info$sigma_scaledlasso
-  mat_incidence <- incidence_matrix(x$shiftestim$tree)
+  hsigma <- x$shiftpunct$optim_info$sigma_scaledlasso
+  mat_incidence <- incidence_matrix(x$shiftpunct$tree)
 
   shifts_est <- df_confint_pvalue(estimate = x$shifts_est$estimate,
                                   sigma = hsigma, tau = noise_fact,
@@ -50,7 +50,7 @@ add_ci_pv <- function(x, alpha_conf){
 #' univariate. q-values are threshold-dependent and need to be recomputed when
 #' \code{alpha_conf} changes.
 #'
-#' @param estimate Shift estimate from \code{shiftestim} object.
+#' @param estimate Shift estimate from \code{shiftpunct} object.
 #' Eventually named.
 #' @param sigma Associated standard error, length \code{1}.
 #' @param tau Noise factor, same length as \code{estimate}.

@@ -1,6 +1,6 @@
 #' Pull p-values
 #'
-#' @param x Object of class shiftestim or shiftconf
+#' @param x Object of class shiftpunct or shiftconf
 #'
 #' @return The named vector of p-values
 #' @export
@@ -11,19 +11,19 @@ pull_pvalues <- function(x){
 
 #' Pull p-values
 #'
-#' @param x Object of class shiftestim or shiftconf
+#' @param x Object of class shiftpunct or shiftconf
 #'
 #' @return The named vector of p-values
 #' @export
 #' @importFrom stats pnorm
 #'
-pull_pvalues.shiftestim <- function(x){
+pull_pvalues.shiftpunct <- function(x){
   pnorm(x$zscores_est)
 }
 
 #' Pull p-values
 #'
-#' @param x Object of class shiftestim or shiftconf
+#' @param x Object of class shiftpunct or shiftconf
 #'
 #' @return The named vector of p-values
 #' @export
