@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pull p-values — pull_pvalues.shiftestim • zazou</title>
+<title>Estimate threshold of rejection for t-scores — estimate_tstar • zazou</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Pull p-values — pull_pvalues.shiftestim" />
-<meta property="og:description" content="Pull p-values" />
+<meta property="og:title" content="Estimate threshold of rejection for t-scores — estimate_tstar" />
+<meta property="og:description" content="Estimate threshold of rejection for t-scores" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -132,30 +132,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pull p-values</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/pull_pvalues.R'><code>R/pull_pvalues.R</code></a></small>
-    <div class="hidden name"><code>pull_pvalues.shiftestim.Rd</code></div>
+    <h1>Estimate threshold of rejection for t-scores</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/correction.R'><code>R/correction.R</code></a></small>
+    <div class="hidden name"><code>estimate_tstar.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pull p-values</p>
+    <p>Estimate threshold of rejection for t-scores</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for shiftestim</span>
-<span class='fu'><a href='pull_pvalues.html'>pull_pvalues</a></span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>estimate_tstar</span>(<span class='no'>t_scores</span>, <span class='no'>alpha</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Object of class shiftestim or shiftconf</p></td>
+      <th>t_scores</th>
+      <td><p>Vector of t-scores.</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>Threshold of detection.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The named vector of p-values</p>
+    <p>The threshold of rejection for t-scores.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
       <tr>
         
         <td>
-          <p><code><a href="correct_pvalues.html">correct_pvalues()</a></code> </p>
+          <p><code><a href="smooth_pvalues.html">smooth_pvalues()</a></code> </p>
         </td>
         <td><p>Hierarchical correction of p-values</p></td>
       </tr>
@@ -206,15 +206,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="as_shiftestim.html">as_shiftestim()</a></code> <code><a href="as_shiftestim.html">print(<i>&lt;shiftestim&gt;</i>)</a></code> <code><a href="as_shiftestim.html">plot(<i>&lt;shiftestim&gt;</i>)</a></code> </p>
+          <p><code><a href="as_shiftpunct.html">as_shiftpunct()</a></code> <code><a href="as_shiftpunct.html">print(<i>&lt;shiftpunct&gt;</i>)</a></code> <code><a href="as_shiftpunct.html">plot(<i>&lt;shiftpunct&gt;</i>)</a></code> </p>
         </td>
-        <td><p>'shiftestim' object</p></td>
+        <td><p>'shiftpunct' object</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="check_selection.html">check_selection()</a></code> </p>
         </td>
-        <td><p>Check if a shiftestim came from model selection</p></td>
+        <td><p>Check if a shiftpunct came from model selection</p></td>
       </tr><tr>
         
         <td>
@@ -262,7 +262,7 @@
       <tr>
         
         <td>
-          <p><code><a href="alcohol.html">alcohol</a></code> <code><a href="alcohol.html">chlamydiae</a></code> </p>
+          <p><code><a href="alcohol.html">alcohol</a></code> <code><a href="alcohol.html">chlamydiae</a></code> <code><a href="alcohol.html">age</a></code> </p>
         </td>
         <td><p>Datasets</p></td>
       </tr><tr>
@@ -274,9 +274,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="as_shiftestim.html">as_shiftestim()</a></code> <code><a href="as_shiftestim.html">print(<i>&lt;shiftestim&gt;</i>)</a></code> <code><a href="as_shiftestim.html">plot(<i>&lt;shiftestim&gt;</i>)</a></code> </p>
+          <p><code><a href="as_shiftpunct.html">as_shiftpunct()</a></code> <code><a href="as_shiftpunct.html">print(<i>&lt;shiftpunct&gt;</i>)</a></code> <code><a href="as_shiftpunct.html">plot(<i>&lt;shiftpunct&gt;</i>)</a></code> </p>
         </td>
-        <td><p>'shiftestim' object</p></td>
+        <td><p>'shiftpunct' object</p></td>
       </tr><tr>
         
         <td>
@@ -306,7 +306,7 @@
         <td>
           <p><code><a href="check_selection.html">check_selection()</a></code> </p>
         </td>
-        <td><p>Check if a shiftestim came from model selection</p></td>
+        <td><p>Check if a shiftpunct came from model selection</p></td>
       </tr><tr>
         
         <td>
@@ -342,7 +342,7 @@
         <td>
           <p><code><a href="correct_pvalues.html">correct_pvalues()</a></code> </p>
         </td>
-        <td><p>Hierarchical correction of p-values</p></td>
+        <td><p>Correct p-values</p></td>
       </tr><tr>
         
         <td>
@@ -388,6 +388,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="estimate_tstar.html">estimate_tstar()</a></code> </p>
+        </td>
+        <td><p>Estimate threshold of rejection for t-scores</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="extract_models.html">extract_models()</a></code> </p>
         </td>
         <td><p>Extract models computed during selection</p></td>
@@ -406,7 +412,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="extract_significant_leaves.shiftestim.html">extract_significant_leaves(<i>&lt;shiftestim&gt;</i>)</a></code> </p>
+          <p><code><a href="extract_significant_leaves.shiftpunct.html">extract_significant_leaves(<i>&lt;shiftpunct&gt;</i>)</a></code> </p>
         </td>
         <td><p>Extract significant leafs</p></td>
       </tr><tr>
@@ -508,7 +514,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="pull_pvalues.shiftestim.html">pull_pvalues(<i>&lt;shiftestim&gt;</i>)</a></code> </p>
+          <p><code><a href="pull_pvalues.shiftpunct.html">pull_pvalues(<i>&lt;shiftpunct&gt;</i>)</a></code> </p>
         </td>
         <td><p>Pull p-values</p></td>
       </tr><tr>
@@ -529,6 +535,12 @@
           <p><code><a href="simu_zscores.html">simu_zscores()</a></code> </p>
         </td>
         <td><p>Simulation of z-scores on branches</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="smooth_pvalues.html">smooth_pvalues()</a></code> </p>
+        </td>
+        <td><p>Hierarchical correction of p-values</p></td>
       </tr><tr>
         
         <td>
@@ -624,7 +636,7 @@
       <tr>
         
         <td>
-          <p><code><a href="alcohol.html">alcohol</a></code> <code><a href="alcohol.html">chlamydiae</a></code> </p>
+          <p><code><a href="alcohol.html">alcohol</a></code> <code><a href="alcohol.html">chlamydiae</a></code> <code><a href="alcohol.html">age</a></code> </p>
         </td>
         <td><p>Datasets</p></td>
       </tr><tr>

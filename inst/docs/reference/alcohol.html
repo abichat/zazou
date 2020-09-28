@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Datasets — alcohol" />
-<meta property="og:description" content="alcohol and chlamydiae datasets" />
+<meta property="og:description" content="alcohol, chlamydiae and age datasets" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -138,12 +138,14 @@
     </div>
 
     <div class="ref-description">
-    <p><code>alcohol</code> and <code>chlamydiae</code> datasets</p>
+    <p><code>alcohol</code>, <code>chlamydiae</code> and <code>age</code> datasets</p>
     </div>
 
     <pre class="usage"><span class='no'>alcohol</span>
 
-<span class='no'>chlamydiae</span></pre>
+<span class='no'>chlamydiae</span>
+
+<span class='no'>age</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -156,7 +158,10 @@
 
 </dl>
 
-<p>An object of class <code>list</code> of length 4.</p>
+
+
+
+
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>Wu, Gary D., et al. "Linking long-term dietary patterns with gut
@@ -164,15 +169,19 @@ microbial enterotypes." Science 334.6052 (2011): 105-108.</p>
 <p>Caporaso, J. G., et al. (2011). "Global patterns of 16S rRNA
 diversity at a depth of millions of sequences per sample." PNAS,
 108, 4516-4522. PMCID: PMC3063599</p>
+<p>Brito, Ilana L., et al. "Mobile genes in the human microbiome
+are structured from global to individual scales." Nature 535.7612
+(2016): 435-439.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>alcohol</code> data set was taken from a study of the dietary
+    <p>The <code>alcohol</code> dataset was taken from a study of the dietary
 association with the gut microbiome (Wu, 2011). Here we include the
 alcohol intake as the primary phenotype. The OTU abundance data consists
 of 98 samples with 949 OTUs with prevalence &gt; 10<!-- %. The raw counts are -->
 normalized to account for variable library sizes.</p>
-<p>The <code>chlamydia</code> data set is taken from a 16s rRNA diversity study
+<p>The <code>chlamydia</code> dataset is taken from a 16s rRNA diversity study
 narrowed to the Chlamydiae bacteria taxon, originally appearing in PNAS.</p>
+<p>The <code>age</code> dataset comes from Brito et al. (2016)</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

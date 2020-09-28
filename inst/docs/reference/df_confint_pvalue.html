@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>estimate</th>
-      <td><p>Shift estimate from <code>shiftestim</code> object.
+      <td><p>Shift estimate from <code>shiftpunct</code> object.
 Eventually named.</p></td>
     </tr>
     <tr>
@@ -190,7 +190,9 @@ Eventually named.</p></td>
     <p>A dataframe with 4 (or 5 if <code>estimate</code> has names) columns.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The confidence interval is bivariate whereas the p-value is univariate.</p>
+    <p>The confidence interval is bivariate whereas the p-value and q-values are
+univariate. q-values are threshold-dependent and need to be recomputed when
+<code>alpha_conf</code> changes.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

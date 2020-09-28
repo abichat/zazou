@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -132,12 +132,12 @@
 <a href="#constraint-on-beta" class="anchor"></a>Constraint on beta</h3>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">estimation1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">true_zscores</span>,
                                <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>)
+                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>)
 <span class="no">estimation1</span>
 <span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.299</span>
 <span class="co">#&gt; BIC: 36.893</span>
@@ -169,12 +169,12 @@
 <a href="#constraint-on-beta-1" class="anchor"></a>Constraint on beta</h3>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">estimation2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">true_zscores</span>,
                                <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>)
+                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>)
 <span class="no">estimation2</span>
 <span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.568</span>
 <span class="co">#&gt; BIC: 48.288</span>
@@ -197,13 +197,13 @@
 <a href="#constraint-on-yhat" class="anchor"></a>Constraint on yhat</h3>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">estimation3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">true_zscores</span>,
                                <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>,
+                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>,
                                <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"yhat"</span>)
 <span class="no">estimation3</span>
 <span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.394</span>
 <span class="co">#&gt; BIC: 39.737</span>
@@ -235,13 +235,13 @@
 <a href="#constraint-on-yhat-1" class="anchor"></a>Constraint on yhat</h3>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">estimation4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">true_zscores</span>,
                                <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>,
+                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>,
                                <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"yhat"</span>)
 <span class="no">estimation4</span>
 <span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.894</span>
 <span class="co">#&gt; BIC: 40.737</span>
@@ -263,13 +263,13 @@
 <a href="#no-constraint" class="anchor"></a>No constraint</h3>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">estimation5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">true_zscores</span>,
                                <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>,
+                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>,
                                <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"none"</span>)
 <span class="no">estimation5</span>
 <span class="co">#&gt; Tree is binary with 17 leafs and 32 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.414 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.489</span>
 <span class="co">#&gt; BIC: 42.58</span>

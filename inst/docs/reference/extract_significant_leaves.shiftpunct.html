@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>'shiftestim' object — as_shiftestim • zazou</title>
+<title>Extract significant leafs — extract_significant_leaves.shiftpunct • zazou</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="'shiftestim' object — as_shiftestim" />
-<meta property="og:description" content="'shiftestim' object" />
+<meta property="og:title" content="Extract significant leafs — extract_significant_leaves.shiftpunct" />
+<meta property="og:description" content="Extract significant leafs" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -132,63 +132,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>'shiftestim' object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/shiftestim.R'><code>R/shiftestim.R</code></a></small>
-    <div class="hidden name"><code>as_shiftestim.Rd</code></div>
+    <h1>Extract significant leafs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/extract_leaves.R'><code>R/extract_leaves.R</code></a></small>
+    <div class="hidden name"><code>extract_significant_leaves.shiftpunct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>'shiftestim' object</p>
+    <p>Extract significant leafs</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_shiftestim</span>(<span class='no'>listopt</span>, <span class='no'>tree</span>, <span class='no'>zscores</span>, <span class='no'>lambda</span>, <span class='no'>alphaOU</span>)
-
-<span class='co'># S3 method for shiftestim</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for shiftestim</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for shiftpunct</span>
+<span class='fu'><a href='extract_significant_leaves.html'>extract_significant_leaves</a></span>(
+  <span class='no'>x</span>,
+  <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"&lt;"</span>, <span class='st'>"&lt;="</span>, <span class='st'>"&gt;"</span>, <span class='st'>"&gt;="</span>),
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>listopt</th>
-      <td><p>an output of 'estimate_shifts()'</p></td>
-    </tr>
-    <tr>
-      <th>tree</th>
-      <td><p>tree</p></td>
-    </tr>
-    <tr>
-      <th>zscores</th>
-      <td><p>vector of observed z-scores</p></td>
-    </tr>
-    <tr>
-      <th>lambda</th>
-      <td><p>regularization parameter</p></td>
-    </tr>
-    <tr>
-      <th>alphaOU</th>
-      <td><p>parameter</p></td>
-    </tr>
-    <tr>
       <th>x</th>
-      <td><p>a 'shiftestim' object.</p></td>
+      <td><p>A "shiftpunct" object.</p></td>
     </tr>
     <tr>
-      <th>digits</th>
-      <td><p>Number of digits to round to.</p></td>
+      <th>threshold</th>
+      <td><p>The threshold where selection begins.</p></td>
+    </tr>
+    <tr>
+      <th>direction</th>
+      <td><p>The direction of the selection from the threshold.
+Default to <code>"&lt;"</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>further arguments to be passed to or from other methods.</p></td>
+      <td><p>Arguments passed on to <code><a href='extract_significant_leaves.html'>extract_significant_leaves</a></code></p><dl'>
+    <dt><code></code></dt><dd><p></p></dd>
+  
+</dl></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a 'shiftestim' object</p>
+    <p>The names of the significant leafs</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

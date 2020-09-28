@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute prediction errors — rmse_glmnet • zazou</title>
+<title>'shiftpunct' object — as_shiftpunct • zazou</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Compute prediction errors — rmse_glmnet" />
-<meta property="og:description" content="Compute prediction errors" />
+<meta property="og:title" content="'shiftpunct' object — as_shiftpunct" />
+<meta property="og:description" content="'shiftpunct' object" />
 
 
 
@@ -132,45 +132,63 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compute prediction errors</h1>
-    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/method_scoresystem.R'><code>R/method_scoresystem.R</code></a></small>
-    <div class="hidden name"><code>rmse_glmnet.Rd</code></div>
+    <h1>'shiftpunct' object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/abichat/zazou/blob/master/R/shiftpunct.R'><code>R/shiftpunct.R</code></a></small>
+    <div class="hidden name"><code>as_shiftpunct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Compute prediction errors</p>
+    <p>'shiftpunct' object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rmse_glmnet</span>(<span class='no'>c</span>, <span class='no'>K</span>, <span class='no'>dataselects</span>, <span class='no'>X</span>, <span class='no'>lambdas</span>)</pre>
+    <pre class="usage"><span class='fu'>as_shiftpunct</span>(<span class='no'>listopt</span>, <span class='no'>tree</span>, <span class='no'>zscores</span>, <span class='no'>lambda</span>, <span class='no'>alphaOU</span>)
+
+<span class='co'># S3 method for shiftpunct</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for shiftpunct</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>c</th>
-      <td><p>Column to use.</p></td>
+      <th>listopt</th>
+      <td><p>an output of 'estimate_shifts()'</p></td>
     </tr>
     <tr>
-      <th>K</th>
-      <td><p>Number of batches.</p></td>
+      <th>tree</th>
+      <td><p>tree</p></td>
     </tr>
     <tr>
-      <th>dataselects</th>
-      <td><p>Batches.</p></td>
+      <th>zscores</th>
+      <td><p>vector of observed z-scores</p></td>
     </tr>
     <tr>
-      <th>X</th>
-      <td><p>Matrix to pseudo orthogonalize of size m*(n+m).</p></td>
+      <th>lambda</th>
+      <td><p>regularization parameter</p></td>
     </tr>
     <tr>
-      <th>lambdas</th>
-      <td><p>Numeric vector of lambda to test.</p></td>
+      <th>alphaOU</th>
+      <td><p>parameter</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>a 'shiftpunct' object.</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>Number of digits to round to.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments to be passed to or from other methods.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Matrix of errors per lambda and batch.</p>
+    <p>a 'shiftpunct' object</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

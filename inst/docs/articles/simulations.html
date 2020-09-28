@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -146,13 +146,13 @@
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1000 and sigma = 44.721 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0 </span>
 <span class="co">#&gt; Objective value: 0</span>
 <span class="co">#&gt; BIC: 17.237</span>
 <span class="co">#&gt; pBIC: -Inf</span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Estimated shifts: 0 -2 -1 -1 0 0 -2 0 ...</span>
+<span class="co">#&gt; Estimated shifts: 0 -0.19 -2.81 -2.81 0 0 -2 0 ...</span>
 <span class="co">#&gt; 5 shifts have been identified (ie 37.5 % of sparsity)</span>
 <span class="co">#&gt; A parsimonious solution would involve 3 shifts</span>
 <span class="co">#&gt; ---</span>
@@ -169,21 +169,21 @@
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1000 and sigma = 44.721 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 7</span>
-<span class="co">#&gt; BIC: 16.799</span>
-<span class="co">#&gt; pBIC: 23.826</span>
+<span class="co">#&gt; BIC: 18.409</span>
+<span class="co">#&gt; pBIC: 28.552</span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Estimated shifts: 0 -2 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt; 1 shifts have been identified (ie 87.5 % of sparsity)</span>
-<span class="co">#&gt; A parsimonious solution would involve 1 shifts</span>
+<span class="co">#&gt; Estimated shifts: 0 -1.999 0 0 0 0 0 0 ...</span>
+<span class="co">#&gt; 2 shifts have been identified (ie 75 % of sparsity)</span>
+<span class="co">#&gt; A parsimonious solution would involve 2 shifts</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Observed z-scores:  -3 -3 0 -2 0 </span>
 <span class="co">#&gt; Estimated z-scores: -2 -2 0  0 0 </span>
-<span class="co">#&gt; 2 z-scores have been shifted (ie 60 % of sparsity)</span>
+<span class="co">#&gt; 3 z-scores have been shifted (ie 40 % of sparsity)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation</span>)
-<span class="co">#&gt; Warning: Removed 8 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="co">#&gt; Warning: Removed 7 rows containing missing values (geom_label).</span></pre></body></html></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-3-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>With a low penalty, the solution is much sparser and closer to the true shifts on branches.</p>
 </div>
@@ -212,13 +212,13 @@
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0 </span>
 <span class="co">#&gt; Objective value: 0</span>
 <span class="co">#&gt; BIC: 20.419</span>
 <span class="co">#&gt; pBIC: -Inf</span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Estimated shifts: -1.299 -0.963 0 -1.15 -0.336 -0.739 -0.345 -0.395 ...</span>
+<span class="co">#&gt; Estimated shifts: -0.452 -1.809 0 -1.15 -1.183 -0.615 -0.469 -0.519 ...</span>
 <span class="co">#&gt; 7 shifts have been identified (ie 12.5 % of sparsity)</span>
 <span class="co">#&gt; A parsimonious solution would involve 4 shifts</span>
 <span class="co">#&gt; ---</span>
@@ -245,7 +245,7 @@
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.445</span>
 <span class="co">#&gt; BIC: 15.608</span>
@@ -268,7 +268,7 @@
 <span class="co">#&gt;   true observed estimated</span>
 <span class="co">#&gt; A   -3  -2.2615   -2.2482</span>
 <span class="co">#&gt; B   -3  -3.4118   -3.3118</span>
-<span class="co">#&gt; C    0  -1.6352   -1.6337</span>
+<span class="co">#&gt; C    0  -1.6352   -1.6336</span>
 <span class="co">#&gt; D   -2  -1.0840   -1.0524</span>
 <span class="co">#&gt; E    0  -1.1342   -1.0524</span></pre></body></html></div>
 <p>The fit does not depend a lot (on this toy example) on the initial solution.</p>
@@ -280,7 +280,7 @@
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.445</span>
 <span class="co">#&gt; BIC: 15.608</span>
@@ -303,7 +303,7 @@
 <span class="co">#&gt;   true observed estimated</span>
 <span class="co">#&gt; A   -3  -2.2615   -2.2482</span>
 <span class="co">#&gt; B   -3  -3.4118   -3.3118</span>
-<span class="co">#&gt; C    0  -1.6352   -1.6337</span>
+<span class="co">#&gt; C    0  -1.6352   -1.6336</span>
 <span class="co">#&gt; D   -2  -1.0840   -1.0524</span>
 <span class="co">#&gt; E    0  -1.1342   -1.0524</span></pre></body></html></div>
 </div>
@@ -348,19 +348,19 @@
 <div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
 <span class="no">estimation_shooting</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zscores</span>,
                                        <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>),
-                                       <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
+                                       <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
 <span class="no">estimation_scla</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zscores</span>,
                                    <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>),
-                                   <span class="kw">method</span> <span class="kw">=</span> <span class="st">"scaledlasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
+                                   <span class="kw">method</span> <span class="kw">=</span> <span class="st">"scaled lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
 
-<span class="no">confint_scoresystem</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_confint.html">estimate_confint</a></span>(<span class="no">estimation_scla</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"scoresystem"</span>)
+<span class="no">confint_scoresystem</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_confint.html">estimate_confint</a></span>(<span class="no">estimation_scla</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"score system"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 100.877 sec elapsed</span>
+<span class="co">#&gt; 111.768 sec elapsed</span>
 <span class="no">estimation_shooting</span>
 <span class="co">#&gt; Tree is binary with 127 leafs and 252 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 2 and sigma = 2.027 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting with model selection</span>
+<span class="co">#&gt; Method: lasso with model selection</span>
 <span class="co">#&gt; Regularization parameter: lambda = 3.878 </span>
 <span class="co">#&gt; Objective value: 100.604</span>
 <span class="co">#&gt; BIC: 425.801</span>
@@ -377,7 +377,7 @@
 <span class="co">#&gt; Tree is binary with 127 leafs and 252 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.6 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: scaledlasso with model selection</span>
+<span class="co">#&gt; Method: scaled lasso with model selection</span>
 <span class="co">#&gt; Regularization parameter: lambda = 14.202 </span>
 <span class="co">#&gt; Objective value: 1.367</span>
 <span class="co">#&gt; BIC: 463.381</span>
@@ -392,15 +392,18 @@
 <span class="co">#&gt; 0 z-scores have been shifted (ie 100 % of sparsity)</span>
 <span class="no">confint_scoresystem</span>
 <span class="co">#&gt; Tree is binary with 127 leafs and 252 branches</span>
-<span class="co">#&gt; Method: scoresystem </span>
+<span class="co">#&gt; Method: score system </span>
 <span class="co">#&gt; Confidence threshold: 0.05 </span>
-<span class="co">#&gt;    leaf   estimate      lower      upper    pvalue</span>
-<span class="co">#&gt; 1   283   1.503942  -8.015409 11.0232936 0.6215866</span>
-<span class="co">#&gt; 2 16688  -2.284907 -13.268161  8.6983473 0.3417315</span>
-<span class="co">#&gt; 3  3494  -2.894828 -16.030329 10.2406728 0.3328922</span>
-<span class="co">#&gt; 4  3470  -4.141860 -17.267166  8.9834456 0.2681255</span>
-<span class="co">#&gt; 5  1661  -3.976428 -15.897790  7.9449336 0.2566347</span>
-<span class="co">#&gt; 6  4206 -11.137879 -23.180958  0.9051999 0.0349432</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; z-scores:</span>
+<span class="co">#&gt;    leaf   estimate      lower      upper    pvalue    qvalue</span>
+<span class="co">#&gt; 1   283   1.503942  -8.015409 11.0232936 0.6215866 1.0000000</span>
+<span class="co">#&gt; 2 16688  -2.284907 -13.268161  8.6983473 0.3417315 0.9475903</span>
+<span class="co">#&gt; 3  3494  -2.894828 -16.030329 10.2406728 0.3328922 0.9230797</span>
+<span class="co">#&gt; 4  3470  -4.141860 -17.267166  8.9834456 0.2681255 0.7434876</span>
+<span class="co">#&gt; 5  1661  -3.976428 -15.897790  7.9449336 0.2566347 0.7116245</span>
+<span class="co">#&gt; 6  4206 -11.137879 -23.180958  0.9051999 0.0349432 0.0968943</span>
+<span class="co">#&gt;   ...</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation_shooting</span>,
      <span class="kw">sup_scores</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">zscores</span> - <span class="no">zscores_original</span>,
                             <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
@@ -528,14 +531,14 @@
   <span class="no">estimation_shooting</span>$<span class="no">zscores_est</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span>(<span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>,
                         <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>)
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"zazou"</span>)
 <span class="no">df_measures_bh</span> <span class="kw">&lt;-</span>
   <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span>(<span class="no">pvalues_bh</span>, <span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>,
-                        <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>)<span class="kw">%&gt;%</span>
+                        <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"bh"</span>)
 <span class="no">df_measures_bonf</span> <span class="kw">&lt;-</span>
   <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span>(<span class="no">pvalues_bonf</span>, <span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>,
-                        <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>)<span class="kw">%&gt;%</span>
+                        <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"bonferonni"</span>)
 
 <span class="no">df_measures</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(<span class="no">df_measures_zazou</span>, <span class="no">df_measures_bh</span>, <span class="no">df_measures_bonf</span>)
@@ -571,6 +574,12 @@
                                <span class="kw">true</span> <span class="kw">=</span> <span class="no">.env</span>$<span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>))) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">nested_measures</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"despars"</span>)
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
 
 <span class="no">several_confint</span>
 <span class="co">#&gt; # A tibble: 2 x 9</span>
@@ -596,7 +605,7 @@
 <span class="co">#&gt; 1 bh         0.808</span>
 <span class="co">#&gt; 2 bonferonni 0.647</span>
 <span class="co">#&gt; 3 despars    0.697</span>
-<span class="co">#&gt; 4 shooting   0.981</span>
+<span class="co">#&gt; 4 zazou      0.981</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">all_measures</span>) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">FPR</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">TPR</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">method</span>) +

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9013</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -145,12 +145,12 @@
                               <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">0.1</span>,
                               <span class="kw">method</span> <span class="kw">=</span> <span class="st">"L-BFGS-B"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 172.419 sec elapsed</span>
+<span class="co">#&gt; 181.742 sec elapsed</span>
 <span class="no">est_lbfgsb</span>
 <span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: L-BFGS-B</span>
+<span class="co">#&gt; Method: L-BFGS-B</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 1422.097</span>
 <span class="co">#&gt; BIC: 5215.825</span>
@@ -173,14 +173,14 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
 <span class="no">est_shooting</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
                                 <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                                <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
+                                <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>() <span class="co"># 10 times faster</span>
-<span class="co">#&gt; 8.089 sec elapsed</span>
+<span class="co">#&gt; 8.506 sec elapsed</span>
 <span class="no">est_shooting</span> <span class="co"># similar results</span>
 <span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 1422.097</span>
 <span class="co">#&gt; BIC: 5215.985</span>
@@ -203,14 +203,14 @@
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
 <span class="no">est_shooting_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
                                   <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                                  <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"yhat"</span>)
+                                  <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"yhat"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 21.2 sec elapsed</span>
+<span class="co">#&gt; 22.616 sec elapsed</span>
 <span class="no">est_shooting_p</span> <span class="co"># similar results</span>
 <span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 1325.407</span>
 <span class="co">#&gt; BIC: 5911.489</span>
@@ -233,14 +233,14 @@
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
 <span class="no">est_shooting_n</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
                                   <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                                  <span class="kw">method</span> <span class="kw">=</span> <span class="st">"shooting"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"none"</span>)
+                                  <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"none"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>() <span class="co"># 10 times faster</span>
-<span class="co">#&gt; 7.509 sec elapsed</span>
+<span class="co">#&gt; 11.033 sec elapsed</span>
 <span class="no">est_shooting_n</span> <span class="co"># similar results</span>
 <span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Optimisation algorithm: shooting</span>
+<span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 861.223</span>
 <span class="co">#&gt; BIC: 4425.318</span>
