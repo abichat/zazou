@@ -15,28 +15,28 @@ est_scaled <- estimate_shifts(zscores = zscores,
 withr::with_preserve_seed({
   set.seed(42)
   est_scosys <- estimate_confint(est_scaled, alpha_conf = 0.05,
-                          method = "scoresystem")
+                          method = "score system")
 })
 
 withr::with_preserve_seed({
   set.seed(42)
   est_scosys002 <- estimate_confint(est_scaled, alpha_conf = 0.02,
-                             method = "scoresystem")
+                             method = "score system")
 })
 
 # est_colwiseinv <-
 #   estimate_confint(est_scaled, alpha_conf = 0.05, # Fail
-#                    method = "colwiseinverse", silent_on_tries = FALSE)
+#                    method = "colwise inverse", silent_on_tries = FALSE)
 # tic()
 # est_colwiseinv <-
 #   estimate_confint(est_scaled, alpha_conf = 0.05, # Success
-#                    method = "colwiseinverse", silent_on_tries = FALSE)
+#                    method = "colwise inverse", silent_on_tries = FALSE)
 # toc()
 #
 # tic()
 # est_colwiseinv_fast <-
 #   estimate_confint(est_scaled, alpha_conf = 0.05,# Success
-#                    method = "colwiseinverse", silent_on_tries = FALSE, fast = TRUE)
+#                    method = "colwise inverse", silent_on_tries = FALSE, fast = TRUE)
 # toc()
 #
 # est_colwiseinv$shifts_est$estimate
@@ -44,7 +44,7 @@ withr::with_preserve_seed({
 
 
 test_that("est_scosys has its specific components / dimensions", {
-  expect_equal(est_scosys$method, "scoresystem")
+  expect_equal(est_scosys$method, "score system")
   expect_equal(est_scosys$alpha_conf, 0.05)
   expect_equal(ncol(est_scosys$shifts_est), 5)
   expect_is(est_scosys$covariance_noise_matrix, "matrix")

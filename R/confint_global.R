@@ -2,27 +2,27 @@
 #'
 #' @param shiftpunct a \code{shiftpunct} object with method \code{scaledlasso}.
 #' @param alpha_conf the confidence level.
-#' @param method For the moment, only \code{scoresystem}.
+#' @param method \code{score system} or \code{colwise inverse}.
 #' @param ... further argument...
 #'
 #' @return a \code{shiftconf} object.
 #' @export
 #'
 estimate_confint <- function(shiftpunct, alpha_conf = 0.05,
-                             method = c("scoresystem", "colwiseinverse"),
+                             method = c("score system", "colwise inverse"),
                              ...){
 
   method <- match.arg(method)
 
   stopifnot(inherits(shiftpunct, "shiftpunct"))
 
-  obj <- switch (method,
+  obj <- switch(method,
 
-                 "scoresystem" = confint_scoresystem(
-                   x = shiftpunct, ...),
+                "score system" = confint_scoresystem(
+                  x = shiftpunct, ...),
 
-                 "colwiseinverse" = confint_colwiseinverse(
-                   x = shiftpunct, ...)
+                "colwise inverse" = confint_colwiseinverse(
+                  x = shiftpunct, ...)
 
                  )
 

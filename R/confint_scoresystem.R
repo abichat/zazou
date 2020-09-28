@@ -39,7 +39,7 @@ confint_scoresystem <- function(x, alpha_conf = 0.05, ...){
 
   list(shifts_est = data.frame(estimate = new_beta),
        zscores_est = NA, covariance_noise_matrix = mat_covar_noise,
-       method = "scoresystem",
+       method = "score system",
        scoresystem = scosys)
 }
 

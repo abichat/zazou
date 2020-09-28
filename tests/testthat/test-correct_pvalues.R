@@ -11,14 +11,14 @@ withr::with_seed(42, {
                            lambda = c(0.1, 2), tree = tree,
                            alpha = c(0.1, 2), method = "scaled lasso")
   est2 <- estimate_confint(est1, alpha_conf = 0.05,
-                           method = "scoresystem")
+                           method = "score system")
 })
 
 withr::with_seed(42, {
   pv <- smooth_pvalues(pvalues = pval_obs, tree = tree,
-                        arg_shiftpunct = list(lambda = c(0.1, 2),
-                                              alpha = c(0.1, 2),
-                                              method = "scaled lasso"))
+                       arg_shiftpunct = list(lambda = c(0.1, 2),
+                                             alpha = c(0.1, 2),
+                                             method = "scaled lasso"))
 })
 
 

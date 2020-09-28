@@ -7,7 +7,7 @@
 estimate_confint(
   shiftpunct,
   alpha_conf = 0.05,
-  method = c("scoresystem", "colwiseinverse"),
+  method = c("score system", "colwise inverse"),
   ...
 )
 }
@@ -16,7 +16,7 @@ estimate_confint(
 
 \item{alpha_conf}{the confidence level.}
 
-\item{method}{For the moment, only \code{scoresystem}.}
+\item{method}{\code{score system} or \code{colwise inverse}.}
 
 \item{...}{further argument...}
 }

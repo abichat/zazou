@@ -9,7 +9,7 @@ smooth_pvalues(
   esign = NULL,
   tree,
   arg_shiftpunct = list(alphaOU = 1, method = "scaled lasso"),
-  arg_shiftconf = list(alpha_conf = 0.05, method = "scoresystem")
+  arg_shiftconf = list(alpha_conf = 0.05, method = "score system")
 )
 }
 \arguments{

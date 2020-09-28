@@ -27,12 +27,12 @@ withr::with_seed(42, {
 
 withr::with_seed(42, {
   estSS <- estimate_confint(estSL, alpha_conf = 0.05,
-                            method = "scoresystem")
+                            method = "score system")
 })
 
 withr::with_seed(42, {
   estCI <- suppressWarnings(estimate_confint(estSL, alpha_conf = 0.05,
-                                             method = "colwiseinverse"))
+                                             method = "colwise inverse"))
 })
 
 ######################################################################

@@ -94,7 +94,7 @@ test_that("pull_pvalues() works", {
 })
 
 # test_that("scoresystem output is correct", {
-#   # expect_equal(estDL$method, "scoresystem")
+#   # expect_equal(estDL$method, "score system")
 #   # expect_equal(ncol(estDL$shifts_est), 3)
 #   # expect_equal(estDL$optim_info$alpha_confint, 0.01)
 #   # expect_true(is.na(estDL$objective_value))

@@ -21,7 +21,7 @@ smooth_pvalues <- function(pvalues, esign = NULL, tree,
                             arg_shiftpunct =
                               list(alphaOU = 1, method = "scaled lasso"),
                             arg_shiftconf =
-                              list(alpha_conf = 0.05, method = "scoresystem")){
+                              list(alpha_conf = 0.05, method = "score system")){
   zscores <- p2z(pvalues, esign)
 
   arg_shiftpunct <- c(zscores = list(zscores), tree = list(tree), arg_shiftpunct)
