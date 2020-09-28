@@ -55,7 +55,10 @@ print.shiftconf <- function(x, digits = 3, ...){
   cat(txt_tree1, txt_tree2)
   cat(paste("Method:", x$method, "\n"))
   cat(paste("Confidence threshold:", x$alpha_conf, "\n"))
+  cat("---\n")
+  cat("z-scores:\n")
   print(head(x$zscores_est))
+  cat("  ...")
 }
 
 
