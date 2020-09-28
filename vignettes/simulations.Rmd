@@ -193,7 +193,7 @@ estimation_scla <- estimate_shifts(zscores = zscores,
                                    tree = tree, alphaOU = c(0.2, 0.5, 1, 2, 5), 
                                    method = "scaled lasso", constraint_type = "beta")
 
-confint_scoresystem <- estimate_confint(estimation_scla, method = "scoresystem")
+confint_scoresystem <- estimate_confint(estimation_scla, method = "score system")
 toc()
 estimation_shooting
 estimation_scla
