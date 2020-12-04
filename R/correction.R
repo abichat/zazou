@@ -10,7 +10,7 @@ estimate_tstar <- function(t_scores, alpha) {
   p <- length(t_scores)
   t_max <- sqrt(2 * log(p) - 2 * log(log(p)))
   t_scores <- sort(t_scores[t_scores <= t_max])
-  values <- 2 * p * (1 - pnorm(t_scores)) / seq_along(t_scores)
+  values <- p * (1 - pnorm(t_scores)) / seq_along(t_scores)
   if (all(values > alpha)) {
     message("t_star is not feasible, falling back to default value.")
     return(sqrt(2 * log(p)))
