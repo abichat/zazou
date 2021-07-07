@@ -41,7 +41,7 @@ plot_shifts <- function(tree, shifts, true_scores = NULL,
   p <-
     ggtree(tree) %<+%
     edge_data +
-    geom_tiplab(size = 5) +
+    geom_tiplab(linesize = 5) +
     geom_label(aes(x = .data$branch,
                    label = round(.data$shift_value, digits))) +
     theme_tree2()
