@@ -121,7 +121,7 @@ library(testthat)
 
 # use_r("generate_hyperparameters")
 
-# use_github_action_check_release()
+# use_github_action_check_release("R-CMD-check-dev.yaml")
 # use_github_action_check_standard()
 
 # use_dev_package("evabic")

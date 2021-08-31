@@ -24,7 +24,7 @@ date <- "Dec" #gsub('-', '--', Sys.Date())
 <!-- badges: start -->
 <!-- [![Last-changedate](https://img.shields.io/badge/Last%20change-`r date`-yellowgreen.svg)]() -->
 [![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg)]()
-[![R build status](https://github.com/abichat/zazou/workflows/R-CMD-check/badge.svg)](https://github.com/abichat/zazou/actions)
+[![R-CMD-check](https://github.com/abichat/zazou/workflows/R-CMD-check/badge.svg)](https://github.com/abichat/zazou/actions)
 <!-- badges: end -->
 
 The goal of __zazou__ is to model the evolution of z-scores along a tree to do differential analysis.
