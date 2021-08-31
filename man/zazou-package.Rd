@@ -6,8 +6,8 @@
 \alias{zazou-package}
 \title{zazou: Z-Scores As Ornstein-Uhlenbeck}
 \description{
-Differentially abundance analysis with
-    Ornstein-Uhlenbeck process on z-scores.
+Differentially abundance analysis with Ornstein-Uhlenbeck
+    process on z-scores.
 }
 \seealso{
 Useful links:

@@ -22,7 +22,7 @@ bic <- function(obs_zscores, est_zscores, est_shifts, mat_covarOU){
                       mat_covarOU = mat_covarOU)
   k <- norm0(est_shifts)
   N <- length(obs_zscores)
-  - 2 * LL + k * log(N)
+  - 2 * LL + k * log(N) * log(log(N))
 }
 
 #' @rdname bic

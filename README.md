@@ -6,10 +6,8 @@
 <!-- badges: start -->
 
 <!-- [![Last-changedate](https://img.shields.io/badge/Last%20change-Dec-yellowgreen.svg)]() -->
-
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1-orange.svg)]()
-[![R build
-status](https://github.com/abichat/zazou/workflows/R-CMD-check/badge.svg)](https://github.com/abichat/zazou/actions)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.2-orange.svg)]()
+[![R-CMD-check](https://github.com/abichat/zazou/workflows/R-CMD-check/badge.svg)](https://github.com/abichat/zazou/actions)
 <!-- badges: end -->
 
 The goal of **zazou** is to model the evolution of z-scores along a tree
