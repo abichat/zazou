@@ -1,6 +1,6 @@
 Package: zazou
 Title: Z-Scores As Ornstein-Uhlenbeck
-Version: 0.0.2
+Version: 0.0.1
 Authors@R: 
     c(person(given = "Antoine",
              family = "Bichat",

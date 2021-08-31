@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -88,8 +88,7 @@
 
       
 
-      </header><link href="simulations_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="simulations_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Simulations</h1>
@@ -150,18 +149,18 @@
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0 </span>
 <span class="co">#&gt; Objective value: 0</span>
-<span class="co">#&gt; BIC: 14.018</span>
-<span class="co">#&gt; pBIC: 26.582</span>
+<span class="co">#&gt; BIC: 17.237</span>
+<span class="co">#&gt; pBIC: -Inf</span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Estimated shifts: 0 0 -3 -3 0 0 -2 0 ...</span>
-<span class="co">#&gt; 3 shifts have been identified (ie 62.5 % of sparsity)</span>
-<span class="co">#&gt; A parsimonious solution would involve 2 shifts</span>
+<span class="co">#&gt; Estimated shifts: 0 -0.19 -2.81 -2.81 0 0 -2 0 ...</span>
+<span class="co">#&gt; 5 shifts have been identified (ie 37.5 % of sparsity)</span>
+<span class="co">#&gt; A parsimonious solution would involve 3 shifts</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Observed z-scores:  -3 -3 0 -2 0 </span>
 <span class="co">#&gt; Estimated z-scores: -3 -3 0 -2 0 </span>
-<span class="co">#&gt; 3 z-scores have been shifted (ie 40 % of sparsity)</span>
+<span class="co">#&gt; 4 z-scores have been shifted (ie 20 % of sparsity)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation</span>)
-<span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_label).</span></pre></body></html></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-2-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>Solution without penalty is not sparse due to ill-conditioning of the incidence matrix.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">estimation</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">obs_zscores</span>,
@@ -173,10 +172,10 @@
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 7</span>
-<span class="co">#&gt; BIC: 18.408</span>
-<span class="co">#&gt; pBIC: 28.551</span>
+<span class="co">#&gt; BIC: 18.409</span>
+<span class="co">#&gt; pBIC: 28.552</span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Estimated shifts: 0 -2 0 0 0 0 0 0 ...</span>
+<span class="co">#&gt; Estimated shifts: 0 -1.999 0 0 0 0 0 0 ...</span>
 <span class="co">#&gt; 2 shifts have been identified (ie 75 % of sparsity)</span>
 <span class="co">#&gt; A parsimonious solution would involve 2 shifts</span>
 <span class="co">#&gt; ---</span>
@@ -356,7 +355,7 @@
 
 <span class="no">confint_scoresystem</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_confint.html">estimate_confint</a></span>(<span class="no">estimation_scla</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"score system"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 112.084 sec elapsed</span>
+<span class="co">#&gt; 111.768 sec elapsed</span>
 <span class="no">estimation_shooting</span>
 <span class="co">#&gt; Tree is binary with 127 leafs and 252 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 2 and sigma = 2.027 </span>
@@ -397,13 +396,13 @@
 <span class="co">#&gt; Confidence threshold: 0.05 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; z-scores:</span>
-<span class="co">#&gt;    leaf   estimate      lower      upper    pvalue     qvalue</span>
-<span class="co">#&gt; 1   283   1.503942  -8.015409 11.0232936 0.6215866 0.68462824</span>
-<span class="co">#&gt; 2 16688  -2.284907 -13.268161  8.6983473 0.3417315 0.37639009</span>
-<span class="co">#&gt; 3  3494  -2.894828 -16.030329 10.2406728 0.3328922 0.36665430</span>
-<span class="co">#&gt; 4  3470  -4.141860 -17.267166  8.9834456 0.2681255 0.29531894</span>
-<span class="co">#&gt; 5  1661  -3.976428 -15.897790  7.9449336 0.2566347 0.28266268</span>
-<span class="co">#&gt; 6  4206 -11.137879 -23.180958  0.9051999 0.0349432 0.03848716</span>
+<span class="co">#&gt;    leaf   estimate      lower      upper    pvalue    qvalue</span>
+<span class="co">#&gt; 1   283   1.503942  -8.015409 11.0232936 0.6215866 1.0000000</span>
+<span class="co">#&gt; 2 16688  -2.284907 -13.268161  8.6983473 0.3417315 0.9475903</span>
+<span class="co">#&gt; 3  3494  -2.894828 -16.030329 10.2406728 0.3328922 0.9230797</span>
+<span class="co">#&gt; 4  3470  -4.141860 -17.267166  8.9834456 0.2681255 0.7434876</span>
+<span class="co">#&gt; 5  1661  -3.976428 -15.897790  7.9449336 0.2566347 0.7116245</span>
+<span class="co">#&gt; 6  4206 -11.137879 -23.180958  0.9051999 0.0349432 0.0968943</span>
 <span class="co">#&gt;   ...</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation_shooting</span>,
      <span class="kw">sup_scores</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">zscores</span> - <span class="no">zscores_original</span>,
@@ -575,6 +574,9 @@
                                <span class="kw">true</span> <span class="kw">=</span> <span class="no">.env</span>$<span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>))) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">nested_measures</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"despars"</span>)
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
+<span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
 <span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
 <span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
 <span class="co">#&gt; t_star is not feasible, falling back to default value.</span>

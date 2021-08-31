@@ -3,7 +3,7 @@
 #' Compute normalized covariance matrix
 #'
 #' The coefficient is proportional to
-#' \eqn{exp(- \alpha * d_{i,j}) - exp(-2 * \alpha * h) / (2 * \alpha)}
+#' \eqn{(exp(- \alpha * d_{i,j}) - exp(-2 * \alpha * h)) / (2 * \alpha)}
 #'
 #' @param tree a phylo object
 #' @param alphaOU hyperparameter
