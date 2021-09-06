@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -115,7 +115,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/abichat/zazou">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -141,11 +141,11 @@
     <p>Vectorized tests</p>
     </div>
 
-    <pre class="usage"><span class='fu'>test_wilcoxon</span>(<span class='no'>X</span>, <span class='no'>Y</span>)
+    <pre class="usage"><span class='fu'>test_wilcoxon</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>Y</span><span class='op'>)</span>
 
-<span class='fu'>test_kruskalwallis</span>(<span class='no'>X</span>, <span class='no'>Y</span>)
+<span class='fu'>test_kruskalwallis</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>Y</span><span class='op'>)</span>
 
-<span class='fu'>test_fisher</span>(<span class='no'>X</span>, <span class='no'>Y</span>)</pre>
+<span class='fu'>test_fisher</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>Y</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,9 +166,12 @@
 a <code>e.sign</code> component.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>test_wilcoxon</span>(<span class='no'>alcohol</span>$<span class='no'>X</span>, <span class='no'>alcohol</span>$<span class='no'>Y</span>)$<span class='no'>p.value</span>)</div><div class='output co'>#&gt;       14531         283        7781       16688        3494        6293 
-#&gt; 0.025757321 0.019732819 0.043370553 0.358103814 0.009946997 0.668781960 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>test_kruskalwallis</span>(<span class='no'>alcohol</span>$<span class='no'>X</span>, <span class='no'>alcohol</span>$<span class='no'>Y</span>)$<span class='no'>p.value</span>)</div><div class='output co'>#&gt;       14531         283        7781       16688        3494        6293 
-#&gt; 0.025329943 0.019545224 0.042827899 0.356137205 0.009844709 0.664068846 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>test_fisher</span>(<span class='no'>alcohol</span>$<span class='no'>X</span>, <span class='no'>alcohol</span>$<span class='no'>Y</span>)$<span class='no'>p.value</span>)</div><div class='output co'>#&gt;      14531        283       7781      16688       3494       6293 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>test_wilcoxon</span><span class='op'>(</span><span class='va'>alcohol</span><span class='op'>$</span><span class='va'>X</span>, <span class='va'>alcohol</span><span class='op'>$</span><span class='va'>Y</span><span class='op'>)</span><span class='op'>$</span><span class='va'>p.value</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       14531         283        7781       16688        3494        6293 
+#&gt; 0.025757321 0.019732819 0.043370553 0.358103814 0.009946997 0.668781960 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>test_kruskalwallis</span><span class='op'>(</span><span class='va'>alcohol</span><span class='op'>$</span><span class='va'>X</span>, <span class='va'>alcohol</span><span class='op'>$</span><span class='va'>Y</span><span class='op'>)</span><span class='op'>$</span><span class='va'>p.value</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       14531         283        7781       16688        3494        6293 
+#&gt; 0.025329943 0.019545224 0.042827899 0.356137205 0.009844709 0.664068846 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>test_fisher</span><span class='op'>(</span><span class='va'>alcohol</span><span class='op'>$</span><span class='va'>X</span>, <span class='va'>alcohol</span><span class='op'>$</span><span class='va'>Y</span><span class='op'>)</span><span class='op'>$</span><span class='va'>p.value</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      14531        283       7781      16688       3494       6293 
 #&gt; 0.02750782 0.13159538 0.12391791 0.89293842 0.02341283 0.37031187 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -185,7 +188,7 @@ a <code>e.sign</code> component.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

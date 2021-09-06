@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -74,7 +74,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/abichat/zazou">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -101,121 +101,137 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggrepel</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tibble</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">evabic</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tictoc</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">zazou</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ape</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://abichat.github.io/evabic">evabic</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/collectivemedia/tictoc">tictoc</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/abichat/zazou">zazou</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div id="deterministic-situation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#deterministic-situation" class="anchor"></a>Deterministic situation</h1>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span>(<span class="kw">text</span> <span class="kw">=</span> <span class="st">"(((A:1,B:1):1,C:2):1,(D:1,E:1):2);"</span>)
-<span class="no">tree</span>$<span class="no">tip.label</span>
-<span class="co">#&gt; [1] "A" "B" "C" "D" "E"</span></pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">incidence_mat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/incidence_matrix.html">incidence_matrix</a></span>(<span class="no">tree</span>)
-<span class="no">incidence_mat</span> + <span class="fl">0</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">"(((A:1,B:1):1,C:2):1,(D:1,E:1):2);"</span><span class="op">)</span>
+<span class="va">tree</span><span class="op">$</span><span class="va">tip.label</span>
+<span class="co">#&gt; [1] "A" "B" "C" "D" "E"</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">incidence_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/incidence_matrix.html">incidence_matrix</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span>
+<span class="va">incidence_mat</span> <span class="op">+</span> <span class="fl">0</span>
 <span class="co">#&gt;   [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]</span>
 <span class="co">#&gt; A    1    1    1    0    0    0    0    0</span>
 <span class="co">#&gt; B    1    1    0    1    0    0    0    0</span>
 <span class="co">#&gt; C    1    0    0    0    1    0    0    0</span>
 <span class="co">#&gt; D    0    0    0    0    0    1    1    0</span>
-<span class="co">#&gt; E    0    0    0    0    0    1    0    1</span></pre></body></html></div>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">true_shifts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, -<span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, -<span class="fl">2</span>, <span class="fl">0</span>)
-<span class="no">true_zscores</span> <span class="kw">&lt;-</span> <span class="no">incidence_mat</span> <span class="kw">%*%</span> <span class="no">true_shifts</span>
-<span class="no">obs_zscores</span> <span class="kw">&lt;-</span> <span class="no">true_zscores</span> <span class="kw">&lt;-</span> <span class="no">true_zscores</span>[, <span class="fl">1</span>]
-<span class="no">covar_mat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">5</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/covarianceOU_matrix.html">covarianceOU_matrix</a></span>(<span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>)
+<span class="co">#&gt; E    0    0    0    0    0    1    0    1</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">true_shifts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>
+<span class="va">true_zscores</span> <span class="op">&lt;-</span> <span class="va">incidence_mat</span> <span class="op">%*%</span> <span class="va">true_shifts</span>
+<span class="va">obs_zscores</span> <span class="op">&lt;-</span> <span class="va">true_zscores</span> <span class="op">&lt;-</span> <span class="va">true_zscores</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>
+<span class="va">covar_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">5</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/covarianceOU_matrix.html">covarianceOU_matrix</a></span><span class="op">(</span><span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt;   A B C D E</span>
 <span class="co">#&gt; A 1 0 0 0 0</span>
 <span class="co">#&gt; B 0 1 0 0 0</span>
 <span class="co">#&gt; C 0 0 1 0 0</span>
 <span class="co">#&gt; D 0 0 0 1 0</span>
-<span class="co">#&gt; E 0 0 0 0 1</span></pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(<span class="no">tree</span>, <span class="no">true_shifts</span>, <span class="kw">true_scores</span> <span class="kw">=</span> <span class="no">true_zscores</span>)
-<span class="co">#&gt; Warning: Removed 7 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="co">#&gt; E 0 0 0 0 1</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span><span class="op">(</span><span class="va">tree</span>, <span class="va">true_shifts</span>, true_scores <span class="op">=</span> <span class="va">true_zscores</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `data_frame()` was deprecated in tibble 1.1.0.</span>
+<span class="co">#&gt; Please use `tibble()` instead.</span>
+<span class="co">#&gt; Warning: `mutate_()` was deprecated in dplyr 0.7.0.</span>
+<span class="co">#&gt; Please use `mutate()` instead.</span>
+<span class="co">#&gt; See vignette('programming') for more help</span>
+<span class="co">#&gt; Warning: Removed 7 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/ggtree-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">estimation</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">obs_zscores</span>,
-                              <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0</span>)
-<span class="no">estimation</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">estimation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">obs_zscores</span>, 
+                              tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">3</span>, lambda <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+<span class="va">estimation</span>
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1000 and sigma = 44.721 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0 </span>
 <span class="co">#&gt; Objective value: 0</span>
-<span class="co">#&gt; BIC: 17.237</span>
+<span class="co">#&gt; BIC: 13.019</span>
 <span class="co">#&gt; pBIC: -Inf</span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Estimated shifts: 0 -0.19 -2.81 -2.81 0 0 -2 0 ...</span>
+<span class="co">#&gt; Estimated shifts: 0 -2.475 -0.525 -0.525 0 0 -2 0 ...</span>
 <span class="co">#&gt; 5 shifts have been identified (ie 37.5 % of sparsity)</span>
 <span class="co">#&gt; A parsimonious solution would involve 3 shifts</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Observed z-scores:  -3 -3 0 -2 0 </span>
 <span class="co">#&gt; Estimated z-scores: -3 -3 0 -2 0 </span>
 <span class="co">#&gt; 4 z-scores have been shifted (ie 20 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation</span>)
-<span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">estimation</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-2-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>Solution without penalty is not sparse due to ill-conditioning of the incidence matrix.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">estimation</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">obs_zscores</span>,
-                              <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>)
-<span class="no">estimation</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">estimation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">obs_zscores</span>, 
+                              tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">3</span>, lambda <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">estimation</span>
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1000 and sigma = 44.721 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 7</span>
-<span class="co">#&gt; BIC: 18.409</span>
-<span class="co">#&gt; pBIC: 28.552</span>
+<span class="co">#&gt; BIC: 15.955</span>
+<span class="co">#&gt; pBIC: 23.826</span>
 <span class="co">#&gt; ---</span>
-<span class="co">#&gt; Estimated shifts: 0 -1.999 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt; 2 shifts have been identified (ie 75 % of sparsity)</span>
-<span class="co">#&gt; A parsimonious solution would involve 2 shifts</span>
+<span class="co">#&gt; Estimated shifts: 0 -2 0 0 0 0 0 0 ...</span>
+<span class="co">#&gt; 1 shifts have been identified (ie 87.5 % of sparsity)</span>
+<span class="co">#&gt; A parsimonious solution would involve 1 shifts</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Observed z-scores:  -3 -3 0 -2 0 </span>
 <span class="co">#&gt; Estimated z-scores: -2 -2 0  0 0 </span>
-<span class="co">#&gt; 3 z-scores have been shifted (ie 40 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation</span>)
-<span class="co">#&gt; Warning: Removed 7 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="co">#&gt; 2 z-scores have been shifted (ie 60 % of sparsity)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">estimation</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 8 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-3-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>With a low penalty, the solution is much sparser and closer to the true shifts on branches.</p>
 </div>
 <div id="simulations-on-a-toy-example" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simulations-on-a-toy-example" class="anchor"></a>Simulations on a toy example</h1>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span>(<span class="kw">text</span> <span class="kw">=</span> <span class="st">"(((A:1,B:1):1,C:2):1,(D:1,E:1):2);"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">2019</span>)
-<span class="no">covar_mat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/covarianceOU_matrix.html">covarianceOU_matrix</a></span>(<span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>)
-<span class="kw pkg">corrplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span>(<span class="no">covar_mat</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"upper"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">"(((A:1,B:1):1,C:2):1,(D:1,E:1):2);"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2019</span><span class="op">)</span>
+<span class="va">covar_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/covarianceOU_matrix.html">covarianceOU_matrix</a></span><span class="op">(</span><span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="fu">corrplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">covar_mat</span>, type <span class="op">=</span> <span class="st">"upper"</span><span class="op">)</span></code></pre></div>
 <p><img src="simulations_files/figure-html/ou_correlation_matrix-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">true_shifts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">3</span>, -<span class="fl">3</span>, <span class="fl">0</span>, -<span class="fl">2</span>, <span class="fl">0</span>)
-<span class="no">sqrtcovar</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/chol.html">chol</a></span>(<span class="no">covar_mat</span>))
-<span class="no">zscores</span> <span class="kw">&lt;-</span> <span class="no">true_shifts</span> + <span class="no">sqrtcovar</span> <span class="kw">%*%</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">5</span>) <span class="co"># simulate </span>
-<span class="no">zscores</span> <span class="kw">&lt;-</span> <span class="no">zscores</span>[, <span class="fl">1</span>]
-<span class="no">zscores</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">true_shifts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>
+<span class="va">sqrtcovar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chol.html">chol</a></span><span class="op">(</span><span class="va">covar_mat</span><span class="op">)</span><span class="op">)</span>
+<span class="va">zscores</span> <span class="op">&lt;-</span> <span class="va">true_shifts</span> <span class="op">+</span> <span class="va">sqrtcovar</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="co"># simulate </span>
+<span class="va">zscores</span> <span class="op">&lt;-</span> <span class="va">zscores</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>
+<span class="va">zscores</span>
 <span class="co">#&gt;         A         B         C         D         E </span>
-<span class="co">#&gt; -2.261477 -3.411813 -1.635239 -1.083963 -1.134186</span></pre></body></html></div>
+<span class="co">#&gt; -2.261477 -3.411813 -1.635239 -1.083963 -1.134186</span></code></pre></div>
 <div id="estimate-shifts-without-penalty" class="section level2">
 <h2 class="hasAnchor">
 <a href="#estimate-shifts-without-penalty" class="anchor"></a>Estimate shifts without penalty</h2>
 <p>The fit is perfect since all observed <span class="math inline">\(z\)</span>-scores are negative.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">estimation</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zscores</span>,
-                              <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0</span>)
-<span class="no">estimation</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">estimation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zscores</span>, 
+                              tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">1</span>, lambda <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+<span class="va">estimation</span>
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0 </span>
 <span class="co">#&gt; Objective value: 0</span>
-<span class="co">#&gt; BIC: 20.419</span>
+<span class="co">#&gt; BIC: 14.514</span>
 <span class="co">#&gt; pBIC: -Inf</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: -0.452 -1.809 0 -1.15 -1.183 -0.615 -0.469 -0.519 ...</span>
@@ -225,30 +241,32 @@
 <span class="co">#&gt; Observed z-scores:  -2.261 -3.412 -1.635 -1.084 -1.134 </span>
 <span class="co">#&gt; Estimated z-scores: -2.261 -3.412 -1.635 -1.084 -1.134 </span>
 <span class="co">#&gt; 5 z-scores have been shifted (ie 0 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation</span>, <span class="kw">true_scores</span> <span class="kw">=</span> <span class="no">true_shifts</span>)
-<span class="co">#&gt; Warning: Removed 2 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">estimation</span>, true_scores <span class="op">=</span> <span class="va">true_shifts</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 2 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r">
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">true</span> <span class="kw">=</span> <span class="no">true_shifts</span>, <span class="kw">observed</span>  <span class="kw">=</span> <span class="no">zscores</span>,
-                 <span class="kw">estimated</span> <span class="kw">=</span> <span class="no">estimation</span>$<span class="no">zscores_est</span>),
-      <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>true <span class="op">=</span> <span class="va">true_shifts</span>, observed  <span class="op">=</span> <span class="va">zscores</span>,
+                 estimated <span class="op">=</span> <span class="va">estimation</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span>, 
+      digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt;   true observed estimated</span>
 <span class="co">#&gt; A   -3  -2.2615   -2.2615</span>
 <span class="co">#&gt; B   -3  -3.4118   -3.4118</span>
 <span class="co">#&gt; C    0  -1.6352   -1.6352</span>
 <span class="co">#&gt; D   -2  -1.0840   -1.0840</span>
-<span class="co">#&gt; E    0  -1.1342   -1.1342</span></pre></body></html></div>
+<span class="co">#&gt; E    0  -1.1342   -1.1342</span></code></pre></div>
 <p>The fit degrades as we increase sparsity. [Well, not so much…]</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">estimation</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zscores</span>,
-                              <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>)
-<span class="no">estimation</span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">estimation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zscores</span>, 
+                              tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">1</span>, lambda <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
+<span class="va">estimation</span>
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.445</span>
-<span class="co">#&gt; BIC: 15.608</span>
+<span class="co">#&gt; BIC: 12.234</span>
 <span class="co">#&gt; pBIC: 28.273</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: -1.634 -0.615 0 -1.064 0 -1.052 0 0 ...</span>
@@ -258,32 +276,34 @@
 <span class="co">#&gt; Observed z-scores:  -2.261 -3.412 -1.635 -1.084 -1.134 </span>
 <span class="co">#&gt; Estimated z-scores: -2.248 -3.312 -1.634 -1.052 -1.052 </span>
 <span class="co">#&gt; 5 z-scores have been shifted (ie 0 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation</span>, <span class="kw">true_scores</span> <span class="kw">=</span> <span class="no">true_shifts</span>)
-<span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">estimation</span>, true_scores <span class="op">=</span> <span class="va">true_shifts</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r">
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">true</span> <span class="kw">=</span> <span class="no">true_shifts</span>, <span class="kw">observed</span>  <span class="kw">=</span> <span class="no">zscores</span>,
-                 <span class="kw">estimated</span> <span class="kw">=</span> <span class="no">estimation</span>$<span class="no">zscores_est</span>),
-      <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>true <span class="op">=</span> <span class="va">true_shifts</span>, observed  <span class="op">=</span> <span class="va">zscores</span>,
+                 estimated <span class="op">=</span> <span class="va">estimation</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span>, 
+      digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt;   true observed estimated</span>
 <span class="co">#&gt; A   -3  -2.2615   -2.2482</span>
 <span class="co">#&gt; B   -3  -3.4118   -3.3118</span>
 <span class="co">#&gt; C    0  -1.6352   -1.6336</span>
 <span class="co">#&gt; D   -2  -1.0840   -1.0524</span>
-<span class="co">#&gt; E    0  -1.1342   -1.0524</span></pre></body></html></div>
+<span class="co">#&gt; E    0  -1.1342   -1.0524</span></code></pre></div>
 <p>The fit does not depend a lot (on this toy example) on the initial solution.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">estimation</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zscores</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>,
-                              <span class="kw">beta0</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, -<span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, -<span class="fl">2</span>, <span class="fl">0</span>),
-                              <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>)
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">estimation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zscores</span>, tree <span class="op">=</span> <span class="va">tree</span>, 
+                              beta0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>, 
+                              alphaOU <span class="op">=</span> <span class="fl">1</span>, lambda <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
 
-<span class="no">estimation</span>
+<span class="va">estimation</span>
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.445</span>
-<span class="co">#&gt; BIC: 15.608</span>
+<span class="co">#&gt; BIC: 12.234</span>
 <span class="co">#&gt; pBIC: 28.273</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: -1.634 -0.615 0 -1.064 0 -1.052 0 0 ...</span>
@@ -293,77 +313,84 @@
 <span class="co">#&gt; Observed z-scores:  -2.261 -3.412 -1.635 -1.084 -1.134 </span>
 <span class="co">#&gt; Estimated z-scores: -2.248 -3.312 -1.634 -1.052 -1.052 </span>
 <span class="co">#&gt; 5 z-scores have been shifted (ie 0 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation</span>, <span class="kw">true_scores</span> <span class="kw">=</span> <span class="no">true_shifts</span>)
-<span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">estimation</span>, true_scores <span class="op">=</span> <span class="va">true_shifts</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r">
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">true</span> <span class="kw">=</span> <span class="no">true_shifts</span>, <span class="kw">observed</span>  <span class="kw">=</span> <span class="no">zscores</span>,
-                 <span class="kw">estimated</span> <span class="kw">=</span> <span class="no">estimation</span>$<span class="no">zscores_est</span>),
-      <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>true <span class="op">=</span> <span class="va">true_shifts</span>, observed  <span class="op">=</span> <span class="va">zscores</span>,
+                 estimated <span class="op">=</span> <span class="va">estimation</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span>, 
+      digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt;   true observed estimated</span>
 <span class="co">#&gt; A   -3  -2.2615   -2.2482</span>
 <span class="co">#&gt; B   -3  -3.4118   -3.3118</span>
 <span class="co">#&gt; C    0  -1.6352   -1.6336</span>
 <span class="co">#&gt; D   -2  -1.0840   -1.0524</span>
-<span class="co">#&gt; E    0  -1.1342   -1.0524</span></pre></body></html></div>
+<span class="co">#&gt; E    0  -1.1342   -1.0524</span></code></pre></div>
 </div>
 </div>
 <div id="simulations-from-real-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simulations-from-real-data" class="anchor"></a>Simulations from real data</h1>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">42</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">alcohol</span>)
-<span class="no">abund</span> <span class="kw">&lt;-</span> <span class="no">alcohol</span>$<span class="no">X</span>[, <span class="no">alcohol</span>$<span class="no">Y</span> <span class="kw">==</span> <span class="st">"Low"</span>]
-<span class="no">groups</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">abund</span>), <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span>(<span class="no">alcohol</span>$<span class="no">tree</span>)
-<span class="no">otu_to_keep</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span>(<span class="no">abund</span> <span class="kw">&gt;</span> <span class="fl">0</span>) <span class="kw">&gt;</span> <span class="fl">20</span>))
-<span class="no">abund</span> <span class="kw">&lt;-</span> <span class="no">abund</span>[<span class="no">otu_to_keep</span>, ]
-<span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">drop.tip</a></span>(<span class="no">tree</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">setdiff</a></span>(<span class="no">tree</span>$<span class="no">tip.label</span>, <span class="no">otu_to_keep</span>))
-<span class="no">N_branch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">tree</span>$<span class="no">edge.length</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">pvalues_original</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span>(<span class="no">abund</span>, <span class="no">groups</span>)$<span class="no">p.value</span>
-<span class="no">zscores_original</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/p2z.html">p2z</a></span>(<span class="no">pvalues_original</span>)
-<span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(<span class="no">tree</span>, <span class="kw">shifts</span> <span class="kw">=</span> <span class="fl">NA</span>, <span class="kw">obs_scores</span> <span class="kw">=</span> <span class="no">zscores_original</span>)
-<span class="co">#&gt; Warning: Removed 253 rows containing missing values (geom_label).</span></pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">alcohol</span><span class="op">)</span>
+<span class="va">abund</span> <span class="op">&lt;-</span> <span class="va">alcohol</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="va">alcohol</span><span class="op">$</span><span class="va">Y</span> <span class="op">==</span> <span class="st">"Low"</span><span class="op">]</span>
+<span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">abund</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span><span class="op">(</span><span class="va">alcohol</span><span class="op">$</span><span class="va">tree</span><span class="op">)</span>
+<span class="va">otu_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">abund</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span>
+<span class="va">abund</span> <span class="op">&lt;-</span> <span class="va">abund</span><span class="op">[</span><span class="va">otu_to_keep</span>, <span class="op">]</span>
+<span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">drop.tip</a></span><span class="op">(</span><span class="va">tree</span>, <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="va">tree</span><span class="op">$</span><span class="va">tip.label</span>, <span class="va">otu_to_keep</span><span class="op">)</span><span class="op">)</span>
+<span class="va">N_branch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">tree</span><span class="op">$</span><span class="va">edge.length</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pvalues_original</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span><span class="op">(</span><span class="va">abund</span>, <span class="va">groups</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>
+<span class="va">zscores_original</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/p2z.html">p2z</a></span><span class="op">(</span><span class="va">pvalues_original</span><span class="op">)</span>
+<span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span><span class="op">(</span><span class="va">tree</span>, shifts <span class="op">=</span> <span class="cn">NA</span>, obs_scores <span class="op">=</span> <span class="va">zscores_original</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 253 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/pvalueswofoldchange-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">clustering</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/create_clusters.html">create_clusters</a></span>(<span class="no">tree</span>, <span class="kw">N_clusters</span> <span class="kw">=</span> <span class="fl">20</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"paraphyletic"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">clusters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>, <span class="fl">4</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">clustering</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">clustering</span> <span class="kw">%in%</span> <span class="no">clusters</span>)])
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">clustering</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_clusters.html">create_clusters</a></span><span class="op">(</span><span class="va">tree</span>, N_clusters <span class="op">=</span> <span class="fl">20</span>, method <span class="op">=</span> <span class="st">"paraphyletic"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">clustering</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">clustering</span> <span class="op">%in%</span> <span class="va">clusters</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2 4 5 8 </span>
 <span class="co">#&gt; 7 9 8 9</span>
-<span class="no">otus_da</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">clustering</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">clustering</span> <span class="kw">%in%</span> <span class="no">clusters</span>)])
-<span class="no">pi0</span> <span class="kw">&lt;-</span> <span class="fl">1</span> - <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otus_da</span>) / <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>)
-<span class="no">abund</span>[<span class="no">otus_da</span>, <span class="no">groups</span> <span class="kw">==</span> <span class="st">"B"</span>] <span class="kw">&lt;-</span> <span class="fl">4</span> * <span class="no">abund</span>[<span class="no">otus_da</span>,  <span class="no">groups</span> <span class="kw">==</span> <span class="st">"B"</span>]</pre></body></html></div>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">pvalues</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span>(<span class="no">abund</span>, <span class="no">groups</span>)$<span class="no">p.value</span>
-<span class="no">zscores</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/p2z.html">p2z</a></span>(<span class="no">pvalues</span>)
-<span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(<span class="no">tree</span>, <span class="fl">NA</span>, <span class="kw">obs_scores</span> <span class="kw">=</span> <span class="no">zscores</span>,
-            <span class="kw">sup_scores</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">clustering</span>,
-                                   <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Clusters"</span>,
-                                   <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">clustering</span>)),
-                              <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">zscores</span> - <span class="no">zscores_original</span>,
-                                   <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
-                                   <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span>(<span class="no">zscores</span> - <span class="no">zscores_original</span>)))))
-<span class="co">#&gt; Warning: Removed 253 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="va">otus_da</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">clustering</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">clustering</span> <span class="op">%in%</span> <span class="va">clusters</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+<span class="va">pi0</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otus_da</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>
+<span class="va">abund</span><span class="op">[</span><span class="va">otus_da</span>, <span class="va">groups</span> <span class="op">==</span> <span class="st">"B"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span> <span class="op">*</span> <span class="va">abund</span><span class="op">[</span><span class="va">otus_da</span>,  <span class="va">groups</span> <span class="op">==</span> <span class="st">"B"</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pvalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span><span class="op">(</span><span class="va">abund</span>, <span class="va">groups</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>
+<span class="va">zscores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/p2z.html">p2z</a></span><span class="op">(</span><span class="va">pvalues</span><span class="op">)</span>
+<span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span><span class="op">(</span><span class="va">tree</span>, <span class="cn">NA</span>, obs_scores <span class="op">=</span> <span class="va">zscores</span>, 
+            sup_scores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scores <span class="op">=</span> <span class="va">clustering</span>,
+                                   title <span class="op">=</span> <span class="st">"Clusters"</span>,
+                                   color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">clustering</span><span class="op">)</span><span class="op">)</span>,
+                              <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scores <span class="op">=</span> <span class="va">zscores</span> <span class="op">-</span> <span class="va">zscores_original</span>,
+                                   title <span class="op">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
+                                   color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">zscores</span> <span class="op">-</span> <span class="va">zscores_original</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 253 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/zscoressimudataset-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
-<span class="no">estimation_shooting</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zscores</span>,
-                                       <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>),
-                                       <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
-<span class="no">estimation_scla</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zscores</span>,
-                                   <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>),
-                                   <span class="kw">method</span> <span class="kw">=</span> <span class="st">"scaled lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">estimation_shooting</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zscores</span>, 
+                                       tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>, 
+                                       method <span class="op">=</span> <span class="st">"lasso"</span>, constraint_type <span class="op">=</span> <span class="st">"beta"</span><span class="op">)</span>
+<span class="va">estimation_scla</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zscores</span>, 
+                                   tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>, 
+                                   method <span class="op">=</span> <span class="st">"scaled lasso"</span>, constraint_type <span class="op">=</span> <span class="st">"beta"</span><span class="op">)</span>
 
-<span class="no">confint_scoresystem</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_confint.html">estimate_confint</a></span>(<span class="no">estimation_scla</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"score system"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 111.768 sec elapsed</span>
-<span class="no">estimation_shooting</span>
+<span class="va">confint_scoresystem</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_confint.html">estimate_confint</a></span><span class="op">(</span><span class="va">estimation_scla</span>, method <span class="op">=</span> <span class="st">"score system"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; 120.753 sec elapsed</span>
+<span class="va">estimation_shooting</span>
 <span class="co">#&gt; Tree is binary with 127 leafs and 252 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 2 and sigma = 2.027 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso with model selection</span>
 <span class="co">#&gt; Regularization parameter: lambda = 3.878 </span>
 <span class="co">#&gt; Objective value: 100.604</span>
-<span class="co">#&gt; BIC: 425.801</span>
+<span class="co">#&gt; BIC: 442.595</span>
 <span class="co">#&gt; pBIC: 486.063</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span>
@@ -373,7 +400,7 @@
 <span class="co">#&gt; Observed z-scores:  1.58 -0.434 -0.152 -1.363 -1.521 -3.632 -4.547  0.266 1.167 1.959 ...</span>
 <span class="co">#&gt; Estimated z-scores:    0 -0.579 -0.579 -0.579 -0.579 -2.116 -2.116 -0.579     0     0 ...</span>
 <span class="co">#&gt; 50 z-scores have been shifted (ie 60.6 % of sparsity)</span>
-<span class="no">estimation_scla</span>
+<span class="va">estimation_scla</span>
 <span class="co">#&gt; Tree is binary with 127 leafs and 252 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.6 </span>
 <span class="co">#&gt; ---</span>
@@ -390,7 +417,7 @@
 <span class="co">#&gt; Observed z-scores:  1.58 -0.434 -0.152 -1.363 -1.521 -3.632 -4.547 0.266 1.167 1.959 ...</span>
 <span class="co">#&gt; Estimated z-scores:    0      0      0      0      0      0      0     0     0     0 ...</span>
 <span class="co">#&gt; 0 z-scores have been shifted (ie 100 % of sparsity)</span>
-<span class="no">confint_scoresystem</span>
+<span class="va">confint_scoresystem</span>
 <span class="co">#&gt; Tree is binary with 127 leafs and 252 branches</span>
 <span class="co">#&gt; Method: score system </span>
 <span class="co">#&gt; Confidence threshold: 0.05 </span>
@@ -404,176 +431,186 @@
 <span class="co">#&gt; 5  1661  -3.976428 -15.897790  7.9449336 0.2566347 0.7116245</span>
 <span class="co">#&gt; 6  4206 -11.137879 -23.180958  0.9051999 0.0349432 0.0968943</span>
 <span class="co">#&gt;   ...</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation_shooting</span>,
-     <span class="kw">sup_scores</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">zscores</span> - <span class="no">zscores_original</span>,
-                            <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
-                            <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span>(<span class="no">zscores</span> - <span class="no">zscores_original</span>)))))
-<span class="co">#&gt; Warning: Removed 247 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">estimation_shooting</span>, 
+     sup_scores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scores <span class="op">=</span> <span class="va">zscores</span> <span class="op">-</span> <span class="va">zscores_original</span>,
+                            title <span class="op">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
+                            color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">zscores</span> <span class="op">-</span> <span class="va">zscores_original</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 247 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/estimationwithselection-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation_scla</span>,
-     <span class="kw">sup_scores</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">zscores</span> - <span class="no">zscores_original</span>,
-                            <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
-                            <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span>(<span class="no">zscores</span> - <span class="no">zscores_original</span>)))))
-<span class="co">#&gt; Warning: Removed 253 rows containing missing values (geom_label).</span></pre></body></html></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">estimation_scla</span>, 
+     sup_scores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scores <span class="op">=</span> <span class="va">zscores</span> <span class="op">-</span> <span class="va">zscores_original</span>,
+                            title <span class="op">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
+                            color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">zscores</span> <span class="op">-</span> <span class="va">zscores_original</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 253 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/estimationwithselection-2.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">confint_scoresystem</span>)
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_label).</span></pre></body></html></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">confint_scoresystem</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/estimationwithselection-3.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">estimation_shooting</span>$<span class="no">optim_info</span>$<span class="no">bic_selection</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">n_shifts</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span>(<span class="no">shifts_est</span>, ~ <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">.</span> <span class="kw">!=</span> <span class="fl">0</span>))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">shifts_est</span>)
-<span class="co">#&gt;    alphaOU     lambda objective_value      bic      pbic n_shifts</span>
-<span class="co">#&gt; 1      0.2 11.5895510       128.36596 470.7441  489.4348        1</span>
-<span class="co">#&gt; 2      0.2  6.9477533       126.23872 465.5052  508.8961        4</span>
-<span class="co">#&gt; 3      0.2  4.1650687       118.86070 455.4931  537.4866        9</span>
-<span class="co">#&gt; 4      0.2  2.4968931       107.43405 449.5286  576.2426       15</span>
-<span class="co">#&gt; 5      0.2  1.4968481        92.77746 483.7207  723.8583       31</span>
-<span class="co">#&gt; 6      0.2  0.8973368        75.67515 581.2979 1017.1727       59</span>
-<span class="co">#&gt; 7      0.2  0.5379393        58.66125 662.5539 1256.0145       82</span>
-<span class="co">#&gt; 8      0.2  0.3224861        43.60607 683.1829 1331.7138       90</span>
-<span class="co">#&gt; 9      0.2  0.1933254        32.25687 709.6169 1403.2901       97</span>
-<span class="co">#&gt; 10     0.2  0.1158955        24.52081 726.0519 1445.1972      101</span>
-<span class="co">#&gt; 11     0.5 12.4598888       123.08493 466.3360  485.0934        1</span>
-<span class="co">#&gt; 12     0.5  7.4695071       121.03595 465.5814  509.1510        4</span>
-<span class="co">#&gt; 13     0.5  4.4778519       114.26468 441.9152  501.0034        6</span>
-<span class="co">#&gt; 14     0.5  2.6844017       104.13248 435.3332  532.0346       11</span>
-<span class="co">#&gt; 15     0.5  1.6092565        91.26661 479.0051  697.3856       28</span>
-<span class="co">#&gt; 16     0.5  0.9647239        75.69281 554.3736  931.4361       51</span>
-<span class="co">#&gt; 17     0.5  0.5783368        59.86505 655.6798 1217.6538       78</span>
-<span class="co">#&gt; 18     0.5  0.3467038        45.40804 689.3767 1325.0351       89</span>
-<span class="co">#&gt; 19     0.5  0.2078435        34.17908 719.9768 1408.6244       97</span>
-<span class="co">#&gt; 20     0.5  0.1245989        26.40135 721.5655 1416.0168       98</span>
-<span class="co">#&gt; 21     1.0 14.2023143       118.62973 463.8225  482.7019        1</span>
-<span class="co">#&gt; 22     1.0  8.5140638       116.26040 460.1404  496.8195        3</span>
-<span class="co">#&gt; 23     1.0  5.1040471       110.23410 438.4954  490.5022        5</span>
-<span class="co">#&gt; 24     1.0  3.0597959       101.16245 433.5722  515.6939        9</span>
-<span class="co">#&gt; 25     1.0  1.8342994        90.21485 460.0233  629.3401       21</span>
-<span class="co">#&gt; 26     1.0  1.0996336        76.56009 516.7369  814.0868       40</span>
-<span class="co">#&gt; 27     1.0  0.6592130        62.33575 605.7708 1066.5435       64</span>
-<span class="co">#&gt; 28     1.0  0.3951878        48.87168 686.5063 1290.6069       85</span>
-<span class="co">#&gt; 29     1.0  0.2369089        37.87408 705.8057 1346.4957       91</span>
-<span class="co">#&gt; 30     1.0  0.1420231        30.08167 711.8596 1366.2605       93</span>
-<span class="co">#&gt; 31     2.0 18.0004476       118.98448 470.3402  500.2776        2</span>
-<span class="co">#&gt; 32     2.0 10.7909848       115.12024 454.2127  484.1501        2</span>
-<span class="co">#&gt; 33     2.0  6.4690254       109.35668 449.7698  513.2005        6</span>
-<span class="co">#&gt; 34     2.0  3.8780789       100.60392 425.8014  486.0634        6</span>
-<span class="co">#&gt; 35     2.0  2.3248472        91.11725 442.5261  563.4297       14</span>
-<span class="co">#&gt; 36     2.0  1.3937093        79.87367 464.4377  660.5086       25</span>
-<span class="co">#&gt; 37     2.0  0.8355068        67.32071 521.5495  830.2473       42</span>
-<span class="co">#&gt; 38     2.0  0.5008731        55.37545 602.8005 1050.6172       63</span>
-<span class="co">#&gt; 39     2.0  0.3002656        45.04711 635.7099 1142.4234       72</span>
-<span class="co">#&gt; 40     2.0  0.1800045        37.47415 660.2807 1207.6319       78</span>
-<span class="co">#&gt; 41     5.0 21.6884593       123.05421 481.9023  529.7452        4</span>
-<span class="co">#&gt; 42     5.0 13.0018897       117.42555 464.0972  511.9400        4</span>
-<span class="co">#&gt; 43     5.0  7.7944281       111.24370 455.9802  522.9567        6</span>
-<span class="co">#&gt; 44     5.0  4.6726369       102.69698 436.8040  508.4488        7</span>
-<span class="co">#&gt; 45     5.0  2.8011722        93.26520 436.1710  538.1841       11</span>
-<span class="co">#&gt; 46     5.0  1.6792586        83.16735 453.6960  617.5517       20</span>
-<span class="co">#&gt; 47     5.0  1.0066891        71.63576 501.0186  764.1025       35</span>
-<span class="co">#&gt; 48     5.0  0.6034943        60.45821 589.0551  997.3125       57</span>
-<span class="co">#&gt; 49     5.0  0.3617853        50.72128 587.3024 1005.9031       59</span>
-<span class="co">#&gt; 50     5.0  0.2168846        43.45897 635.8101 1126.5051       70</span></pre></body></html></div>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">punct_scla</span> <span class="kw">=</span> <span class="no">estimation_scla</span>$<span class="no">shifts_est</span>,
-           <span class="kw">punct_scoresystem</span> <span class="kw">=</span> <span class="no">confint_scoresystem</span>$<span class="no">shifts_est</span>$<span class="no">estimate</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">punct_scla</span>, <span class="no">punct_scoresystem</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">estimation_shooting</span><span class="op">$</span><span class="va">optim_info</span><span class="op">$</span><span class="va">bic_selection</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>n_shifts <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">shifts_est</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">.</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">shifts_est</span><span class="op">)</span>
+<span class="co">#&gt;    alphaOU     lambda objective_value       bic      pbic n_shifts</span>
+<span class="co">#&gt; 1      0.2 11.5895510       128.36596  473.5429  489.4348        1</span>
+<span class="co">#&gt; 2      0.2  6.9477533       126.23872  476.7007  508.8961        4</span>
+<span class="co">#&gt; 3      0.2  4.1650687       118.86070  480.6829  537.4866        9</span>
+<span class="co">#&gt; 4      0.2  2.4968931       107.43405  491.5117  576.2426       15</span>
+<span class="co">#&gt; 5      0.2  1.4968481        92.77746  570.4857  723.8583       31</span>
+<span class="co">#&gt; 6      0.2  0.8973368        75.67515  746.4313 1017.1727       59</span>
+<span class="co">#&gt; 7      0.2  0.5379393        58.66125  892.0613 1256.0145       82</span>
+<span class="co">#&gt; 8      0.2  0.3224861        43.60607  935.0813 1331.7138       90</span>
+<span class="co">#&gt; 9      0.2  0.1933254        32.25687  981.1074 1403.2901       97</span>
+<span class="co">#&gt; 10     0.2  0.1158955        24.52081 1008.7379 1445.1972      101</span>
+<span class="co">#&gt; 11     0.5 12.4598888       123.08493  469.1349  485.0934        1</span>
+<span class="co">#&gt; 12     0.5  7.4695071       121.03595  476.7769  509.1510        4</span>
+<span class="co">#&gt; 13     0.5  4.4778519       114.26468  458.7085  501.0034        6</span>
+<span class="co">#&gt; 14     0.5  2.6844017       104.13248  466.1208  532.0346       11</span>
+<span class="co">#&gt; 15     0.5  1.6092565        91.26661  557.3735  697.3856       28</span>
+<span class="co">#&gt; 16     0.5  0.9647239        75.69281  697.1161  931.4361       51</span>
+<span class="co">#&gt; 17     0.5  0.5783368        59.86505  873.9918 1217.6538       78</span>
+<span class="co">#&gt; 18     0.5  0.3467038        45.40804  938.4763 1325.0351       89</span>
+<span class="co">#&gt; 19     0.5  0.2078435        34.17908  991.4674 1408.6244       97</span>
+<span class="co">#&gt; 20     0.5  0.1245989        26.40135  995.8549 1416.0168       98</span>
+<span class="co">#&gt; 21     1.0 14.2023143       118.62973  466.6214  482.7019        1</span>
+<span class="co">#&gt; 22     1.0  8.5140638       116.26040  468.5370  496.8195        3</span>
+<span class="co">#&gt; 23     1.0  5.1040471       110.23410  452.4898  490.5022        5</span>
+<span class="co">#&gt; 24     1.0  3.0597959       101.16245  458.7620  515.6939        9</span>
+<span class="co">#&gt; 25     1.0  1.8342994        90.21485  518.7996  629.3401       21</span>
+<span class="co">#&gt; 26     1.0  1.0996336        76.56009  628.6918  814.0868       40</span>
+<span class="co">#&gt; 27     1.0  0.6592130        62.33575  784.8986 1066.5435       64</span>
+<span class="co">#&gt; 28     1.0  0.3951878        48.87168  924.4104 1290.6069       85</span>
+<span class="co">#&gt; 29     1.0  0.2369089        37.87408  960.5030 1346.4957       91</span>
+<span class="co">#&gt; 30     1.0  0.1420231        30.08167  972.1547 1366.2605       93</span>
+<span class="co">#&gt; 31     2.0 18.0004476       118.98448  475.9380  500.2776        2</span>
+<span class="co">#&gt; 32     2.0 10.7909848       115.12024  459.8105  484.1501        2</span>
+<span class="co">#&gt; 33     2.0  6.4690254       109.35668  466.5630  513.2005        6</span>
+<span class="co">#&gt; 34     2.0  3.8780789       100.60392  442.5946  486.0634        6</span>
+<span class="co">#&gt; 35     2.0  2.3248472        91.11725  481.7103  563.4297       14</span>
+<span class="co">#&gt; 36     2.0  1.3937093        79.87367  534.4095  660.5086       25</span>
+<span class="co">#&gt; 37     2.0  0.8355068        67.32071  639.1021  830.2473       42</span>
+<span class="co">#&gt; 38     2.0  0.5008731        55.37545  779.1295 1050.6172       63</span>
+<span class="co">#&gt; 39     2.0  0.3002656        45.04711  837.2287 1142.4234       72</span>
+<span class="co">#&gt; 40     2.0  0.1800045        37.47415  878.5927 1207.6319       78</span>
+<span class="co">#&gt; 41     5.0 21.6884593       123.05421  493.0978  529.7452        4</span>
+<span class="co">#&gt; 42     5.0 13.0018897       117.42555  475.2926  511.9400        4</span>
+<span class="co">#&gt; 43     5.0  7.7944281       111.24370  472.7734  522.9567        6</span>
+<span class="co">#&gt; 44     5.0  4.6726369       102.69698  456.3961  508.4488        7</span>
+<span class="co">#&gt; 45     5.0  2.8011722        93.26520  466.9586  538.1841       11</span>
+<span class="co">#&gt; 46     5.0  1.6792586        83.16735  509.6734  617.5517       20</span>
+<span class="co">#&gt; 47     5.0  1.0066891        71.63576  598.9791  764.1025       35</span>
+<span class="co">#&gt; 48     5.0  0.6034943        60.45821  748.5908  997.3125       57</span>
+<span class="co">#&gt; 49     5.0  0.3617853        50.72128  752.4358 1005.9031       59</span>
+<span class="co">#&gt; 50     5.0  0.2168846        43.45897  831.7312 1126.5051       70</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>punct_scla <span class="op">=</span> <span class="va">estimation_scla</span><span class="op">$</span><span class="va">shifts_est</span>, 
+           punct_scoresystem <span class="op">=</span> <span class="va">confint_scoresystem</span><span class="op">$</span><span class="va">shifts_est</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">punct_scla</span>, <span class="va">punct_scoresystem</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-7-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">punct_scla</span> <span class="kw">=</span> <span class="no">estimation_scla</span>$<span class="no">zscores_est</span>,
-           <span class="kw">punct_scoresystem</span> <span class="kw">=</span> <span class="no">confint_scoresystem</span>$<span class="no">zscores_est</span>$<span class="no">estimate</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">punct_scla</span>, <span class="no">punct_scoresystem</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>punct_scla <span class="op">=</span> <span class="va">estimation_scla</span><span class="op">$</span><span class="va">zscores_est</span>, 
+           punct_scoresystem <span class="op">=</span> <span class="va">confint_scoresystem</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">punct_scla</span>, <span class="va">punct_scoresystem</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-7-2.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">detected_sh</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">estimation_shooting</span>$<span class="no">zscores_est</span> <span class="kw">!=</span> <span class="fl">0</span>))
-<span class="no">pvalues_bh</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span>(<span class="no">pvalues</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"BH"</span>)
-<span class="no">detected_bh</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">pvalues_bh</span> <span class="kw">&lt;</span> <span class="fl">0.05</span>))
-<span class="no">pvalues_bonf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span>(<span class="no">pvalues</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"bonferroni"</span>)
-<span class="no">detected_bonf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">pvalues_bonf</span> <span class="kw">&lt;</span> <span class="fl">0.05</span>))
-<span class="no">mm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"TPR"</span>, <span class="st">"FPR"</span>, <span class="st">"FDR"</span>, <span class="st">"ACC"</span>, <span class="st">"F1"</span>, <span class="st">"BACC"</span>)
-<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span>(<span class="no">detected_sh</span>, <span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>)
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">detected_sh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">estimation_shooting</span><span class="op">$</span><span class="va">zscores_est</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+<span class="va">pvalues_bh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvalues</span>, method <span class="op">=</span> <span class="st">"BH"</span><span class="op">)</span>
+<span class="va">detected_bh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">pvalues_bh</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>
+<span class="va">pvalues_bonf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvalues</span>, method <span class="op">=</span> <span class="st">"bonferroni"</span><span class="op">)</span>
+<span class="va">detected_bonf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">pvalues_bonf</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>
+<span class="va">mm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TPR"</span>, <span class="st">"FPR"</span>, <span class="st">"FDR"</span>, <span class="st">"ACC"</span>, <span class="st">"F1"</span>, <span class="st">"BACC"</span><span class="op">)</span>
+<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span><span class="op">(</span><span class="va">detected_sh</span>, <span class="va">otus_da</span>, m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span>
 <span class="co">#&gt;   TPR       FPR  FDR       ACC        F1      BACC</span>
 <span class="co">#&gt; 1   1 0.1808511 0.34 0.8661417 0.7951807 0.9095745</span>
-<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span>(<span class="no">detected_bh</span>, <span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>)
+<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span><span class="op">(</span><span class="va">detected_bh</span>, <span class="va">otus_da</span>, m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span>
 <span class="co">#&gt;         TPR       FPR   FDR       ACC        F1      BACC</span>
 <span class="co">#&gt; 1 0.2121212 0.0106383 0.125 0.7874016 0.3414634 0.6007415</span>
-<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span>(<span class="no">detected_bonf</span>, <span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>)
+<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span><span class="op">(</span><span class="va">detected_bonf</span>, <span class="va">otus_da</span>, m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span>
 <span class="co">#&gt;         TPR FPR FDR       ACC        F1      BACC</span>
 <span class="co">#&gt; 1 0.1212121   0   0 0.7716535 0.2162162 0.5606061</span>
-<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(), <span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>)
+<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">otus_da</span>, m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span>
 <span class="co">#&gt;   TPR FPR FDR       ACC F1 BACC</span>
 <span class="co">#&gt; 1   0   0 NaN 0.7401575  0  0.5</span>
-<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span>(<span class="no">otu_to_keep</span>, <span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>)
+<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy.html">ebc_tidy</a></span><span class="op">(</span><span class="va">otu_to_keep</span>, <span class="va">otus_da</span>, m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span>
 <span class="co">#&gt;   TPR FPR       FDR       ACC     F1 BACC</span>
 <span class="co">#&gt; 1   1   1 0.7401575 0.2598425 0.4125  0.5</span>
 
-<span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">detected_sh</span>, <span class="no">detected_bh</span>, <span class="no">detected_bonf</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(), <span class="no">otu_to_keep</span>), <span class="no">ebc_tidy</span>,
-        <span class="kw">detected</span> <span class="kw">=</span> <span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"zazou"</span>, <span class="st">"bh"</span>, <span class="st">"bonf"</span>, <span class="st">"nothing"</span>, <span class="st">"everything"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">method</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">everything</a></span>())
-<span class="co">#&gt;       method       TPR       FPR       FDR       ACC        F1      BACC</span>
-<span class="co">#&gt; 1      zazou 0.6600000 0.0000000 0.0000000 0.8661417 0.7951807 0.8300000</span>
-<span class="co">#&gt; 2         bh 0.8750000 0.2184874 0.7878788 0.7874016 0.3414634 0.8282563</span>
-<span class="co">#&gt; 3       bonf 1.0000000 0.2357724 0.8787879 0.7716535 0.2162162 0.8821138</span>
-<span class="co">#&gt; 4    nothing       NaN 0.2598425 1.0000000 0.7401575 0.0000000       NaN</span>
-<span class="co">#&gt; 5 everything 0.2598425       NaN 0.0000000 0.2598425 0.4125000       NaN</span></pre></body></html></div>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">estimation_shooting</span>,
-     <span class="kw">sup_scores</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">zscores</span> - <span class="no">zscores_original</span>,
-                            <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
-                            <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span>(<span class="no">zscores</span> - <span class="no">zscores_original</span>))),
-                       <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">pvalues_bh</span>, <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Detected by BH"</span>,
-                            <span class="kw">color</span> <span class="kw">=</span> <span class="no">pvalues_bh</span> <span class="kw">&lt;</span> <span class="fl">0.05</span>),
-                       <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">scores</span> <span class="kw">=</span> <span class="no">pvalues_bonf</span>, <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Detected by Bonferroni"</span>,
-                            <span class="kw">color</span> <span class="kw">=</span> <span class="no">pvalues_bonf</span> <span class="kw">&lt;</span> <span class="fl">0.05</span>)))
-<span class="co">#&gt; Warning: Removed 247 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">detected_sh</span>, <span class="va">detected_bh</span>, <span class="va">detected_bonf</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">otu_to_keep</span><span class="op">)</span>, <span class="va">ebc_tidy</span>, 
+        detected <span class="op">=</span> <span class="va">otus_da</span>, m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"zazou"</span>, <span class="st">"bh"</span>, <span class="st">"bonf"</span>, <span class="st">"nothing"</span>, <span class="st">"everything"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">method</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;           method       TPR       FPR       FDR       ACC        F1      BACC</span>
+<span class="co">#&gt; 1...1      zazou 0.6600000 0.0000000 0.0000000 0.8661417 0.7951807 0.8300000</span>
+<span class="co">#&gt; 1...2         bh 0.8750000 0.2184874 0.7878788 0.7874016 0.3414634 0.8282563</span>
+<span class="co">#&gt; 1...3       bonf 1.0000000 0.2357724 0.8787879 0.7716535 0.2162162 0.8821138</span>
+<span class="co">#&gt; 1...4    nothing       NaN 0.2598425 1.0000000 0.7401575 0.0000000       NaN</span>
+<span class="co">#&gt; 1...5 everything 0.2598425       NaN 0.0000000 0.2598425 0.4125000       NaN</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">estimation_shooting</span>, 
+     sup_scores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scores <span class="op">=</span> <span class="va">zscores</span> <span class="op">-</span> <span class="va">zscores_original</span>,
+                            title <span class="op">=</span> <span class="st">"Difference in z-scores after fold-change"</span>,
+                            color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">zscores</span> <span class="op">-</span> <span class="va">zscores_original</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
+                       <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scores <span class="op">=</span> <span class="va">pvalues_bh</span>, title <span class="op">=</span> <span class="st">"Detected by BH"</span>,
+                            color <span class="op">=</span> <span class="va">pvalues_bh</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span>,
+                       <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scores <span class="op">=</span> <span class="va">pvalues_bonf</span>, title <span class="op">=</span> <span class="st">"Detected by Bonferroni"</span>,
+                            color <span class="op">=</span> <span class="va">pvalues_bonf</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 247 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/plotswithbh-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">df_measures_zazou</span> <span class="kw">&lt;-</span>
-  <span class="no">estimation_shooting</span>$<span class="no">zscores_est</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span>(<span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>,
-                        <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"zazou"</span>)
-<span class="no">df_measures_bh</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span>(<span class="no">pvalues_bh</span>, <span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>,
-                        <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"bh"</span>)
-<span class="no">df_measures_bonf</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span>(<span class="no">pvalues_bonf</span>, <span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>,
-                        <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>), <span class="kw">measures</span> <span class="kw">=</span> <span class="no">mm</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"bonferonni"</span>)
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_measures_zazou</span> <span class="op">&lt;-</span>
+  <span class="va">estimation_shooting</span><span class="op">$</span><span class="va">zscores_est</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span><span class="op">(</span>true <span class="op">=</span> <span class="va">otus_da</span>, 
+                        m  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"zazou"</span><span class="op">)</span>
+<span class="va">df_measures_bh</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span><span class="op">(</span><span class="va">pvalues_bh</span>, true <span class="op">=</span> <span class="va">otus_da</span>, 
+                        m  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"bh"</span><span class="op">)</span>
+<span class="va">df_measures_bonf</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_tidy_by_threshold.html">ebc_tidy_by_threshold</a></span><span class="op">(</span><span class="va">pvalues_bonf</span>, true <span class="op">=</span> <span class="va">otus_da</span>, 
+                        m  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span>, measures <span class="op">=</span> <span class="va">mm</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"bonferonni"</span><span class="op">)</span>
 
-<span class="no">df_measures</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(<span class="no">df_measures_zazou</span>, <span class="no">df_measures_bh</span>, <span class="no">df_measures_bonf</span>)
+<span class="va">df_measures</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">df_measures_zazou</span>, <span class="va">df_measures_bh</span>, <span class="va">df_measures_bonf</span><span class="op">)</span>
 
-<span class="no">df_measures</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">FPR</span>, <span class="no">TPR</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">FPR</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">TPR</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">method</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>()</pre></body></html></div>
+<span class="va">df_measures</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">FPR</span>, <span class="va">TPR</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">FPR</span>, y <span class="op">=</span> <span class="va">TPR</span>, color <span class="op">=</span> <span class="va">method</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="simulations_files/figure-html/AUC-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb31"><html><body><pre class="r">
-<span class="no">estimation_shooting</span>$<span class="no">zscores_est</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_AUC.html">ebc_AUC</a></span>(<span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>, <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>))
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">estimation_shooting</span><span class="op">$</span><span class="va">zscores_est</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_AUC.html">ebc_AUC</a></span><span class="op">(</span>true <span class="op">=</span> <span class="va">otus_da</span>, m  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.9808188</span>
 
-<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_AUC.html">ebc_AUC</a></span>(<span class="no">pvalues_bh</span>, <span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>, <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>))
+<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_AUC.html">ebc_AUC</a></span><span class="op">(</span><span class="va">pvalues_bh</span>, true <span class="op">=</span> <span class="va">otus_da</span>, m  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.8083495</span>
-<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_AUC.html">ebc_AUC</a></span>(<span class="no">pvalues_bonf</span>, <span class="kw">true</span> <span class="kw">=</span> <span class="no">otus_da</span>, <span class="kw">m</span>  <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>))
-<span class="co">#&gt; [1] 0.6468407</span></pre></body></html></div>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">several_confint</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="kw">from</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fl">0.01</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span>(<span class="kw">value</span> <span class="kw">=</span> <span class="st">"level"</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="kw">NULL</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">model</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">level</span>, <span class="no">update_confint</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="no">confint_scoresystem</span>),
-         <span class="kw">da_species</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">model</span>, <span class="no">extract_significant_leaves</span>, <span class="kw">side</span> <span class="kw">=</span> <span class="st">"left"</span>),
-         <span class="kw">N</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span>(<span class="no">.data</span>$<span class="no">da_species</span>, <span class="no">length</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span>(<span class="no">N</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">head</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html">reduce</a></span>(<span class="no">bind_rows</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">N</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_row.html">add_row</a></span>(<span class="kw">level</span> <span class="kw">=</span> <span class="fl">Inf</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">NULL</span>), <span class="kw">da_species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">otu_to_keep</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">nested_measures</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">da_species</span>, <span class="no">ebc_tidy</span>,
-                               <span class="kw">true</span> <span class="kw">=</span> <span class="no">.env</span>$<span class="no">otus_da</span>, <span class="kw">m</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">otu_to_keep</span>))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">nested_measures</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"despars"</span>)
+<span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_AUC.html">ebc_AUC</a></span><span class="op">(</span><span class="va">pvalues_bonf</span>, true <span class="op">=</span> <span class="va">otus_da</span>, m  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.6468407</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">several_confint</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span>value <span class="op">=</span> <span class="st">"level"</span>, name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">level</span>, <span class="va">update_confint</span>, x <span class="op">=</span> <span class="va">confint_scoresystem</span><span class="op">)</span>,
+         da_species <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">extract_significant_leaves</span>, side <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span>,
+         N <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">da_species</span>, <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">head</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html">reduce</a></span><span class="op">(</span><span class="va">bind_rows</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">N</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_row.html">add_row</a></span><span class="op">(</span>level <span class="op">=</span> <span class="cn">Inf</span>, model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>, da_species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>nested_measures <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">da_species</span>, <span class="va">ebc_tidy</span>, 
+                               true <span class="op">=</span> <span class="va">.env</span><span class="op">$</span><span class="va">otus_da</span>, m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">otu_to_keep</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">nested_measures</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"despars"</span><span class="op">)</span>
 <span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
 <span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
 <span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
@@ -581,25 +618,25 @@
 <span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
 <span class="co">#&gt; t_star is not feasible, falling back to default value.</span>
 
-<span class="no">several_confint</span>
-<span class="co">#&gt; # A tibble: 2 x 9</span>
+<span class="va">several_confint</span>
+<span class="co">#&gt; # A tibble: 2 × 9</span>
 <span class="co">#&gt;   level model      da_species    TPR   FPR   FDR   ACC    F1 method </span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;list&gt;     &lt;list&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  </span>
 <span class="co">#&gt; 1     0 &lt;shiftcnf&gt; &lt;chr [13]&gt;  0.394     0 0     0.843 0.565 despars</span>
 <span class="co">#&gt; 2   Inf &lt;NULL&gt;     &lt;chr [127]&gt; 1         1 0.740 0.260 0.412 despars</span>
 
-<span class="kw pkg">evabic</span><span class="kw ns">::</span><span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_AUC.html">ebc_AUC_from_measures</a></span>(<span class="no">several_confint</span>)
-<span class="co">#&gt; [1] 0.6969697</span></pre></body></html></div>
-<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="no">all_measures</span> <span class="kw">&lt;-</span>
-  <span class="no">df_measures</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">level</span> <span class="kw">=</span> <span class="no">threshold</span>, <span class="no">TPR</span>:<span class="no">method</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">several_confint</span>, -<span class="no">model</span>, -<span class="no">da_species</span>))
+<span class="fu">evabic</span><span class="fu">::</span><span class="fu"><a href="https://abichat.github.io/evabic/reference/ebc_AUC.html">ebc_AUC_from_measures</a></span><span class="op">(</span><span class="va">several_confint</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.6969697</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">all_measures</span> <span class="op">&lt;-</span>
+  <span class="va">df_measures</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>level <span class="op">=</span> <span class="va">threshold</span>, <span class="va">TPR</span><span class="op">:</span><span class="va">method</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">several_confint</span>, <span class="op">-</span><span class="va">model</span>, <span class="op">-</span><span class="va">da_species</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">all_measures</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">method</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">AUC</span> <span class="kw">=</span> <span class="kw pkg">evabic</span><span class="kw ns">:::</span><span class="fu"><a href="https://abichat.github.io/evabic/reference/area_rect.html">area_rect</a></span>(<span class="no">FPR</span>, <span class="no">TPR</span>))
-<span class="co">#&gt; `summarise()` ungrouping output (override with `.groups` argument)</span>
-<span class="co">#&gt; # A tibble: 4 x 2</span>
+<span class="va">all_measures</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>AUC <span class="op">=</span> <span class="fu">evabic</span><span class="fu">:::</span><span class="fu"><a href="https://abichat.github.io/evabic/reference/area_rect.html">area_rect</a></span><span class="op">(</span><span class="va">FPR</span>, <span class="va">TPR</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 4 × 2</span>
 <span class="co">#&gt;   method       AUC</span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 bh         0.808</span>
@@ -607,22 +644,25 @@
 <span class="co">#&gt; 3 despars    0.697</span>
 <span class="co">#&gt; 4 zazou      0.981</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">all_measures</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">FPR</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">TPR</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">method</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>() +
-  <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_text_repel</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">FDR</span>, <span class="fl">2</span>)), <span class="kw">show.legend</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="co">#&gt; Warning: Removed 3 rows containing missing values (geom_text_repel).</span></pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">all_measures</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">FPR</span>, y <span class="op">=</span> <span class="va">TPR</span>, color <span class="op">=</span> <span class="va">method</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">FDR</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> 
+<span class="co">#&gt; Warning: Removed 3 rows containing missing values (geom_text_repel).</span>
+<span class="co">#&gt; Warning: ggrepel: 33 unlabeled data points (too many overlaps). Consider</span>
+<span class="co">#&gt; increasing max.overlaps</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb34"><html><body><pre class="r">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">all_measures</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">level</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">FDR</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">method</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>(<span class="kw">slope</span> <span class="kw">=</span> <span class="no">pi0</span>, <span class="kw">intercept</span> <span class="kw">=</span> <span class="fl">0</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">cols</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span>(<span class="no">method</span>), <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free_x"</span>)
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">all_measures</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">level</span>, y <span class="op">=</span> <span class="va">FDR</span>, color <span class="op">=</span> <span class="va">method</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>slope <span class="op">=</span> <span class="va">pi0</span>, intercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Removed 3 rows containing missing values (geom_point).</span>
-<span class="co">#&gt; Warning: Removed 3 row(s) containing missing values (geom_path).</span></pre></body></html></div>
+<span class="co">#&gt; Warning: Removed 3 row(s) containing missing values (geom_path).</span></code></pre></div>
 <p><img src="simulations_files/figure-html/unnamed-chunk-9-2.png" width="700" style="display: block; margin: auto;"></p>
 </div>
   </div>
@@ -642,7 +682,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

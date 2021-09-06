@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -74,7 +74,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/abichat/zazou">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -101,37 +101,49 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">zazou</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/abichat/zazou">zazou</a></span><span class="op">)</span>
+<span class="co">#&gt; Bioconductor version '3.9' is out-of-date; the current release version '3.13'</span>
+<span class="co">#&gt;   is available with R version '4.1'; see https://bioconductor.org/install</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
 <span class="co">#&gt;   method     from</span>
 <span class="co">#&gt;   root.phylo ape</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ape</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">42</span>)</pre></body></html></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></code></pre></div>
 <div id="parameters" class="section level1">
 <h1 class="hasAnchor">
 <a href="#parameters" class="anchor"></a>Parameters</h1>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span>(<span class="kw">text</span> <span class="kw">=</span> <span class="st">"(((A:1,B:1):1,C:2):1,(D:1,E:1):2);"</span>)
-<span class="no">true_shifts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, -<span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, -<span class="fl">2</span>, <span class="fl">0</span>)
-<span class="no">alphaOU</span> <span class="kw">&lt;-</span> <span class="fl">1</span>
-<span class="no">lambda</span> <span class="kw">&lt;-</span> <span class="fl">0.1</span></pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">(<span class="no">true_zscores</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/incidence_matrix.html">incidence_matrix</a></span>(<span class="no">tree</span>) <span class="kw">%*%</span> <span class="no">true_shifts</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span><span class="op">(</span>text <span class="op">=</span> <span class="st">"(((A:1,B:1):1,C:2):1,(D:1,E:1):2);"</span><span class="op">)</span>
+<span class="va">true_shifts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>
+<span class="va">alphaOU</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+<span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="va">true_zscores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/incidence_matrix.html">incidence_matrix</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span> <span class="op">%*%</span> <span class="va">true_shifts</span><span class="op">)</span>
 <span class="co">#&gt;   [,1]</span>
 <span class="co">#&gt; A   -3</span>
 <span class="co">#&gt; B   -3</span>
 <span class="co">#&gt; C    0</span>
 <span class="co">#&gt; D   -2</span>
-<span class="co">#&gt; E    0</span></pre></body></html></div>
+<span class="co">#&gt; E    0</span></code></pre></div>
 </div>
 <div id="simulations" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simulations" class="anchor"></a>Simulations</h1>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">observed_zscores</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simu_zscores.html">simu_zscores</a></span>(<span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">shifts</span> <span class="kw">=</span> <span class="no">true_shifts</span>,
-                                 <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">graph</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co">#&gt; Warning: Removed 7 rows containing missing values (geom_label).</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">observed_zscores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simu_zscores.html">simu_zscores</a></span><span class="op">(</span>tree <span class="op">=</span> <span class="va">tree</span>, shifts <span class="op">=</span> <span class="va">true_shifts</span>, 
+                                 alphaOU <span class="op">=</span> <span class="fl">1</span>, graph <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `data_frame()` was deprecated in tibble 1.1.0.</span>
+<span class="co">#&gt; Please use `tibble()` instead.</span>
+<span class="co">#&gt; Warning: `mutate_()` was deprecated in dplyr 0.7.0.</span>
+<span class="co">#&gt; Please use `mutate()` instead.</span>
+<span class="co">#&gt; See vignette('programming') for more help</span>
+<span class="co">#&gt; Warning: Removed 7 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="comparisons_files/figure-html/simulations-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">observed_zscores</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">observed_zscores</span>
 <span class="co">#&gt;          A          B          C          D          E </span>
-<span class="co">#&gt; -1.6290416 -3.7540090  0.3519108 -1.3671374  0.3228558</span></pre></body></html></div>
+<span class="co">#&gt; -1.6290416 -3.7540090  0.3519108 -1.3671374  0.3228558</span></code></pre></div>
 </div>
 <div id="comparisons" class="section level1">
 <h1 class="hasAnchor">
@@ -139,17 +151,18 @@
 <div id="l-bfgs-b-algorithm" class="section level2">
 <h2 class="hasAnchor">
 <a href="#l-bfgs-b-algorithm" class="anchor"></a>L-BFGS-B algorithm</h2>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">mthd1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">observed_zscores</span>,
-                         <span class="kw">lambda</span> <span class="kw">=</span> <span class="no">lambda</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="no">alphaOU</span>,
-                         <span class="kw">method</span> <span class="kw">=</span> <span class="st">"L-BFGS-B"</span>)
-<span class="no">mthd1</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mthd1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">observed_zscores</span>, 
+                         lambda <span class="op">=</span> <span class="va">lambda</span>, tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="va">alphaOU</span>, 
+                         method <span class="op">=</span> <span class="st">"L-BFGS-B"</span><span class="op">)</span>
+<span class="va">mthd1</span>
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: L-BFGS-B</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.621</span>
-<span class="co">#&gt; BIC: 14.229</span>
+<span class="co">#&gt; BIC: 11.699</span>
 <span class="co">#&gt; pBIC: 27.49</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: 0 -1.621 0 -2.038 0 0 -1.312 0 ...</span>
@@ -159,24 +172,25 @@
 <span class="co">#&gt; Observed z-scores:  -1.629 -3.754 0.352 -1.367 0.323 </span>
 <span class="co">#&gt; Estimated z-scores: -1.621  -3.66     0 -1.312     0 </span>
 <span class="co">#&gt; 3 z-scores have been shifted (ie 40 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">mthd1</span>)
-<span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">mthd1</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="comparisons_files/figure-html/lbfgsb-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shooting-algorithm" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shooting-algorithm" class="anchor"></a>Shooting algorithm</h2>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">mthd2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">observed_zscores</span>,
-                         <span class="kw">lambda</span> <span class="kw">=</span> <span class="no">lambda</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="no">alphaOU</span>,
-                         <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>)
-<span class="no">mthd2</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mthd2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">observed_zscores</span>, 
+                         lambda <span class="op">=</span> <span class="va">lambda</span>, tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="va">alphaOU</span>, 
+                         method <span class="op">=</span> <span class="st">"lasso"</span><span class="op">)</span>
+<span class="va">mthd2</span>
 <span class="co">#&gt; Tree is binary with 5 leafs and 8 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 1.418 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 0.621</span>
-<span class="co">#&gt; BIC: 14.229</span>
+<span class="co">#&gt; BIC: 11.699</span>
 <span class="co">#&gt; pBIC: 27.49</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: 0 -1.621 0 -2.038 0 0 -1.312 0 ...</span>
@@ -186,8 +200,8 @@
 <span class="co">#&gt; Observed z-scores:  -1.629 -3.754 0.352 -1.367 0.323 </span>
 <span class="co">#&gt; Estimated z-scores: -1.621  -3.66     0 -1.312     0 </span>
 <span class="co">#&gt; 3 z-scores have been shifted (ie 40 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">mthd2</span>)
-<span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">mthd2</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 6 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="comparisons_files/figure-html/shooting-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="results" class="section level2">
@@ -196,40 +210,44 @@
 <div id="shifts" class="section level3">
 <h3 class="hasAnchor">
 <a href="#shifts" class="anchor"></a>Shifts</h3>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">true_shifts</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">true_shifts</span>
 <span class="co">#&gt; [1]  0 -3  0  0  0  0 -2  0</span>
-<span class="no">mthd1</span>$<span class="no">shifts_est</span>
+<span class="va">mthd1</span><span class="op">$</span><span class="va">shifts_est</span>
 <span class="co">#&gt; [1]  0.000000 -1.621335  0.000000 -2.038286  0.000000  0.000000 -1.311911</span>
 <span class="co">#&gt; [8]  0.000000</span>
-<span class="no">mthd2</span>$<span class="no">shifts_est</span>
+<span class="va">mthd2</span><span class="op">$</span><span class="va">shifts_est</span>
 <span class="co">#&gt; [1]  0.000000 -1.621301  0.000000 -2.038354  0.000000  0.000000 -1.311911</span>
-<span class="co">#&gt; [8]  0.000000</span></pre></body></html></div>
+<span class="co">#&gt; [8]  0.000000</span></code></pre></div>
 </div>
 <div id="z-scores" class="section level3">
 <h3 class="hasAnchor">
 <a href="#z-scores" class="anchor"></a>Z-scores</h3>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="no">true_zscores</span>)
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">true_zscores</span><span class="op">)</span>
 <span class="co">#&gt;       A  B C  D E</span>
 <span class="co">#&gt; [1,] -3 -3 0 -2 0</span>
-<span class="no">mthd1</span>$<span class="no">zscores_est</span>
+<span class="va">mthd1</span><span class="op">$</span><span class="va">zscores_est</span>
 <span class="co">#&gt;         A         B         C         D         E </span>
 <span class="co">#&gt; -1.621335 -3.659621  0.000000 -1.311911  0.000000</span>
-<span class="no">mthd2</span>$<span class="no">zscores_est</span>
+<span class="va">mthd2</span><span class="op">$</span><span class="va">zscores_est</span>
 <span class="co">#&gt;         A         B         C         D         E </span>
-<span class="co">#&gt; -1.621301 -3.659655  0.000000 -1.311911  0.000000</span></pre></body></html></div>
+<span class="co">#&gt; -1.621301 -3.659655  0.000000 -1.311911  0.000000</span></code></pre></div>
 </div>
 <div id="objective" class="section level3">
 <h3 class="hasAnchor">
 <a href="#objective" class="anchor"></a>Objective</h3>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">mthd1</span>$<span class="no">objective_value</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mthd1</span><span class="op">$</span><span class="va">objective_value</span>
 <span class="co">#&gt; [1] 0.6211018</span>
-<span class="no">mthd2</span>$<span class="no">objective_value</span>
-<span class="co">#&gt; [1] 0.6211018</span></pre></body></html></div>
+<span class="va">mthd2</span><span class="op">$</span><span class="va">objective_value</span>
+<span class="co">#&gt; [1] 0.6211018</span></code></pre></div>
 </div>
 <div id="other-informations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-informations" class="anchor"></a>Other informations</h3>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">mthd1</span>$<span class="no">optim_info</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mthd1</span><span class="op">$</span><span class="va">optim_info</span>
 <span class="co">#&gt; $counts</span>
 <span class="co">#&gt; function gradient </span>
 <span class="co">#&gt;       14       14 </span>
@@ -242,7 +260,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $supp_arg</span>
 <span class="co">#&gt; list()</span>
-<span class="no">mthd2</span>$<span class="no">optim_info</span>
+<span class="va">mthd2</span><span class="op">$</span><span class="va">optim_info</span>
 <span class="co">#&gt; $iterations</span>
 <span class="co">#&gt; [1] 46</span>
 <span class="co">#&gt; </span>
@@ -250,7 +268,7 @@
 <span class="co">#&gt; [1] 9.1569e-09</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $supp_arg</span>
-<span class="co">#&gt; list()</span></pre></body></html></div>
+<span class="co">#&gt; list()</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -271,7 +289,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

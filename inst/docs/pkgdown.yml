@@ -1,11 +1,11 @@
 pandoc: 2.3.1
-pkgdown: 1.5.1.9000
-pkgdown_sha: cb74ce08c4b25adda98256ea46196b1182f4e0ea
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
   alcohol: alcohol.html
   chlamydiae: chlamydiae.html
   comparisons: comparisons.html
   constraints: constraints.html
   simulations: simulations.html
-last_built: 2020-09-28T20:38Z
+last_built: 2021-09-06T18:04Z
 

@@ -165,7 +165,7 @@ goodpractice::gp()
 
 install(upgrade = "never")
 rmarkdown::render("README.Rmd"); file.remove("README.html")
-chameleon::build_pkgdown(yml = "_pkgdown.yml")
+# chameleon::build_pkgdown(yml = "_pkgdown.yml")
 install(upgrade = "never")
 
 

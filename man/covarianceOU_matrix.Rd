@@ -19,7 +19,7 @@ Compute normalized covariance matrix
 }
 \details{
 The coefficient is proportional to
-\eqn{exp(- \alpha * d_{i,j}) - exp(-2 * \alpha * h) / (2 * \alpha)}
+\eqn{(exp(- \alpha * d_{i,j}) - exp(-2 * \alpha * h)) / (2 * \alpha)}
 }
 \examples{
 tree <- ape::rtree(3)
