@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -74,7 +74,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/abichat/zazou">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -101,25 +101,36 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">zazou</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/abichat/zazou">zazou</a></span><span class="op">)</span>
+<span class="co">#&gt; Bioconductor version '3.9' is out-of-date; the current release version '3.13'</span>
+<span class="co">#&gt;   is available with R version '4.1'; see https://bioconductor.org/install</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
 <span class="co">#&gt;   method     from</span>
 <span class="co">#&gt;   root.phylo ape</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tictoc</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">chlamydiae</span>)</pre></body></html></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/collectivemedia/tictoc">tictoc</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">chlamydiae</span><span class="op">)</span></code></pre></div>
 <div id="z-scores" class="section level1">
 <h1 class="hasAnchor">
 <a href="#z-scores" class="anchor"></a>z-scores</h1>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">pval_obs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/test_wilcoxon.html">test_kruskalwallis</a></span>(<span class="no">chlamydiae</span>$<span class="no">X</span>, <span class="no">chlamydiae</span>$<span class="no">Y</span>)$<span class="no">p.value</span>
-<span class="no">zsco_obs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/p2z.html">p2z</a></span>(<span class="no">pval_obs</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pval_obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/test_wilcoxon.html">test_kruskalwallis</a></span><span class="op">(</span><span class="va">chlamydiae</span><span class="op">$</span><span class="va">X</span>, <span class="va">chlamydiae</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>
+<span class="va">zsco_obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/p2z.html">p2z</a></span><span class="op">(</span><span class="va">pval_obs</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="tree" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tree" class="anchor"></a>Tree</h1>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span>(<span class="no">chlamydiae</span>$<span class="no">tree</span>)
-<span class="no">N_branch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">tree</span>$<span class="no">edge.length</span>)
-<span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(<span class="no">tree</span>, <span class="fl">NA</span>, <span class="kw">obs_scores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>)
-<span class="co">#&gt; Warning: Removed 41 rows containing missing values (geom_label).</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span><span class="op">(</span><span class="va">chlamydiae</span><span class="op">$</span><span class="va">tree</span><span class="op">)</span>
+<span class="va">N_branch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">tree</span><span class="op">$</span><span class="va">edge.length</span><span class="op">)</span>
+<span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span><span class="op">(</span><span class="va">tree</span>, <span class="cn">NA</span>, obs_scores <span class="op">=</span> <span class="va">zsco_obs</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `data_frame()` was deprecated in tibble 1.1.0.</span>
+<span class="co">#&gt; Please use `tibble()` instead.</span>
+<span class="co">#&gt; Warning: `mutate_()` was deprecated in dplyr 0.7.0.</span>
+<span class="co">#&gt; Please use `mutate()` instead.</span>
+<span class="co">#&gt; See vignette('programming') for more help</span>
+<span class="co">#&gt; Warning: Removed 41 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/tree-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shift-estimation" class="section level1">
@@ -128,20 +139,21 @@
 <div id="l-bfgs-b" class="section level2">
 <h2 class="hasAnchor">
 <a href="#l-bfgs-b" class="anchor"></a>L-BFGS-B</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
-<span class="no">est_lbfgsb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
-                              <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>,
-                              <span class="kw">method</span> <span class="kw">=</span> <span class="st">"L-BFGS-B"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 0.017 sec elapsed</span>
-<span class="no">est_lbfgsb</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">est_lbfgsb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zsco_obs</span>,
+                              lambda <span class="op">=</span> <span class="fl">0.1</span>, tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">1</span>,
+                              method <span class="op">=</span> <span class="st">"L-BFGS-B"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; 0.014 sec elapsed</span>
+<span class="va">est_lbfgsb</span>
 <span class="co">#&gt; Tree is binary with 21 leafs and 40 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 7.198 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: L-BFGS-B</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 1.308</span>
-<span class="co">#&gt; BIC: 84.446</span>
+<span class="co">#&gt; BIC: 90.313</span>
 <span class="co">#&gt; pBIC: 162.43</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: -0.077 0 0 0 -0.073 -2.21 0 0 0 0 ...</span>
@@ -151,28 +163,29 @@
 <span class="co">#&gt; Observed z-scores:  -0.084 -0.084 -2.444 -2.423 -1.819 -0.041 -1.153 -1.153 -1.715  0.107 ...</span>
 <span class="co">#&gt; Estimated z-scores: -0.077 -0.077 -2.359 -2.359  -1.75 -0.149 -1.114 -1.114 -1.622 -0.022 ...</span>
 <span class="co">#&gt; 21 z-scores have been shifted (ie 0 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">est_lbfgsb</span>)
-<span class="co">#&gt; Warning: Removed 24 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">est_lbfgsb</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 24 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/lbfgsb-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shooting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shooting" class="anchor"></a>Shooting</h2>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">42</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
-<span class="no">est_shooting</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
-                                <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">1</span>,
-                                <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 0.073 sec elapsed</span>
-<span class="no">est_shooting</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">est_shooting</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zsco_obs</span>,
+                                lambda <span class="op">=</span> <span class="fl">0.1</span>, tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">1</span>,
+                                method <span class="op">=</span> <span class="st">"lasso"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; 0.069 sec elapsed</span>
+<span class="va">est_shooting</span>
 <span class="co">#&gt; Tree is binary with 21 leafs and 40 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 1 and sigma = 7.198 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 0.1 </span>
 <span class="co">#&gt; Objective value: 1.308</span>
-<span class="co">#&gt; BIC: 84.446</span>
+<span class="co">#&gt; BIC: 90.313</span>
 <span class="co">#&gt; pBIC: 162.43</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: -0.076 0 0 0 -0.073 -2.21 0 0 0 0 ...</span>
@@ -182,19 +195,20 @@
 <span class="co">#&gt; Observed z-scores:  -0.084 -0.084 -2.444 -2.423 -1.819 -0.041 -1.153 -1.153 -1.715  0.107 ...</span>
 <span class="co">#&gt; Estimated z-scores: -0.076 -0.076 -2.359 -2.359  -1.75 -0.149 -1.114 -1.114 -1.622 -0.022 ...</span>
 <span class="co">#&gt; 21 z-scores have been shifted (ie 0 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">est_shooting</span>)
-<span class="co">#&gt; Warning: Removed 24 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">est_shooting</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 24 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/shooting-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="comparisons" class="section level1">
 <h1 class="hasAnchor">
 <a href="#comparisons" class="anchor"></a>Comparisons</h1>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">est_lbfgsb</span>$<span class="no">objective_value</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">objective_value</span>
 <span class="co">#&gt; [1] 1.308043</span>
-<span class="no">est_shooting</span>$<span class="no">objective_value</span>
+<span class="va">est_shooting</span><span class="op">$</span><span class="va">objective_value</span>
 <span class="co">#&gt; [1] 1.308043</span>
-<span class="no">est_lbfgsb</span>$<span class="no">optim_info</span>
+<span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">optim_info</span>
 <span class="co">#&gt; $counts</span>
 <span class="co">#&gt; function gradient </span>
 <span class="co">#&gt;       44       44 </span>
@@ -207,7 +221,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $supp_arg</span>
 <span class="co">#&gt; list()</span>
-<span class="no">est_shooting</span>$<span class="no">optim_info</span>
+<span class="va">est_shooting</span><span class="op">$</span><span class="va">optim_info</span>
 <span class="co">#&gt; $iterations</span>
 <span class="co">#&gt; [1] 64</span>
 <span class="co">#&gt; </span>
@@ -215,17 +229,20 @@
 <span class="co">#&gt; [1] 6.584924e-09</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $supp_arg</span>
-<span class="co">#&gt; list()</span></pre></body></html></div>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="no">est_lbfgsb</span>$<span class="no">zscores_obs</span>, <span class="no">est_lbfgsb</span>$<span class="no">zscores_est</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="kw">xintercept</span> <span class="kw">=</span> <span class="fl">0</span>)</pre></body></html></div>
+<span class="co">#&gt; list()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">zscores_obs</span>, <span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="no">est_shooting</span>$<span class="no">zscores_obs</span>, <span class="no">est_shooting</span>$<span class="no">zscores_est</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="kw">xintercept</span> <span class="kw">=</span> <span class="fl">0</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">est_shooting</span><span class="op">$</span><span class="va">zscores_obs</span>, <span class="va">est_shooting</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/unnamed-chunk-4-2.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(-<span class="no">est_shooting</span>$<span class="no">zscores_est</span>, -<span class="no">est_lbfgsb</span>$<span class="no">zscores_est</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="op">-</span><span class="va">est_shooting</span><span class="op">$</span><span class="va">zscores_est</span>, <span class="op">-</span><span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="chlamydiae_files/figure-html/unnamed-chunk-4-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
   </div>
@@ -245,7 +262,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

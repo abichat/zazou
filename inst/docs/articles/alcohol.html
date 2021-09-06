@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -74,7 +74,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/abichat/zazou">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -101,37 +101,48 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span>$<span class="fu">set</span>(
-  <span class="kw">collapse</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-  <span class="kw">comment</span> <span class="kw">=</span> <span class="st">"#&gt;"</span>,
-  <span class="kw">fig.align</span> <span class="kw">=</span> <span class="st">"center"</span>,
-  <span class="kw">eval</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-)</pre></body></html></div>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tictoc</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">zazou</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">42</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">alcohol</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>
+  collapse <span class="op">=</span> <span class="cn">TRUE</span>,
+  comment <span class="op">=</span> <span class="st">"#&gt;"</span>, 
+  fig.align <span class="op">=</span> <span class="st">"center"</span>,
+  eval <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/collectivemedia/tictoc">tictoc</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/abichat/zazou">zazou</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">alcohol</span><span class="op">)</span></code></pre></div>
 <div id="abundance" class="section level1">
 <h1 class="hasAnchor">
 <a href="#abundance" class="anchor"></a>Abundance</h1>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">alcohol</span>$<span class="no">X</span>)
-<span class="co">#&gt; [1] 949  98</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">alcohol</span><span class="op">$</span><span class="va">X</span><span class="op">)</span>
+<span class="co">#&gt; [1] 949  98</span></code></pre></div>
 </div>
 <div id="z-scores" class="section level1">
 <h1 class="hasAnchor">
 <a href="#z-scores" class="anchor"></a>z-scores</h1>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">pval_obs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span>(<span class="no">alcohol</span>$<span class="no">X</span>, <span class="no">alcohol</span>$<span class="no">Y</span>)$<span class="no">p.value</span>
-<span class="no">zsco_obs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/p2z.html">p2z</a></span>(<span class="no">pval_obs</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pval_obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/test_wilcoxon.html">test_wilcoxon</a></span><span class="op">(</span><span class="va">alcohol</span><span class="op">$</span><span class="va">X</span>, <span class="va">alcohol</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>
+<span class="va">zsco_obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/p2z.html">p2z</a></span><span class="op">(</span><span class="va">pval_obs</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="tree" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tree" class="anchor"></a>Tree</h1>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span>(<span class="no">alcohol</span>$<span class="no">tree</span>)
-<span class="no">N_branch</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">tree</span>$<span class="no">edge.length</span>)
-<span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span>(<span class="no">tree</span>, <span class="fl">NA</span>, <span class="kw">obs_scores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>)
-<span class="co">#&gt; Warning: Removed 1891 rows containing missing values (geom_label).</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/force_ultrametric.html">force_ultrametric</a></span><span class="op">(</span><span class="va">alcohol</span><span class="op">$</span><span class="va">tree</span><span class="op">)</span>
+<span class="va">N_branch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">tree</span><span class="op">$</span><span class="va">edge.length</span><span class="op">)</span>
+<span class="fu"><a href="../reference/plot_shifts.html">plot_shifts</a></span><span class="op">(</span><span class="va">tree</span>, <span class="cn">NA</span>, obs_scores <span class="op">=</span> <span class="va">zsco_obs</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `data_frame()` was deprecated in tibble 1.1.0.</span>
+<span class="co">#&gt; Please use `tibble()` instead.</span>
+<span class="co">#&gt; Warning: `mutate_()` was deprecated in dplyr 0.7.0.</span>
+<span class="co">#&gt; Please use `mutate()` instead.</span>
+<span class="co">#&gt; See vignette('programming') for more help</span>
+<span class="co">#&gt; Warning: Removed 1891 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/tree-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shift-estimation" class="section level1">
@@ -140,20 +151,21 @@
 <div id="l-bfgs-b" class="section level2">
 <h2 class="hasAnchor">
 <a href="#l-bfgs-b" class="anchor"></a>L-BFGS-B</h2>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
-<span class="no">est_lbfgsb</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
-                              <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                              <span class="kw">method</span> <span class="kw">=</span> <span class="st">"L-BFGS-B"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 181.742 sec elapsed</span>
-<span class="no">est_lbfgsb</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">est_lbfgsb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zsco_obs</span>,
+                              lambda <span class="op">=</span> <span class="fl">2</span>, tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">0.1</span>,
+                              method <span class="op">=</span> <span class="st">"L-BFGS-B"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; 176.863 sec elapsed</span>
+<span class="va">est_lbfgsb</span>
 <span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: L-BFGS-B</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 1422.097</span>
-<span class="co">#&gt; BIC: 5215.825</span>
+<span class="co">#&gt; BIC: 6813.886</span>
 <span class="co">#&gt; pBIC: 7766.488</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span>
@@ -163,28 +175,29 @@
 <span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span>
 <span class="co">#&gt; Estimated z-scores: -0.591 -0.704 -0.883 -0.883 -1.085 -0.883 -0.883 -0.883 -0.883 -0.883 ...</span>
 <span class="co">#&gt; 827 z-scores have been shifted (ie 12.9 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">est_lbfgsb</span>)
-<span class="co">#&gt; Warning: Removed 1639 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">est_lbfgsb</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 1639 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/lbfgsb-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shooting-beta" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shooting-beta" class="anchor"></a>Shooting (beta)</h2>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
-<span class="no">est_shooting</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
-                                <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                                <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"beta"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>() <span class="co"># 10 times faster</span>
-<span class="co">#&gt; 8.506 sec elapsed</span>
-<span class="no">est_shooting</span> <span class="co"># similar results</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">est_shooting</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zsco_obs</span>,
+                                lambda <span class="op">=</span> <span class="fl">2</span>, tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">0.1</span>,
+                                method <span class="op">=</span> <span class="st">"lasso"</span>, constraint_type <span class="op">=</span> <span class="st">"beta"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># 10 times faster</span>
+<span class="co">#&gt; 8.543 sec elapsed</span>
+<span class="va">est_shooting</span> <span class="co"># similar results</span>
 <span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 1422.097</span>
-<span class="co">#&gt; BIC: 5215.985</span>
-<span class="co">#&gt; pBIC: 7766.647</span>
+<span class="co">#&gt; BIC: 6814.053</span>
+<span class="co">#&gt; pBIC: 7766.654</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span>
 <span class="co">#&gt; 252 shifts have been identified (ie 86.7 % of sparsity)</span>
@@ -193,83 +206,86 @@
 <span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span>
 <span class="co">#&gt; Estimated z-scores: -0.591 -0.704 -0.883 -0.883 -1.085 -0.883 -0.883 -0.883 -0.883 -0.883 ...</span>
 <span class="co">#&gt; 827 z-scores have been shifted (ie 12.9 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">est_shooting</span>)
-<span class="co">#&gt; Warning: Removed 1639 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">est_shooting</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 1639 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/shooting-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shooting-yhat" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shooting-yhat" class="anchor"></a>Shooting (yhat)</h2>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
-<span class="no">est_shooting_p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
-                                  <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                                  <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"yhat"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>()
-<span class="co">#&gt; 22.616 sec elapsed</span>
-<span class="no">est_shooting_p</span> <span class="co"># similar results</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">est_shooting_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zsco_obs</span>,
+                                  lambda <span class="op">=</span> <span class="fl">2</span>, tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">0.1</span>,
+                                  method <span class="op">=</span> <span class="st">"lasso"</span>, constraint_type <span class="op">=</span> <span class="st">"yhat"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; 25.024 sec elapsed</span>
+<span class="va">est_shooting_p</span> <span class="co"># similar results</span>
 <span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
-<span class="co">#&gt; Objective value: 1325.407</span>
-<span class="co">#&gt; BIC: 5911.489</span>
-<span class="co">#&gt; pBIC: 8447.836</span>
+<span class="co">#&gt; Objective value: 1324.232</span>
+<span class="co">#&gt; BIC: 8407.169</span>
+<span class="co">#&gt; pBIC: 8421.637</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt; 392 shifts have been identified (ie 79.3 % of sparsity)</span>
-<span class="co">#&gt; A parsimonious solution would involve 349 shifts</span>
+<span class="co">#&gt; 393 shifts have been identified (ie 79.2 % of sparsity)</span>
+<span class="co">#&gt; A parsimonious solution would involve 350 shifts</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328 0.437 -0.153 -0.225   1.34 -1.678 ...</span>
-<span class="co">#&gt; Estimated z-scores:  -0.62 -0.734  -0.94  -0.94 -1.116 -0.94  -0.94 -0.628 -0.503  -0.94 ...</span>
-<span class="co">#&gt; 895 z-scores have been shifted (ie 5.7 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">est_shooting_p</span>)
-<span class="co">#&gt; Warning: Removed 1499 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="co">#&gt; Estimated z-scores: -0.632 -0.746  -0.95  -0.95 -1.126 -0.95  -0.95 -0.638 -0.513  -0.95 ...</span>
+<span class="co">#&gt; 894 z-scores have been shifted (ie 5.8 % of sparsity)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">est_shooting_p</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 1498 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/shootingp-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="shooting-none" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shooting-none" class="anchor"></a>Shooting (none)</h2>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span>()
-<span class="no">est_shooting_n</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span>(<span class="kw">zscores</span> <span class="kw">=</span> <span class="no">zsco_obs</span>,
-                                  <span class="kw">lambda</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">tree</span> <span class="kw">=</span> <span class="no">tree</span>, <span class="kw">alphaOU</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-                                  <span class="kw">method</span> <span class="kw">=</span> <span class="st">"lasso"</span>, <span class="kw">constraint_type</span> <span class="kw">=</span> <span class="st">"none"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span>() <span class="co"># 10 times faster</span>
-<span class="co">#&gt; 11.033 sec elapsed</span>
-<span class="no">est_shooting_n</span> <span class="co"># similar results</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">est_shooting_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_shifts.html">estimate_shifts</a></span><span class="op">(</span>zscores <span class="op">=</span> <span class="va">zsco_obs</span>,
+                                  lambda <span class="op">=</span> <span class="fl">2</span>, tree <span class="op">=</span> <span class="va">tree</span>, alphaOU <span class="op">=</span> <span class="fl">0.1</span>,
+                                  method <span class="op">=</span> <span class="st">"lasso"</span>, constraint_type <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># 10 times faster</span>
+<span class="co">#&gt; 8.943 sec elapsed</span>
+<span class="va">est_shooting_n</span> <span class="co"># similar results</span>
 <span class="co">#&gt; Tree is not binary with 949 leafs and 1890 branches</span>
 <span class="co">#&gt; Covariance matrix has been estimated from an OU with alpha = 0.1 and sigma = 2.307 </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Method: lasso</span>
 <span class="co">#&gt; Regularization parameter: lambda = 2 </span>
 <span class="co">#&gt; Objective value: 861.223</span>
-<span class="co">#&gt; BIC: 4425.318</span>
-<span class="co">#&gt; pBIC: 7190.542</span>
+<span class="co">#&gt; BIC: 6467.791</span>
+<span class="co">#&gt; pBIC: 7174.148</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Estimated shifts: 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt; 320 shifts have been identified (ie 83.1 % of sparsity)</span>
+<span class="co">#&gt; 321 shifts have been identified (ie 83 % of sparsity)</span>
 <span class="co">#&gt; A parsimonious solution would involve 307 shifts</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Observed z-scores:  -1.947 -2.059 -1.713 -0.364 -2.328  0.437 -0.153 -0.225   1.34 -1.678 ...</span>
 <span class="co">#&gt; Estimated z-scores: -0.301 -0.301 -0.513 -0.513 -0.689 -0.513 -0.513 -0.201 -0.076 -0.513 ...</span>
 <span class="co">#&gt; 933 z-scores have been shifted (ie 1.7 % of sparsity)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">est_shooting_n</span>)
-<span class="co">#&gt; Warning: Removed 1571 rows containing missing values (geom_label).</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">est_shooting_n</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 1570 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/shootingn-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="comparisons" class="section level1">
 <h1 class="hasAnchor">
 <a href="#comparisons" class="anchor"></a>Comparisons</h1>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">est_lbfgsb</span>$<span class="no">objective_value</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">objective_value</span>
 <span class="co">#&gt; [1] 1422.097</span>
-<span class="no">est_shooting</span>$<span class="no">objective_value</span>
+<span class="va">est_shooting</span><span class="op">$</span><span class="va">objective_value</span>
 <span class="co">#&gt; [1] 1422.097</span>
-<span class="no">est_shooting_p</span>$<span class="no">objective_value</span>
-<span class="co">#&gt; [1] 1325.407</span>
-<span class="no">est_shooting_n</span>$<span class="no">objective_value</span>
+<span class="va">est_shooting_p</span><span class="op">$</span><span class="va">objective_value</span>
+<span class="co">#&gt; [1] 1324.232</span>
+<span class="va">est_shooting_n</span><span class="op">$</span><span class="va">objective_value</span>
 <span class="co">#&gt; [1] 861.2229</span>
-<span class="no">est_lbfgsb</span>$<span class="no">optim_info</span>
+<span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">optim_info</span>
 <span class="co">#&gt; $counts</span>
 <span class="co">#&gt; function gradient </span>
 <span class="co">#&gt;       86       86 </span>
@@ -282,54 +298,59 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $supp_arg</span>
 <span class="co">#&gt; list()</span>
-<span class="no">est_shooting</span>$<span class="no">optim_info</span>
+<span class="va">est_shooting</span><span class="op">$</span><span class="va">optim_info</span>
 <span class="co">#&gt; $iterations</span>
-<span class="co">#&gt; [1] 58</span>
+<span class="co">#&gt; [1] 57</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $last_progress</span>
-<span class="co">#&gt; [1] 9.789514e-09</span>
+<span class="co">#&gt; [1] 9.527673e-09</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $supp_arg</span>
 <span class="co">#&gt; list()</span>
-<span class="no">est_shooting_p</span>$<span class="no">optim_info</span>
+<span class="va">est_shooting_p</span><span class="op">$</span><span class="va">optim_info</span>
 <span class="co">#&gt; $iterations</span>
-<span class="co">#&gt; [1] 79</span>
+<span class="co">#&gt; [1] 86</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $last_progress</span>
-<span class="co">#&gt; [1] 8.898412e-09</span>
+<span class="co">#&gt; [1] 8.24811e-09</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $supp_arg</span>
 <span class="co">#&gt; list()</span>
-<span class="no">est_shooting_n</span>$<span class="no">optim_info</span>
+<span class="va">est_shooting_n</span><span class="op">$</span><span class="va">optim_info</span>
 <span class="co">#&gt; $iterations</span>
-<span class="co">#&gt; [1] 44</span>
+<span class="co">#&gt; [1] 51</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $last_progress</span>
-<span class="co">#&gt; [1] 7.505355e-09</span>
+<span class="co">#&gt; [1] 7.771e-09</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $supp_arg</span>
-<span class="co">#&gt; list()</span></pre></body></html></div>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="no">est_lbfgsb</span>$<span class="no">zscores_obs</span>, <span class="no">est_lbfgsb</span>$<span class="no">zscores_est</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="kw">xintercept</span> <span class="kw">=</span> <span class="fl">0</span>) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</pre></body></html></div>
+<span class="co">#&gt; list()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">zscores_obs</span>, <span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="no">est_shooting</span>$<span class="no">zscores_obs</span>, <span class="no">est_shooting</span>$<span class="no">zscores_est</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span>(<span class="kw">xintercept</span> <span class="kw">=</span> <span class="fl">0</span>) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">est_shooting</span><span class="op">$</span><span class="va">zscores_obs</span>, <span class="va">est_shooting</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/unnamed-chunk-4-2.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># qplot(est_shooting_p$zscores_obs, est_shooting_p$zscores_est) +</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># qplot(est_shooting_p$zscores_obs, est_shooting_p$zscores_est) +</span>
 <span class="co">#   geom_abline() + geom_vline(xintercept = 0) + coord_equal()</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(-<span class="no">est_shooting</span>$<span class="no">zscores_est</span>, -<span class="no">est_lbfgsb</span>$<span class="no">zscores_est</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="op">-</span><span class="va">est_shooting</span><span class="op">$</span><span class="va">zscores_est</span>, <span class="op">-</span><span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">zscores_est</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span>
-<span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></pre></body></html></div>
+<span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/unnamed-chunk-4-3.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(-<span class="no">est_shooting</span>$<span class="no">shifts_est</span>, -<span class="no">est_lbfgsb</span>$<span class="no">shifts_est</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="op">-</span><span class="va">est_shooting</span><span class="op">$</span><span class="va">shifts_est</span>, <span class="op">-</span><span class="va">est_lbfgsb</span><span class="op">$</span><span class="va">shifts_est</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Transformation introduced infinite values in continuous x-axis</span>
 
-<span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></pre></body></html></div>
+<span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></code></pre></div>
 <p><img src="alcohol_files/figure-html/unnamed-chunk-4-4.png" width="700" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"># qplot(-est_shooting$shifts_est, -est_shooting_p$shifts_est) +
-  # geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># qplot(-est_shooting$shifts_est, -est_shooting_p$shifts_est) +</span>
+  <span class="co"># geom_abline() + scale_x_log10() + scale_y_log10() + coord_equal()</span></code></pre></div>
 </div>
   </div>
 
@@ -348,7 +369,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

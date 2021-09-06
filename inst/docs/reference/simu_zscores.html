@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zazou</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -115,7 +115,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/abichat/zazou">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -141,7 +141,7 @@
     <p>Simulates z-scores</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='no'>alphaOU</span>, <span class='kw'>shifts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Nshifts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>simu_zscores</span><span class='op'>(</span><span class='va'>tree</span>, <span class='va'>alphaOU</span>, shifts <span class='op'>=</span> <span class='cn'>NULL</span>, Nshifts <span class='op'>=</span> <span class='cn'>NULL</span>, graph <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,11 +180,13 @@
     <p>Shifts are sampled from "statistically significant values of z-scores"</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>tree</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ape</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rcoal</a></span>(<span class='fl'>5</span>)
-<span class='no'>shift</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, -<span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>)
-<span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alphaOU</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='no'>shift</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 8 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;          t4          t2          t5          t1          t3 
-#&gt;  2.28664539 -4.38886070 -2.53530326  0.02227707  1.97763678 </div><div class='input'><span class='fu'>simu_zscores</span>(<span class='no'>tree</span>, <span class='kw'>alphaOU</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>Nshifts</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 7 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;        t4        t2        t5        t1        t3 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>
+<span class='va'>tree</span> <span class='op'>&lt;-</span> <span class='fu'>ape</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ape/man/rtree.html'>rcoal</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>shift</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>
+<span class='fu'>simu_zscores</span><span class='op'>(</span><span class='va'>tree</span>, alphaOU <span class='op'>=</span> <span class='fl'>0.2</span>, shift <span class='op'>=</span> <span class='va'>shift</span>, graph <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 8 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;          t4          t2          t5          t1          t3 
+#&gt;  2.28664539 -4.38886070 -2.53530326  0.02227707  1.97763678 </div><div class='input'><span class='fu'>simu_zscores</span><span class='op'>(</span><span class='va'>tree</span>, alphaOU <span class='op'>=</span> <span class='fl'>0.2</span>, Nshifts <span class='op'>=</span> <span class='fl'>2</span>, graph <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 7 rows containing missing values (geom_label).</span></div><div class='img'><img src='simu_zscores-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;        t4        t2        t5        t1        t3 
 #&gt; -2.440467 -2.567665 -4.986076 -3.722039  1.914937 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -201,7 +203,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

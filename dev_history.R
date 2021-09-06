@@ -121,7 +121,7 @@ library(testthat)
 
 # use_r("generate_hyperparameters")
 
-# use_github_action_check_release()
+# use_github_action_check_release("R-CMD-check-dev.yaml")
 # use_github_action_check_standard()
 
 # use_dev_package("evabic")
@@ -141,7 +141,7 @@ library(testthat)
 
 document()
 load_all()
-attachment::att_to_description()
+attachment::att_amend_desc()
 use_tidy_description()
 
 
@@ -165,7 +165,7 @@ goodpractice::gp()
 
 install(upgrade = "never")
 rmarkdown::render("README.Rmd"); file.remove("README.html")
-chameleon::build_pkgdown(yml = "_pkgdown.yml")
+# chameleon::build_pkgdown(yml = "_pkgdown.yml")
 install(upgrade = "never")
 
 
